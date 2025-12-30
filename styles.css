@@ -251,23 +251,15 @@ body {
   margin-bottom: 40px;
 }
 .form-grid--inline {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
   margin-bottom: 0;
-  align-items: flex-end;
-  justify-content: center;
-}
-.form-grid--inline .form-group {
-  flex: 1;
-  min-width: 140px;
-  max-width: 180px;
+  align-items: end;
 }
 .form-grid--inline .form-group--btn {
-  flex: 0 0 auto;
-  min-width: auto;
-  max-width: none;
-  margin-left: auto;
+  grid-column: 2;
+  justify-self: end;
 }
 .form-grid--inline .form-input {
   padding: 12px 16px;
@@ -278,7 +270,7 @@ body {
   font-size: 12px;
 }
 .form-grid--inline .form-label {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .form-group {
@@ -1070,10 +1062,11 @@ body {
     grid-template-columns: 1fr;
   }
   .form-grid--inline {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
-  .form-grid--inline .form-group {
-    max-width: 100%;
+  .form-grid--inline .form-group--btn {
+    grid-column: 1;
+    justify-self: stretch;
   }
   .birth-form {
     padding: 32px 24px;

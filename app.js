@@ -699,6 +699,10 @@ async function handleFormSubmit(event) {
         renderResults(chartData);
         showResults();
 
+        // Mostrar navegación de resultados
+        const resultsNav = document.getElementById('results-nav');
+        if (resultsNav) resultsNav.classList.remove('hidden');
+
     } catch (error) {
         console.error('❌ Error:', error);
         alert('Hubo un error al calcular la carta. Por favor, intenta de nuevo.');
