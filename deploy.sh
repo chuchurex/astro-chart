@@ -81,7 +81,7 @@ deploy_backend() {
         docker build -t astro-api . 2>/dev/null
         docker stop astro-api 2>/dev/null || true
         docker rm astro-api 2>/dev/null || true
-        docker run -d --name astro-api -p 8001:8001 --restart unless-stopped astro-api
+        docker run -d --name astro-api -p 8001:8001 -e PORT=8001 --restart unless-stopped astro-api
         echo "Container status:"
         docker ps | grep astro-api
 EOF
