@@ -146,6 +146,36 @@ body {
   color: #d4af37;
 }
 
+/* Header expanded - form in header */
+.header--expanded {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20px 40px 40px;
+  background: linear-gradient(to bottom, rgba(10, 10, 18, 0.98), rgba(10, 10, 18, 0.9));
+}
+.header--expanded .header__top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.header__form-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.header__subtitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  font-style: italic;
+  color: #8888a0;
+  margin-bottom: 24px;
+}
+
 .hero {
   min-height: 50vh;
   display: flex;
@@ -984,8 +1014,26 @@ body {
   .header__nav {
     display: none;
   }
+  .header--expanded {
+    padding: 16px 20px 24px;
+  }
+  .header--expanded .header__top {
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .header--expanded .header__nav {
+    display: flex;
+    gap: 16px;
+  }
   .form-grid {
     grid-template-columns: 1fr;
+  }
+  .form-grid--inline {
+    flex-direction: column;
+  }
+  .form-grid--inline .form-group {
+    max-width: 100%;
   }
   .birth-form {
     padding: 32px 24px;
