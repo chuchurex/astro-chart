@@ -62,5 +62,11 @@
   "errors": {
     "city_not_found": "City not found. Using default coordinates.",
     "api_error": "Error calculating chart. Please try again."
+  },
+  "ra_quotes": {
+    "optimal": "\"precisely the fourth, the fifth, and the sixth—when workings are most appropriately undertaken\"",
+    "critical_9_10": "\"passing from the ninth to the tenth... the adept will experience some difficulty\"",
+    "critical_18_1": "\"passing from the eighteenth to the first days\"",
+    "nadir": "\"at its least powerful but will not be open to difficulties\""
   }
 }

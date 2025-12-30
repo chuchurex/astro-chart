@@ -409,7 +409,7 @@ function renderBiorhythms(biorhythms) {
                 </div>
                 ${isSpiritual ? `
                     <p class="biorhythm-cycle__description">${cycle.description}</p>
-                    ${cycle.ra_quote ? `<blockquote class="biorhythm-cycle__quote">${cycle.ra_quote}</blockquote>` : ''}
+                    ${cycle.ra_quote ? `<blockquote class="biorhythm-cycle__quote">${getTranslatedRaQuote(cycle.current_day)}</blockquote>` : ''}
                 ` : ''}
             </div>
         `;
@@ -444,6 +444,20 @@ function getCycleColor(value) {
     if (value > 0) return '#60A5FA';
     if (value > -0.5) return '#F59E0B';
     return '#EF4444';
+}
+
+function getTranslatedRaQuote(day) {
+    const quotes = i18n.translations?.ra_quotes || {};
+    if (day >= 4 && day <= 6) {
+        return quotes.optimal || '"precisely the fourth, the fifth, and the sixth—when workings are most appropriately undertaken"';
+    } else if (day === 9 || day === 10) {
+        return quotes.critical_9_10 || '"passing from the ninth to the tenth... the adept will experience some difficulty"';
+    } else if (day === 18 || day === 1) {
+        return quotes.critical_18_1 || '"passing from the eighteenth to the first days"';
+    } else if (day === 13 || day === 14) {
+        return quotes.nadir || '"at its least powerful but will not be open to difficulties"';
+    }
+    return '';
 }
 
 function getLevelIcon(level) {

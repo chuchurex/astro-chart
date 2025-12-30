@@ -62,5 +62,11 @@
   "errors": {
     "city_not_found": "Cidade não encontrada. Usando coordenadas padrão.",
     "api_error": "Erro ao calcular o mapa. Por favor tente novamente."
+  },
+  "ra_quotes": {
+    "optimal": "\"precisamente o quarto, quinto e sexto dia—quando os trabalhos são mais apropriadamente realizados\"",
+    "critical_9_10": "\"passando do nono ao décimo dia... o adepto experimentará alguma dificuldade\"",
+    "critical_18_1": "\"passando do décimo oitavo ao primeiro dia\"",
+    "nadir": "\"em seu ponto menos poderoso mas sem estar exposto a dificuldades\""
   }
 }

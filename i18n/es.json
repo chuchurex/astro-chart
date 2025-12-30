@@ -62,5 +62,11 @@
   "errors": {
     "city_not_found": "Ciudad no encontrada. Usando coordenadas por defecto.",
     "api_error": "Error al calcular la carta. Por favor intenta de nuevo."
+  },
+  "ra_quotes": {
+    "optimal": "\"precisamente el cuarto, quinto y sexto día—cuando los trabajos se emprenden más apropiadamente\"",
+    "critical_9_10": "\"pasando del noveno al décimo día... el adepto experimentará alguna dificultad\"",
+    "critical_18_1": "\"pasando del décimo octavo al primer día\"",
+    "nadir": "\"en su punto menos poderoso pero sin estar expuesto a dificultades\""
   }
 }

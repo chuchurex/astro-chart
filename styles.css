@@ -426,12 +426,6 @@ body {
 .results__header {
   text-align: center;
   margin-bottom: 60px;
-  position: relative;
-}
-.results__header .btn--share {
-  position: absolute;
-  top: 0;
-  right: 0;
 }
 .results__name {
   font-family: "Cinzel", serif;
@@ -439,6 +433,10 @@ body {
   letter-spacing: 4px;
   margin-bottom: 40px;
   color: #d4af37;
+}
+.results__header .btn--share {
+  display: block;
+  margin: 0 auto 24px;
 }
 
 .big-three {
