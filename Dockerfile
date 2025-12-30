@@ -19,5 +19,7 @@ COPY . .
 # Puerto
 EXPOSE 8000
 
-# Comando de inicio (Railway provee $PORT dinámicamente)
-CMD ["sh", "-c", "uvicorn app:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Copiar y ejecutar script de inicio
+COPY start.sh .
+RUN chmod +x start.sh
+CMD ["./start.sh"]
