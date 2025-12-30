@@ -1,0 +1,113 @@
+.birth-form {
+  background: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: 16px;
+  padding: 48px;
+  backdrop-filter: blur(10px);
+  position: relative;
+
+  &::before {
+    content: "✧";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: $color-gold;
+    background: $color-bg;
+    padding: 0 16px;
+  }
+}
+
+// Compact form variant
+.birth-form--compact {
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  &::before {
+    display: none;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.form-grid--inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 0;
+  align-items: flex-end;
+  justify-content: center;
+
+  .form-group {
+    flex: 1;
+    min-width: 140px;
+    max-width: 180px;
+  }
+
+  .form-group--btn {
+    flex: 0 0 auto;
+    min-width: auto;
+    max-width: none;
+  }
+
+  .form-input {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    font-size: 12px;
+  }
+
+  .form-label {
+    font-size: 10px;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &--full {
+    grid-column: 1 / -1;
+  }
+}
+
+.form-label {
+  font-family: $font-display;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $color-gold;
+}
+
+.form-input {
+  font-family: $font-body;
+  font-size: 18px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba($color-gold, 0.3);
+  border-radius: 8px;
+  color: $color-text;
+  transition: all $transition-fast;
+
+  &::placeholder {
+    color: $color-text-subtle;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-gold;
+    box-shadow: 0 0 20px rgba($color-gold, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+  }
+}

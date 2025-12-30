@@ -1,0 +1,43 @@
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($color-bg, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  &.hidden {
+    display: none;
+  }
+
+  &__spinner {
+    text-align: center;
+  }
+
+  &__ring {
+    width: 80px;
+    height: 80px;
+    border: 3px solid rgba($color-gold, 0.2);
+    border-top-color: $color-gold;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 24px;
+  }
+
+  &__text {
+    font-family: $font-display;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: $color-gold;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

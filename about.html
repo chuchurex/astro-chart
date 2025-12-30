@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Chuchu | Natal Chart</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css?v=1">
+</head>
+<body>
+    <div class="stars-container">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+    </div>
+
+    <header class="header">
+        <div class="header__logo">
+            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+                <span class="header__symbol">☉</span>
+                <h1 class="header__title" data-i18n="header.title">Natal Chart</h1>
+            </a>
+        </div>
+        <nav class="header__nav">
+            <a href="index.html" class="header__link" data-i18n="nav.calculate">Calculate</a>
+        </nav>
+        <div class="lang-selector">
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="es">ES</button>
+            <button class="lang-btn" data-lang="pt">PT</button>
+        </div>
+    </header>
+
+    <main class="about">
+        <div class="container">
+            <div class="about__content">
+                <div class="about__header">
+                    <h2 class="about__name" data-i18n="about.name">Carlos Martínez</h2>
+                    <p class="about__aka" data-i18n="about.aka">aka Chuchu</p>
+                </div>
+
+                <div class="about__bio">
+                    <p data-i18n="about.bio1">Developer and explorer of the digital cosmos from Santiago, Chile.</p>
+                    <p data-i18n="about.bio2">This project combines my interest in programming with the fascination for cosmic cycles and the teachings of Ra.</p>
+                </div>
+
+                <div class="about__links">
+                    <a href="https://github.com/chuchurex" target="_blank" rel="noopener" class="about__link" data-i18n="about.github">github</a>
+                </div>
+
+                <div class="about__collab">
+                    <p class="about__collab-title" data-i18n="about.collab_title">Developed with Claude</p>
+                    <p><span data-i18n="about.collab_text">This project was created in collaboration with</span> <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener" class="about__link--inline">Claude</a>, <span data-i18n="about.collab_anthropic">the AI assistant from Anthropic.</span></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__credits">
+                <a href="index.html" class="footer__link" data-i18n="about.back">← Back to Natal Chart</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="app.js?v=1"></script>
+</body>
+</html>

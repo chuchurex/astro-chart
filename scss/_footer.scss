@@ -1,0 +1,29 @@
+.footer {
+  padding: 60px 0;
+  text-align: center;
+  border-top: 1px solid rgba($color-gold, 0.1);
+
+  &__text {
+    font-family: $font-system;
+    font-size: 15px;
+    color: $color-text-muted;
+    margin-bottom: 12px;
+  }
+
+  &__credits {
+    font-family: $font-display;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: $color-gold;
+  }
+
+  &__link {
+    color: $color-blue;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-blue-light;
+    }
+  }
+}

@@ -6,10 +6,10 @@
 
 // === CONFIGURACIÓN ===
 const CONFIG = {
-    // En producción usa Railway, en desarrollo usa localhost
+    // En producción usa Vultr (Chile) con HTTPS, en desarrollo usa localhost
     API_URL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:8000'
-        : 'https://web-production-22c8f.up.railway.app',
+        ? 'http://localhost:8001'
+        : 'https://api.chuchurex.cl',
     DEFAULT_TIMEZONE: 'America/Santiago'
 };
 
@@ -253,9 +253,14 @@ function renderResults(chartData) {
     }
 
     // Renderizar biorritmos (enseñanzas de Ra)
+    console.log('🔮 Biorhythms data:', chartData.biorhythms);
     if (chartData.biorhythms && chartData.biorhythms.cycles) {
+        console.log('🔮 Renderizando biorritmos...');
         renderBiorhythms(chartData.biorhythms);
         document.getElementById('biorhythms-section')?.classList.remove('hidden');
+        console.log('🔮 Biorritmos renderizados');
+    } else {
+        console.log('🔮 No hay datos de biorritmos');
     }
 }
 
@@ -512,120 +517,130 @@ function renderPlanets(planets) {
 
 function renderChart(chartData) {
     DOM.chart.innerHTML = '';
-    
-    // Crear carta SVG simplificada
+    // Usar nuestra carta SVG personalizada con símbolos Unicode limpios
+    renderSimpleChart(chartData);
+}
+
+function renderSimpleChart(chartData) {
+    // Carta SVG simplificada con posiciones reales
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('viewBox', '0 0 400 400');
     svg.style.width = '100%';
     svg.style.height = '100%';
-    
+
+    const cx = 200, cy = 200;
+    const outerR = 180, midR = 140, innerR = 100, centerR = 60;
+
     // Círculo exterior
-    const outerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    outerCircle.setAttribute('cx', '200');
-    outerCircle.setAttribute('cy', '200');
-    outerCircle.setAttribute('r', '180');
-    outerCircle.setAttribute('fill', 'none');
-    outerCircle.setAttribute('stroke', '#d4af37');
-    outerCircle.setAttribute('stroke-width', '2');
-    svg.appendChild(outerCircle);
-    
-    // Círculo medio
-    const midCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    midCircle.setAttribute('cx', '200');
-    midCircle.setAttribute('cy', '200');
-    midCircle.setAttribute('r', '140');
-    midCircle.setAttribute('fill', 'none');
-    midCircle.setAttribute('stroke', 'rgba(212, 175, 55, 0.4)');
-    midCircle.setAttribute('stroke-width', '1');
-    svg.appendChild(midCircle);
-    
-    // Círculo interior
-    const innerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    innerCircle.setAttribute('cx', '200');
-    innerCircle.setAttribute('cy', '200');
-    innerCircle.setAttribute('r', '60');
-    innerCircle.setAttribute('fill', 'none');
-    innerCircle.setAttribute('stroke', 'rgba(212, 175, 55, 0.3)');
-    innerCircle.setAttribute('stroke-width', '1');
-    svg.appendChild(innerCircle);
-    
+    drawCircle(svg, cx, cy, outerR, '#d4af37', 2);
+    drawCircle(svg, cx, cy, midR, 'rgba(212, 175, 55, 0.4)', 1);
+    drawCircle(svg, cx, cy, innerR, 'rgba(212, 175, 55, 0.3)', 1);
+    drawCircle(svg, cx, cy, centerR, 'rgba(212, 175, 55, 0.2)', 1);
+
     // Signos del zodiaco
     const zodiacSymbols = ['♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'];
-    
+
+    // Obtener offset del Ascendente (Casa 1)
+    const ascOffset = chartData.cusps ? chartData.cusps[0] : 0;
+
     // Divisiones de signos y símbolos
     for (let i = 0; i < 12; i++) {
-        const angle = (i * 30 - 90) * Math.PI / 180;
-        const x1 = 200 + 140 * Math.cos(angle);
-        const y1 = 200 + 140 * Math.sin(angle);
-        const x2 = 200 + 180 * Math.cos(angle);
-        const y2 = 200 + 180 * Math.sin(angle);
-        
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', x1);
-        line.setAttribute('y1', y1);
-        line.setAttribute('x2', x2);
-        line.setAttribute('y2', y2);
-        line.setAttribute('stroke', 'rgba(212, 175, 55, 0.5)');
-        line.setAttribute('stroke-width', '1');
-        svg.appendChild(line);
-        
+        const signStart = (i * 30 - ascOffset - 90);
+        const angle = signStart * Math.PI / 180;
+
+        // Línea divisoria
+        const x1 = cx + midR * Math.cos(angle);
+        const y1 = cy + midR * Math.sin(angle);
+        const x2 = cx + outerR * Math.cos(angle);
+        const y2 = cy + outerR * Math.sin(angle);
+        drawLine(svg, x1, y1, x2, y2, 'rgba(212, 175, 55, 0.5)', 1);
+
         // Símbolo del signo
-        const symbolAngle = ((i * 30) + 15 - 90) * Math.PI / 180;
-        const sx = 200 + 160 * Math.cos(symbolAngle);
-        const sy = 200 + 160 * Math.sin(symbolAngle);
-        
-        const signText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        signText.setAttribute('x', sx);
-        signText.setAttribute('y', sy);
-        signText.setAttribute('text-anchor', 'middle');
-        signText.setAttribute('dominant-baseline', 'middle');
-        signText.setAttribute('fill', '#8888a0');
-        signText.setAttribute('font-size', '16');
-        signText.textContent = zodiacSymbols[i];
-        svg.appendChild(signText);
+        const symbolAngle = (signStart + 15) * Math.PI / 180;
+        const sx = cx + (midR + 20) * Math.cos(symbolAngle);
+        const sy = cy + (midR + 20) * Math.sin(symbolAngle);
+        drawText(svg, sx, sy, zodiacSymbols[i], '#8888a0', 14);
     }
-    
-    // Texto central con el ascendente
-    const centerText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    centerText.setAttribute('x', '200');
-    centerText.setAttribute('y', '195');
-    centerText.setAttribute('text-anchor', 'middle');
-    centerText.setAttribute('fill', '#d4af37');
-    centerText.setAttribute('font-family', 'Cinzel, serif');
-    centerText.setAttribute('font-size', '12');
-    centerText.textContent = 'ASC';
-    svg.appendChild(centerText);
-    
-    const ascText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    ascText.setAttribute('x', '200');
-    ascText.setAttribute('y', '215');
-    ascText.setAttribute('text-anchor', 'middle');
-    ascText.setAttribute('fill', '#e8e8f0');
-    ascText.setAttribute('font-family', 'Cinzel, serif');
-    ascText.setAttribute('font-size', '14');
-    ascText.textContent = chartData.ascendant;
-    svg.appendChild(ascText);
-    
-    // Símbolos de planetas
-    const planetSymbols = ['☉', '☽', '☿', '♀', '♂', '♃', '♄', '♅', '♆', '♇'];
+
+    // Dibujar casas si tenemos cúspides
+    if (chartData.cusps && chartData.cusps.length === 12) {
+        chartData.cusps.forEach((cusp, i) => {
+            const angle = (cusp - ascOffset - 90) * Math.PI / 180;
+            const x1 = cx + centerR * Math.cos(angle);
+            const y1 = cy + centerR * Math.sin(angle);
+            const x2 = cx + midR * Math.cos(angle);
+            const y2 = cy + midR * Math.sin(angle);
+
+            const strokeWidth = (i === 0 || i === 3 || i === 6 || i === 9) ? 2 : 1;
+            const color = (i === 0 || i === 3 || i === 6 || i === 9) ? '#d4af37' : 'rgba(212, 175, 55, 0.4)';
+            drawLine(svg, x1, y1, x2, y2, color, strokeWidth);
+        });
+    }
+
+    // Símbolos de planetas en sus posiciones reales
+    const planetSymbols = {
+        'Sol': '☉', 'Luna': '☽', 'Mercurio': '☿', 'Venus': '♀', 'Marte': '♂',
+        'Júpiter': '♃', 'Saturno': '♄', 'Urano': '♅', 'Neptuno': '♆', 'Plutón': '♇'
+    };
+
+    const planetColors = {
+        'Sol': '#FFD700', 'Luna': '#C0C0C0', 'Mercurio': '#87CEEB', 'Venus': '#98FB98',
+        'Marte': '#FF6347', 'Júpiter': '#DEB887', 'Saturno': '#DAA520',
+        'Urano': '#00CED1', 'Neptuno': '#6495ED', 'Plutón': '#9370DB'
+    };
+
     chartData.planets.forEach((planet, i) => {
-        const angle = (i * 36 - 90) * Math.PI / 180;
-        const radius = 100;
-        const x = 200 + radius * Math.cos(angle);
-        const y = 200 + radius * Math.sin(angle);
-        
-        const planetText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        planetText.setAttribute('x', x);
-        planetText.setAttribute('y', y);
-        planetText.setAttribute('text-anchor', 'middle');
-        planetText.setAttribute('dominant-baseline', 'middle');
-        planetText.setAttribute('fill', '#d4af37');
-        planetText.setAttribute('font-size', '20');
-        planetText.textContent = planetSymbols[i] || '★';
-        svg.appendChild(planetText);
+        const absPos = planet.abs_pos !== undefined ? planet.abs_pos : (i * 36);
+        const angle = (absPos - ascOffset - 90) * Math.PI / 180;
+        const radius = innerR - 15;
+        const x = cx + radius * Math.cos(angle);
+        const y = cy + radius * Math.sin(angle);
+
+        const symbol = planetSymbols[planet.name] || '★';
+        const color = planetColors[planet.name] || '#d4af37';
+        drawText(svg, x, y, symbol, color, 18);
     });
-    
+
+    // Texto central
+    drawText(svg, cx, cy - 10, 'ASC', '#d4af37', 12);
+    drawText(svg, cx, cy + 10, chartData.ascendant, '#e8e8f0', 14);
+
     DOM.chart.appendChild(svg);
+}
+
+// Funciones auxiliares para SVG
+function drawCircle(svg, cx, cy, r, stroke, strokeWidth) {
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', cx);
+    circle.setAttribute('cy', cy);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('stroke', stroke);
+    circle.setAttribute('stroke-width', strokeWidth);
+    svg.appendChild(circle);
+}
+
+function drawLine(svg, x1, y1, x2, y2, stroke, strokeWidth) {
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+    line.setAttribute('stroke', stroke);
+    line.setAttribute('stroke-width', strokeWidth);
+    svg.appendChild(line);
+}
+
+function drawText(svg, x, y, text, fill, fontSize) {
+    const textEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    textEl.setAttribute('x', x);
+    textEl.setAttribute('y', y);
+    textEl.setAttribute('text-anchor', 'middle');
+    textEl.setAttribute('dominant-baseline', 'middle');
+    textEl.setAttribute('fill', fill);
+    textEl.setAttribute('font-size', fontSize);
+    textEl.textContent = text;
+    svg.appendChild(textEl);
 }
 
 // === EVENT HANDLERS ===
@@ -702,9 +717,84 @@ async function handleCityChange(event) {
     }
 }
 
+// === PARÁMETROS URL ===
+
+function parseURLParams() {
+    // Formato: ?name=Carlos&date=19800822&time=00:00&lat=-33.4489&lon=-70.6693
+    // O también: ?Carlos&19800822&00:00&-33.4489&-70.6693 (posicional)
+    const params = new URLSearchParams(window.location.search);
+
+    // Intentar formato con nombres
+    if (params.has('name') || params.has('date')) {
+        return {
+            name: params.get('name') || '',
+            date: params.get('date') || '',
+            time: params.get('time') || '12:00',
+            lat: params.get('lat') || '-33.4489',
+            lon: params.get('lon') || '-70.6693',
+            city: params.get('city') || ''
+        };
+    }
+
+    // Intentar formato posicional: ?Carlos&19800822&00:00&-33.4489&-70.6693
+    const keys = Array.from(params.keys());
+    if (keys.length >= 2) {
+        return {
+            name: keys[0] || '',
+            date: keys[1] || '',
+            time: keys[2] || '12:00',
+            lat: keys[3] || '-33.4489',
+            lon: keys[4] || '-70.6693',
+            city: ''
+        };
+    }
+
+    return null;
+}
+
+function formatDateForInput(dateStr) {
+    // Convierte YYYYMMDD a YYYY-MM-DD
+    if (dateStr && dateStr.length === 8) {
+        return `${dateStr.slice(0,4)}-${dateStr.slice(4,6)}-${dateStr.slice(6,8)}`;
+    }
+    return dateStr;
+}
+
+function fillFormFromURL() {
+    const urlData = parseURLParams();
+    if (!urlData) return false;
+
+    if (urlData.name && DOM.nameInput) {
+        DOM.nameInput.value = decodeURIComponent(urlData.name);
+    }
+
+    if (urlData.date && DOM.birthDate) {
+        DOM.birthDate.value = formatDateForInput(urlData.date);
+    }
+
+    if (urlData.time && DOM.birthTime) {
+        DOM.birthTime.value = urlData.time;
+    }
+
+    if (urlData.lat && DOM.latitudeInput) {
+        DOM.latitudeInput.value = urlData.lat;
+    }
+
+    if (urlData.lon && DOM.longitudeInput) {
+        DOM.longitudeInput.value = urlData.lon;
+    }
+
+    if (urlData.city && DOM.cityInput) {
+        DOM.cityInput.value = decodeURIComponent(urlData.city);
+    }
+
+    console.log('📋 Formulario pre-llenado desde URL:', urlData);
+    return true;
+}
+
 // === INICIALIZACIÓN ===
 
-function init() {
+async function init() {
     // Obtener elementos del DOM
     DOM.form = document.getElementById('birth-form');
     DOM.loader = document.getElementById('loader');
@@ -725,22 +815,169 @@ function init() {
     DOM.sunInterpretation = document.querySelector('#sun-interpretation .interpretation-card__text');
     DOM.moonInterpretation = document.querySelector('#moon-interpretation .interpretation-card__text');
     DOM.ascInterpretation = document.querySelector('#asc-interpretation .interpretation-card__text');
-    
+
     // Event listeners
     if (DOM.form) DOM.form.addEventListener('submit', handleFormSubmit);
     if (DOM.cityInput) DOM.cityInput.addEventListener('blur', handleCityChange);
-    
+
     // Fecha máxima = hoy
     if (DOM.birthDate) {
         const today = new Date().toISOString().split('T')[0];
         DOM.birthDate.setAttribute('max', today);
     }
-    
+
     // Valores por defecto
     if (DOM.latitudeInput) DOM.latitudeInput.value = '-33.4489';
     if (DOM.longitudeInput) DOM.longitudeInput.value = '-70.6693';
-    
+
+    // Pre-llenar desde URL si hay parámetros
+    const filledFromURL = fillFormFromURL();
+
+    // Si se llenó desde URL y tiene todos los datos, calcular automáticamente
+    if (filledFromURL && DOM.nameInput?.value && DOM.birthDate?.value && DOM.birthTime?.value) {
+        console.log('🚀 Calculando carta automáticamente desde URL...');
+        setTimeout(() => DOM.form?.dispatchEvent(new Event('submit')), 500);
+    }
+
     console.log('🌟 Astro Chart inicializado');
+
+    // Inicializar i18n
+    await i18n.init();
 }
+
+// === SISTEMA DE INTERNACIONALIZACIÓN (i18n) ===
+const i18n = {
+    currentLang: 'en',
+    translations: {},
+    supportedLangs: ['en', 'es', 'pt'],
+
+    async init() {
+        const lang = this.detectLanguage();
+        await this.setLanguage(lang);
+        this.setupLangSelector();
+    },
+
+    detectLanguage() {
+        // 1. URL param tiene prioridad
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlLang = urlParams.get('lang');
+        if (urlLang && this.supportedLangs.includes(urlLang)) {
+            return urlLang;
+        }
+
+        // 2. localStorage (preferencia guardada)
+        const savedLang = localStorage.getItem('lang');
+        if (savedLang && this.supportedLangs.includes(savedLang)) {
+            return savedLang;
+        }
+
+        // 3. Idioma del navegador
+        const browserLang = navigator.language.split('-')[0];
+        if (this.supportedLangs.includes(browserLang)) {
+            return browserLang;
+        }
+
+        // 4. Default: inglés
+        return 'en';
+    },
+
+    async loadTranslations(lang) {
+        try {
+            const basePath = window.location.pathname.includes('about.html') ? '' : '';
+            const response = await fetch(`${basePath}i18n/${lang}.json`);
+            if (!response.ok) throw new Error('Failed to load translations');
+            const data = await response.json();
+            console.log(`🌐 Traducciones cargadas: ${lang}`, data);
+            return data;
+        } catch (error) {
+            console.error(`Error loading ${lang} translations:`, error);
+            return null;
+        }
+    },
+
+    async setLanguage(lang) {
+        if (!this.supportedLangs.includes(lang)) {
+            lang = 'en';
+        }
+
+        const translations = await this.loadTranslations(lang);
+        if (!translations) {
+            if (lang !== 'en') {
+                return this.setLanguage('en');
+            }
+            return;
+        }
+
+        this.currentLang = lang;
+        this.translations = translations;
+        localStorage.setItem('lang', lang);
+        document.documentElement.lang = lang;
+
+        this.applyTranslations();
+        this.updateLangSelector();
+    },
+
+    t(key) {
+        const keys = key.split('.');
+        let value = this.translations;
+        for (const k of keys) {
+            if (value && typeof value === 'object' && k in value) {
+                value = value[k];
+            } else {
+                return key; // Return key if translation not found
+            }
+        }
+        return value;
+    },
+
+    applyTranslations() {
+        // Traducir elementos con data-i18n
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            const translation = this.t(key);
+            if (translation !== key) {
+                el.textContent = translation;
+            }
+        });
+
+        // Traducir placeholders con data-i18n-placeholder
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            const translation = this.t(key);
+            if (translation !== key) {
+                el.placeholder = translation;
+            }
+        });
+
+        // Actualizar título de la página
+        const titleKey = document.body.contains(document.querySelector('.about'))
+            ? 'about.name'
+            : 'header.title';
+        const pageTitle = this.t(titleKey);
+        if (pageTitle !== titleKey) {
+            document.title = `${pageTitle} | ${this.t('header.title')}`;
+        }
+    },
+
+    setupLangSelector() {
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const lang = e.target.getAttribute('data-lang');
+                this.setLanguage(lang);
+            });
+        });
+    },
+
+    updateLangSelector() {
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            const lang = btn.getAttribute('data-lang');
+            if (lang === this.currentLang) {
+                btn.classList.add('lang-btn--active');
+            } else {
+                btn.classList.remove('lang-btn--active');
+            }
+        });
+    }
+};
 
 document.addEventListener('DOMContentLoaded', init);

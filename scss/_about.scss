@@ -1,0 +1,111 @@
+.about {
+  width: 100%;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px 60px;
+
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__content {
+    width: 100%;
+    max-width: $content-max;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  &__header {
+    margin-bottom: 40px;
+  }
+
+  &__name {
+    font-family: $font-display;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: $color-text-subtle;
+    margin-bottom: 4px;
+  }
+
+  &__aka {
+    font-family: $font-system;
+    font-size: 18px;
+    font-style: italic;
+    color: $color-text-subtle;
+  }
+
+  &__bio {
+    margin-bottom: 40px;
+
+    p {
+      font-family: $font-system;
+      font-size: 16px;
+      line-height: 1.7;
+      color: $color-text-muted;
+      margin-bottom: 16px;
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+
+  &__link {
+    display: inline-block;
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid $color-border-blue;
+    border-radius: 6px;
+    color: $color-blue;
+    text-decoration: none;
+    font-family: $font-system;
+    font-size: 14px;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba($color-blue, 0.1);
+      border-color: $color-blue;
+    }
+
+    &--inline {
+      color: $color-blue;
+      text-decoration: none;
+
+      &:hover {
+        color: $color-blue-light;
+      }
+    }
+  }
+
+  &__collab {
+    padding: 24px;
+    background: $color-bg-card-light;
+    border: 1px solid rgba($color-blue, 0.15);
+    border-radius: 12px;
+
+    &-title {
+      font-family: $font-system;
+      font-size: 14px;
+      font-weight: 600;
+      color: $color-text-muted;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-family: $font-system;
+      font-size: 14px;
+      line-height: 1.6;
+      color: $color-text-subtle;
+    }
+  }
+}

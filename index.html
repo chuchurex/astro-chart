@@ -1,173 +1,140 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carta Astral | Tu Mapa Celestial</title>
-    
-    <!-- Fuentes distintivas -->
+    <title>Natal Chart | Your Celestial Map</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-    
-    <!-- AstroChart.js para renderizar cartas SVG -->
+
     <script src="https://cdn.jsdelivr.net/npm/@astrodraw/astrochart@3.0.2/dist/astrochart.min.js"></script>
-    
-    <link rel="stylesheet" href="styles.css">
+
+    <link rel="stylesheet" href="styles.css?v=1">
 </head>
 <body>
-    <!-- Fondo animado de estrellas -->
     <div class="stars-container">
         <div class="stars"></div>
         <div class="stars2"></div>
         <div class="stars3"></div>
     </div>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="header__logo">
-            <span class="header__symbol">☉</span>
-            <h1 class="header__title">Carta Astral</h1>
+    <header class="header header--expanded" id="calculate">
+        <div class="header__top">
+            <div class="header__logo">
+                <span class="header__symbol">☉</span>
+                <h1 class="header__title" data-i18n="header.title">Natal Chart</h1>
+            </div>
+            <nav class="header__nav">
+                <a href="#results" class="header__link" data-i18n="nav.chart">Chart</a>
+                <a href="#interpretations" class="header__link" data-i18n="nav.planets">Planets</a>
+                <a href="#biorhythms-section" class="header__link" data-i18n="nav.cycles">Ra Cycles</a>
+            </nav>
+            <div class="lang-selector">
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="es">ES</button>
+                <button class="lang-btn" data-lang="pt">PT</button>
+            </div>
         </div>
-        <nav class="header__nav">
-            <a href="#calcular" class="header__link">Calcular</a>
-            <a href="#interpretaciones" class="header__link">Interpretaciones</a>
-            <a href="#acerca" class="header__link">Acerca</a>
-        </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="calcular">
-        <div class="hero__content">
-            <h2 class="hero__title">Descubre tu Mapa Celestial</h2>
-            <p class="hero__subtitle">Ingresa tus datos de nacimiento y revela los secretos que las estrellas tienen para ti</p>
-        </div>
-    </section>
-
-    <!-- Formulario de datos de nacimiento -->
-    <section class="form-section">
-        <div class="container">
-            <form id="birth-form" class="birth-form">
-                <div class="form-grid">
-                    <!-- Nombre -->
-                    <div class="form-group form-group--full">
-                        <label for="name" class="form-label">Nombre</label>
-                        <input type="text" id="name" name="name" class="form-input" 
-                               placeholder="Tu nombre" required>
+        <div class="header__form-container">
+            <p class="header__subtitle" data-i18n="header.subtitle">Enter your birth data</p>
+            <form id="birth-form" class="birth-form birth-form--compact">
+                <div class="form-grid form-grid--inline">
+                    <div class="form-group">
+                        <label for="name" class="form-label" data-i18n="form.name">Name</label>
+                        <input type="text" id="name" name="name" class="form-input"
+                               data-i18n-placeholder="form.name_placeholder" placeholder="Your name" required>
                     </div>
 
-                    <!-- Fecha de nacimiento -->
                     <div class="form-group">
-                        <label for="birth-date" class="form-label">Fecha de Nacimiento</label>
+                        <label for="birth-date" class="form-label" data-i18n="form.date">Date</label>
                         <input type="date" id="birth-date" name="birthDate" class="form-input" required>
                     </div>
 
-                    <!-- Hora de nacimiento -->
                     <div class="form-group">
-                        <label for="birth-time" class="form-label">Hora de Nacimiento</label>
+                        <label for="birth-time" class="form-label" data-i18n="form.time">Time</label>
                         <input type="time" id="birth-time" name="birthTime" class="form-input" required>
                     </div>
 
-                    <!-- Ciudad -->
-                    <div class="form-group form-group--full">
-                        <label for="city" class="form-label">Ciudad de Nacimiento</label>
-                        <input type="text" id="city" name="city" class="form-input" 
-                               placeholder="Ej: Santiago, Chile" required>
+                    <div class="form-group">
+                        <label for="city" class="form-label" data-i18n="form.city">City</label>
+                        <input type="text" id="city" name="city" class="form-input"
+                               data-i18n-placeholder="form.city_placeholder" placeholder="e.g. New York, USA" required>
                     </div>
 
-                    <!-- Coordenadas (ocultas, se llenan automáticamente) -->
-                    <div class="form-group form-group--coords">
-                        <label for="latitude" class="form-label">Latitud</label>
-                        <input type="number" id="latitude" name="latitude" class="form-input" 
-                               step="0.0001" placeholder="-33.4489" required>
-                    </div>
+                    <input type="hidden" id="latitude" name="latitude" value="-33.4489">
+                    <input type="hidden" id="longitude" name="longitude" value="-70.6693">
 
-                    <div class="form-group form-group--coords">
-                        <label for="longitude" class="form-label">Longitud</label>
-                        <input type="number" id="longitude" name="longitude" class="form-input" 
-                               step="0.0001" placeholder="-70.6693" required>
+                    <div class="form-group form-group--btn">
+                        <button type="submit" class="btn btn--primary" id="calculate-btn">
+                            <span class="btn__text" data-i18n="form.calculate">Calculate</span>
+                            <span class="btn__icon">✧</span>
+                        </button>
                     </div>
                 </div>
-
-                <button type="submit" class="btn btn--primary" id="calculate-btn">
-                    <span class="btn__text">Calcular Carta Astral</span>
-                    <span class="btn__icon">✧</span>
-                </button>
             </form>
         </div>
-    </section>
+    </header>
 
-    <!-- Loader -->
     <div id="loader" class="loader hidden">
         <div class="loader__spinner">
             <div class="loader__ring"></div>
-            <span class="loader__text">Consultando las estrellas...</span>
+            <span class="loader__text" data-i18n="loader.text">Consulting the stars...</span>
         </div>
     </div>
 
-    <!-- Resultados -->
     <section id="results" class="results hidden">
         <div class="container">
-            <!-- Resumen principal -->
             <div class="results__header">
-                <h2 class="results__name" id="result-name">Tu Carta Astral</h2>
+                <h2 class="results__name" id="result-name" data-i18n="results.title">Your Natal Chart</h2>
                 <div class="big-three">
                     <div class="big-three__item">
                         <span class="big-three__symbol">☉</span>
-                        <span class="big-three__label">Sol</span>
+                        <span class="big-three__label" data-i18n="results.sun">Sun</span>
                         <span class="big-three__sign" id="sun-sign">--</span>
                     </div>
                     <div class="big-three__item">
                         <span class="big-three__symbol">☽</span>
-                        <span class="big-three__label">Luna</span>
+                        <span class="big-three__label" data-i18n="results.moon">Moon</span>
                         <span class="big-three__sign" id="moon-sign">--</span>
                     </div>
                     <div class="big-three__item">
                         <span class="big-three__symbol">↑</span>
-                        <span class="big-three__label">Ascendente</span>
+                        <span class="big-three__label" data-i18n="results.ascendant">Ascendant</span>
                         <span class="big-three__sign" id="ascendant">--</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Resumen Ejecutivo -->
             <div class="summary-section">
-                <h3 class="section-title">Resumen de tu Carta</h3>
-                <div id="summary-container">
-                    <!-- Se llena dinámicamente -->
-                </div>
+                <h3 class="section-title" data-i18n="results.summary">Chart Summary</h3>
+                <div id="summary-container"></div>
             </div>
 
-            <!-- Contenedor de la carta SVG -->
             <div class="chart-container">
                 <div id="chart" class="chart"></div>
             </div>
 
-            <!-- Tabla de planetas -->
-            <div class="planets-table" id="interpretaciones">
-                <h3 class="section-title">Posiciones Planetarias</h3>
-                <div class="planets-grid" id="planets-grid">
-                    <!-- Se llena dinámicamente -->
-                </div>
+            <div class="planets-table" id="interpretations">
+                <h3 class="section-title" data-i18n="results.positions">Planetary Positions</h3>
+                <div class="planets-grid" id="planets-grid"></div>
             </div>
 
-            <!-- Distribución de Elementos y Modalidades -->
             <div class="interpretations interpretations--balance">
-                <h3 class="section-title">Balance Energético</h3>
-                <p class="section-subtitle">La distribución de elementos y modalidades en tu carta</p>
-                <div id="element-modality-container">
-                    <!-- Se llena dinámicamente -->
-                </div>
+                <h3 class="section-title" data-i18n="results.balance">Energy Balance</h3>
+                <p class="section-subtitle" data-i18n="results.balance_sub">The distribution of elements and modalities in your chart</p>
+                <div id="element-modality-container"></div>
             </div>
 
-            <!-- Interpretaciones del Big Three -->
             <div class="interpretations">
-                <h3 class="section-title">Tu Esencia: Sol, Luna y Ascendente</h3>
+                <h3 class="section-title" data-i18n="results.essence">Your Essence: Sun, Moon and Ascendant</h3>
 
                 <article class="interpretation-card" id="sun-interpretation">
                     <header class="interpretation-card__header">
                         <span class="interpretation-card__symbol">☉</span>
-                        <h4 class="interpretation-card__title">Tu Sol</h4>
+                        <h4 class="interpretation-card__title" data-i18n="results.your_sun">Your Sun</h4>
                     </header>
                     <p class="interpretation-card__text"></p>
                 </article>
@@ -175,7 +142,7 @@
                 <article class="interpretation-card" id="moon-interpretation">
                     <header class="interpretation-card__header">
                         <span class="interpretation-card__symbol">☽</span>
-                        <h4 class="interpretation-card__title">Tu Luna</h4>
+                        <h4 class="interpretation-card__title" data-i18n="results.your_moon">Your Moon</h4>
                     </header>
                     <p class="interpretation-card__text"></p>
                 </article>
@@ -183,53 +150,44 @@
                 <article class="interpretation-card" id="asc-interpretation">
                     <header class="interpretation-card__header">
                         <span class="interpretation-card__symbol">↑</span>
-                        <h4 class="interpretation-card__title">Tu Ascendente</h4>
+                        <h4 class="interpretation-card__title" data-i18n="results.your_asc">Your Ascendant</h4>
                     </header>
                     <p class="interpretation-card__text"></p>
                 </article>
             </div>
 
-            <!-- Interpretaciones de Planetas en Casas (oculto hasta tener datos) -->
             <div class="interpretations interpretations--planets hidden" id="planets-houses-section">
-                <h3 class="section-title">Planetas en las Casas</h3>
-                <div id="planets-interpretations" class="planets-interpretations-grid">
-                    <!-- Se llena dinámicamente -->
-                </div>
+                <h3 class="section-title" data-i18n="results.houses">Planets in Houses</h3>
+                <div id="planets-interpretations" class="planets-interpretations-grid"></div>
             </div>
 
-            <!-- Interpretaciones de Aspectos (oculto hasta tener datos) -->
             <div class="interpretations interpretations--aspects hidden" id="aspects-section">
-                <h3 class="section-title">Aspectos Planetarios</h3>
-                <p class="section-subtitle">Las relaciones entre tus planetas revelan dinámicas internas</p>
-                <div id="aspects-interpretations" class="aspects-interpretations-grid">
-                    <!-- Se llena dinámicamente -->
-                </div>
+                <h3 class="section-title" data-i18n="results.aspects">Planetary Aspects</h3>
+                <p class="section-subtitle" data-i18n="results.aspects_sub">The relationships between your planets reveal inner dynamics</p>
+                <div id="aspects-interpretations" class="aspects-interpretations-grid"></div>
             </div>
 
-            <!-- Biorritmos y Ciclo del Adepto (oculto hasta tener datos) -->
-            <div class="interpretations interpretations--biorhythms hidden" id="biorhythms-section">
-                <h3 class="section-title">Ciclos Personales</h3>
-                <p class="section-subtitle">Los ritmos del ser según las enseñanzas de Ra</p>
-                <div id="biorhythms-container">
-                    <!-- Se llena dinámicamente -->
-                </div>
+            <div class="interpretations interpretations--biorhythms" id="biorhythms-section">
+                <h3 class="section-title" data-i18n="results.cycles">Personal Cycles</h3>
+                <p class="section-subtitle" data-i18n="results.cycles_sub">The rhythms of being according to Ra's teachings</p>
+                <div id="biorhythms-container"></div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer" id="acerca">
+    <footer class="footer">
         <div class="container">
             <p class="footer__text">
-                Cálculos astronómicos: Swiss Ephemeris ·
-                Ciclos del Adepto: Material Ra (L/L Research)
+                <span data-i18n="footer.calculations">Astronomical calculations: Swiss Ephemeris</span> ·
+                <span data-i18n="footer.cycles">Adept Cycles: Ra Material (L/L Research)</span>
             </p>
             <p class="footer__credits">
-                Desarrollado con ☽ y ☉ · 2025
+                <span data-i18n="footer.developed">Developed by</span> <a href="about.html" class="footer__link">Chuchu</a>
+                <span data-i18n="footer.and">and</span> <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener" class="footer__link">Claude</a> · 2025
             </p>
         </div>
     </footer>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=1"></script>
 </body>
 </html>

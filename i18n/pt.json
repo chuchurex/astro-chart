@@ -1,0 +1,64 @@
+{
+  "header": {
+    "title": "Mapa Astral",
+    "subtitle": "Insira seus dados de nascimento"
+  },
+  "nav": {
+    "chart": "Mapa",
+    "planets": "Planetas",
+    "cycles": "Ciclos Ra",
+    "calculate": "Calcular"
+  },
+  "form": {
+    "name": "Nome",
+    "name_placeholder": "Seu nome",
+    "date": "Data",
+    "time": "Hora",
+    "city": "Cidade",
+    "city_placeholder": "Ex: São Paulo, Brasil",
+    "calculate": "Calcular"
+  },
+  "loader": {
+    "text": "Consultando as estrelas..."
+  },
+  "results": {
+    "title": "Seu Mapa Astral",
+    "sun": "Sol",
+    "moon": "Lua",
+    "ascendant": "Ascendente",
+    "summary": "Resumo do seu Mapa",
+    "positions": "Posições Planetárias",
+    "balance": "Equilíbrio Energético",
+    "balance_sub": "A distribuição de elementos e modalidades no seu mapa",
+    "essence": "Sua Essência: Sol, Lua e Ascendente",
+    "your_sun": "Seu Sol",
+    "your_moon": "Sua Lua",
+    "your_asc": "Seu Ascendente",
+    "houses": "Planetas nas Casas",
+    "aspects": "Aspectos Planetários",
+    "aspects_sub": "As relações entre seus planetas revelam dinâmicas internas",
+    "cycles": "Ciclos Pessoais",
+    "cycles_sub": "Os ritmos do ser segundo os ensinamentos de Ra"
+  },
+  "footer": {
+    "calculations": "Cálculos astronômicos: Swiss Ephemeris",
+    "cycles": "Ciclos do Adepto: Material Ra (L/L Research)",
+    "developed": "Desenvolvido por",
+    "and": "e"
+  },
+  "about": {
+    "name": "Carlos Martínez",
+    "aka": "aka Chuchu",
+    "bio1": "Desenvolvedor e explorador do cosmos digital desde Santiago, Chile.",
+    "bio2": "Este projeto combina meu interesse por programação com o fascínio pelos ciclos cósmicos e os ensinamentos de Ra.",
+    "github": "github",
+    "collab_title": "Desenvolvido com Claude",
+    "collab_text": "Este projeto foi criado em colaboração com",
+    "collab_anthropic": "o assistente de IA da Anthropic.",
+    "back": "← Voltar ao Mapa Astral"
+  },
+  "errors": {
+    "city_not_found": "Cidade não encontrada. Usando coordenadas padrão.",
+    "api_error": "Erro ao calcular o mapa. Por favor tente novamente."
+  }
+}

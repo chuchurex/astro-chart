@@ -1,0 +1,117 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba($color-bg, 0.95), transparent);
+  backdrop-filter: blur(10px);
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__symbol {
+    font-size: 28px;
+    color: $color-gold;
+    text-shadow: 0 0 20px rgba($color-gold, 0.5);
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: $color-text;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 32px;
+  }
+
+  &__link {
+    font-family: $font-display;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $color-text-subtle;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-gold;
+    }
+  }
+}
+
+// Header expanded with form
+.header--expanded {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20px 40px 40px;
+  background: linear-gradient(to bottom, rgba($color-bg, 0.98), rgba($color-bg, 0.9));
+
+  .header__top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+}
+
+.header__form-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.header__subtitle {
+  font-family: $font-body;
+  font-size: 18px;
+  font-style: italic;
+  color: $color-text-subtle;
+  margin-bottom: 24px;
+}
+
+// Language selector
+.lang-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid rgba($color-gold, 0.3);
+  color: $color-text-subtle;
+  font-family: $font-display;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all $transition-fast;
+  border-radius: 4px;
+
+  &:hover {
+    border-color: $color-gold;
+    color: $color-gold;
+  }
+
+  &--active {
+    background: rgba($color-gold, 0.2);
+    border-color: $color-gold;
+    color: $color-gold;
+  }
+}

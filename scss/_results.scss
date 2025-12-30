@@ -1,0 +1,78 @@
+.results {
+  padding: 80px 0;
+
+  &.hidden {
+    display: none;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  &__name {
+    font-family: $font-display;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: $color-text;
+    margin-bottom: 32px;
+  }
+}
+
+.big-three {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 24px 32px;
+    background: $color-bg-card;
+    border: 1px solid $color-border;
+    border-radius: 12px;
+    min-width: 160px;
+  }
+
+  &__symbol {
+    font-size: 32px;
+    color: $color-gold;
+  }
+
+  &__label {
+    font-family: $font-display;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $color-text-subtle;
+  }
+
+  &__sign {
+    font-family: $font-body;
+    font-size: 20px;
+    font-weight: 500;
+    color: $color-text;
+  }
+}
+
+.section-title {
+  font-family: $font-display;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-align: center;
+  color: $color-text;
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  font-size: 16px;
+  font-style: italic;
+  text-align: center;
+  color: $color-text-subtle;
+  margin-bottom: 32px;
+}

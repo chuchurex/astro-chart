@@ -1,0 +1,18 @@
+// Main SCSS file - imports all modules
+// Compile with: sass scss/main.scss styles.css
+
+@import 'variables';
+@import 'base';
+@import 'stars';
+@import 'header';
+@import 'form';
+@import 'buttons';
+@import 'loader';
+@import 'results';
+@import 'footer';
+@import 'about';
+@import 'responsive';
+
+// Note: The stars animation CSS is very complex and kept in the compiled
+// styles.css directly. When compiling, you may need to merge the stars
+// CSS manually or keep it in a separate file.

@@ -1,0 +1,64 @@
+{
+  "header": {
+    "title": "Natal Chart",
+    "subtitle": "Enter your birth data"
+  },
+  "nav": {
+    "chart": "Chart",
+    "planets": "Planets",
+    "cycles": "Ra Cycles",
+    "calculate": "Calculate"
+  },
+  "form": {
+    "name": "Name",
+    "name_placeholder": "Your name",
+    "date": "Date",
+    "time": "Time",
+    "city": "City",
+    "city_placeholder": "e.g. New York, USA",
+    "calculate": "Calculate"
+  },
+  "loader": {
+    "text": "Consulting the stars..."
+  },
+  "results": {
+    "title": "Your Natal Chart",
+    "sun": "Sun",
+    "moon": "Moon",
+    "ascendant": "Ascendant",
+    "summary": "Chart Summary",
+    "positions": "Planetary Positions",
+    "balance": "Energy Balance",
+    "balance_sub": "The distribution of elements and modalities in your chart",
+    "essence": "Your Essence: Sun, Moon and Ascendant",
+    "your_sun": "Your Sun",
+    "your_moon": "Your Moon",
+    "your_asc": "Your Ascendant",
+    "houses": "Planets in Houses",
+    "aspects": "Planetary Aspects",
+    "aspects_sub": "The relationships between your planets reveal inner dynamics",
+    "cycles": "Personal Cycles",
+    "cycles_sub": "The rhythms of being according to Ra's teachings"
+  },
+  "footer": {
+    "calculations": "Astronomical calculations: Swiss Ephemeris",
+    "cycles": "Adept Cycles: Ra Material (L/L Research)",
+    "developed": "Developed by",
+    "and": "and"
+  },
+  "about": {
+    "name": "Carlos Martínez",
+    "aka": "aka Chuchu",
+    "bio1": "Developer and explorer of the digital cosmos from Santiago, Chile.",
+    "bio2": "This project combines my interest in programming with the fascination for cosmic cycles and the teachings of Ra.",
+    "github": "github",
+    "collab_title": "Developed with Claude",
+    "collab_text": "This project was created in collaboration with",
+    "collab_anthropic": "the AI assistant from Anthropic.",
+    "back": "← Back to Natal Chart"
+  },
+  "errors": {
+    "city_not_found": "City not found. Using default coordinates.",
+    "api_error": "Error calculating chart. Please try again."
+  }
+}

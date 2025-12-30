@@ -1002,4 +1002,35 @@ body {
   }
 }
 
+/* Language selector */
+.lang-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #8888a0;
+  font-family: "Cinzel", serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+}
+
+.lang-btn:hover {
+  border-color: #d4af37;
+  color: #d4af37;
+}
+
+.lang-btn--active {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: #d4af37;
+  color: #d4af37;
+}
+
 /*# sourceMappingURL=styles.css.map */

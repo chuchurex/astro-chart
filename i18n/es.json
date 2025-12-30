@@ -1,0 +1,64 @@
+{
+  "header": {
+    "title": "Carta Astral",
+    "subtitle": "Ingresa tus datos de nacimiento"
+  },
+  "nav": {
+    "chart": "Carta",
+    "planets": "Planetas",
+    "cycles": "Ciclos Ra",
+    "calculate": "Calcular"
+  },
+  "form": {
+    "name": "Nombre",
+    "name_placeholder": "Tu nombre",
+    "date": "Fecha",
+    "time": "Hora",
+    "city": "Ciudad",
+    "city_placeholder": "Ej: Santiago, Chile",
+    "calculate": "Calcular"
+  },
+  "loader": {
+    "text": "Consultando las estrellas..."
+  },
+  "results": {
+    "title": "Tu Carta Astral",
+    "sun": "Sol",
+    "moon": "Luna",
+    "ascendant": "Ascendente",
+    "summary": "Resumen de tu Carta",
+    "positions": "Posiciones Planetarias",
+    "balance": "Balance Energético",
+    "balance_sub": "La distribución de elementos y modalidades en tu carta",
+    "essence": "Tu Esencia: Sol, Luna y Ascendente",
+    "your_sun": "Tu Sol",
+    "your_moon": "Tu Luna",
+    "your_asc": "Tu Ascendente",
+    "houses": "Planetas en las Casas",
+    "aspects": "Aspectos Planetarios",
+    "aspects_sub": "Las relaciones entre tus planetas revelan dinámicas internas",
+    "cycles": "Ciclos Personales",
+    "cycles_sub": "Los ritmos del ser según las enseñanzas de Ra"
+  },
+  "footer": {
+    "calculations": "Cálculos astronómicos: Swiss Ephemeris",
+    "cycles": "Ciclos del Adepto: Material Ra (L/L Research)",
+    "developed": "Desarrollado por",
+    "and": "y"
+  },
+  "about": {
+    "name": "Carlos Martínez",
+    "aka": "aka Chuchu",
+    "bio1": "Desarrollador y explorador del cosmos digital desde Santiago, Chile.",
+    "bio2": "Este proyecto combina mi interés por la programación con la fascinación por los ciclos cósmicos y las enseñanzas de Ra.",
+    "github": "github",
+    "collab_title": "Desarrollado con Claude",
+    "collab_text": "Este proyecto fue creado en colaboración con",
+    "collab_anthropic": "el asistente de IA de Anthropic.",
+    "back": "← Volver a Carta Astral"
+  },
+  "errors": {
+    "city_not_found": "Ciudad no encontrada. Usando coordenadas por defecto.",
+    "api_error": "Error al calcular la carta. Por favor intenta de nuevo."
+  }
+}

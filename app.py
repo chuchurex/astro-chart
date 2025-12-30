@@ -61,6 +61,7 @@ class PlanetPosition(BaseModel):
     name: str
     sign: str
     degree: float
+    abs_pos: float  # Posición absoluta 0-360° para el gráfico
     house: int
     retrograde: bool = False
 
@@ -232,23 +233,27 @@ def generate_kerykeion_chart(data: BirthData) -> dict:
                 name=planet_names_es.get(planet.name, planet.name),
                 sign=sign_names_es.get(planet.sign, planet.sign),
                 degree=planet.abs_pos % 30,
+                abs_pos=planet.abs_pos,  # Posición absoluta 0-360°
                 house=get_house_number(planet.house) if planet.house else 1,
                 retrograde=planet.retrograde or False
             ))
 
-    # Extraer casas
+    # Extraer casas con posiciones absolutas (cúspides)
     house_attrs = ['first_house', 'second_house', 'third_house', 'fourth_house',
                    'fifth_house', 'sixth_house', 'seventh_house', 'eighth_house',
                    'ninth_house', 'tenth_house', 'eleventh_house', 'twelfth_house']
 
     houses = []
+    cusps = []  # Posiciones absolutas para el gráfico
     for i, house_attr in enumerate(house_attrs):
         house = getattr(subject, house_attr, None)
         if house:
             houses.append({
                 "house": i + 1,
-                "sign": sign_names_es.get(house.sign, house.sign)
+                "sign": sign_names_es.get(house.sign, house.sign),
+                "degree": house.abs_pos if hasattr(house, 'abs_pos') else 0
             })
+            cusps.append(house.abs_pos if hasattr(house, 'abs_pos') else i * 30)
 
     # Extraer aspectos
     aspects = []
@@ -264,8 +269,10 @@ def generate_kerykeion_chart(data: BirthData) -> dict:
         "sun_sign": sign_names_es.get(subject.sun.sign, subject.sun.sign),
         "moon_sign": sign_names_es.get(subject.moon.sign, subject.moon.sign),
         "ascendant": sign_names_es.get(subject.first_house.sign, subject.first_house.sign),
+        "ascendant_degree": subject.first_house.abs_pos if hasattr(subject.first_house, 'abs_pos') else 0,
         "planets": planets,
         "houses": houses,
+        "cusps": cusps,
         "aspects": aspects,
         "calculation_method": "kerykeion"
     }
