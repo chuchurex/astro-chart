@@ -380,11 +380,23 @@ function renderBiorhythms(biorhythms) {
         const barPosition = (cycle.percentage + 100) / 2;
         const displayPercent = cycle.percentage > 0 ? `+${cycle.percentage}%` : `${cycle.percentage}%`;
 
+        // Determinar tendencia para todos los ciclos
+        const getTrendIndicator = (phase, value) => {
+            if (phase === 'ascenso' || (value >= 0 && phase !== 'descenso')) {
+                return { symbol: '📈', label: 'Ascenso', color: '#10B981' };
+            } else {
+                return { symbol: '📉', label: 'Descenso', color: '#F59E0B' };
+            }
+        };
+        const trend = getTrendIndicator(cycle.phase, cycle.value);
+
         return `
             <div class="biorhythm-cycle biorhythm-cycle--${key} ${isSpiritual ? 'biorhythm-cycle--spiritual' : ''}">
                 <div class="biorhythm-cycle__header">
                     <span class="biorhythm-cycle__name">${cycle.name}</span>
-                    ${isSpiritual ? `<span class="biorhythm-cycle__quality" style="color: ${cycle.color}">${cycle.symbol} ${cycle.quality}</span>` : ''}
+                    ${isSpiritual
+                        ? `<span class="biorhythm-cycle__quality" style="color: ${cycle.color}">${cycle.symbol} ${cycle.quality}</span>`
+                        : `<span class="biorhythm-cycle__trend" style="color: ${trend.color}">${trend.symbol} ${trend.label}</span>`}
                     <span class="biorhythm-cycle__day">Día ${cycle.current_day}/${cycle.duration}</span>
                 </div>
                 <div class="biorhythm-cycle__bar">
