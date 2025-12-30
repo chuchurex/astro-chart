@@ -56,6 +56,12 @@ deploy_frontend() {
         curl -s -T about.html "ftp://${FTP_SERVER}${FTP_SERVER_DIR}/" --user "${FTP_USERNAME}:${FTP_PASSWORD}"
     fi
 
+    # Crear directorio i18n y subir traducciones
+    echo "  Subiendo archivos i18n..."
+    curl -s --ftp-create-dirs -T i18n/en.json "ftp://${FTP_SERVER}${FTP_SERVER_DIR}/i18n/" --user "${FTP_USERNAME}:${FTP_PASSWORD}"
+    curl -s --ftp-create-dirs -T i18n/es.json "ftp://${FTP_SERVER}${FTP_SERVER_DIR}/i18n/" --user "${FTP_USERNAME}:${FTP_PASSWORD}"
+    curl -s --ftp-create-dirs -T i18n/pt.json "ftp://${FTP_SERVER}${FTP_SERVER_DIR}/i18n/" --user "${FTP_USERNAME}:${FTP_PASSWORD}"
+
     echo -e "${GREEN}Frontend desplegado en https://chuchurex.cl (v=${CACHE_VERSION})${NC}"
 }
 
