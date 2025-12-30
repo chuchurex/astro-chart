@@ -328,29 +328,45 @@ def calculate_biorhythms(birth_date: str, target_date: str = None) -> dict:
 
     days_alive = (target - birth).days
 
-    # Ciclos tradicionales (seno)
+    # Ciclos tradicionales (seno) - Compatible con Bring4th
+    # La fórmula estándar de biorritmos: sin(2π * días / duración)
+    # El ciclo empieza en 0%, sube al 100% en 1/4, baja a 0% en 1/2,
+    # llega a -100% en 3/4, y vuelve a 0% al final
     def get_cycle(days, duration, name_es):
-        day_in_cycle = (days % duration) + 1
-        angle = ((day_in_cycle - 1) / duration) * 2 * math.pi
+        # Bring4th usa días desde nacimiento directamente (día 0 = nacimiento)
+        day_in_cycle = days % duration
+        angle = (2 * math.pi * days) / duration
         value = math.sin(angle)
-        midpoint = duration // 2
+
+        # Porcentaje en escala -100% a +100% (como Bring4th)
+        percentage = round(value * 100)
+
+        # Día crítico: cuando cruza el 0 (inicio/mitad del ciclo)
+        is_critical = day_in_cycle == 0 or day_in_cycle == duration // 2
 
         return {
             "name": name_es,
             "duration": duration,
-            "current_day": day_in_cycle,
+            "current_day": day_in_cycle + 1,  # Mostrar 1-based para UI
             "value": round(value, 2),
-            "percentage": round((value + 1) / 2 * 100),
-            "phase": "ascenso" if day_in_cycle <= midpoint else "descenso",
-            "is_critical": day_in_cycle in [1, midpoint, midpoint + 1, duration]
+            "percentage": percentage,  # -100 a +100
+            "phase": "ascenso" if value >= 0 and day_in_cycle < duration // 4 else "descenso" if value >= 0 else "bajo",
+            "is_critical": is_critical
         }
 
-    # Ciclo espiritual del adepto (coseno, pico en día 5)
+    # Ciclo espiritual del adepto (18 días)
+    # Según Ra: días 4, 5, 6 son óptimos (pico)
+    # Usamos seno desplazado para que el pico esté en día 5
     def get_spiritual_cycle(days):
-        day = (days % 18) + 1
-        peak_day = 5
-        angle = ((day - peak_day) / 18) * 2 * math.pi
-        value = math.cos(angle)
+        day_in_cycle = days % 18
+        day = day_in_cycle + 1  # 1-based para mostrar
+
+        # Desplazar para que el pico (100%) esté en día 5
+        # sin(x) tiene pico en π/2, queremos eso en día 5
+        # angle = 2π * (days + offset) / 18, donde offset hace que día 5 = pico
+        offset = 18 / 4 - 5  # = -0.5
+        angle = (2 * math.pi * (days + offset)) / 18
+        value = math.sin(angle)
 
         # Clasificación según Ra
         if day in [4, 5, 6]:
@@ -407,7 +423,7 @@ def calculate_biorhythms(birth_date: str, target_date: str = None) -> dict:
             "duration": 18,
             "current_day": day,
             "value": round(value, 2),
-            "percentage": round((value + 1) / 2 * 100),
+            "percentage": round(value * 100),  # -100 a +100 como los otros ciclos
             "quality": quality,
             "symbol": symbol,
             "description": description,

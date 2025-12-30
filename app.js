@@ -374,7 +374,11 @@ function renderBiorhythms(biorhythms) {
     const cycleHtml = Object.entries(cycles).map(([key, cycle]) => {
         const isSpiritual = key === 'spiritual';
         const barColor = isSpiritual ? cycle.color : getCycleColor(cycle.value);
-        const statusClass = cycle.is_critical ? 'critical' : (cycle.value > 0.5 ? 'high' : (cycle.value < -0.5 ? 'low' : 'neutral'));
+        const statusClass = cycle.is_critical ? 'critical' : (cycle.percentage > 50 ? 'high' : (cycle.percentage < -50 ? 'low' : 'neutral'));
+
+        // Convertir porcentaje -100 a +100 en posición 0-100 para la barra (50 = centro)
+        const barPosition = (cycle.percentage + 100) / 2;
+        const displayPercent = cycle.percentage > 0 ? `+${cycle.percentage}%` : `${cycle.percentage}%`;
 
         return `
             <div class="biorhythm-cycle biorhythm-cycle--${key} ${isSpiritual ? 'biorhythm-cycle--spiritual' : ''}">
@@ -385,10 +389,11 @@ function renderBiorhythms(biorhythms) {
                 </div>
                 <div class="biorhythm-cycle__bar">
                     <div class="biorhythm-cycle__track">
-                        <div class="biorhythm-cycle__fill" style="width: ${cycle.percentage}%; background: ${barColor}"></div>
-                        <div class="biorhythm-cycle__marker" style="left: ${cycle.percentage}%"></div>
+                        <div class="biorhythm-cycle__center"></div>
+                        <div class="biorhythm-cycle__fill" style="width: ${barPosition}%; background: ${barColor}"></div>
+                        <div class="biorhythm-cycle__marker" style="left: ${barPosition}%"></div>
                     </div>
-                    <span class="biorhythm-cycle__value ${statusClass}">${cycle.percentage}%</span>
+                    <span class="biorhythm-cycle__value ${statusClass}">${displayPercent}</span>
                 </div>
                 ${isSpiritual ? `
                     <p class="biorhythm-cycle__description">${cycle.description}</p>

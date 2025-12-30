@@ -959,6 +959,14 @@ body {
   position: relative;
   overflow: hidden;
 }
+.biorhythm-cycle__center {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: rgba(136, 136, 160, 0.4);
+}
 .biorhythm-cycle__fill {
   height: 100%;
   border-radius: 4px;
@@ -976,7 +984,7 @@ body {
 .biorhythm-cycle__value {
   font-size: 13px;
   font-family: "Cinzel", serif;
-  min-width: 40px;
+  min-width: 55px;
   text-align: right;
 }
 .biorhythm-cycle__value.high {
