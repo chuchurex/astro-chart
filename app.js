@@ -240,15 +240,22 @@ function renderResults(chartData) {
         renderElementModality(chartData.interpretations.element_modality);
 
         // Renderizar interpretaciones de planetas en casas
-        renderPlanetsInHouses(chartData.interpretations.planets_in_houses);
+        if (chartData.interpretations.planets_in_houses && Object.keys(chartData.interpretations.planets_in_houses).length > 0) {
+            renderPlanetsInHouses(chartData.interpretations.planets_in_houses);
+            document.getElementById('planets-houses-section')?.classList.remove('hidden');
+        }
 
         // Renderizar interpretaciones de aspectos
-        renderAspects(chartData.interpretations.aspects);
+        if (chartData.interpretations.aspects && chartData.interpretations.aspects.length > 0) {
+            renderAspects(chartData.interpretations.aspects);
+            document.getElementById('aspects-section')?.classList.remove('hidden');
+        }
     }
 
     // Renderizar biorritmos (enseñanzas de Ra)
-    if (chartData.biorhythms) {
+    if (chartData.biorhythms && chartData.biorhythms.cycles) {
         renderBiorhythms(chartData.biorhythms);
+        document.getElementById('biorhythms-section')?.classList.remove('hidden');
     }
 }
 
