@@ -1,0 +1,17 @@
+# Astro Project - Backend Dependencies
+# =====================================
+# Instalar con: pip install -r requirements.txt
+
+# Framework web
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+
+# Cálculos astrológicos (Swiss Ephemeris)
+kerykeion>=4.0.0
+
+# Utilidades
+pydantic>=2.0.0
+python-multipart>=0.0.6
+
+# Opcional: para desarrollo
+httpx>=0.25.0  # Para testing

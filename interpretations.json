@@ -1,0 +1,393 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "description": "Interpretaciones astrológicas para cartas natales",
+    "sources": ["Astro.com", "Astro-Seek.com", "Compilación propia"],
+    "language": "es"
+  },
+  
+  "sun_in_signs": {
+    "sun_aries": "El Sol en Aries indica una personalidad pionera, valiente y directa. Eres un iniciador natural, con gran energía vital y deseo de acción. Tu esencia busca la independencia y el liderazgo. Tiendes a ser impulsivo pero genuino, prefiriendo la honestidad aunque sea incómoda.",
+    
+    "sun_tauro": "El Sol en Tauro representa una naturaleza estable, sensual y persistente. Valoras la seguridad material y emocional. Tu esencia busca construir algo duradero y disfrutar de los placeres de la vida. Eres práctico, confiable y tienes una fuerte conexión con el mundo físico.",
+    
+    "sun_géminis": "El Sol en Géminis otorga una mente curiosa, versátil y comunicativa. Tu esencia se expresa a través del intercambio de ideas y la exploración intelectual. Eres adaptable, ingenioso y necesitas variedad para sentirte vivo. La comunicación es tu don natural.",
+    
+    "sun_cáncer": "El Sol en Cáncer indica una naturaleza emocional, protectora y profundamente intuitiva. Tu esencia está conectada con el hogar, la familia y las raíces. Eres sensible a los ambientes y tienes una memoria emocional poderosa. Cuidas y nutres a quienes amas.",
+    
+    "sun_leo": "El Sol en Leo representa una personalidad creativa, generosa y magnética. Tu esencia brilla naturalmente y busca reconocimiento y expresión auténtica. Tienes un gran corazón, amas el drama y la celebración de la vida. El liderazgo te viene naturalmente.",
+    
+    "sun_virgo": "El Sol en Virgo otorga una mente analítica, práctica y orientada al servicio. Tu esencia busca mejorar, perfeccionar y ser útil. Tienes un ojo para los detalles y una profunda necesidad de orden. Eres modesto pero increíblemente competente.",
+    
+    "sun_libra": "El Sol en Libra indica una naturaleza diplomática, estética y orientada a las relaciones. Tu esencia busca el equilibrio, la armonía y la belleza. Valoras la justicia y tienes un don natural para mediar y conectar personas. Las relaciones son centrales en tu vida.",
+    
+    "sun_escorpio": "El Sol en Escorpio representa una personalidad intensa, transformadora y profundamente perceptiva. Tu esencia busca la verdad oculta y la transformación radical. Tienes una voluntad poderosa y una capacidad de regeneración notable. No temes la oscuridad.",
+    
+    "sun_sagitario": "El Sol en Sagitario otorga un espíritu aventurero, filosófico y optimista. Tu esencia busca expandirse, explorar y encontrar significado. Eres honesto, entusiasta y tienes una visión amplia de la vida. La libertad es esencial para ti.",
+    
+    "sun_capricornio": "El Sol en Capricornio indica una naturaleza ambiciosa, responsable y estructurada. Tu esencia busca lograr, construir y dejar un legado. Eres disciplinado, paciente y entiendes el valor del esfuerzo sostenido. Maduras con gracia.",
+    
+    "sun_acuario": "El Sol en Acuario representa una personalidad innovadora, humanitaria e independiente. Tu esencia busca el progreso y la originalidad. Piensas diferente y valoras la libertad intelectual. Tienes visión de futuro y te importa el bienestar colectivo.",
+    
+    "sun_piscis": "El Sol en Piscis otorga una naturaleza compasiva, imaginativa y espiritualmente sensible. Tu esencia está conectada con lo trascendente y el inconsciente colectivo. Eres empático, creativo y tienes una intuición profunda. Los límites entre tú y el mundo son fluidos."
+  },
+  
+  "moon_in_signs": {
+    "moon_aries": "La Luna en Aries indica necesidades emocionales de acción, independencia y espontaneidad. Reaccionas rápidamente y necesitas desafíos para sentirte vivo emocionalmente. Tu mundo interior es apasionado e impulsivo.",
+    
+    "moon_tauro": "La Luna en Tauro representa necesidades emocionales de seguridad, confort y estabilidad. Te nutres a través de los sentidos y necesitas un ambiente tranquilo. Tu mundo interior es sereno y constante.",
+    
+    "moon_géminis": "La Luna en Géminis indica necesidades emocionales de comunicación, variedad y estímulo mental. Procesas las emociones hablando y necesitas cambio. Tu mundo interior es curioso y adaptable.",
+    
+    "moon_cáncer": "La Luna en Cáncer representa necesidades emocionales profundas de seguridad, pertenencia y nutrición. Eres extremadamente sensible e intuitivo. Tu mundo interior está íntimamente conectado con la familia y el pasado.",
+    
+    "moon_leo": "La Luna en Leo indica necesidades emocionales de reconocimiento, expresión creativa y afecto. Necesitas sentirte especial y apreciado. Tu mundo interior es dramático, cálido y generoso.",
+    
+    "moon_virgo": "La Luna en Virgo representa necesidades emocionales de orden, utilidad y mejora. Te sientes seguro cuando eres productivo. Tu mundo interior busca perfeccionar y servir.",
+    
+    "moon_libra": "La Luna en Libra indica necesidades emocionales de armonía, compañía y belleza. Necesitas relaciones equilibradas para tu bienestar. Tu mundo interior busca la paz y la justicia.",
+    
+    "moon_escorpio": "La Luna en Escorpio representa necesidades emocionales intensas de profundidad, control y transformación. Tus emociones son poderosas y a veces abrumadoras. Tu mundo interior es magnético y misterioso.",
+    
+    "moon_sagitario": "La Luna en Sagitario indica necesidades emocionales de libertad, aventura y significado. Necesitas espacio para explorar y crecer. Tu mundo interior es optimista y filosófico.",
+    
+    "moon_capricornio": "La Luna en Capricornio representa necesidades emocionales de estructura, logro y respeto. Te sientes seguro cuando tienes control. Tu mundo interior es reservado pero profundamente responsable.",
+    
+    "moon_acuario": "La Luna en Acuario indica necesidades emocionales de libertad, originalidad y conexión con grupos. Procesas las emociones de forma racional. Tu mundo interior valora la independencia y la amistad.",
+    
+    "moon_piscis": "La Luna en Piscis representa necesidades emocionales de conexión espiritual, escape y compasión. Eres extremadamente sensible y absorbente. Tu mundo interior es imaginativo y trascendente."
+  },
+  
+  "ascendants": {
+    "aries": "Con Ascendente en Aries te presentas como una persona directa, enérgica y competitiva. Tu primera impresión es de alguien valiente y decidido. Enfrentas la vida como un guerrero, siempre listo para la acción.",
+    
+    "tauro": "Con Ascendente en Tauro te presentas como una persona estable, sensual y confiable. Tu primera impresión es de alguien tranquilo y sólido. Enfrentas la vida con paciencia y determinación práctica.",
+    
+    "géminis": "Con Ascendente en Géminis te presentas como una persona comunicativa, curiosa y versátil. Tu primera impresión es de alguien ingenioso y social. Enfrentas la vida con flexibilidad mental.",
+    
+    "cáncer": "Con Ascendente en Cáncer te presentas como una persona sensible, protectora y acogedora. Tu primera impresión puede ser de timidez inicial pero gran calidez. Enfrentas la vida con intuición.",
+    
+    "leo": "Con Ascendente en Leo te presentas como una persona carismática, creativa y magnética. Tu primera impresión es de alguien seguro y notable. Enfrentas la vida con dignidad y estilo.",
+    
+    "virgo": "Con Ascendente en Virgo te presentas como una persona analítica, modesta y servicial. Tu primera impresión es de alguien competente y detallista. Enfrentas la vida con precisión y humildad.",
+    
+    "libra": "Con Ascendente en Libra te presentas como una persona encantadora, diplomática y elegante. Tu primera impresión es de alguien refinado y sociable. Enfrentas la vida buscando equilibrio.",
+    
+    "escorpio": "Con Ascendente en Escorpio te presentas como una persona intensa, magnética y reservada. Tu primera impresión es de alguien poderoso y misterioso. Enfrentas la vida con profundidad.",
+    
+    "sagitario": "Con Ascendente en Sagitario te presentas como una persona optimista, aventurera y filosófica. Tu primera impresión es de alguien abierto y entusiasta. Enfrentas la vida con fe.",
+    
+    "capricornio": "Con Ascendente en Capricornio te presentas como una persona seria, ambiciosa y responsable. Tu primera impresión es de alguien maduro y competente. Enfrentas la vida con determinación.",
+    
+    "acuario": "Con Ascendente en Acuario te presentas como una persona original, independiente y progresista. Tu primera impresión es de alguien único e intelectual. Enfrentas la vida con visión de futuro.",
+    
+    "piscis": "Con Ascendente en Piscis te presentas como una persona sensible, soñadora y compasiva. Tu primera impresión es de alguien gentil y etéreo. Enfrentas la vida con imaginación."
+  },
+  
+  "planets_in_houses": {
+    "sol_1": "El Sol en Casa 1 te otorga una fuerte presencia personal y autoexpresión natural. Tu identidad es central en tu vida y proyectas confianza. Tienes vitalidad y magnetismo innato.",
+    "sol_2": "El Sol en Casa 2 enfoca tu vitalidad en recursos, valores y seguridad material. Tu identidad está ligada a lo que posees y valoras. Brillas construyendo estabilidad financiera.",
+    "sol_3": "El Sol en Casa 3 ilumina la comunicación, el aprendizaje y las conexiones cercanas. Brillas expresando ideas y tienes facilidad para conectar con tu entorno inmediato.",
+    "sol_4": "El Sol en Casa 4 centra tu vitalidad en el hogar, familia y raíces. Tu identidad está profundamente conectada con tu origen y necesitas un espacio propio donde brillar.",
+    "sol_5": "El Sol en Casa 5 potencia la creatividad, romance y autoexpresión. Brillas siendo auténtico, disfrutando la vida y expresando tu lado más lúdico y artístico.",
+    "sol_6": "El Sol en Casa 6 enfoca tu energía en el trabajo, salud y servicio diario. Tu identidad se forja en la rutina productiva y encuentras propósito sirviendo a otros.",
+    "sol_7": "El Sol en Casa 7 ilumina las asociaciones y relaciones. Tu identidad se desarrolla significativamente a través de otros y las parejas son espejos de tu esencia.",
+    "sol_8": "El Sol en Casa 8 profundiza tu vitalidad en temas de transformación, intimidad y recursos compartidos. Brillas en crisis y tienes poder regenerativo.",
+    "sol_9": "El Sol en Casa 9 expande tu identidad a través de la filosofía, viajes y educación superior. Buscas significado y tu propósito está ligado a expandir horizontes.",
+    "sol_10": "El Sol en Casa 10 proyecta tu vitalidad hacia la carrera y reconocimiento público. Tu destino es visible y estás destinado a destacar profesionalmente.",
+    "sol_11": "El Sol en Casa 11 enfoca tu energía en grupos, amistades y causas colectivas. Brillas en comunidad y tus ideales definen tu identidad.",
+    "sol_12": "El Sol en Casa 12 interioriza tu vitalidad hacia la espiritualidad y el inconsciente. Tu luz es más sutil y encuentras propósito en el servicio anónimo.",
+
+    "luna_1": "La Luna en Casa 1 hace que tus emociones sean muy visibles. Tu estado de ánimo afecta tu apariencia y eres naturalmente receptivo al ambiente.",
+    "luna_2": "La Luna en Casa 2 conecta tu seguridad emocional con los recursos materiales. Necesitas estabilidad financiera para sentirte nutrido.",
+    "luna_3": "La Luna en Casa 3 indica que procesas emociones comunicando. Tienes vínculos emocionales fuertes con hermanos y vecinos.",
+    "luna_4": "La Luna en Casa 4 intensifica la conexión emocional con el hogar y la familia. Necesitas un refugio seguro y las raíces son fundamentales.",
+    "luna_5": "La Luna en Casa 5 nutre a través de la creatividad y el romance. Tus emociones se expresan de forma dramática y necesitas diversión.",
+    "luna_6": "La Luna en Casa 6 conecta tu bienestar emocional con la rutina y el trabajo. Cuidas de otros y tu salud refleja tu estado emocional.",
+    "luna_7": "La Luna en Casa 7 indica fuertes necesidades emocionales en las relaciones. Buscas nutrición a través de la pareja y eres muy receptivo a otros.",
+    "luna_8": "La Luna en Casa 8 profundiza las emociones hacia lo intenso y transformador. Tienes intuición sobre lo oculto y vínculos emocionales profundos.",
+    "luna_9": "La Luna en Casa 9 nutre a través de la exploración, viajes y filosofía. Necesitas expandir horizontes para sentirte emocionalmente satisfecho.",
+    "luna_10": "La Luna en Casa 10 conecta tus emociones con tu carrera. Tu profesión satisface necesidades profundas y el público te percibe como cercano.",
+    "luna_11": "La Luna en Casa 11 encuentra nutrición en grupos y amistades. Tus emociones están ligadas a causas sociales y la comunidad.",
+    "luna_12": "La Luna en Casa 12 interioriza las emociones hacia el inconsciente. Eres muy sensible, necesitas retiro y tienes una vida emocional privada rica.",
+
+    "mercurio_1": "Mercurio en Casa 1 te hace comunicativo, curioso y mentalmente ágil. Tu identidad está ligada a las ideas y la expresión verbal.",
+    "mercurio_2": "Mercurio en Casa 2 enfoca la mente en recursos y valores. Tienes habilidad para los negocios y ganas dinero con tu intelecto.",
+    "mercurio_3": "Mercurio en Casa 3 potencia la comunicación, escritura y aprendizaje. Tu mente es rápida y tienes facilidad para conectar ideas.",
+    "mercurio_4": "Mercurio en Casa 4 conecta el intelecto con el hogar y la familia. Conversaciones importantes ocurren en casa y estudias historia familiar.",
+    "mercurio_5": "Mercurio en Casa 5 expresa la mente de forma creativa y lúdica. Tienes talento para escribir, actuar o comunicar de forma entretenida.",
+    "mercurio_6": "Mercurio en Casa 6 aplica el intelecto al trabajo y la salud. Eres metódico, analítico y excelente resolviendo problemas prácticos.",
+    "mercurio_7": "Mercurio en Casa 7 busca parejas intelectuales. La comunicación es central en tus relaciones y valoras el intercambio mental.",
+    "mercurio_8": "Mercurio en Casa 8 profundiza la mente hacia lo oculto y tabú. Tienes capacidad investigativa y entiendes psicología profunda.",
+    "mercurio_9": "Mercurio en Casa 9 expande el intelecto hacia la filosofía y culturas. Amas aprender, viajar y explorar ideas universales.",
+    "mercurio_10": "Mercurio en Casa 10 proyecta tu intelecto hacia la carrera. Tu profesión involucra comunicación, escritura o comercio.",
+    "mercurio_11": "Mercurio en Casa 11 conecta la mente con grupos y causas. Tienes ideas progresistas y te comunicas bien en comunidades.",
+    "mercurio_12": "Mercurio en Casa 12 interioriza el pensamiento. Tienes una mente intuitiva, sueños significativos y procesas información subconscientemente.",
+
+    "venus_1": "Venus en Casa 1 te otorga encanto, belleza y magnetismo natural. Valoras la armonía y proyectas gracia en tu presencia.",
+    "venus_2": "Venus en Casa 2 atrae recursos y aprecia las posesiones bellas. Tienes buen gusto y capacidad para generar abundancia.",
+    "venus_3": "Venus en Casa 3 embellece la comunicación. Tienes una forma elegante de expresarte y relaciones armoniosas con hermanos.",
+    "venus_4": "Venus en Casa 4 crea un hogar hermoso y armonioso. Valoras la familia y necesitas un espacio estéticamente agradable.",
+    "venus_5": "Venus en Casa 5 potencia el romance, creatividad y placeres. Amas intensamente, tienes talento artístico y disfrutas la vida.",
+    "venus_6": "Venus en Casa 6 armoniza el trabajo y la rutina. Buscas belleza en lo cotidiano y tienes buenas relaciones laborales.",
+    "venus_7": "Venus en Casa 7 es muy favorable para las relaciones. Atraes parejas armoniosas y valoras profundamente el matrimonio.",
+    "venus_8": "Venus en Casa 8 intensifica el amor hacia lo profundo. Tienes magnetismo sexual y transformas a través del amor.",
+    "venus_9": "Venus en Casa 9 ama la exploración, viajes y filosofía. Encuentras belleza en culturas extranjeras y el conocimiento.",
+    "venus_10": "Venus en Casa 10 proyecta encanto hacia la carrera. Tu profesión involucra arte, belleza o diplomacia y eres querido públicamente.",
+    "venus_11": "Venus en Casa 11 valora las amistades y grupos. Tienes amigos influyentes y encuentras amor en contextos sociales.",
+    "venus_12": "Venus en Casa 12 interioriza el amor hacia lo espiritual. Tienes amores secretos o sacrificados y una sensibilidad artística profunda.",
+
+    "marte_1": "Marte en Casa 1 te otorga energía, iniciativa y espíritu competitivo. Eres directo, valiente y tienes presencia física fuerte.",
+    "marte_2": "Marte en Casa 2 dirige la energía hacia ganar recursos. Eres ambicioso financieramente y luchas por tus valores.",
+    "marte_3": "Marte en Casa 3 energiza la comunicación. Tu mente es rápida y combativa, defiendes tus ideas con pasión.",
+    "marte_4": "Marte en Casa 4 activa el hogar con energía. Puede haber conflictos familiares pero también una fuerte defensa del hogar.",
+    "marte_5": "Marte en Casa 5 intensifica la creatividad, romance y competitividad. Tienes pasión artística y amas con intensidad.",
+    "marte_6": "Marte en Casa 6 canaliza energía al trabajo. Eres un trabajador incansable, competitivo laboralmente y activo físicamente.",
+    "marte_7": "Marte en Casa 7 activa las relaciones con pasión. Atraes parejas dinámicas y puede haber conflictos que generan crecimiento.",
+    "marte_8": "Marte en Casa 8 intensifica el deseo, transformación y poder. Tienes magnetismo sexual fuerte y capacidad regenerativa.",
+    "marte_9": "Marte en Casa 9 impulsa la exploración y defensa de creencias. Luchas por tus ideales y tienes espíritu aventurero.",
+    "marte_10": "Marte en Casa 10 proyecta ambición hacia la carrera. Eres competitivo profesionalmente y luchas por alcanzar la cima.",
+    "marte_11": "Marte en Casa 11 activa grupos y causas sociales. Luchas por ideales colectivos y tienes amigos dinámicos.",
+    "marte_12": "Marte en Casa 12 interioriza la energía. Puedes tener enemigos ocultos o canalizar la acción hacia causas espirituales.",
+
+    "júpiter_1": "Júpiter en Casa 1 te otorga optimismo, generosidad y expansividad. Tienes suerte natural y una presencia que inspira confianza.",
+    "júpiter_2": "Júpiter en Casa 2 expande los recursos y la abundancia. Tienes suerte financiera y una actitud generosa hacia el dinero.",
+    "júpiter_3": "Júpiter en Casa 3 expande la mente y comunicación. Eres un eterno estudiante con facilidad para idiomas y escritura.",
+    "júpiter_4": "Júpiter en Casa 4 bendice el hogar con abundancia. Vienes de una familia generosa o creas un hogar expansivo.",
+    "júpiter_5": "Júpiter en Casa 5 expande la creatividad, romance y alegría. Tienes suerte en el amor y abundante expresión creativa.",
+    "júpiter_6": "Júpiter en Casa 6 mejora el trabajo y la salud. Tienes suerte laboral y una actitud positiva hacia el servicio.",
+    "júpiter_7": "Júpiter en Casa 7 expande las relaciones. Atraes parejas generosas y las asociaciones te traen crecimiento.",
+    "júpiter_8": "Júpiter en Casa 8 expande recursos compartidos y herencias. Tienes suerte en inversiones y crecimiento a través de crisis.",
+    "júpiter_9": "Júpiter en Casa 9 está en su casa natural. Amas viajar, filosofar y expandir horizontes. La educación superior te favorece.",
+    "júpiter_10": "Júpiter en Casa 10 expande la carrera y reputación. Tienes éxito profesional y reconocimiento público generoso.",
+    "júpiter_11": "Júpiter en Casa 11 expande amistades y causas. Tienes amigos influyentes y tus ideales se manifiestan con facilidad.",
+    "júpiter_12": "Júpiter en Casa 12 expande la espiritualidad. Tienes protección invisible, suerte oculta y crecimiento a través del retiro.",
+
+    "saturno_1": "Saturno en Casa 1 te otorga seriedad, responsabilidad y madurez. Puedes parecer mayor de lo que eres y tienes autodisciplina.",
+    "saturno_2": "Saturno en Casa 2 enseña lecciones sobre recursos. Construyes seguridad lentamente pero de forma duradera.",
+    "saturno_3": "Saturno en Casa 3 estructura el pensamiento. Eres metódico al comunicar y puedes tener responsabilidades con hermanos.",
+    "saturno_4": "Saturno en Casa 4 indica una infancia con restricciones o responsabilidades familiares. Construyes un hogar sólido con el tiempo.",
+    "saturno_5": "Saturno en Casa 5 puede retrasar la creatividad o romance, pero los madura. La expresión personal viene con disciplina.",
+    "saturno_6": "Saturno en Casa 6 es un trabajador dedicado. Tienes sentido del deber y construyes salud a través de disciplina.",
+    "saturno_7": "Saturno en Casa 7 indica relaciones serias y comprometidas. Puede haber retrasos en el matrimonio pero son duraderos.",
+    "saturno_8": "Saturno en Casa 8 enfrenta temas de control y transformación. Aprendes a manejar recursos compartidos con madurez.",
+    "saturno_9": "Saturno en Casa 9 estructura las creencias. Tienes una filosofía práctica y la educación requiere esfuerzo pero da frutos.",
+    "saturno_10": "Saturno en Casa 10 está en su casa natural. Tienes ambición disciplinada y construyes una carrera sólida con el tiempo.",
+    "saturno_11": "Saturno en Casa 11 toma en serio las amistades y causas. Tienes pocos amigos pero leales y responsabilidades grupales.",
+    "saturno_12": "Saturno en Casa 12 enfrenta miedos inconscientes. Hay karma por resolver pero la disciplina espiritual trae liberación.",
+
+    "urano_1": "Urano en Casa 1 te hace único, original y poco convencional. Proyectas independencia y necesitas libertad para ser tú mismo.",
+    "urano_2": "Urano en Casa 2 trae ingresos inusuales o fluctuantes. Tienes valores poco convencionales y formas originales de ganar dinero.",
+    "urano_3": "Urano en Casa 3 revoluciona el pensamiento. Tienes ideas originales, comunicación no convencional y mente inventiva.",
+    "urano_4": "Urano en Casa 4 indica un hogar poco convencional. Puede haber cambios familiares súbitos o un enfoque único de la vida doméstica.",
+    "urano_5": "Urano en Casa 5 expresa creatividad de forma original. Tienes romances poco convencionales y un estilo artístico único.",
+    "urano_6": "Urano en Casa 6 revoluciona el trabajo. Prefieres horarios flexibles, métodos innovadores y trabajo con tecnología.",
+    "urano_7": "Urano en Casa 7 busca relaciones no convencionales. Necesitas libertad en pareja y atraes personas únicas.",
+    "urano_8": "Urano en Casa 8 transforma de forma súbita. Tienes insights psíquicos repentinos y cambios inesperados en recursos compartidos.",
+    "urano_9": "Urano en Casa 9 revoluciona creencias y filosofía. Tienes ideas progresistas y viajes inesperados que cambian tu visión.",
+    "urano_10": "Urano en Casa 10 indica una carrera no convencional. Tu profesión involucra innovación, tecnología o cambio social.",
+    "urano_11": "Urano en Casa 11 está en su casa natural. Tienes amigos excéntricos, ideales progresistas y visión de futuro.",
+    "urano_12": "Urano en Casa 12 tiene intuiciones súbitas del inconsciente. Hay despertar espiritual repentino y liberación de patrones ocultos.",
+
+    "neptuno_1": "Neptuno en Casa 1 te otorga sensibilidad, intuición y aura misteriosa. Puedes ser camaleónico y absorbes el ambiente.",
+    "neptuno_2": "Neptuno en Casa 2 disuelve límites con el dinero. Puedes ser generoso en exceso o tener confusión sobre valores materiales.",
+    "neptuno_3": "Neptuno en Casa 3 poetiza la comunicación. Tienes pensamiento intuitivo, imaginación rica y posible talento artístico verbal.",
+    "neptuno_4": "Neptuno en Casa 4 idealiza el hogar y familia. Puede haber confusión sobre orígenes o un hogar espiritualmente sensible.",
+    "neptuno_5": "Neptuno en Casa 5 inspira creatividad artística y romances idealizados. Tienes imaginación rica y expresión artística natural.",
+    "neptuno_6": "Neptuno en Casa 6 sensibiliza el trabajo hacia el servicio compasivo. Puede haber sensibilidad física o trabajo en sanación.",
+    "neptuno_7": "Neptuno en Casa 7 idealiza las relaciones. Puedes proyectar fantasías en la pareja o encontrar conexiones espirituales profundas.",
+    "neptuno_8": "Neptuno en Casa 8 profundiza la intuición psíquica. Tienes conexión con lo invisible y transformación a través de lo espiritual.",
+    "neptuno_9": "Neptuno en Casa 9 expande la espiritualidad y misticismo. Buscas significado trascendente y tienes visiones expansivas.",
+    "neptuno_10": "Neptuno en Casa 10 indica una carrera artística, espiritual o de servicio. Tu imagen pública tiene un aura especial.",
+    "neptuno_11": "Neptuno en Casa 11 idealiza amistades y causas. Tienes sueños colectivos y conexión con movimientos espirituales.",
+    "neptuno_12": "Neptuno en Casa 12 está en su casa natural. Tienes profunda conexión espiritual, sensibilidad psíquica y necesidad de retiro.",
+
+    "plutón_1": "Plutón en Casa 1 te otorga intensidad, magnetismo y poder personal. Proyectas transformación y tienes presencia impactante.",
+    "plutón_2": "Plutón en Casa 2 transforma la relación con recursos. Puede haber crisis financieras que regeneran o poder sobre el dinero.",
+    "plutón_3": "Plutón en Casa 3 profundiza el pensamiento. Tienes mente investigativa, comunicación poderosa y percepción penetrante.",
+    "plutón_4": "Plutón en Casa 4 transforma dinámicas familiares. Puede haber secretos de familia o poder regenerativo desde las raíces.",
+    "plutón_5": "Plutón en Casa 5 intensifica la creatividad y el romance. Tienes pasión artística transformadora y amores intensos.",
+    "plutón_6": "Plutón en Casa 6 transforma el trabajo y la salud. Tienes poder de sanación y capacidad de regenerar rutinas.",
+    "plutón_7": "Plutón en Casa 7 intensifica las relaciones. Las parejas son transformadoras y hay poder dinámico en asociaciones.",
+    "plutón_8": "Plutón en Casa 8 está en su casa natural. Tienes profundo poder transformador, magnetismo sexual y conexión con lo oculto.",
+    "plutón_9": "Plutón en Casa 9 transforma creencias y filosofía. Tienes poder para influir en otros con tus ideas y viajes transformadores.",
+    "plutón_10": "Plutón en Casa 10 proyecta poder hacia la carrera. Tienes ambición transformadora y capacidad de regenerar tu estatus.",
+    "plutón_11": "Plutón en Casa 11 transforma grupos y causas. Tienes poder en colectivos y amistades que cambian tu vida.",
+    "plutón_12": "Plutón en Casa 12 transforma desde el inconsciente. Tienes poder oculto, capacidad de sanar karma y regeneración profunda."
+  },
+  
+  "aspects": {
+    "sol_conjunction_luna": "La conjunción Sol-Luna indica una personalidad integrada donde voluntad y emociones trabajan juntas. Hay coherencia entre lo que quieres y lo que sientes.",
+    "sol_opposition_luna": "La oposición Sol-Luna crea tensión entre tu voluntad consciente y tus necesidades emocionales. Aprendes a integrar polaridades.",
+    "sol_square_luna": "La cuadratura Sol-Luna genera fricción interna entre tu identidad y tus emociones. Este desafío impulsa el crecimiento.",
+    "sol_trine_luna": "El trígono Sol-Luna armoniza tu voluntad y emociones naturalmente. Hay fluidez entre lo que eres y lo que sientes.",
+    "sol_sextile_luna": "El sextil Sol-Luna ofrece oportunidades para integrar consciencia y emoción de forma constructiva.",
+
+    "sol_conjunction_mercurio": "La conjunción Sol-Mercurio une identidad con intelecto. Tu mente es central en tu expresión personal y te identificas con tus ideas.",
+    "sol_conjunction_venus": "La conjunción Sol-Venus otorga encanto natural, apreciación por la belleza y facilidad para atraer amor y recursos.",
+    "sol_conjunction_marte": "La conjunción Sol-Marte te da energía vital poderosa, iniciativa y espíritu competitivo. Eres directo y orientado a la acción.",
+    "sol_conjunction_júpiter": "La conjunción Sol-Júpiter expande tu identidad con optimismo, generosidad y buena fortuna. Tienes confianza natural.",
+    "sol_conjunction_saturno": "La conjunción Sol-Saturno añade seriedad y responsabilidad a tu identidad. Maduras temprano y tienes autodisciplina.",
+    "sol_conjunction_urano": "La conjunción Sol-Urano te hace único, original e independiente. Necesitas libertad para expresar tu individualidad.",
+    "sol_conjunction_neptuno": "La conjunción Sol-Neptuno añade sensibilidad artística y espiritual. Tu identidad tiene cualidades idealistas y compasivas.",
+    "sol_conjunction_plutón": "La conjunción Sol-Plutón intensifica tu presencia con magnetismo y poder transformador. Tienes profundidad psicológica.",
+
+    "sol_opposition_marte": "La oposición Sol-Marte crea tensión entre tu identidad y tu energía agresiva. Aprendes a equilibrar asertividad con diplomacia.",
+    "sol_opposition_júpiter": "La oposición Sol-Júpiter puede generar excesos o promesas exageradas. Aprendes a equilibrar optimismo con realismo.",
+    "sol_opposition_saturno": "La oposición Sol-Saturno indica desafíos con la autoridad o el padre. Construyes identidad superando limitaciones.",
+    "sol_opposition_urano": "La oposición Sol-Urano genera tensión entre estabilidad e independencia. Equilibras tradición con originalidad.",
+    "sol_opposition_neptuno": "La oposición Sol-Neptuno puede crear confusión sobre identidad. Aprendes a distinguir realidad de ilusión.",
+    "sol_opposition_plutón": "La oposición Sol-Plutón indica luchas de poder que transforman tu identidad. Enfrentas y superas crisis existenciales.",
+
+    "sol_square_marte": "La cuadratura Sol-Marte genera fricción que impulsa acción. Puedes ser impaciente pero tienes gran determinación.",
+    "sol_square_júpiter": "La cuadratura Sol-Júpiter puede llevar a excesos o arrogancia. El desafío te enseña moderación y humildad.",
+    "sol_square_saturno": "La cuadratura Sol-Saturno indica obstáculos que forjan carácter. Superas limitaciones con persistencia.",
+    "sol_square_urano": "La cuadratura Sol-Urano crea tensión entre conformidad y rebeldía. Integras originalidad de forma constructiva.",
+    "sol_square_neptuno": "La cuadratura Sol-Neptuno puede generar escapismo o confusión. Aprendes a canalizar la inspiración prácticamente.",
+    "sol_square_plutón": "La cuadratura Sol-Plutón genera luchas de poder internas. Transformas tu ego a través de crisis.",
+
+    "sol_trine_marte": "El trígono Sol-Marte otorga energía vital fluida, confianza y capacidad de acción natural.",
+    "sol_trine_júpiter": "El trígono Sol-Júpiter es muy afortunado: optimismo natural, oportunidades y crecimiento fluido.",
+    "sol_trine_saturno": "El trígono Sol-Saturno equilibra vitalidad con disciplina. Tienes madurez y logras metas con constancia.",
+    "sol_trine_urano": "El trígono Sol-Urano integra originalidad naturalmente. Expresas tu individualidad de forma creativa.",
+    "sol_trine_neptuno": "El trígono Sol-Neptuno otorga sensibilidad artística y espiritual fluida. Inspiras a otros con tu visión.",
+    "sol_trine_plutón": "El trígono Sol-Plutón da poder personal y capacidad de regeneración natural. Tienes magnetismo tranquilo.",
+
+    "luna_conjunction_mercurio": "La conjunción Luna-Mercurio conecta emociones con pensamiento. Procesas sentimientos verbalizando y tienes memoria emocional.",
+    "luna_conjunction_venus": "La conjunción Luna-Venus otorga dulzura, encanto emocional y necesidad de armonía en las relaciones.",
+    "luna_conjunction_marte": "La conjunción Luna-Marte intensifica las emociones con pasión. Reaccionas rápidamente y defiendes lo que amas.",
+    "luna_conjunction_júpiter": "La conjunción Luna-Júpiter expande las emociones con generosidad y optimismo. Tienes fe emocional.",
+    "luna_conjunction_saturno": "La conjunción Luna-Saturno puede indicar emociones contenidas o madurez emocional temprana. Eres emocionalmente responsable.",
+    "luna_conjunction_urano": "La conjunción Luna-Urano genera emociones impredecibles y necesidad de libertad emocional. Eres emocionalmente único.",
+    "luna_conjunction_neptuno": "La conjunción Luna-Neptuno intensifica la sensibilidad psíquica y la compasión. Absorbes emociones del ambiente.",
+    "luna_conjunction_plutón": "La conjunción Luna-Plutón profundiza las emociones intensamente. Tienes poder emocional y capacidad de transformación.",
+
+    "luna_opposition_saturno": "La oposición Luna-Saturno indica tensión entre necesidades emocionales y responsabilidades. Equilibras sensibilidad con deber.",
+    "luna_opposition_plutón": "La oposición Luna-Plutón crea intensidad emocional y posibles luchas de poder en relaciones íntimas.",
+    "luna_square_marte": "La cuadratura Luna-Marte genera fricción entre emociones y acción. Aprendes a manejar la irritabilidad.",
+    "luna_square_saturno": "La cuadratura Luna-Saturno indica desafíos emocionales que construyen fortaleza interior.",
+    "luna_square_plutón": "La cuadratura Luna-Plutón genera transformaciones emocionales profundas a través de crisis.",
+    "luna_trine_venus": "El trígono Luna-Venus armoniza emociones con amor. Tienes encanto natural y relaciones fluidas.",
+    "luna_trine_júpiter": "El trígono Luna-Júpiter es muy positivo: optimismo emocional, generosidad y buena fortuna en el hogar.",
+    "luna_trine_neptuno": "El trígono Luna-Neptuno otorga intuición natural, sensibilidad artística y compasión fluida.",
+    "luna_trine_plutón": "El trígono Luna-Plutón da profundidad emocional y poder de sanación natural.",
+
+    "mercurio_conjunction_venus": "La conjunción Mercurio-Venus otorga elegancia en la comunicación, diplomacia y apreciación estética de las ideas.",
+    "mercurio_conjunction_marte": "La conjunción Mercurio-Marte agudiza la mente con rapidez y capacidad de debate. Defiendes tus ideas con vigor.",
+    "mercurio_conjunction_júpiter": "La conjunción Mercurio-Júpiter expande la mente con optimismo y visión amplia. Eres un pensador filosófico.",
+    "mercurio_conjunction_saturno": "La conjunción Mercurio-Saturno estructura el pensamiento con disciplina. Eres metódico y profundo.",
+    "mercurio_conjunction_urano": "La conjunción Mercurio-Urano electrifica la mente con originalidad e intuición. Tienes ideas revolucionarias.",
+    "mercurio_conjunction_neptuno": "La conjunción Mercurio-Neptuno añade imaginación y intuición al pensamiento. Tienes mente poética.",
+    "mercurio_conjunction_plutón": "La conjunción Mercurio-Plutón profundiza la mente con capacidad investigativa. Percibes lo oculto.",
+
+    "mercurio_opposition_júpiter": "La oposición Mercurio-Júpiter puede dispersar el pensamiento. Aprendes a enfocar tu visión amplia.",
+    "mercurio_opposition_saturno": "La oposición Mercurio-Saturno genera tensión entre ideas y limitaciones. Comunicas con más cuidado.",
+    "mercurio_square_marte": "La cuadratura Mercurio-Marte puede generar discusiones. Aprendes a canalizar la agudeza mental constructivamente.",
+    "mercurio_square_júpiter": "La cuadratura Mercurio-Júpiter puede exagerar o prometer demasiado. Aprendes precisión en la comunicación.",
+    "mercurio_square_saturno": "La cuadratura Mercurio-Saturno indica desafíos de aprendizaje que construyen pensamiento sólido.",
+    "mercurio_square_neptuno": "La cuadratura Mercurio-Neptuno puede confundir hechos con fantasía. Aprendes a distinguir intuición de ilusión.",
+    "mercurio_trine_júpiter": "El trígono Mercurio-Júpiter expande la mente naturalmente. Tienes optimismo intelectual y facilidad de aprendizaje.",
+    "mercurio_trine_saturno": "El trígono Mercurio-Saturno estructura el pensamiento de forma fluida. Tienes mente práctica y disciplinada.",
+    "mercurio_trine_urano": "El trígono Mercurio-Urano otorga originalidad mental natural. Tienes intuiciones brillantes.",
+    "mercurio_trine_neptuno": "El trígono Mercurio-Neptuno armoniza lógica con intuición. Tienes imaginación creativa.",
+
+    "venus_conjunction_marte": "La conjunción Venus-Marte fusiona el amor con el deseo, creando una naturaleza apasionada y magnética.",
+    "venus_conjunction_júpiter": "La conjunción Venus-Júpiter es muy afortunada: amor expansivo, generosidad y atracción de abundancia.",
+    "venus_conjunction_saturno": "La conjunción Venus-Saturno añade seriedad al amor. Valoras compromisos duraderos y lealtad.",
+    "venus_conjunction_urano": "La conjunción Venus-Urano busca amor emocionante y no convencional. Valoras libertad en relaciones.",
+    "venus_conjunction_neptuno": "La conjunción Venus-Neptuno idealiza el amor con romanticismo y sensibilidad artística profunda.",
+    "venus_conjunction_plutón": "La conjunción Venus-Plutón intensifica el amor con pasión transformadora. Amas profundamente.",
+
+    "venus_opposition_marte": "La oposición Venus-Marte crea tensión atractiva entre amor y deseo. Aprendes a equilibrar dar y recibir.",
+    "venus_opposition_saturno": "La oposición Venus-Saturno puede retrasar el amor pero lo madura. Aprendes el valor del compromiso.",
+    "venus_opposition_plutón": "La oposición Venus-Plutón intensifica relaciones con posibles luchas de poder. Transformas a través del amor.",
+    "venus_square_marte": "La cuadratura Venus-Marte genera fricción pasional. Aprendes a equilibrar deseo con armonía.",
+    "venus_square_saturno": "La cuadratura Venus-Saturno puede indicar inhibiciones en el amor. Superas miedos al rechazo.",
+    "venus_square_urano": "La cuadratura Venus-Urano genera tensión entre estabilidad y libertad en el amor.",
+    "venus_square_neptuno": "La cuadratura Venus-Neptuno puede crear ilusiones en el amor. Aprendes a ver las relaciones claramente.",
+    "venus_square_plutón": "La cuadratura Venus-Plutón genera intensidad y posibles obsesiones amorosas. Transformas patrones relacionales.",
+    "venus_trine_marte": "El trígono Venus-Marte armoniza amor con deseo. Tienes magnetismo natural y relaciones apasionadas.",
+    "venus_trine_júpiter": "El trígono Venus-Júpiter es muy afortunado: amor generoso, abundancia y alegría en relaciones.",
+    "venus_trine_saturno": "El trígono Venus-Saturno estabiliza el amor con madurez. Construyes relaciones duraderas.",
+    "venus_trine_neptuno": "El trígono Venus-Neptuno otorga romanticismo ideal y sensibilidad artística fluida.",
+    "venus_trine_plutón": "El trígono Venus-Plutón profundiza el amor con intensidad transformadora natural.",
+
+    "marte_conjunction_júpiter": "La conjunción Marte-Júpiter expande la energía con entusiasmo y suerte. Eres un emprendedor natural.",
+    "marte_conjunction_saturno": "La conjunción Marte-Saturno combina energía con disciplina. Tienes resistencia y determinación estratégica.",
+    "marte_conjunction_urano": "La conjunción Marte-Urano electrifica la acción con impredecibilidad. Actúas de forma revolucionaria.",
+    "marte_conjunction_neptuno": "La conjunción Marte-Neptuno puede idealizar la acción o canalizarla espiritualmente. Luchas por causas elevadas.",
+    "marte_conjunction_plutón": "La conjunción Marte-Plutón intensifica la voluntad con poder transformador. Tienes fuerza formidable.",
+
+    "marte_opposition_júpiter": "La oposición Marte-Júpiter puede generar excesos de energía o riesgos. Aprendes moderación en la acción.",
+    "marte_opposition_saturno": "La oposición Marte-Saturno crea tensión entre acción y restricción. Aprendes paciencia estratégica.",
+    "marte_opposition_plutón": "La oposición Marte-Plutón indica luchas de poder intensas. Transformas la agresión en poder constructivo.",
+    "marte_square_júpiter": "La cuadratura Marte-Júpiter puede generar impulsividad o excesos. Aprendes a canalizar el entusiasmo.",
+    "marte_square_saturno": "La cuadratura Marte-Saturno genera frustración que construye resiliencia. Superas obstáculos con persistencia.",
+    "marte_square_urano": "La cuadratura Marte-Urano crea tensión explosiva. Aprendes a canalizar la rebeldía constructivamente.",
+    "marte_square_neptuno": "La cuadratura Marte-Neptuno puede debilitar la acción o confundir objetivos. Clarificas tus motivaciones.",
+    "marte_square_plutón": "La cuadratura Marte-Plutón genera luchas de poder intensas. Transformas la voluntad a través de crisis.",
+    "marte_trine_júpiter": "El trígono Marte-Júpiter otorga energía afortunada y entusiasmo natural. Tienes éxito en empresas.",
+    "marte_trine_saturno": "El trígono Marte-Saturno equilibra energía con disciplina. Logras metas con eficiencia.",
+    "marte_trine_urano": "El trígono Marte-Urano canaliza originalidad en acción constructiva. Innovas naturalmente.",
+    "marte_trine_plutón": "El trígono Marte-Plutón otorga poder y determinación natural. Tienes capacidad de regeneración.",
+
+    "júpiter_conjunction_saturno": "La conjunción Júpiter-Saturno equilibra expansión con estructura, optimismo con realismo. Construyes con visión.",
+    "júpiter_conjunction_urano": "La conjunción Júpiter-Urano expande con originalidad. Tienes suerte en innovación y cambios súbitos positivos.",
+    "júpiter_conjunction_neptuno": "La conjunción Júpiter-Neptuno expande la espiritualidad e imaginación. Tienes fe y visión trascendente.",
+    "júpiter_conjunction_plutón": "La conjunción Júpiter-Plutón expande el poder con ambición transformadora. Tienes influencia significativa.",
+
+    "júpiter_opposition_saturno": "La oposición Júpiter-Saturno genera tensión entre expansión y contracción. Equilibras optimismo con realismo.",
+    "júpiter_opposition_urano": "La oposición Júpiter-Urano crea tensión entre tradición y cambio. Integras libertad con crecimiento.",
+    "júpiter_opposition_neptuno": "La oposición Júpiter-Neptuno puede generar idealismo excesivo. Aprendes a fundamentar tus visiones.",
+    "júpiter_square_saturno": "La cuadratura Júpiter-Saturno genera fricción entre fe y duda. El desafío construye sabiduría práctica.",
+    "júpiter_square_urano": "La cuadratura Júpiter-Urano crea tensión entre lo convencional y lo radical. Integras cambio con crecimiento.",
+    "júpiter_square_neptuno": "La cuadratura Júpiter-Neptuno puede exagerar ilusiones. Aprendes discernimiento espiritual.",
+    "júpiter_square_plutón": "La cuadratura Júpiter-Plutón genera ambición intensa. Aprendes a usar el poder éticamente.",
+    "júpiter_trine_saturno": "El trígono Júpiter-Saturno equilibra optimismo con disciplina naturalmente. Logras éxito sostenido.",
+    "júpiter_trine_urano": "El trígono Júpiter-Urano otorga suerte en innovación. Tienes oportunidades inesperadas beneficiosas.",
+    "júpiter_trine_neptuno": "El trígono Júpiter-Neptuno expande la espiritualidad fluidamente. Tienes fe inspiradora.",
+    "júpiter_trine_plutón": "El trígono Júpiter-Plutón otorga poder expansivo natural. Tienes influencia transformadora positiva.",
+
+    "saturno_conjunction_urano": "La conjunción Saturno-Urano combina estructura con innovación. Revolucionas de forma práctica.",
+    "saturno_conjunction_neptuno": "La conjunción Saturno-Neptuno estructura los sueños. Manifiestas visiones con disciplina.",
+    "saturno_conjunction_plutón": "La conjunción Saturno-Plutón concentra poder con disciplina. Tienes capacidad de transformación estructurada.",
+
+    "saturno_opposition_urano": "La oposición Saturno-Urano genera tensión entre tradición y cambio. Equilibras estabilidad con progreso.",
+    "saturno_opposition_neptuno": "La oposición Saturno-Neptuno crea tensión entre realismo e idealismo. Fundamentas tus sueños.",
+    "saturno_opposition_plutón": "La oposición Saturno-Plutón indica luchas de poder con estructuras. Transformas limitaciones en fortaleza.",
+    "saturno_square_urano": "La cuadratura Saturno-Urano genera fricción entre orden y rebeldía. Integras cambio con responsabilidad.",
+    "saturno_square_neptuno": "La cuadratura Saturno-Neptuno puede crear desilusión. Aprendes a equilibrar ideales con realidad.",
+    "saturno_square_plutón": "La cuadratura Saturno-Plutón genera tensión entre control y transformación. Desafíos de poder que forjan fortaleza.",
+    "saturno_trine_urano": "El trígono Saturno-Urano integra estabilidad con innovación naturalmente. Cambias de forma práctica.",
+    "saturno_trine_neptuno": "El trígono Saturno-Neptuno estructura la espiritualidad. Manifiestas sueños con disciplina.",
+    "saturno_trine_plutón": "El trígono Saturno-Plutón otorga poder disciplinado. Transformas estructuras constructivamente.",
+
+    "urano_conjunction_neptuno": "La conjunción Urano-Neptuno fusiona innovación con espiritualidad. Tu generación busca despertar colectivo.",
+    "urano_conjunction_plutón": "La conjunción Urano-Plutón intensifica el cambio radical. Tu generación transforma estructuras profundamente.",
+    "urano_opposition_neptuno": "La oposición Urano-Neptuno genera tensión entre razón e intuición. Integras ciencia con espiritualidad.",
+    "urano_opposition_plutón": "La oposición Urano-Plutón crea tensión generacional entre libertad y poder. Transformas revolucionariamente.",
+    "urano_square_neptuno": "La cuadratura Urano-Neptuno genera fricción entre ideales y cambio. Clarificas tu visión espiritual.",
+    "urano_square_plutón": "La cuadratura Urano-Plutón intensifica transformaciones radicales. Tu generación enfrenta crisis de poder.",
+    "urano_trine_neptuno": "El trígono Urano-Neptuno armoniza innovación con inspiración. Tienes visión espiritual progresista.",
+    "urano_trine_plutón": "El trígono Urano-Plutón facilita transformaciones revolucionarias constructivas.",
+    "urano_sextile_neptuno": "El sextil Urano-Neptuno ofrece oportunidades de integrar innovación con espiritualidad.",
+    "urano_sextile_plutón": "El sextil Urano-Plutón facilita cambios transformadores de forma constructiva.",
+
+    "neptuno_conjunction_plutón": "La conjunción Neptuno-Plutón (muy rara) marca generaciones con profunda transformación espiritual.",
+    "neptuno_sextile_plutón": "El sextil Neptuno-Plutón (presente desde 1940s) facilita integración de espiritualidad con transformación.",
+    "neptuno_square_plutón": "La cuadratura Neptuno-Plutón genera tensión entre ilusión y poder. Transformación espiritual profunda."
+  },
+  
+  "elements": {
+    "fire_dominant": "Con predominio de Fuego (Aries, Leo, Sagitario) tienes una naturaleza entusiasta, activa e inspiradora. Necesitas acción y expresión.",
+    "earth_dominant": "Con predominio de Tierra (Tauro, Virgo, Capricornio) tienes una naturaleza práctica, estable y orientada a resultados concretos.",
+    "air_dominant": "Con predominio de Aire (Géminis, Libra, Acuario) tienes una naturaleza intelectual, social y orientada a las ideas y conexiones.",
+    "water_dominant": "Con predominio de Agua (Cáncer, Escorpio, Piscis) tienes una naturaleza emocional, intuitiva y profundamente sensible."
+  },
+  
+  "modalities": {
+    "cardinal_dominant": "Con predominio Cardinal (Aries, Cáncer, Libra, Capricornio) eres un iniciador natural que pone las cosas en movimiento.",
+    "fixed_dominant": "Con predominio Fijo (Tauro, Leo, Escorpio, Acuario) tienes gran persistencia y capacidad de mantener el curso.",
+    "mutable_dominant": "Con predominio Mutable (Géminis, Virgo, Sagitario, Piscis) eres adaptable y flexible ante los cambios."
+  }
+}
