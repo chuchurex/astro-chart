@@ -350,6 +350,21 @@ body {
 .btn--primary:active {
   transform: translateY(0);
 }
+.btn--share {
+  background: rgba(122, 156, 191, 0.15);
+  border: 1px solid rgba(122, 156, 191, 0.4);
+  color: #7a9cbf;
+  padding: 10px 20px;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.btn--share:hover {
+  background: rgba(122, 156, 191, 0.25);
+  border-color: #7a9cbf;
+}
+.btn--share .btn__icon {
+  animation: none;
+}
 .btn__icon {
   font-size: 18px;
   animation: pulse 2s infinite;
@@ -411,6 +426,12 @@ body {
 .results__header {
   text-align: center;
   margin-bottom: 60px;
+  position: relative;
+}
+.results__header .btn--share {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .results__name {
   font-family: "Cinzel", serif;

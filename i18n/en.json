@@ -38,7 +38,9 @@
     "aspects": "Planetary Aspects",
     "aspects_sub": "The relationships between your planets reveal inner dynamics",
     "cycles": "Personal Cycles",
-    "cycles_sub": "The rhythms of being according to Ra's teachings"
+    "cycles_sub": "The rhythms of being according to Ra's teachings",
+    "share": "Share",
+    "copied": "Copied!"
   },
   "footer": {
     "calculations": "Astronomical calculations: Swiss Ephemeris",

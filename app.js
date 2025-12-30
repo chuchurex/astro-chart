@@ -738,9 +738,93 @@ async function handleCityChange(event) {
     }
 }
 
-// === PARÁMETROS URL ===
+// === PARÁMETROS URL Y HASH ===
+
+// Genera un hash base64 con los datos de nacimiento
+function generateShareHash() {
+    const data = {
+        n: DOM.nameInput?.value || '',
+        d: DOM.birthDate?.value?.replace(/-/g, '') || '',
+        t: DOM.birthTime?.value || '',
+        c: DOM.cityInput?.value || '',
+        lat: DOM.latitudeInput?.value || '',
+        lon: DOM.longitudeInput?.value || ''
+    };
+
+    const jsonStr = JSON.stringify(data);
+    // Codificar en base64 URL-safe
+    const base64 = btoa(unescape(encodeURIComponent(jsonStr)))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '');
+
+    return base64;
+}
+
+// Decodifica el hash y retorna los datos
+function parseHashData(hash) {
+    try {
+        // Restaurar base64 estándar
+        let base64 = hash.replace(/-/g, '+').replace(/_/g, '/');
+        // Añadir padding si es necesario
+        while (base64.length % 4) base64 += '=';
+
+        const jsonStr = decodeURIComponent(escape(atob(base64)));
+        const data = JSON.parse(jsonStr);
+
+        return {
+            name: data.n || '',
+            date: data.d || '',
+            time: data.t || '',
+            city: data.c || '',
+            lat: data.lat || '',
+            lon: data.lon || ''
+        };
+    } catch (e) {
+        console.error('Error decodificando hash:', e);
+        return null;
+    }
+}
+
+// Genera la URL para compartir
+function generateShareURL() {
+    const hash = generateShareHash();
+    return `${window.location.origin}${window.location.pathname}#${hash}`;
+}
+
+// Copia al portapapeles y muestra feedback
+async function handleShare() {
+    const url = generateShareURL();
+
+    try {
+        await navigator.clipboard.writeText(url);
+
+        // Feedback visual
+        const btn = document.getElementById('share-btn');
+        const originalText = btn.querySelector('.btn__text').textContent;
+        btn.querySelector('.btn__icon').textContent = '✓';
+        btn.querySelector('.btn__text').textContent = i18n.translations?.results?.copied || 'Copied!';
+
+        setTimeout(() => {
+            btn.querySelector('.btn__icon').textContent = '🔗';
+            btn.querySelector('.btn__text').textContent = originalText;
+        }, 2000);
+
+    } catch (e) {
+        // Fallback para navegadores antiguos
+        prompt('Copy this URL:', url);
+    }
+}
 
 function parseURLParams() {
+    // Primero intentar leer desde hash
+    if (window.location.hash && window.location.hash.length > 1) {
+        const hashData = parseHashData(window.location.hash.slice(1));
+        if (hashData && hashData.name) {
+            return hashData;
+        }
+    }
+
     // Formato: ?name=Carlos&date=19800822&time=00:00&lat=-33.4489&lon=-70.6693
     // O también: ?Carlos&19800822&00:00&-33.4489&-70.6693 (posicional)
     const params = new URLSearchParams(window.location.search);
@@ -840,6 +924,10 @@ async function init() {
     // Event listeners
     if (DOM.form) DOM.form.addEventListener('submit', handleFormSubmit);
     if (DOM.cityInput) DOM.cityInput.addEventListener('blur', handleCityChange);
+
+    // Botón compartir
+    const shareBtn = document.getElementById('share-btn');
+    if (shareBtn) shareBtn.addEventListener('click', handleShare);
 
     // Fecha máxima = hoy
     if (DOM.birthDate) {
