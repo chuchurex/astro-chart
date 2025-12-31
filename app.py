@@ -8,16 +8,25 @@ Para ejecutar:
 2. uvicorn app:app --reload
 """
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional
 from functools import lru_cache
+from collections import defaultdict
+import time
 import json
 import os
+
+# === RATE LIMITING ===
+# Límite: 60 requests por minuto por IP
+RATE_LIMIT = 60
+RATE_WINDOW = 60  # segundos
+request_counts = defaultdict(list)
 
 # Intentar importar kerykeion, si no está disponible usar cálculos básicos
 try:
@@ -34,12 +43,20 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS para permitir peticiones del frontend
+# Compresión gzip para responses grandes (reduce ~70% el tamaño)
+app.add_middleware(GZipMiddleware, minimum_size=1000)
+
+# CORS restringido a dominios propios
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://chuchurex.cl",
+        "https://www.chuchurex.cl",
+        "http://localhost:8000",  # desarrollo local
+        "http://127.0.0.1:8000"
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
@@ -772,11 +789,22 @@ def get_planets():
     """Retorna la lista de planetas"""
     return {"planets": PLANETS}
 
+def check_rate_limit(ip: str) -> bool:
+    """Verifica si la IP excedió el límite de requests"""
+    now = time.time()
+    # Limpiar requests antiguos
+    request_counts[ip] = [t for t in request_counts[ip] if now - t < RATE_WINDOW]
+    # Verificar límite
+    if len(request_counts[ip]) >= RATE_LIMIT:
+        return False
+    request_counts[ip].append(now)
+    return True
+
 @app.post("/chart")
-def calculate_chart(data: BirthData):
+def calculate_chart(data: BirthData, request: Request):
     """
     Calcula la carta natal completa.
-    
+
     Requiere:
     - name: Nombre de la persona
     - year, month, day: Fecha de nacimiento
@@ -784,6 +812,10 @@ def calculate_chart(data: BirthData):
     - latitude, longitude: Coordenadas del lugar de nacimiento
     - timezone: Zona horaria (ej: "America/Santiago")
     """
+    # Rate limiting
+    client_ip = request.client.host if request.client else "unknown"
+    if not check_rate_limit(client_ip):
+        raise HTTPException(status_code=429, detail="Límite de requests excedido. Intenta en un minuto.")
     try:
         # Usar Kerykeion si está disponible, sino cálculos simplificados
         if KERYKEION_AVAILABLE:
@@ -825,20 +857,45 @@ def example_chart():
 # Directorio base de la aplicación
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Headers de caché para assets estáticos (1 año para versionados)
+CACHE_HEADERS = {"Cache-Control": "public, max-age=31536000, immutable"}
+NO_CACHE_HEADERS = {"Cache-Control": "no-cache, must-revalidate"}
+
 @app.get("/app.js")
 def get_js():
-    """Sirve el archivo JavaScript"""
-    return FileResponse(os.path.join(BASE_DIR, "app.js"), media_type="application/javascript")
+    """Sirve el archivo JavaScript (cacheado 1 año, versionado en HTML)"""
+    return FileResponse(
+        os.path.join(BASE_DIR, "app.js"),
+        media_type="application/javascript",
+        headers=CACHE_HEADERS
+    )
 
 @app.get("/styles.css")
 def get_css():
-    """Sirve el archivo CSS"""
-    return FileResponse(os.path.join(BASE_DIR, "styles.css"), media_type="text/css")
+    """Sirve el archivo CSS (cacheado 1 año, versionado en HTML)"""
+    return FileResponse(
+        os.path.join(BASE_DIR, "styles.css"),
+        media_type="text/css",
+        headers=CACHE_HEADERS
+    )
+
+@app.get("/share.jpeg")
+def get_share_image():
+    """Sirve la imagen para compartir en redes sociales"""
+    return FileResponse(
+        os.path.join(BASE_DIR, "share.jpeg"),
+        media_type="image/jpeg",
+        headers=CACHE_HEADERS
+    )
 
 @app.get("/")
 def get_index():
-    """Sirve la página principal"""
-    return FileResponse(os.path.join(BASE_DIR, "index.html"), media_type="text/html")
+    """Sirve la página principal (sin caché para actualizaciones inmediatas)"""
+    return FileResponse(
+        os.path.join(BASE_DIR, "index.html"),
+        media_type="text/html",
+        headers=NO_CACHE_HEADERS
+    )
 
 
 if __name__ == "__main__":
