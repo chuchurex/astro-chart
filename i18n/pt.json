@@ -51,12 +51,10 @@
   "about": {
     "name": "Carlos Martínez",
     "aka": "aka chuchurex",
-    "bio1": "Desenvolvedor front-end e explorador do cosmos digital desde Santiago, Chile.\n\nEste site nasceu na interseção entre código e curiosidade cósmica. As ferramentas de IA me ajudaram a construí-lo; os ensinamentos de Ra lhe deram sentido. É um presente gratuito para quem quiser usá-lo.\n\nUma nota pessoal: os ciclos que calculamos aqui não são previsões nem destino. São convites. Cada desafio que aparece no seu mapa —cada quadratura, cada trânsito difícil— é exatamente isso: um convite para escolher.\n\nEstamos em um planeta extraordinário, cercados de lições disfarçadas de problemas. Cada queda é uma oportunidade de se levantar escolhendo o amor. Cada erro, uma porta. Cada coisa que vem para tirá-lo do seu centro é, vista com outros olhos, o catalisador mais precioso que você poderia receber.\n\nAproveite a jornada. Tudo está bem.",
-    "bio2": "Este projeto combina meu interesse por programação com o fascínio pelos ciclos cósmicos e os ensinamentos de Ra.",
+    "role": "Buscador espiritual",
+    "role_suffix": " e carpinteiro de coração.",
+    "bio1": "Este site nasceu da curiosidade cósmica e dos ensinamentos de Ra. A <strong>IA</strong> me ajudou a construí-lo; <strong>Ra</strong> lhe deu sentido.\n\nEsta ferramenta é <strong>gratuita e aberta</strong> para quem quiser usá-la. Está pensada especialmente para <strong>quem trabalha com o mapa astral</strong> como mapa dos arquétipos que nosso Sol nos oferece. Que sirva para entender, para acompanhar, para iluminar caminhos.\n\nUma nota pessoal: os ciclos que calculamos aqui não são previsões nem destino. São convites. Cada desafio que aparece no seu mapa —cada quadratura, cada trânsito difícil— é exatamente isso: <strong>um convite para escolher</strong>.\n\nEstamos em um planeta extraordinário, cercados de lições disfarçadas de problemas. Cada queda é uma oportunidade de se levantar <strong>escolhendo o amor</strong>. Cada erro, uma porta. Cada coisa que vem para tirá-lo do seu centro é, vista com outros olhos, o catalisador mais precioso que você poderia receber.",
     "github": "github",
-    "collab_title": "Desenvolvido com Claude",
-    "collab_text": "Este projeto foi criado em colaboração com",
-    "collab_anthropic": "o assistente de IA da Anthropic.",
     "back": "← Voltar ao Chuchurex Astral"
   },
   "errors": {

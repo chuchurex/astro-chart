@@ -51,12 +51,10 @@
   "about": {
     "name": "Carlos Martínez",
     "aka": "aka chuchurex",
-    "bio1": "Desarrollador front-end y explorador del cosmos digital desde Santiago, Chile.\n\nEste sitio nació de la intersección entre código y curiosidad cósmica. Las herramientas de IA me ayudaron a construirlo; las enseñanzas de Ra le dieron sentido. Es un regalo gratuito para quien quiera usarlo.\n\nUna nota personal: los ciclos que aquí calculamos no son predicciones ni destino. Son invitaciones. Cada desafío que aparece en tu carta —cada cuadratura, cada tránsito difícil— es exactamente eso: una invitación a elegir.\n\nEstamos en un planeta extraordinario, rodeados de lecciones disfrazadas de problemas. Cada caída es una oportunidad de levantarse eligiendo el amor. Cada error, una puerta. Cada cosa que llega a sacarte de tu centro es, vista con otros ojos, el catalizador más precioso que podrías recibir.\n\nDisfruta el viaje. Todo está bien.",
-    "bio2": "Este proyecto combina mi interés por la programación con la fascinación por los ciclos cósmicos y las enseñanzas de Ra.",
+    "role": "Buscador espiritual",
+    "role_suffix": " y carpintero de corazón.",
+    "bio1": "Este sitio nació de la curiosidad cósmica y las enseñanzas de Ra. La <strong>IA</strong> me ayudó a construirlo; <strong>Ra</strong> le dio sentido.\n\nEsta herramienta es <strong>gratuita y abierta</strong> para quien quiera usarla. Está pensada especialmente para <strong>quienes trabajan con la carta astral</strong> como mapa de los arquetipos que nuestro Sol nos ofrece. Que sirva para entender, para acompañar, para iluminar caminos.\n\nUna nota personal: los ciclos que aquí calculamos no son predicciones ni destino. Son invitaciones. Cada desafío que aparece en tu carta —cada cuadratura, cada tránsito difícil— es exactamente eso: <strong>una invitación a elegir</strong>.\n\nEstamos en un planeta extraordinario, rodeados de lecciones disfrazadas de problemas. Cada caída es una oportunidad de levantarse <strong>eligiendo el amor</strong>. Cada error, una puerta. Cada cosa que llega a sacarte de tu centro es, vista con otros ojos, el catalizador más precioso que podrías recibir.",
     "github": "github",
-    "collab_title": "Desarrollado con Claude",
-    "collab_text": "Este proyecto fue creado en colaboración con",
-    "collab_anthropic": "el asistente de IA de Anthropic.",
     "back": "← Volver a Chuchurex Astral"
   },
   "errors": {

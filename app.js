@@ -1125,7 +1125,12 @@ const i18n = {
             const key = el.getAttribute('data-i18n');
             const translation = this.t(key);
             if (translation !== key) {
-                el.textContent = translation;
+                // Soporte para HTML (data-i18n-html="true") y saltos de línea
+                if (el.hasAttribute('data-i18n-html')) {
+                    el.innerHTML = translation.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>');
+                } else {
+                    el.textContent = translation;
+                }
             }
         });
 
