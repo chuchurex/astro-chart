@@ -189,7 +189,7 @@ a:focus-visible {
   font-size: 14px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #8888a0;
+  color: #b0b0c8;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -223,7 +223,7 @@ a:focus-visible {
   font-family: "Cormorant Garamond", serif;
   font-size: 18px;
   font-style: italic;
-  color: #8888a0;
+  color: #b0b0c8;
   margin-bottom: 24px;
 }
 
@@ -266,7 +266,7 @@ a:focus-visible {
 .hero__subtitle {
   font-size: 20px;
   font-style: italic;
-  color: #8888a0;
+  color: #b0b0c8;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -351,7 +351,7 @@ a:focus-visible {
   transition: all 0.2s ease;
 }
 .form-input::placeholder {
-  color: #8888a0;
+  color: #b0b0c8;
 }
 .form-input:focus {
   outline: none;
@@ -404,14 +404,14 @@ a:focus-visible {
 .btn--share {
   background: rgba(122, 156, 191, 0.15);
   border: 1px solid rgba(122, 156, 191, 0.4);
-  color: #7a9cbf;
+  color: #9cc0e0;
   padding: 10px 20px;
   font-size: 12px;
   letter-spacing: 1px;
 }
 .btn--share:hover {
   background: rgba(122, 156, 191, 0.25);
-  border-color: #7a9cbf;
+  border-color: #9cc0e0;
 }
 .btn--share .btn__icon {
   animation: none;
@@ -544,7 +544,7 @@ a:focus-visible {
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #8888a0;
+  color: #b0b0c8;
 }
 .big-three__sign {
   font-family: "Cinzel", serif;
@@ -628,7 +628,7 @@ a:focus-visible {
   font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #8888a0;
+  color: #b0b0c8;
 }
 .planet-card__position {
   font-size: 18px;
@@ -636,7 +636,7 @@ a:focus-visible {
 }
 .planet-card__house {
   font-size: 14px;
-  color: #8888a0;
+  color: #b0b0c8;
 }
 
 .interpretations {
@@ -681,7 +681,7 @@ a:focus-visible {
 .interpretation-card__text {
   font-size: 18px;
   line-height: 1.8;
-  color: #8888a0;
+  color: #b0b0c8;
   font-style: italic;
 }
 .interpretation-card--compact {
@@ -723,7 +723,7 @@ a:focus-visible {
   margin-bottom: 8px;
 }
 .interpretations--aspects .section-subtitle {
-  color: #8888a0;
+  color: #b0b0c8;
   font-style: italic;
   margin-bottom: 32px;
   font-size: 16px;
@@ -753,7 +753,7 @@ a:focus-visible {
 }
 .interpretation-card--aspect .interpretation-card__aspect-symbol {
   font-size: 14px;
-  color: #7b68ee;
+  color: #a594f9;
   opacity: 0.8;
 }
 .interpretation-card--aspect .interpretation-card__title {
@@ -809,7 +809,7 @@ a:focus-visible {
   margin-top: 60px;
 }
 .interpretations--balance .section-subtitle {
-  color: #8888a0;
+  color: #b0b0c8;
   font-style: italic;
   margin-bottom: 32px;
   font-size: 16px;
@@ -885,7 +885,7 @@ a:focus-visible {
 .element-modality__interpretation {
   font-size: 15px;
   line-height: 1.7;
-  color: #8888a0;
+  color: #b0b0c8;
   font-style: italic;
   padding-top: 16px;
   border-top: 1px solid rgba(212, 175, 55, 0.1);
@@ -899,7 +899,7 @@ a:focus-visible {
 }
 .element-bar__label {
   font-size: 13px;
-  color: #8888a0;
+  color: #b0b0c8;
 }
 .element-bar__track {
   height: 8px;
@@ -944,7 +944,7 @@ a:focus-visible {
   margin-top: 60px;
 }
 .interpretations--biorhythms .section-subtitle {
-  color: #8888a0;
+  color: #b0b0c8;
   font-style: italic;
   margin-bottom: 32px;
   font-size: 16px;
@@ -981,7 +981,7 @@ a:focus-visible {
 }
 .biorhythms__critical-message {
   font-size: 14px;
-  color: #8888a0;
+  color: #b0b0c8;
   line-height: 1.6;
 }
 .biorhythms__philosophy {
@@ -1040,7 +1040,7 @@ a:focus-visible {
 }
 .biorhythm-cycle__day {
   font-size: 12px;
-  color: #8888a0;
+  color: #b0b0c8;
 }
 .biorhythm-cycle__bar {
   display: flex;
@@ -1090,7 +1090,7 @@ a:focus-visible {
   color: #EF4444;
 }
 .biorhythm-cycle__value.neutral {
-  color: #8888a0;
+  color: #b0b0c8;
 }
 .biorhythm-cycle__value.critical {
   color: #F59E0B;
@@ -1098,7 +1098,7 @@ a:focus-visible {
 .biorhythm-cycle__description {
   margin-top: 12px;
   font-size: 14px;
-  color: #8888a0;
+  color: #b0b0c8;
   line-height: 1.6;
 }
 .biorhythm-cycle__quote {
@@ -1152,12 +1152,12 @@ a:focus-visible {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 18px;
   font-style: italic;
-  color: #8888a0;
+  color: #b0b0c8;
 }
 .about__role {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 16px;
-  color: #a0a0b8;
+  color: #b8b8d0;
   margin-top: 12px;
 }
 .about__bio {
@@ -1182,7 +1182,7 @@ a:focus-visible {
   background: transparent;
   border: 1px solid rgba(122, 156, 191, 0.4);
   border-radius: 6px;
-  color: #7a9cbf;
+  color: #9cc0e0;
   text-decoration: none;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 14px;
@@ -1190,7 +1190,7 @@ a:focus-visible {
 }
 .about__link:hover {
   background: rgba(122, 156, 191, 0.1);
-  border-color: #7a9cbf;
+  border-color: #9cc0e0;
 }
 
 .footer {
@@ -1212,7 +1212,7 @@ a:focus-visible {
   color: #d4af37;
 }
 .footer__link {
-  color: #7a9cbf;
+  color: #9cc0e0;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -1278,7 +1278,7 @@ a:focus-visible {
 .lang-btn {
   background: transparent;
   border: 1px solid rgba(212, 175, 55, 0.3);
-  color: #8888a0;
+  color: #b0b0c8;
   font-family: "Cinzel", serif;
   font-size: 12px;
   letter-spacing: 1px;
