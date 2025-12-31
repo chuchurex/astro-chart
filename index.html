@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <!-- Google Analytics -->
@@ -48,19 +48,23 @@
     <link rel="stylesheet" href="styles/print.css" media="print">
 </head>
 <body>
+    <!-- Skip Links para accesibilidad -->
+    <a href="#birth-form" class="skip-link" data-i18n="a11y.skip_to_form">Saltar al formulario</a>
+    <a href="#results" class="skip-link" data-i18n="a11y.skip_to_results">Saltar a resultados</a>
+
     <div class="stars-container">
         <div class="stars"></div>
         <div class="stars2"></div>
         <div class="stars3"></div>
     </div>
 
-    <header class="header header--expanded" id="calculate">
+    <header class="header header--expanded" id="calculate" role="banner">
         <div class="header__top">
             <div class="header__logo">
                 <span class="header__symbol">☉</span>
                 <h1 class="header__title" data-i18n="header.title">Chuchurex Astral</h1>
             </div>
-            <nav class="header__nav hidden" id="results-nav">
+            <nav class="header__nav hidden" id="results-nav" role="navigation" aria-label="Navegación de resultados">
                 <a href="#results" class="header__link" data-i18n="nav.chart">Chart</a>
                 <a href="#interpretations" class="header__link" data-i18n="nav.planets">Planets</a>
                 <a href="#biorhythms-section" class="header__link" data-i18n="nav.cycles">Personal Cycles</a>
@@ -73,8 +77,8 @@
         </div>
 
         <div class="header__form-container">
-            <p class="header__subtitle" data-i18n="header.subtitle">Enter your birth data</p>
-            <form id="birth-form" class="birth-form birth-form--compact">
+            <p class="header__subtitle" id="form-title" data-i18n="header.subtitle">Enter your birth data</p>
+            <form id="birth-form" class="birth-form birth-form--compact" role="form" aria-labelledby="form-title">
                 <div class="form-grid form-grid--inline">
                     <div class="form-group">
                         <label for="name" class="form-label" data-i18n="form.name">Name</label>
@@ -112,14 +116,14 @@
         </div>
     </header>
 
-    <div id="loader" class="loader hidden">
+    <div id="loader" class="loader hidden" role="status" aria-live="polite" aria-label="Cargando">
         <div class="loader__spinner">
             <div class="loader__ring"></div>
             <span class="loader__text" data-i18n="loader.text">Consulting the stars...</span>
         </div>
     </div>
 
-    <section id="results" class="results hidden">
+    <main id="results" class="results hidden" role="main" aria-label="Resultados de la carta natal">
         <div class="container">
             <div class="results__header">
                 <div class="results__actions">
@@ -217,9 +221,9 @@
                 <div id="biorhythms-container"></div>
             </div>
         </div>
-    </section>
+    </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <p class="footer__text">
                 <span data-i18n="footer.calculations">Astronomical calculations: Swiss Ephemeris</span> ·

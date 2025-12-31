@@ -48,6 +48,10 @@
     "developed": "Desarrollado por",
     "and": "y"
   },
+  "a11y": {
+    "skip_to_form": "Saltar al formulario",
+    "skip_to_results": "Saltar a resultados"
+  },
   "about": {
     "name": "Carlos Martínez",
     "aka": "aka chuchurex",

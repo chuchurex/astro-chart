@@ -19,6 +19,57 @@ body {
   overflow-x: hidden;
 }
 
+/* === ACCESIBILIDAD === */
+
+/* Skip Links - visibles solo con focus */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #d4af37;
+  color: #0a0a12;
+  padding: 12px 24px;
+  font-family: "Cinzel", serif;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 9999;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 10px;
+  outline: 3px solid #e8e8f0;
+  outline-offset: 2px;
+}
+
+/* Focus visible global - WCAG AAA */
+:focus-visible {
+  outline: 3px solid #d4af37;
+  outline-offset: 3px;
+}
+
+/* Focus para inputs (sobrescribe el outline: none existente) */
+.form-input:focus-visible {
+  outline: 3px solid #d4af37;
+  outline-offset: 2px;
+  border-color: #d4af37;
+}
+
+/* Focus para botones */
+.btn:focus-visible,
+.lang-btn:focus-visible {
+  outline: 3px solid #d4af37;
+  outline-offset: 3px;
+}
+
+/* Focus para links */
+a:focus-visible {
+  outline: 3px solid #d4af37;
+  outline-offset: 3px;
+}
+
 .stars-container {
   position: fixed;
   top: 0;
