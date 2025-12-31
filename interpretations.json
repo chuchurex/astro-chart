@@ -7,7 +7,7 @@
   },
   
   "sun_in_signs": {
-    "sun_aries": "El Sol en Aries indica una personalidad pionera, valiente y directa. Eres un iniciador natural, con gran energía vital y deseo de acción. Tu esencia busca la independencia y el liderazgo. Tiendes a ser impulsivo pero genuino, prefiriendo la honestidad aunque sea incómoda.",
+    "sun_aries": "El Sol en Aries indica una personalidad pionera, valiente y directa. Tu naturaleza es de iniciar, con gran energía vital y deseo de acción. Tu esencia busca la independencia y el liderazgo. Tiendes a ser impulsivo pero genuino, prefiriendo la honestidad aunque sea incómoda.",
     
     "sun_tauro": "El Sol en Tauro representa una naturaleza estable, sensual y persistente. Valoras la seguridad material y emocional. Tu esencia busca construir algo duradero y disfrutar de los placeres de la vida. Eres práctico, confiable y tienes una fuerte conexión con el mundo físico.",
     
@@ -17,15 +17,15 @@
     
     "sun_leo": "El Sol en Leo representa una personalidad creativa, generosa y magnética. Tu esencia brilla naturalmente y busca reconocimiento y expresión auténtica. Tienes un gran corazón, amas el drama y la celebración de la vida. El liderazgo te viene naturalmente.",
     
-    "sun_virgo": "El Sol en Virgo otorga una mente analítica, práctica y orientada al servicio. Tu esencia busca mejorar, perfeccionar y ser útil. Tienes un ojo para los detalles y una profunda necesidad de orden. Eres modesto pero increíblemente competente.",
+    "sun_virgo": "El Sol en Virgo otorga una mente analítica, práctica y orientada al servicio. Tu esencia busca mejorar, perfeccionar y ser útil. Tienes un ojo para los detalles y una profunda necesidad de orden. Tu naturaleza es humilde pero increíblemente competente.",
     
     "sun_libra": "El Sol en Libra indica una naturaleza diplomática, estética y orientada a las relaciones. Tu esencia busca el equilibrio, la armonía y la belleza. Valoras la justicia y tienes un don natural para mediar y conectar personas. Las relaciones son centrales en tu vida.",
     
     "sun_escorpio": "El Sol en Escorpio representa una personalidad intensa, transformadora y profundamente perceptiva. Tu esencia busca la verdad oculta y la transformación radical. Tienes una voluntad poderosa y una capacidad de regeneración notable. No temes la oscuridad.",
     
-    "sun_sagitario": "El Sol en Sagitario otorga un espíritu aventurero, filosófico y optimista. Tu esencia busca expandirse, explorar y encontrar significado. Eres honesto, entusiasta y tienes una visión amplia de la vida. La libertad es esencial para ti.",
+    "sun_sagitario": "El Sol en Sagitario otorga un espíritu aventurero, filosófico y optimista. Tu esencia busca expandirse, explorar y encontrar significado. Tu naturaleza es honesta, entusiasta y tiene una visión amplia de la vida. La libertad es esencial para ti.",
     
-    "sun_capricornio": "El Sol en Capricornio indica una naturaleza ambiciosa, responsable y estructurada. Tu esencia busca lograr, construir y dejar un legado. Eres disciplinado, paciente y entiendes el valor del esfuerzo sostenido. Maduras con gracia.",
+    "sun_capricornio": "El Sol en Capricornio indica una naturaleza ambiciosa, responsable y estructurada. Tu esencia busca lograr, construir y dejar un legado. Tu naturaleza es disciplinada, paciente y entiende el valor del esfuerzo sostenido. Maduras con gracia.",
     
     "sun_acuario": "El Sol en Acuario representa una personalidad innovadora, humanitaria e independiente. Tu esencia busca el progreso y la originalidad. Piensas diferente y valoras la libertad intelectual. Tienes visión de futuro y te importa el bienestar colectivo.",
     
@@ -39,11 +39,11 @@
     
     "moon_géminis": "La Luna en Géminis indica necesidades emocionales de comunicación, variedad y estímulo mental. Procesas las emociones hablando y necesitas cambio. Tu mundo interior es curioso y adaptable.",
     
-    "moon_cáncer": "La Luna en Cáncer representa necesidades emocionales profundas de seguridad, pertenencia y nutrición. Eres extremadamente sensible e intuitivo. Tu mundo interior está íntimamente conectado con la familia y el pasado.",
+    "moon_cáncer": "La Luna en Cáncer representa necesidades emocionales profundas de seguridad, pertenencia y nutrición. Tu sensibilidad e intuición son extremas. Tu mundo interior está íntimamente conectado con la familia y el pasado.",
     
-    "moon_leo": "La Luna en Leo indica necesidades emocionales de reconocimiento, expresión creativa y afecto. Necesitas sentirte especial y apreciado. Tu mundo interior es dramático, cálido y generoso.",
+    "moon_leo": "La Luna en Leo indica necesidades emocionales de reconocimiento, expresión creativa y afecto. Necesitas sentirte especial y con aprecio. Tu mundo interior es dramático, cálido y generoso.",
     
-    "moon_virgo": "La Luna en Virgo representa necesidades emocionales de orden, utilidad y mejora. Te sientes seguro cuando eres productivo. Tu mundo interior busca perfeccionar y servir.",
+    "moon_virgo": "La Luna en Virgo representa necesidades emocionales de orden, utilidad y mejora. La seguridad viene de la productividad. Tu mundo interior busca perfeccionar y servir.",
     
     "moon_libra": "La Luna en Libra indica necesidades emocionales de armonía, compañía y belleza. Necesitas relaciones equilibradas para tu bienestar. Tu mundo interior busca la paz y la justicia.",
     
@@ -55,33 +55,33 @@
     
     "moon_acuario": "La Luna en Acuario indica necesidades emocionales de libertad, originalidad y conexión con grupos. Procesas las emociones de forma racional. Tu mundo interior valora la independencia y la amistad.",
     
-    "moon_piscis": "La Luna en Piscis representa necesidades emocionales de conexión espiritual, escape y compasión. Eres extremadamente sensible y absorbente. Tu mundo interior es imaginativo y trascendente."
+    "moon_piscis": "La Luna en Piscis representa necesidades emocionales de conexión espiritual, escape y compasión. Tu sensibilidad es extrema y absorbente. Tu mundo interior es imaginativo y trascendente."
   },
   
   "ascendants": {
-    "aries": "Con Ascendente en Aries te presentas como una persona directa, enérgica y competitiva. Tu primera impresión es de alguien valiente y decidido. Enfrentas la vida como un guerrero, siempre listo para la acción.",
-    
-    "tauro": "Con Ascendente en Tauro te presentas como una persona estable, sensual y confiable. Tu primera impresión es de alguien tranquilo y sólido. Enfrentas la vida con paciencia y determinación práctica.",
-    
-    "géminis": "Con Ascendente en Géminis te presentas como una persona comunicativa, curiosa y versátil. Tu primera impresión es de alguien ingenioso y social. Enfrentas la vida con flexibilidad mental.",
-    
-    "cáncer": "Con Ascendente en Cáncer te presentas como una persona sensible, protectora y acogedora. Tu primera impresión puede ser de timidez inicial pero gran calidez. Enfrentas la vida con intuición.",
-    
-    "leo": "Con Ascendente en Leo te presentas como una persona carismática, creativa y magnética. Tu primera impresión es de alguien seguro y notable. Enfrentas la vida con dignidad y estilo.",
-    
-    "virgo": "Con Ascendente en Virgo te presentas como una persona analítica, modesta y servicial. Tu primera impresión es de alguien competente y detallista. Enfrentas la vida con precisión y humildad.",
-    
-    "libra": "Con Ascendente en Libra te presentas como una persona encantadora, diplomática y elegante. Tu primera impresión es de alguien refinado y sociable. Enfrentas la vida buscando equilibrio.",
-    
-    "escorpio": "Con Ascendente en Escorpio te presentas como una persona intensa, magnética y reservada. Tu primera impresión es de alguien poderoso y misterioso. Enfrentas la vida con profundidad.",
-    
-    "sagitario": "Con Ascendente en Sagitario te presentas como una persona optimista, aventurera y filosófica. Tu primera impresión es de alguien abierto y entusiasta. Enfrentas la vida con fe.",
-    
-    "capricornio": "Con Ascendente en Capricornio te presentas como una persona seria, ambiciosa y responsable. Tu primera impresión es de alguien maduro y competente. Enfrentas la vida con determinación.",
-    
-    "acuario": "Con Ascendente en Acuario te presentas como una persona original, independiente y progresista. Tu primera impresión es de alguien único e intelectual. Enfrentas la vida con visión de futuro.",
-    
-    "piscis": "Con Ascendente en Piscis te presentas como una persona sensible, soñadora y compasiva. Tu primera impresión es de alguien gentil y etéreo. Enfrentas la vida con imaginación."
+    "aries": "Con Ascendente en Aries te presentas con energía directa y competitiva. Tu primera impresión es de valentía y decisión. Enfrentas la vida con espíritu guerrero, siempre en acción.",
+
+    "tauro": "Con Ascendente en Tauro te presentas con estabilidad, sensualidad y confiabilidad. Tu primera impresión es de tranquilidad y solidez. Enfrentas la vida con paciencia y determinación práctica.",
+
+    "géminis": "Con Ascendente en Géminis te presentas con curiosidad, comunicación y versatilidad. Tu primera impresión es de ingenio y sociabilidad. Enfrentas la vida con flexibilidad mental.",
+
+    "cáncer": "Con Ascendente en Cáncer te presentas con sensibilidad, protección y calidez. Tu primera impresión puede ser de timidez inicial pero gran acogida. Enfrentas la vida con intuición.",
+
+    "leo": "Con Ascendente en Leo te presentas con carisma, creatividad y magnetismo. Tu primera impresión es de seguridad y presencia notable. Enfrentas la vida con dignidad y estilo.",
+
+    "virgo": "Con Ascendente en Virgo te presentas con mente analítica y espíritu servicial. Tu primera impresión es de competencia y atención al detalle. Enfrentas la vida con precisión y humildad.",
+
+    "libra": "Con Ascendente en Libra te presentas con encanto, diplomacia y elegancia. Tu primera impresión es de refinamiento y sociabilidad. Enfrentas la vida buscando equilibrio.",
+
+    "escorpio": "Con Ascendente en Escorpio te presentas con intensidad, magnetismo y reserva. Tu primera impresión es de poder y misterio. Enfrentas la vida con profundidad.",
+
+    "sagitario": "Con Ascendente en Sagitario te presentas con optimismo, espíritu aventurero y filosofía. Tu primera impresión es de apertura y entusiasmo. Enfrentas la vida con fe.",
+
+    "capricornio": "Con Ascendente en Capricornio te presentas con seriedad, ambición y responsabilidad. Tu primera impresión es de madurez y competencia. Enfrentas la vida con determinación.",
+
+    "acuario": "Con Ascendente en Acuario te presentas con originalidad, independencia y visión progresista. Tu primera impresión es de singularidad e intelecto. Enfrentas la vida con visión de futuro.",
+
+    "piscis": "Con Ascendente en Piscis te presentas con sensibilidad, naturaleza soñadora y compasión. Tu primera impresión es de gentileza y cualidad etérea. Enfrentas la vida con imaginación."
   },
   
   "planets_in_houses": {
@@ -94,7 +94,7 @@
     "sol_7": "El Sol en Casa 7 ilumina las asociaciones y relaciones. Tu identidad se desarrolla significativamente a través de otros y las parejas son espejos de tu esencia.",
     "sol_8": "El Sol en Casa 8 profundiza tu vitalidad en temas de transformación, intimidad y recursos compartidos. Brillas en crisis y tienes poder regenerativo.",
     "sol_9": "El Sol en Casa 9 expande tu identidad a través de la filosofía, viajes y educación superior. Buscas significado y tu propósito está ligado a expandir horizontes.",
-    "sol_10": "El Sol en Casa 10 proyecta tu vitalidad hacia la carrera y reconocimiento público. Tu destino es visible y estás destinado a destacar profesionalmente.",
+    "sol_10": "El Sol en Casa 10 proyecta tu vitalidad hacia la carrera y reconocimiento público. Tu destino es visible y el brillo profesional te llama.",
     "sol_11": "El Sol en Casa 11 enfoca tu energía en grupos, amistades y causas colectivas. Brillas en comunidad y tus ideales definen tu identidad.",
     "sol_12": "El Sol en Casa 12 interioriza tu vitalidad hacia la espiritualidad y el inconsciente. Tu luz es más sutil y encuentras propósito en el servicio anónimo.",
 
@@ -111,12 +111,12 @@
     "luna_11": "La Luna en Casa 11 encuentra nutrición en grupos y amistades. Tus emociones están ligadas a causas sociales y la comunidad.",
     "luna_12": "La Luna en Casa 12 interioriza las emociones hacia el inconsciente. Eres muy sensible, necesitas retiro y tienes una vida emocional privada rica.",
 
-    "mercurio_1": "Mercurio en Casa 1 te hace comunicativo, curioso y mentalmente ágil. Tu identidad está ligada a las ideas y la expresión verbal.",
+    "mercurio_1": "Mercurio en Casa 1 otorga comunicación fluida, curiosidad y agilidad mental. Tu identidad está ligada a las ideas y la expresión verbal.",
     "mercurio_2": "Mercurio en Casa 2 enfoca la mente en recursos y valores. Tienes habilidad para los negocios y ganas dinero con tu intelecto.",
     "mercurio_3": "Mercurio en Casa 3 potencia la comunicación, escritura y aprendizaje. Tu mente es rápida y tienes facilidad para conectar ideas.",
     "mercurio_4": "Mercurio en Casa 4 conecta el intelecto con el hogar y la familia. Conversaciones importantes ocurren en casa y estudias historia familiar.",
     "mercurio_5": "Mercurio en Casa 5 expresa la mente de forma creativa y lúdica. Tienes talento para escribir, actuar o comunicar de forma entretenida.",
-    "mercurio_6": "Mercurio en Casa 6 aplica el intelecto al trabajo y la salud. Eres metódico, analítico y excelente resolviendo problemas prácticos.",
+    "mercurio_6": "Mercurio en Casa 6 aplica el intelecto al trabajo y la salud. Tu enfoque es metódico, analítico y excelente para resolver problemas prácticos.",
     "mercurio_7": "Mercurio en Casa 7 busca parejas intelectuales. La comunicación es central en tus relaciones y valoras el intercambio mental.",
     "mercurio_8": "Mercurio en Casa 8 profundiza la mente hacia lo oculto y tabú. Tienes capacidad investigativa y entiendes psicología profunda.",
     "mercurio_9": "Mercurio en Casa 9 expande el intelecto hacia la filosofía y culturas. Amas aprender, viajar y explorar ideas universales.",
@@ -137,22 +137,22 @@
     "venus_11": "Venus en Casa 11 valora las amistades y grupos. Tienes amigos influyentes y encuentras amor en contextos sociales.",
     "venus_12": "Venus en Casa 12 interioriza el amor hacia lo espiritual. Tienes amores secretos o sacrificados y una sensibilidad artística profunda.",
 
-    "marte_1": "Marte en Casa 1 te otorga energía, iniciativa y espíritu competitivo. Eres directo, valiente y tienes presencia física fuerte.",
-    "marte_2": "Marte en Casa 2 dirige la energía hacia ganar recursos. Eres ambicioso financieramente y luchas por tus valores.",
+    "marte_1": "Marte en Casa 1 te otorga energía, iniciativa y espíritu competitivo. Tu naturaleza es directa, valiente y tiene presencia física fuerte.",
+    "marte_2": "Marte en Casa 2 dirige la energía hacia ganar recursos. Hay ambición financiera y luchas por tus valores.",
     "marte_3": "Marte en Casa 3 energiza la comunicación. Tu mente es rápida y combativa, defiendes tus ideas con pasión.",
     "marte_4": "Marte en Casa 4 activa el hogar con energía. Puede haber conflictos familiares pero también una fuerte defensa del hogar.",
     "marte_5": "Marte en Casa 5 intensifica la creatividad, romance y competitividad. Tienes pasión artística y amas con intensidad.",
-    "marte_6": "Marte en Casa 6 canaliza energía al trabajo. Eres un trabajador incansable, competitivo laboralmente y activo físicamente.",
+    "marte_6": "Marte en Casa 6 canaliza energía al trabajo. El esfuerzo es incansable, hay competitividad laboral y actividad física.",
     "marte_7": "Marte en Casa 7 activa las relaciones con pasión. Atraes parejas dinámicas y puede haber conflictos que generan crecimiento.",
     "marte_8": "Marte en Casa 8 intensifica el deseo, transformación y poder. Tienes magnetismo sexual fuerte y capacidad regenerativa.",
     "marte_9": "Marte en Casa 9 impulsa la exploración y defensa de creencias. Luchas por tus ideales y tienes espíritu aventurero.",
-    "marte_10": "Marte en Casa 10 proyecta ambición hacia la carrera. Eres competitivo profesionalmente y luchas por alcanzar la cima.",
+    "marte_10": "Marte en Casa 10 proyecta ambición hacia la carrera. Hay competitividad profesional y lucha por alcanzar la cima.",
     "marte_11": "Marte en Casa 11 activa grupos y causas sociales. Luchas por ideales colectivos y tienes amigos dinámicos.",
     "marte_12": "Marte en Casa 12 interioriza la energía. Puedes tener enemigos ocultos o canalizar la acción hacia causas espirituales.",
 
     "júpiter_1": "Júpiter en Casa 1 te otorga optimismo, generosidad y expansividad. Tienes suerte natural y una presencia que inspira confianza.",
     "júpiter_2": "Júpiter en Casa 2 expande los recursos y la abundancia. Tienes suerte financiera y una actitud generosa hacia el dinero.",
-    "júpiter_3": "Júpiter en Casa 3 expande la mente y comunicación. Eres un eterno estudiante con facilidad para idiomas y escritura.",
+    "júpiter_3": "Júpiter en Casa 3 expande la mente y comunicación. Hay amor por el aprendizaje eterno con facilidad para idiomas y escritura.",
     "júpiter_4": "Júpiter en Casa 4 bendice el hogar con abundancia. Vienes de una familia generosa o creas un hogar expansivo.",
     "júpiter_5": "Júpiter en Casa 5 expande la creatividad, romance y alegría. Tienes suerte en el amor y abundante expresión creativa.",
     "júpiter_6": "Júpiter en Casa 6 mejora el trabajo y la salud. Tienes suerte laboral y una actitud positiva hacia el servicio.",
@@ -165,7 +165,7 @@
 
     "saturno_1": "Saturno en Casa 1 te otorga seriedad, responsabilidad y madurez. Puedes parecer mayor de lo que eres y tienes autodisciplina.",
     "saturno_2": "Saturno en Casa 2 enseña lecciones sobre recursos. Construyes seguridad lentamente pero de forma duradera.",
-    "saturno_3": "Saturno en Casa 3 estructura el pensamiento. Eres metódico al comunicar y puedes tener responsabilidades con hermanos.",
+    "saturno_3": "Saturno en Casa 3 estructura el pensamiento. Tu comunicación es metódica y puedes tener responsabilidades con hermanos.",
     "saturno_4": "Saturno en Casa 4 indica una infancia con restricciones o responsabilidades familiares. Construyes un hogar sólido con el tiempo.",
     "saturno_5": "Saturno en Casa 5 puede retrasar la creatividad o romance, pero los madura. La expresión personal viene con disciplina.",
     "saturno_6": "Saturno en Casa 6 es un trabajador dedicado. Tienes sentido del deber y construyes salud a través de disciplina.",
@@ -176,7 +176,7 @@
     "saturno_11": "Saturno en Casa 11 toma en serio las amistades y causas. Tienes pocos amigos pero leales y responsabilidades grupales.",
     "saturno_12": "Saturno en Casa 12 enfrenta miedos inconscientes. Hay karma por resolver pero la disciplina espiritual trae liberación.",
 
-    "urano_1": "Urano en Casa 1 te hace único, original y poco convencional. Proyectas independencia y necesitas libertad para ser tú mismo.",
+    "urano_1": "Urano en Casa 1 otorga singularidad, originalidad y espíritu poco convencional. Proyectas independencia y necesitas libertad para expresar tu esencia.",
     "urano_2": "Urano en Casa 2 trae ingresos inusuales o fluctuantes. Tienes valores poco convencionales y formas originales de ganar dinero.",
     "urano_3": "Urano en Casa 3 revoluciona el pensamiento. Tienes ideas originales, comunicación no convencional y mente inventiva.",
     "urano_4": "Urano en Casa 4 indica un hogar poco convencional. Puede haber cambios familiares súbitos o un enfoque único de la vida doméstica.",
@@ -225,10 +225,10 @@
 
     "sol_conjunction_mercurio": "La conjunción Sol-Mercurio une identidad con intelecto. Tu mente es central en tu expresión personal y te identificas con tus ideas.",
     "sol_conjunction_venus": "La conjunción Sol-Venus otorga encanto natural, apreciación por la belleza y facilidad para atraer amor y recursos.",
-    "sol_conjunction_marte": "La conjunción Sol-Marte te da energía vital poderosa, iniciativa y espíritu competitivo. Eres directo y orientado a la acción.",
+    "sol_conjunction_marte": "La conjunción Sol-Marte te da energía vital poderosa, iniciativa y espíritu competitivo. Tu naturaleza es directa y orientada a la acción.",
     "sol_conjunction_júpiter": "La conjunción Sol-Júpiter expande tu identidad con optimismo, generosidad y buena fortuna. Tienes confianza natural.",
     "sol_conjunction_saturno": "La conjunción Sol-Saturno añade seriedad y responsabilidad a tu identidad. Maduras temprano y tienes autodisciplina.",
-    "sol_conjunction_urano": "La conjunción Sol-Urano te hace único, original e independiente. Necesitas libertad para expresar tu individualidad.",
+    "sol_conjunction_urano": "La conjunción Sol-Urano otorga singularidad, originalidad e independencia. Necesitas libertad para expresar tu individualidad.",
     "sol_conjunction_neptuno": "La conjunción Sol-Neptuno añade sensibilidad artística y espiritual. Tu identidad tiene cualidades idealistas y compasivas.",
     "sol_conjunction_plutón": "La conjunción Sol-Plutón intensifica tu presencia con magnetismo y poder transformador. Tienes profundidad psicológica.",
 
@@ -257,8 +257,8 @@
     "luna_conjunction_venus": "La conjunción Luna-Venus otorga dulzura, encanto emocional y necesidad de armonía en las relaciones.",
     "luna_conjunction_marte": "La conjunción Luna-Marte intensifica las emociones con pasión. Reaccionas rápidamente y defiendes lo que amas.",
     "luna_conjunction_júpiter": "La conjunción Luna-Júpiter expande las emociones con generosidad y optimismo. Tienes fe emocional.",
-    "luna_conjunction_saturno": "La conjunción Luna-Saturno puede indicar emociones contenidas o madurez emocional temprana. Eres emocionalmente responsable.",
-    "luna_conjunction_urano": "La conjunción Luna-Urano genera emociones impredecibles y necesidad de libertad emocional. Eres emocionalmente único.",
+    "luna_conjunction_saturno": "La conjunción Luna-Saturno puede indicar emociones contenidas o madurez emocional temprana. Hay responsabilidad emocional profunda.",
+    "luna_conjunction_urano": "La conjunción Luna-Urano genera emociones impredecibles y necesidad de libertad emocional. Hay singularidad emocional.",
     "luna_conjunction_neptuno": "La conjunción Luna-Neptuno intensifica la sensibilidad psíquica y la compasión. Absorbes emociones del ambiente.",
     "luna_conjunction_plutón": "La conjunción Luna-Plutón profundiza las emociones intensamente. Tienes poder emocional y capacidad de transformación.",
 
@@ -274,8 +274,8 @@
 
     "mercurio_conjunction_venus": "La conjunción Mercurio-Venus otorga elegancia en la comunicación, diplomacia y apreciación estética de las ideas.",
     "mercurio_conjunction_marte": "La conjunción Mercurio-Marte agudiza la mente con rapidez y capacidad de debate. Defiendes tus ideas con vigor.",
-    "mercurio_conjunction_júpiter": "La conjunción Mercurio-Júpiter expande la mente con optimismo y visión amplia. Eres un pensador filosófico.",
-    "mercurio_conjunction_saturno": "La conjunción Mercurio-Saturno estructura el pensamiento con disciplina. Eres metódico y profundo.",
+    "mercurio_conjunction_júpiter": "La conjunción Mercurio-Júpiter expande la mente con optimismo y visión amplia. Tu pensamiento es filosófico.",
+    "mercurio_conjunction_saturno": "La conjunción Mercurio-Saturno estructura el pensamiento con disciplina. Tu mente es metódica y profunda.",
     "mercurio_conjunction_urano": "La conjunción Mercurio-Urano electrifica la mente con originalidad e intuición. Tienes ideas revolucionarias.",
     "mercurio_conjunction_neptuno": "La conjunción Mercurio-Neptuno añade imaginación y intuición al pensamiento. Tienes mente poética.",
     "mercurio_conjunction_plutón": "La conjunción Mercurio-Plutón profundiza la mente con capacidad investigativa. Percibes lo oculto.",
@@ -312,7 +312,7 @@
     "venus_trine_neptuno": "El trígono Venus-Neptuno otorga romanticismo ideal y sensibilidad artística fluida.",
     "venus_trine_plutón": "El trígono Venus-Plutón profundiza el amor con intensidad transformadora natural.",
 
-    "marte_conjunction_júpiter": "La conjunción Marte-Júpiter expande la energía con entusiasmo y suerte. Eres un emprendedor natural.",
+    "marte_conjunction_júpiter": "La conjunción Marte-Júpiter expande la energía con entusiasmo y suerte. Hay espíritu emprendedor natural.",
     "marte_conjunction_saturno": "La conjunción Marte-Saturno combina energía con disciplina. Tienes resistencia y determinación estratégica.",
     "marte_conjunction_urano": "La conjunción Marte-Urano electrifica la acción con impredecibilidad. Actúas de forma revolucionaria.",
     "marte_conjunction_neptuno": "La conjunción Marte-Neptuno puede idealizar la acción o canalizarla espiritualmente. Luchas por causas elevadas.",
@@ -386,8 +386,8 @@
   },
   
   "modalities": {
-    "cardinal_dominant": "Con predominio Cardinal (Aries, Cáncer, Libra, Capricornio) eres un iniciador natural que pone las cosas en movimiento.",
+    "cardinal_dominant": "Con predominio Cardinal (Aries, Cáncer, Libra, Capricornio) tu naturaleza inicia y pone las cosas en movimiento.",
     "fixed_dominant": "Con predominio Fijo (Tauro, Leo, Escorpio, Acuario) tienes gran persistencia y capacidad de mantener el curso.",
-    "mutable_dominant": "Con predominio Mutable (Géminis, Virgo, Sagitario, Piscis) eres adaptable y flexible ante los cambios."
+    "mutable_dominant": "Con predominio Mutable (Géminis, Virgo, Sagitario, Piscis) tu naturaleza es adaptable y flexible ante los cambios."
   }
 }
