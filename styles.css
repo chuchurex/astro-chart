@@ -353,6 +353,22 @@ a:focus-visible {
 .form-input::placeholder {
   color: #b0b0c8;
 }
+
+/* Íconos de fecha/hora con contraste AAA */
+.form-input[type="date"],
+.form-input[type="time"] {
+  color-scheme: dark;
+}
+.form-input::-webkit-calendar-picker-indicator {
+  filter: invert(0.85) sepia(0.1) saturate(0.5) hue-rotate(180deg);
+  cursor: pointer;
+  opacity: 0.9;
+}
+.form-input::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  filter: invert(0.75) sepia(0.5) saturate(2) hue-rotate(10deg);
+}
+
 .form-input:focus {
   outline: none;
   border-color: #d4af37;
