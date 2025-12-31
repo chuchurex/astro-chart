@@ -80,6 +80,116 @@ function hideResults() {
     if (DOM.results) DOM.results.classList.add('hidden');
 }
 
+// === PARSEO FLEXIBLE DE FECHA Y HORA ===
+
+/**
+ * Parsea fecha en múltiples formatos:
+ * - DD/MM/YYYY, DD-MM-YYYY, DD.MM.YYYY
+ * - YYYY/MM/DD, YYYY-MM-DD
+ * - "15 marzo 1985", "march 15 1985"
+ * Retorna { year, month, day } o null si no puede parsear
+ */
+function parseFlexibleDate(input) {
+    if (!input) return null;
+    const str = input.trim();
+
+    // Meses en español, inglés y portugués
+    const monthNames = {
+        'enero': 1, 'january': 1, 'jan': 1, 'janeiro': 1,
+        'febrero': 2, 'february': 2, 'feb': 2, 'fevereiro': 2,
+        'marzo': 3, 'march': 3, 'mar': 3, 'março': 3,
+        'abril': 4, 'april': 4, 'apr': 4,
+        'mayo': 5, 'may': 5, 'maio': 5,
+        'junio': 6, 'june': 6, 'jun': 6, 'junho': 6,
+        'julio': 7, 'july': 7, 'jul': 7, 'julho': 7,
+        'agosto': 8, 'august': 8, 'aug': 8,
+        'septiembre': 9, 'september': 9, 'sep': 9, 'setembro': 9,
+        'octubre': 10, 'october': 10, 'oct': 10, 'outubro': 10,
+        'noviembre': 11, 'november': 11, 'nov': 11, 'novembro': 11,
+        'diciembre': 12, 'december': 12, 'dec': 12, 'dezembro': 12
+    };
+
+    // Intenta formato con nombre de mes: "15 marzo 1985" o "march 15, 1985"
+    const monthNameMatch = str.toLowerCase().match(/(\d{1,2})\s*(?:de\s+)?([a-záéíóúñ]+)\s*(?:de\s+)?(\d{4})|([a-záéíóúñ]+)\s+(\d{1,2}),?\s+(\d{4})/i);
+    if (monthNameMatch) {
+        let day, monthName, year;
+        if (monthNameMatch[1]) {
+            // Formato: 15 marzo 1985
+            day = parseInt(monthNameMatch[1]);
+            monthName = monthNameMatch[2].toLowerCase();
+            year = parseInt(monthNameMatch[3]);
+        } else {
+            // Formato: march 15, 1985
+            monthName = monthNameMatch[4].toLowerCase();
+            day = parseInt(monthNameMatch[5]);
+            year = parseInt(monthNameMatch[6]);
+        }
+        const month = monthNames[monthName];
+        if (month && day >= 1 && day <= 31 && year >= 1900 && year <= new Date().getFullYear()) {
+            return { year, month, day };
+        }
+    }
+
+    // Intenta formatos numéricos: DD/MM/YYYY, DD-MM-YYYY, DD.MM.YYYY
+    const numericMatch = str.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{4})$/);
+    if (numericMatch) {
+        const first = parseInt(numericMatch[1]);
+        const second = parseInt(numericMatch[2]);
+        const third = parseInt(numericMatch[3]);
+
+        // Asumimos DD/MM/YYYY (formato común en Latinoamérica y Europa)
+        if (first >= 1 && first <= 31 && second >= 1 && second <= 12) {
+            return { year: third, month: second, day: first };
+        }
+    }
+
+    // Intenta formato ISO: YYYY-MM-DD
+    const isoMatch = str.match(/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})$/);
+    if (isoMatch) {
+        return {
+            year: parseInt(isoMatch[1]),
+            month: parseInt(isoMatch[2]),
+            day: parseInt(isoMatch[3])
+        };
+    }
+
+    return null;
+}
+
+/**
+ * Parsea hora en formatos flexibles:
+ * - HH:MM, H:MM
+ * - HH.MM, H.MM
+ * - HHMM
+ * Retorna { hour, minute } o null
+ */
+function parseFlexibleTime(input) {
+    if (!input) return null;
+    const str = input.trim();
+
+    // Formato con separador: 14:30, 14.30, 9:05
+    const sepMatch = str.match(/^(\d{1,2})[\:\.](\d{2})$/);
+    if (sepMatch) {
+        const hour = parseInt(sepMatch[1]);
+        const minute = parseInt(sepMatch[2]);
+        if (hour >= 0 && hour <= 23 && minute >= 0 && minute <= 59) {
+            return { hour, minute };
+        }
+    }
+
+    // Formato sin separador: 1430, 0905
+    const noSepMatch = str.match(/^(\d{1,2})(\d{2})$/);
+    if (noSepMatch) {
+        const hour = parseInt(noSepMatch[1]);
+        const minute = parseInt(noSepMatch[2]);
+        if (hour >= 0 && hour <= 23 && minute >= 0 && minute <= 59) {
+            return { hour, minute };
+        }
+    }
+
+    return null;
+}
+
 // === GEOCODIFICACIÓN ===
 
 async function geocodeCity(city) {
@@ -809,14 +919,30 @@ async function handleFormSubmit(event) {
     try {
         const formData = new FormData(DOM.form);
         const name = formData.get('name');
-        const birthDate = formData.get('birthDate');
-        const birthTime = formData.get('birthTime');
+        const birthDateInput = formData.get('birthDate');
+        const birthTimeInput = formData.get('birthTime');
         const city = formData.get('city');
 
-        console.log('📝 Datos del formulario:', { name, birthDate, birthTime, city });
+        console.log('📝 Datos del formulario:', { name, birthDate: birthDateInput, birthTime: birthTimeInput, city });
 
-        const [year, month, day] = birthDate.split('-').map(Number);
-        const [hour, minute] = birthTime.split(':').map(Number);
+        // Parsear fecha y hora con formatos flexibles
+        const parsedDate = parseFlexibleDate(birthDateInput);
+        const parsedTime = parseFlexibleTime(birthTimeInput);
+
+        if (!parsedDate) {
+            hideLoader();
+            alert(i18n.translations?.errors?.invalid_date || 'Fecha inválida. Usa formato: DD/MM/AAAA');
+            return;
+        }
+
+        if (!parsedTime) {
+            hideLoader();
+            alert(i18n.translations?.errors?.invalid_time || 'Hora inválida. Usa formato: HH:MM');
+            return;
+        }
+
+        const { year, month, day } = parsedDate;
+        const { hour, minute } = parsedTime;
 
         let latitude = parseFloat(formData.get('latitude'));
         let longitude = parseFloat(formData.get('longitude'));
@@ -950,7 +1076,12 @@ function fillFormFromURL() {
     }
 
     if (urlData.date && DOM.birthDate) {
-        DOM.birthDate.value = formatDateForInput(urlData.date);
+        // Convertir YYYYMMDD a DD/MM/YYYY para el input
+        const formattedDate = formatDateForInput(urlData.date);
+        if (formattedDate) {
+            const [y, m, d] = formattedDate.split('-');
+            DOM.birthDate.value = `${d}/${m}/${y}`;
+        }
     }
 
     if (urlData.time && DOM.birthTime) {
@@ -1032,6 +1163,9 @@ async function init() {
 
     // Inicializar i18n
     await i18n.init();
+
+    // Pre-llenar desde URL si hay parámetros
+    fillFormFromURL();
 }
 
 // === SISTEMA DE INTERNACIONALIZACIÓN (i18n) ===
@@ -1072,8 +1206,7 @@ const i18n = {
 
     async loadTranslations(lang) {
         try {
-            const basePath = window.location.pathname.includes('about.html') ? '' : '';
-            const response = await fetch(`${basePath}i18n/${lang}.json`);
+            const response = await fetch(`/i18n/${lang}.json`);
             if (!response.ok) throw new Error('Failed to load translations');
             const data = await response.json();
             console.log(`🌐 Traducciones cargadas: ${lang}`, data);

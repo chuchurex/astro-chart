@@ -88,12 +88,16 @@
 
                     <div class="form-group">
                         <label for="birth-date" class="form-label" data-i18n="form.date">Date</label>
-                        <input type="date" id="birth-date" name="birthDate" class="form-input" required>
+                        <input type="text" id="birth-date" name="birthDate" class="form-input"
+                               data-i18n-placeholder="form.date_placeholder" placeholder="15/03/1985"
+                               autocomplete="bday" inputmode="numeric" required>
                     </div>
 
                     <div class="form-group">
                         <label for="birth-time" class="form-label" data-i18n="form.time">Time</label>
-                        <input type="time" id="birth-time" name="birthTime" class="form-input" required>
+                        <input type="text" id="birth-time" name="birthTime" class="form-input"
+                               data-i18n-placeholder="form.time_placeholder" placeholder="14:30"
+                               inputmode="numeric" required>
                     </div>
 
                     <div class="form-group">
@@ -230,7 +234,7 @@
                 <span data-i18n="footer.cycles">Adept Cycles: Ra Material (L/L Research)</span>
             </p>
             <p class="footer__credits">
-                <span data-i18n="footer.developed">Developed by</span> <a href="about.html" class="footer__link">Chuchu</a>
+                <span data-i18n="footer.developed">Developed by</span> <a href="/about/" class="footer__link">Chuchu</a>
                 <span data-i18n="footer.and">and</span> <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener" class="footer__link">Claude</a> · 2025
             </p>
         </div>

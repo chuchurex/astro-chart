@@ -12,8 +12,10 @@
   "form": {
     "name": "Nome",
     "name_placeholder": "Seu nome",
-    "date": "Data",
-    "time": "Hora",
+    "date": "Data de nascimento",
+    "date_placeholder": "15/03/1985",
+    "time": "Hora de nascimento",
+    "time_placeholder": "14:30",
     "city": "Cidade",
     "city_placeholder": "Ex: São Paulo, Brasil",
     "calculate": "Calcular"
@@ -63,7 +65,9 @@
   },
   "errors": {
     "city_not_found": "Cidade não encontrada. Usando coordenadas padrão.",
-    "api_error": "Erro ao calcular o mapa. Por favor tente novamente."
+    "api_error": "Erro ao calcular o mapa. Por favor tente novamente.",
+    "invalid_date": "Data inválida. Use formato: DD/MM/AAAA (ex: 15/03/1985)",
+    "invalid_time": "Hora inválida. Use formato: HH:MM (ex: 14:30)"
   },
   "ra_quotes": {
     "optimal": "\"precisamente o quarto, quinto e sexto dia—quando os trabalhos são mais apropriadamente realizados\"",

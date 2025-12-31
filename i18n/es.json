@@ -12,8 +12,10 @@
   "form": {
     "name": "Nombre",
     "name_placeholder": "Tu nombre",
-    "date": "Fecha",
-    "time": "Hora",
+    "date": "Fecha de nacimiento",
+    "date_placeholder": "15/03/1985",
+    "time": "Hora de nacimiento",
+    "time_placeholder": "14:30",
     "city": "Ciudad",
     "city_placeholder": "Ej: Santiago, Chile",
     "calculate": "Calcular"
@@ -63,7 +65,9 @@
   },
   "errors": {
     "city_not_found": "Ciudad no encontrada. Usando coordenadas por defecto.",
-    "api_error": "Error al calcular la carta. Por favor intenta de nuevo."
+    "api_error": "Error al calcular la carta. Por favor intenta de nuevo.",
+    "invalid_date": "Fecha inválida. Usa formato: DD/MM/AAAA (ej: 15/03/1985)",
+    "invalid_time": "Hora inválida. Usa formato: HH:MM (ej: 14:30)"
   },
   "ra_quotes": {
     "optimal": "\"precisamente el cuarto, quinto y sexto día—cuando los trabajos se emprenden más apropiadamente\"",

@@ -355,18 +355,12 @@ a:focus-visible {
 }
 
 /* Íconos de fecha/hora con contraste AAA */
-.form-input[type="date"],
-.form-input[type="time"] {
-  color-scheme: dark;
-}
 .form-input::-webkit-calendar-picker-indicator {
-  filter: invert(0.85) sepia(0.1) saturate(0.5) hue-rotate(180deg);
+  filter: invert(0.7);
   cursor: pointer;
-  opacity: 0.9;
 }
 .form-input::-webkit-calendar-picker-indicator:hover {
-  opacity: 1;
-  filter: invert(0.75) sepia(0.5) saturate(2) hue-rotate(10deg);
+  filter: invert(0.9) sepia(0.3) saturate(5) hue-rotate(10deg);
 }
 
 .form-input:focus {
@@ -374,6 +368,59 @@ a:focus-visible {
   border-color: #d4af37;
   box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
   background: rgba(255, 255, 255, 0.08);
+}
+
+/* Selects personalizados para fecha y hora */
+.form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23d4af37' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+.form-select:focus {
+  outline: 3px solid #d4af37;
+  outline-offset: 2px;
+}
+.form-select option {
+  background: #1a1a2e;
+  color: #e8e8f0;
+  padding: 8px;
+}
+
+.date-selects,
+.time-selects {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.date-selects .form-select:nth-child(1) { /* día */
+  width: 80px;
+  flex-shrink: 0;
+}
+.date-selects .form-select:nth-child(2) { /* mes */
+  flex: 1;
+  min-width: 100px;
+}
+.date-selects .form-select:nth-child(3) { /* año */
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.time-selects .form-select {
+  width: 80px;
+}
+.time-separator {
+  color: #d4af37;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.form-group--date,
+.form-group--time {
+  min-width: 200px;
 }
 
 .btn {
