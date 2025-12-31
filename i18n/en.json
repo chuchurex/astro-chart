@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "Natal Chart",
+    "title": "Chuchurex Astral",
     "subtitle": "Enter your birth data"
   },
   "nav": {
@@ -50,14 +50,14 @@
   },
   "about": {
     "name": "Carlos Martínez",
-    "aka": "aka Chuchu",
-    "bio1": "Developer and explorer of the digital cosmos from Santiago, Chile.",
+    "aka": "aka chuchurex",
+    "bio1": "Front-end developer and explorer of the digital cosmos from Santiago, Chile.\n\nThis site was born at the intersection of code and cosmic curiosity. AI tools helped me build it; Ra's teachings gave it meaning. It's a free gift for anyone who wants to use it.\n\nA personal note: the cycles we calculate here are not predictions or destiny. They are invitations. Every challenge that appears in your chart —every square, every difficult transit— is exactly that: an invitation to choose.\n\nWe are on an extraordinary planet, surrounded by lessons disguised as problems. Every fall is an opportunity to rise up choosing love. Every mistake, a door. Everything that comes to shake you from your center is, seen with different eyes, the most precious catalyst you could receive.\n\nEnjoy the journey. All is well.",
     "bio2": "This project combines my interest in programming with the fascination for cosmic cycles and the teachings of Ra.",
     "github": "github",
     "collab_title": "Developed with Claude",
     "collab_text": "This project was created in collaboration with",
     "collab_anthropic": "the AI assistant from Anthropic.",
-    "back": "← Back to Natal Chart"
+    "back": "← Back to Chuchurex Astral"
   },
   "errors": {
     "city_not_found": "City not found. Using default coordinates.",

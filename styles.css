@@ -434,9 +434,30 @@ body {
   margin-bottom: 40px;
   color: #d4af37;
 }
-.results__header .btn--share {
-  display: block;
-  margin: 0 auto 24px;
+.results__header .results__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.results__header .btn--share,
+.results__header .btn--pdf {
+  display: inline-flex;
+  padding: 6px 12px;
+  font-size: 10px;
+}
+.results__header .btn--share .btn__icon,
+.results__header .btn--pdf .btn__icon {
+  font-size: 14px;
+}
+.btn--pdf {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #d4af37;
+}
+.btn--pdf:hover {
+  background: rgba(212, 175, 55, 0.25);
+  border-color: #d4af37;
 }
 
 .big-three {

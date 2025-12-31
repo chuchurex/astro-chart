@@ -62,6 +62,12 @@ deploy_frontend() {
     curl -s --ftp-create-dirs -T i18n/es.json "ftp://${FTP_SERVER}${FTP_SERVER_DIR}/i18n/" --user "${FTP_USERNAME}:${FTP_PASSWORD}"
     curl -s --ftp-create-dirs -T i18n/pt.json "ftp://${FTP_SERVER}${FTP_SERVER_DIR}/i18n/" --user "${FTP_USERNAME}:${FTP_PASSWORD}"
 
+    # Subir CSS de impresión
+    if [ -f styles/print.css ]; then
+        echo "  Subiendo print.css..."
+        curl -s --ftp-create-dirs -T styles/print.css "ftp://${FTP_SERVER}${FTP_SERVER_DIR}/styles/" --user "${FTP_USERNAME}:${FTP_PASSWORD}"
+    fi
+
     echo -e "${GREEN}Frontend desplegado en https://chuchurex.cl (v=${CACHE_VERSION})${NC}"
 }
 

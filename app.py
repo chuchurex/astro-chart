@@ -15,6 +15,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional
+from functools import lru_cache
 import json
 import os
 
@@ -174,24 +175,43 @@ def generate_simple_chart(data: BirthData) -> dict:
         "calculation_method": "simplified"
     }
 
-# === CÁLCULOS CON KERYKEION ===
+# === CÁLCULOS CON KERYKEION (con caché) ===
 
-def generate_kerykeion_chart(data: BirthData) -> dict:
-    """Genera una carta natal precisa usando Kerykeion"""
+# Caché para cálculos astronómicos - misma fecha/hora/lugar = mismo resultado
+@lru_cache(maxsize=10000)
+def _cached_kerykeion_calculation(year: int, month: int, day: int, hour: int, minute: int, lat: float, lng: float, tz: str) -> tuple:
+    """
+    Calcula posiciones astronómicas y las cachea.
+    Retorna tupla para ser hasheable.
+    """
     subject = AstrologicalSubjectFactory.from_birth_data(
-        name=data.name,
-        year=data.year,
-        month=data.month,
-        day=data.day,
-        hour=data.hour,
-        minute=data.minute,
-        lng=data.longitude,
-        lat=data.latitude,
-        tz_str=data.timezone,
+        name="cached",
+        year=year,
+        month=month,
+        day=day,
+        hour=hour,
+        minute=minute,
+        lng=lng,
+        lat=lat,
+        tz_str=tz,
         online=False
     )
-
     chart_data = ChartDataFactory.create_natal_chart_data(subject)
+    return (subject, chart_data)
+
+def generate_kerykeion_chart(data: BirthData) -> dict:
+    """Genera una carta natal precisa usando Kerykeion (con caché)"""
+    # Redondear lat/lng para mejor hit rate del caché
+    lat_rounded = round(data.latitude, 2)
+    lng_rounded = round(data.longitude, 2)
+
+    # Usar cálculo cacheado
+    subject, chart_data = _cached_kerykeion_calculation(
+        data.year, data.month, data.day,
+        data.hour, data.minute,
+        lat_rounded, lng_rounded,
+        data.timezone
+    )
 
     # Nombres de planetas a extraer del subject
     planet_names = ['sun', 'moon', 'mercury', 'venus', 'mars',
@@ -575,19 +595,20 @@ def calculate_element_modality_distribution(chart: dict) -> dict:
         }
     }
 
-# === CARGA DE INTERPRETACIONES ===
+# === CARGA DE INTERPRETACIONES (cacheada) ===
 
-def load_interpretations() -> dict:
+# Cargar interpretaciones una sola vez al inicio
+def _load_interpretations_from_file() -> dict:
     """Carga las interpretaciones desde el archivo JSON"""
     interpretations_path = os.path.join(
         os.path.dirname(__file__),
         "interpretations.json"
     )
-    
+
     if os.path.exists(interpretations_path):
         with open(interpretations_path, 'r', encoding='utf-8') as f:
             return json.load(f)
-    
+
     # Interpretaciones por defecto si no existe el archivo
     return {
         "sun_in_signs": {},
@@ -596,6 +617,14 @@ def load_interpretations() -> dict:
         "planets_in_houses": {},
         "aspects": {}
     }
+
+# Cache global - se carga una sola vez
+INTERPRETATIONS_CACHE = _load_interpretations_from_file()
+print(f"✅ Interpretaciones cargadas: {len(INTERPRETATIONS_CACHE.get('planets_in_houses', {}))} planetas en casas")
+
+def load_interpretations() -> dict:
+    """Retorna las interpretaciones cacheadas"""
+    return INTERPRETATIONS_CACHE
 
 def get_interpretations_for_chart(chart: dict) -> dict:
     """Obtiene las interpretaciones relevantes para una carta"""
@@ -713,10 +742,19 @@ def api_info():
 @app.get("/health")
 def health_check():
     """Verifica el estado de la API"""
+    # Estadísticas del caché
+    cache_info = _cached_kerykeion_calculation.cache_info() if KERYKEION_AVAILABLE else None
+
     return {
         "status": "healthy",
         "kerykeion": KERYKEION_AVAILABLE,
-        "timestamp": datetime.now().isoformat()
+        "timestamp": datetime.now().isoformat(),
+        "cache": {
+            "hits": cache_info.hits if cache_info else 0,
+            "misses": cache_info.misses if cache_info else 0,
+            "size": cache_info.currsize if cache_info else 0,
+            "maxsize": cache_info.maxsize if cache_info else 0
+        } if KERYKEION_AVAILABLE else None
     }
 
 @app.get("/signs")

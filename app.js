@@ -554,30 +554,47 @@ function renderChart(chartData) {
 
 function renderSimpleChart(chartData) {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('viewBox', '0 0 500 500');
+    svg.setAttribute('viewBox', '0 0 1058 1058');  // Escalado a 1058px para coincidir con contenedor
     svg.style.width = '100%';
     svg.style.height = '100%';
 
-    const cx = 250, cy = 250;
-    const outerR = 230, signR = 200, houseR = 160, innerR = 120, centerR = 50;
+    const cx = 529, cy = 529;
+    // Radios escalados proporcionalmente (factor ~1.41 desde 750)
+    const outerR = 486, signR = 402, planetR = 360, airR = 318, houseR = 233, centerR = 106;
 
-    // Colores por elemento
+    // Colores por elemento (sutiles, semi-transparentes)
     const elementColors = {
-        fire: 'rgba(239, 68, 68, 0.15)',
-        earth: 'rgba(34, 197, 94, 0.15)',
-        air: 'rgba(59, 130, 246, 0.15)',
-        water: 'rgba(147, 51, 234, 0.15)'
+        fire: 'rgba(239, 68, 68, 0.12)',
+        earth: 'rgba(34, 197, 94, 0.12)',
+        air: 'rgba(59, 130, 246, 0.12)',
+        water: 'rgba(147, 51, 234, 0.12)'
     };
     const signElements = ['fire', 'earth', 'air', 'water', 'fire', 'earth', 'air', 'water', 'fire', 'earth', 'air', 'water'];
 
-    // Círculos base
-    drawCircle(svg, cx, cy, outerR, '#d4af37', 2);
-    drawCircle(svg, cx, cy, signR, 'rgba(212, 175, 55, 0.5)', 1);
-    drawCircle(svg, cx, cy, houseR, 'rgba(212, 175, 55, 0.4)', 1);
-    drawCircle(svg, cx, cy, innerR, 'rgba(212, 175, 55, 0.3)', 1);
-    drawCircle(svg, cx, cy, centerR, 'rgba(212, 175, 55, 0.2)', 1);
+    // Círculos base (de afuera hacia adentro)
+    drawCircle(svg, cx, cy, outerR, '#d4af37', 2);           // Borde exterior
+    drawCircle(svg, cx, cy, signR, 'rgba(212, 175, 55, 0.5)', 1);   // Límite signos/planetas
+    drawCircle(svg, cx, cy, airR, 'rgba(212, 175, 55, 0.3)', 1);    // Límite planetas/aire
+    drawCircle(svg, cx, cy, houseR, 'rgba(212, 175, 55, 0.4)', 1);  // Límite aire/casas
+    drawCircle(svg, cx, cy, centerR, 'rgba(212, 175, 55, 0.2)', 1); // Centro
 
-    const zodiacSymbols = ['♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'];
+    // Símbolos zodiacales SVG paths (profesionales) + abreviaturas
+    const zodiacPaths = {
+        aries: 'M12 2C9.5 2 7.5 4 7.5 6.5c0 1.5.7 2.8 1.8 3.7L12 12l2.7-1.8c1.1-.9 1.8-2.2 1.8-3.7C16.5 4 14.5 2 12 2zm0 2c1.4 0 2.5 1.1 2.5 2.5S13.4 9 12 9s-2.5-1.1-2.5-2.5S10.6 4 12 4zM12 14l-4 8h2l2-4 2 4h2l-4-8z',
+        taurus: 'M12 2C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V22h8v-7.3c1.8-1.2 3-3.3 3-5.7 0-3.9-3.1-7-7-7zm0 2c2.8 0 5 2.2 5 5 0 1.5-.7 2.9-1.8 3.8L14 13.7V20h-4v-6.3l-1.2-.9C7.7 11.9 7 10.5 7 9c0-2.8 2.2-5 5-5z',
+        gemini: 'M7 2v4h2V4h2v16H9v2h6v-2h-2V4h2v2h2V2H7zm0 16v4h2v-2h2v-2H7zm8 0v2h2v2h2v-4h-4z',
+        cancer: 'M12 4c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm0 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zM6 12c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm12 0c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm-12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm12 0c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z',
+        leo: 'M12 2C9.2 2 7 4.2 7 7c0 1.9 1 3.5 2.5 4.3-.3.4-.5.9-.5 1.5 0 1.2.8 2.2 2 2.2s2-1 2-2.2c0-.6-.2-1.1-.5-1.5C14 10.5 15 8.9 15 7c0-2.8-2.2-5-3-5zm0 2c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3zm-4 13v5h8v-5h-2v3h-4v-3H8z',
+        virgo: 'M8 2v10c0 1.1-.9 2-2 2v2c2.2 0 4-1.8 4-4V2H8zm4 0v10c0 1.1-.9 2-2 2v2c2.2 0 4-1.8 4-4V2h-2zm4 0v10c0 2.2 1.8 4 4 4v-2c-1.1 0-2-.9-2-2V2h-2zm2 14c-1.1 0-2 .9-2 2v4h2v-4c0-.6.4-1 1-1v-1z',
+        libra: 'M12 2L8 6h8l-4-4zM6 8v2h12V8H6zm0 4v2h2v6H6v2h12v-2h-2v-6h2v-2H6zm4 2h4v6h-4v-6z',
+        scorpio: 'M6 2v12h2V4h2v10h2V4h2v10c0 2.2 1.8 4 4 4v-2c-1.1 0-2-.9-2-2V2H6zm12 12l-2 2 2 2 2-2-2-2z',
+        sagittarius: 'M18 2l-8 8-4-4-4 4 4 4-4 4 2 2 4-4 4 4 8-8-2-2-6 6-4-4 6-6 4 4 2-2-4-4 4-4-2-2z',
+        capricorn: 'M12 2C9.8 2 8 3.8 8 6v6c0 1.1-.9 2-2 2v2c2.2 0 4-1.8 4-4V6c0-1.1.9-2 2-2s2 .9 2 2v8c0 2.2 1.8 4 4 4v-2c-1.1 0-2-.9-2-2V6c0-2.2-1.8-4-4-4zm6 14c-1.1 0-2 .9-2 2v4h2v-4c0-.6.4-1 1-1h1v-1h-2z',
+        aquarius: 'M4 6l2 2 2-2 2 2 2-2 2 2 2-2 2 2 2-2v3l-2 2-2-2-2 2-2-2-2 2-2-2-2 2-2-2V6zm0 8l2 2 2-2 2 2 2-2 2 2 2-2 2 2 2-2v3l-2 2-2-2-2 2-2-2-2 2-2-2-2 2-2-2v-3z',
+        pisces: 'M6 4v16h2V12h8v8h2V4h-2v8H8V4H6zm-2 6v4h4v-4H4zm14 0v4h4v-4h-4z'
+    };
+    const zodiacKeys = ['aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius', 'pisces'];
+    const zodiacAbbr = ['Ari', 'Tau', 'Gem', 'Cnc', 'Leo', 'Vir', 'Lib', 'Sco', 'Sgr', 'Cap', 'Aqr', 'Psc'];
     const ascOffset = chartData.cusps ? chartData.cusps[0] : 0;
 
     // Segmentos de signos con color de fondo (sentido antihorario)
@@ -600,11 +617,26 @@ function renderSimpleChart(chartData) {
         path.setAttribute('stroke', 'rgba(212, 175, 55, 0.3)');
         svg.appendChild(path);
 
-        // Símbolo del signo
+        // Símbolo del signo (SVG icon al 200% + abreviatura)
         const symbolAngle = (ascOffset - i * 30 - 15 + 180) * Math.PI / 180;
-        const sx = cx + (signR + 15) * Math.cos(symbolAngle);
-        const sy = cy + (signR + 15) * Math.sin(symbolAngle);
-        drawText(svg, sx, sy, zodiacSymbols[i], '#a0a0b0', 13);
+        const iconR = signR + 35;
+        const abbrR = signR + 70;
+        const ix = cx + iconR * Math.cos(symbolAngle);
+        const iy = cy + iconR * Math.sin(symbolAngle);
+        const ax = cx + abbrR * Math.cos(symbolAngle);
+        const ay = cy + abbrR * Math.sin(symbolAngle);
+
+        // Dibujar icono SVG del signo (escala 2 = 200%)
+        const iconGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        iconPath.setAttribute('d', zodiacPaths[zodiacKeys[i]]);
+        iconPath.setAttribute('fill', '#e0e0f0');
+        iconGroup.setAttribute('transform', `translate(${ix - 24}, ${iy - 24}) scale(2)`);
+        iconGroup.appendChild(iconPath);
+        svg.appendChild(iconGroup);
+
+        // Abreviatura debajo (tamaño aumentado)
+        drawText(svg, ax, ay, zodiacAbbr[i], 'rgba(220, 220, 240, 0.85)', 20);
     }
 
     // Casas con números (sentido antihorario)
@@ -613,24 +645,25 @@ function renderSimpleChart(chartData) {
             const angle = (ascOffset - cusp + 180) * Math.PI / 180;
             const isCardinal = (i === 0 || i === 3 || i === 6 || i === 9);
 
+            // Las líneas cardinales cruzan todo, las demás solo hasta el límite de casas
             const x1 = cx + centerR * Math.cos(angle);
             const y1 = cy + centerR * Math.sin(angle);
             const x2 = cx + (isCardinal ? signR : houseR) * Math.cos(angle);
             const y2 = cy + (isCardinal ? signR : houseR) * Math.sin(angle);
-            drawLine(svg, x1, y1, x2, y2, isCardinal ? '#d4af37' : 'rgba(212, 175, 55, 0.4)', isCardinal ? 2 : 1);
+            drawLine(svg, x1, y1, x2, y2, isCardinal ? 'rgba(212, 175, 55, 0.7)' : 'rgba(212, 175, 55, 0.3)', isCardinal ? 2 : 1);
 
-            // Número de casa
+            // Número de casa (entre centro y límite de casas)
             const nextCusp = chartData.cusps[(i + 1) % 12];
             const midAngle = (cusp + (nextCusp > cusp ? nextCusp : nextCusp + 360)) / 2;
             const numAngle = (ascOffset - midAngle + 180) * Math.PI / 180;
-            const numR = (houseR + innerR) / 2;
-            drawText(svg, cx + numR * Math.cos(numAngle), cy + numR * Math.sin(numAngle), String(i + 1), 'rgba(212, 175, 55, 0.6)', 11);
+            const numR = (centerR + houseR) / 2;
+            drawText(svg, cx + numR * Math.cos(numAngle), cy + numR * Math.sin(numAngle), String(i + 1), 'rgba(212, 175, 55, 0.7)', 24);
         });
 
         // Etiquetas AC, DC, MC, IC
         [{ i: 0, l: 'AC' }, { i: 6, l: 'DC' }, { i: 9, l: 'MC' }, { i: 3, l: 'IC' }].forEach(axis => {
             const angle = (ascOffset - chartData.cusps[axis.i] + 180) * Math.PI / 180;
-            drawText(svg, cx + (outerR + 15) * Math.cos(angle), cy + (outerR + 15) * Math.sin(angle), axis.l, '#d4af37', 11);
+            drawText(svg, cx + (outerR + 35) * Math.cos(angle), cy + (outerR + 35) * Math.sin(angle), axis.l, '#d4af37', 24);
         });
     }
 
@@ -659,23 +692,35 @@ function renderSimpleChart(chartData) {
 
     positions.forEach((planet) => {
         const angle = (ascOffset - planet.pos + 180) * Math.PI / 180;
-        const r = innerR - 25;
+        const r = planetR;  // Planetas en la nueva zona entre aire y signos
         const x = cx + r * Math.cos(angle);
         const y = cy + r * Math.sin(angle);
 
-        drawText(svg, x, y, planetSymbols[planet.name], planetColors[planet.name] || '#d4af37', 16);
+        drawText(svg, x, y, planetSymbols[planet.name], planetColors[planet.name] || '#d4af37', 38);
 
-        // Grado
+        // Grado con fondo para mejor legibilidad
         const deg = Math.floor(planet.abs_pos % 30);
-        drawText(svg, cx + (r - 14) * Math.cos(angle), cy + (r - 14) * Math.sin(angle), `${deg}°`, 'rgba(255,255,255,0.5)', 8);
+        const degX = cx + (r - 42) * Math.cos(angle);
+        const degY = cy + (r - 42) * Math.sin(angle);
 
-        // Retrógrado
+        // Fondo del grado
+        const degBg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        degBg.setAttribute('x', degX - 18);
+        degBg.setAttribute('y', degY - 12);
+        degBg.setAttribute('width', 36);
+        degBg.setAttribute('height', 24);
+        degBg.setAttribute('rx', 4);
+        degBg.setAttribute('fill', 'rgba(0, 0, 0, 0.6)');
+        svg.appendChild(degBg);
+        drawText(svg, degX, degY, `${deg}°`, '#ffffff', 18);
+
+        // Retrógrado (más hacia afuera)
         if (planet.retrograde) {
-            drawText(svg, cx + (r + 12) * Math.cos(angle), cy + (r + 12) * Math.sin(angle), 'R', '#FF6347', 8);
+            drawText(svg, cx + (r + 25) * Math.cos(angle), cy + (r + 25) * Math.sin(angle), 'R', '#FF6347', 20);
         }
     });
 
-    // Líneas de aspectos (sentido antihorario)
+    // Líneas de aspectos (en la zona de aire, entre casas y planetas)
     if (chartData.aspects && chartData.aspects.length > 0) {
         const aspectColors = { conjunction: '#FFD700', opposition: '#EF4444', trine: '#3B82F6', square: '#EF4444', sextile: '#22C55E' };
         const aspectDash = { square: '4,4', sextile: '2,2' };
@@ -687,7 +732,7 @@ function renderSimpleChart(chartData) {
             const pos2 = planetPosMap[aspect.planet2];
             if (pos1 === undefined || pos2 === undefined) return;
 
-            const r = innerR - 30;
+            const r = (houseR + airR) / 2;  // En medio de la zona de aire
             const a1 = (ascOffset - pos1 + 180) * Math.PI / 180;
             const a2 = (ascOffset - pos2 + 180) * Math.PI / 180;
 
@@ -712,8 +757,8 @@ function renderSimpleChart(chartData) {
     centerBg.setAttribute('fill', 'rgba(10, 10, 18, 0.9)');
     svg.appendChild(centerBg);
 
-    drawText(svg, cx, cy - 8, 'ASC', '#d4af37', 10);
-    drawText(svg, cx, cy + 10, chartData.ascendant, '#e8e8f0', 12);
+    drawText(svg, cx, cy - 25, 'ASC', '#d4af37', 26);
+    drawText(svg, cx, cy + 25, chartData.ascendant, '#e8e8f0', 28);
 
     DOM.chart.appendChild(svg);
 }
@@ -831,58 +876,18 @@ async function handleCityChange(event) {
     }
 }
 
-// === PARÁMETROS URL Y HASH ===
-
-// Genera un hash base64 con los datos de nacimiento
-function generateShareHash() {
-    const data = {
-        n: DOM.nameInput?.value || '',
-        d: DOM.birthDate?.value?.replace(/-/g, '') || '',
-        t: DOM.birthTime?.value || '',
-        c: DOM.cityInput?.value || '',
-        lat: DOM.latitudeInput?.value || '',
-        lon: DOM.longitudeInput?.value || ''
-    };
-
-    const jsonStr = JSON.stringify(data);
-    // Codificar en base64 URL-safe
-    const base64 = btoa(unescape(encodeURIComponent(jsonStr)))
-        .replace(/\+/g, '-')
-        .replace(/\//g, '_')
-        .replace(/=+$/, '');
-
-    return base64;
-}
-
-// Decodifica el hash y retorna los datos
-function parseHashData(hash) {
-    try {
-        // Restaurar base64 estándar
-        let base64 = hash.replace(/-/g, '+').replace(/_/g, '/');
-        // Añadir padding si es necesario
-        while (base64.length % 4) base64 += '=';
-
-        const jsonStr = decodeURIComponent(escape(atob(base64)));
-        const data = JSON.parse(jsonStr);
-
-        return {
-            name: data.n || '',
-            date: data.d || '',
-            time: data.t || '',
-            city: data.c || '',
-            lat: data.lat || '',
-            lon: data.lon || ''
-        };
-    } catch (e) {
-        console.error('Error decodificando hash:', e);
-        return null;
-    }
-}
+// === PARÁMETROS URL ===
 
 // Genera la URL para compartir
+// Formato: ?Nombre&YYYYMMDD&HH:MM&latitud&longitud
 function generateShareURL() {
-    const hash = generateShareHash();
-    return `${window.location.origin}${window.location.pathname}#${hash}`;
+    const name = encodeURIComponent(DOM.nameInput?.value || '');
+    const date = DOM.birthDate?.value?.replace(/-/g, '') || '';
+    const time = DOM.birthTime?.value || '12:00';
+    const lat = DOM.latitudeInput?.value || '-33.4489';
+    const lon = DOM.longitudeInput?.value || '-70.6693';
+
+    return `${window.location.origin}${window.location.pathname}?${name}&${date}&${time}&${lat}&${lon}`;
 }
 
 // Copia al portapapeles y muestra feedback
@@ -909,41 +914,19 @@ async function handleShare() {
     }
 }
 
+// Parsea los parámetros de URL
+// Formato: ?Nombre&YYYYMMDD&HH:MM&latitud&longitud
 function parseURLParams() {
-    // Primero intentar leer desde hash
-    if (window.location.hash && window.location.hash.length > 1) {
-        const hashData = parseHashData(window.location.hash.slice(1));
-        if (hashData && hashData.name) {
-            return hashData;
-        }
-    }
-
-    // Formato: ?name=Carlos&date=19800822&time=00:00&lat=-33.4489&lon=-70.6693
-    // O también: ?Carlos&19800822&00:00&-33.4489&-70.6693 (posicional)
     const params = new URLSearchParams(window.location.search);
-
-    // Intentar formato con nombres
-    if (params.has('name') || params.has('date')) {
-        return {
-            name: params.get('name') || '',
-            date: params.get('date') || '',
-            time: params.get('time') || '12:00',
-            lat: params.get('lat') || '-33.4489',
-            lon: params.get('lon') || '-70.6693',
-            city: params.get('city') || ''
-        };
-    }
-
-    // Intentar formato posicional: ?Carlos&19800822&00:00&-33.4489&-70.6693
     const keys = Array.from(params.keys());
+
     if (keys.length >= 2) {
         return {
-            name: keys[0] || '',
+            name: decodeURIComponent(keys[0] || ''),
             date: keys[1] || '',
             time: keys[2] || '12:00',
             lat: keys[3] || '-33.4489',
-            lon: keys[4] || '-70.6693',
-            city: ''
+            lon: keys[4] || '-70.6693'
         };
     }
 
@@ -1021,6 +1004,10 @@ async function init() {
     // Botón compartir
     const shareBtn = document.getElementById('share-btn');
     if (shareBtn) shareBtn.addEventListener('click', handleShare);
+
+    // Botón PDF - abre vista de impresión
+    const pdfBtn = document.getElementById('pdf-btn');
+    if (pdfBtn) pdfBtn.addEventListener('click', () => window.print());
 
     // Fecha máxima = hoy
     if (DOM.birthDate) {

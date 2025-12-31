@@ -2,8 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T0KJ3RVZ08"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-T0KJ3RVZ08');
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Natal Chart | Your Celestial Map</title>
+    <title>Chuchurex Astral | Carta Natal Gratis</title>
+    <meta name="description" content="Calcula tu carta natal gratis con posiciones planetarias precisas, aspectos, casas y ciclos personales basados en las enseñanzas de Ra. Sin registro, sin costo.">
+    <meta name="keywords" content="carta natal, carta astral, horóscopo, astrología, signos zodiacales, ascendente, casas astrológicas, aspectos planetarios, ciclos personales, Ra, Law of One">
+    <meta name="author" content="chuchurex">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://chuchurex.cl/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chuchurex.cl/">
+    <meta property="og:title" content="Chuchurex Astral | Carta Natal Gratis">
+    <meta property="og:description" content="Calcula tu carta natal gratis con posiciones planetarias precisas, aspectos y ciclos personales. Sin registro, sin costo.">
+    <meta property="og:image" content="https://chuchurex.cl/share.jpeg">
+    <meta property="og:locale" content="es_CL">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="pt_BR">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://chuchurex.cl/">
+    <meta name="twitter:title" content="Chuchurex Astral | Carta Natal Gratis">
+    <meta name="twitter:description" content="Calcula tu carta natal gratis con posiciones planetarias precisas, aspectos y ciclos personales.">
+    <meta name="twitter:image" content="https://chuchurex.cl/share.jpeg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☉</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +44,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@astrodraw/astrochart@3.0.2/dist/astrochart.min.js"></script>
 
-    <link rel="stylesheet" href="styles.css?v=1767142460">
+    <link rel="stylesheet" href="styles.css?v=1767174372">
+    <link rel="stylesheet" href="styles/print.css" media="print">
 </head>
 <body>
     <div class="stars-container">
@@ -24,7 +58,7 @@
         <div class="header__top">
             <div class="header__logo">
                 <span class="header__symbol">☉</span>
-                <h1 class="header__title" data-i18n="header.title">Natal Chart</h1>
+                <h1 class="header__title" data-i18n="header.title">Chuchurex Astral</h1>
             </div>
             <nav class="header__nav hidden" id="results-nav">
                 <a href="#results" class="header__link" data-i18n="nav.chart">Chart</a>
@@ -88,10 +122,16 @@
     <section id="results" class="results hidden">
         <div class="container">
             <div class="results__header">
-                <button id="share-btn" class="btn btn--share" title="Share">
-                    <span class="btn__icon">🔗</span>
-                    <span class="btn__text" data-i18n="results.share">Share</span>
-                </button>
+                <div class="results__actions">
+                    <button id="share-btn" class="btn btn--share" title="Share">
+                        <span class="btn__icon">🔗</span>
+                        <span class="btn__text" data-i18n="results.share">Share</span>
+                    </button>
+                    <button id="pdf-btn" class="btn btn--pdf" title="Download PDF">
+                        <span class="btn__icon">📄</span>
+                        <span class="btn__text" data-i18n="results.pdf">PDF</span>
+                    </button>
+                </div>
                 <h2 class="results__name" id="result-name" data-i18n="results.title">Your Natal Chart</h2>
                 <div class="big-three">
                     <div class="big-three__item">
@@ -192,6 +232,6 @@
         </div>
     </footer>
 
-    <script src="app.js?v=1767142460"></script>
+    <script src="app.js?v=1767174372"></script>
 </body>
 </html>

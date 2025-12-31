@@ -1,6 +1,6 @@
 {
   "header": {
-    "title": "Mapa Astral",
+    "title": "Chuchurex Astral",
     "subtitle": "Insira seus dados de nascimento"
   },
   "nav": {
@@ -50,14 +50,14 @@
   },
   "about": {
     "name": "Carlos Martínez",
-    "aka": "aka Chuchu",
-    "bio1": "Desenvolvedor e explorador do cosmos digital desde Santiago, Chile.",
+    "aka": "aka chuchurex",
+    "bio1": "Desenvolvedor front-end e explorador do cosmos digital desde Santiago, Chile.\n\nEste site nasceu na interseção entre código e curiosidade cósmica. As ferramentas de IA me ajudaram a construí-lo; os ensinamentos de Ra lhe deram sentido. É um presente gratuito para quem quiser usá-lo.\n\nUma nota pessoal: os ciclos que calculamos aqui não são previsões nem destino. São convites. Cada desafio que aparece no seu mapa —cada quadratura, cada trânsito difícil— é exatamente isso: um convite para escolher.\n\nEstamos em um planeta extraordinário, cercados de lições disfarçadas de problemas. Cada queda é uma oportunidade de se levantar escolhendo o amor. Cada erro, uma porta. Cada coisa que vem para tirá-lo do seu centro é, vista com outros olhos, o catalisador mais precioso que você poderia receber.\n\nAproveite a jornada. Tudo está bem.",
     "bio2": "Este projeto combina meu interesse por programação com o fascínio pelos ciclos cósmicos e os ensinamentos de Ra.",
     "github": "github",
     "collab_title": "Desenvolvido com Claude",
     "collab_text": "Este projeto foi criado em colaboração com",
     "collab_anthropic": "o assistente de IA da Anthropic.",
-    "back": "← Voltar ao Mapa Astral"
+    "back": "← Voltar ao Chuchurex Astral"
   },
   "errors": {
     "city_not_found": "Cidade não encontrada. Usando coordenadas padrão.",

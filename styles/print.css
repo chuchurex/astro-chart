@@ -1,0 +1,390 @@
+/* CSS de impresión para carta natal - Blanco y negro */
+@media print {
+    /* Reset para impresión */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Ocultar elementos no necesarios para impresión */
+    .stars-container,
+    .stars,
+    .stars2,
+    .stars3,
+    header,
+    footer,
+    .share-button,
+    .hero,
+    .calculate-btn,
+    form,
+    .loader,
+    nav,
+    .results__actions,
+    .btn--share,
+    .btn--pdf {
+        display: none !important;
+    }
+
+    /* Fondo blanco para impresión */
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 12pt !important;
+    }
+
+    /* Contenedor principal */
+    .container,
+    main,
+    .results {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: transparent !important;
+    }
+
+    /* Títulos en negro */
+    h1, h2, h3, h4, h5, h6 {
+        color: #000000 !important;
+        text-shadow: none !important;
+    }
+
+    /* Textos en negro */
+    p, span, div, li, td, th {
+        color: #333333 !important;
+    }
+
+    /* ========================================
+       FRANJA PRINCIPAL SOL/LUNA/ASCENDENTE
+       ======================================== */
+    .big-three {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 20px !important;
+    }
+
+    .big-three__item {
+        background: transparent !important;
+        background-color: transparent !important;
+        border: 1px solid #d4af37 !important;
+        border-radius: 8px !important;
+        padding: 12px 20px !important;
+    }
+
+    /* Símbolos de planetas principales - borde amarillo */
+    .big-three__symbol {
+        color: #d4af37 !important;
+        text-shadow: none !important;
+    }
+
+    /* ========================================
+       CARTA NATAL SVG
+       ======================================== */
+    .chart-container,
+    #chart {
+        width: 600px !important;
+        max-width: 600px !important;
+        height: 600px !important;
+        margin: 20px auto !important;
+        page-break-inside: avoid !important;
+    }
+
+    .chart {
+        background: transparent !important;
+        background-color: transparent !important;
+        border: none !important;
+    }
+
+    /* SVG de la carta */
+    #chart svg {
+        width: 600px !important;
+        height: 600px !important;
+    }
+
+    /* Círculos base - solo bordes en escala de grises, sin relleno */
+    #chart svg circle {
+        fill: transparent !important;
+        stroke: #666666 !important;
+    }
+
+    /* Centro del chart - transparente con borde */
+    #chart svg circle[fill*="10, 10, 18"],
+    #chart svg circle:last-of-type {
+        fill: transparent !important;
+        stroke: #333333 !important;
+        stroke-width: 1px !important;
+    }
+
+    /* Líneas de casa - escala de grises */
+    #chart svg line {
+        stroke: #888888 !important;
+    }
+
+    /* Textos dentro del SVG - negro */
+    #chart svg text {
+        fill: #000000 !important;
+    }
+
+    /* Segmentos de signos - SIN RELLENO, solo borde */
+    #chart svg path {
+        fill: transparent !important;
+        stroke: #aaaaaa !important;
+        stroke-width: 0.5px !important;
+    }
+
+    /* Iconos de signos zodiacales - escala de grises */
+    #chart svg g path {
+        fill: #444444 !important;
+        stroke: none !important;
+    }
+
+    /* Fondo de grados - TRANSPARENTE sin borde */
+    #chart svg rect {
+        fill: transparent !important;
+        stroke: none !important;
+    }
+
+    /* Colores de planetas convertidos a escala de grises */
+    #chart svg text[fill="#FFD700"] { fill: #000000 !important; }
+    #chart svg text[fill="#C0C0C0"] { fill: #333333 !important; }
+    #chart svg text[fill="#87CEEB"] { fill: #444444 !important; }
+    #chart svg text[fill="#98FB98"] { fill: #555555 !important; }
+    #chart svg text[fill="#FF6347"] { fill: #222222 !important; }
+    #chart svg text[fill="#DEB887"] { fill: #444444 !important; }
+    #chart svg text[fill="#DAA520"] { fill: #333333 !important; }
+    #chart svg text[fill="#00CED1"] { fill: #555555 !important; }
+    #chart svg text[fill="#6495ED"] { fill: #444444 !important; }
+    #chart svg text[fill="#9370DB"] { fill: #333333 !important; }
+
+    /* Líneas de aspectos - escala de grises */
+    #chart svg line[stroke="#FFD700"] { stroke: #000000 !important; stroke-width: 1px !important; }
+    #chart svg line[stroke="#EF4444"] { stroke: #444444 !important; }
+    #chart svg line[stroke="#3B82F6"] { stroke: #777777 !important; }
+    #chart svg line[stroke="#22C55E"] { stroke: #999999 !important; }
+
+    /* Etiquetas AC, DC, MC, IC */
+    #chart svg text[fill="#d4af37"] {
+        fill: #000000 !important;
+        font-weight: bold !important;
+    }
+
+    /* ========================================
+       POSICIONES PLANETARIAS - SIN BORDES
+       ======================================== */
+    .planets-table,
+    .planets-grid {
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .planet-card {
+        background: transparent !important;
+        border: none !important;
+        padding: 8px !important;
+    }
+
+    .planet-card__symbol,
+    .planet-card__name,
+    .planet-card__position,
+    .planet-card__house {
+        border: none !important;
+    }
+
+    /* ========================================
+       BALANCE ENERGÉTICO
+       ======================================== */
+    .interpretations--balance,
+    #element-modality-container {
+        background: transparent !important;
+        border: 1px solid #bbbbbb !important;
+        border-radius: 6px !important;
+        padding: 16px !important;
+    }
+
+    .element-modality__section {
+        background: transparent !important;
+        background-color: transparent !important;
+        border: 1px solid #cccccc !important;
+        border-radius: 4px !important;
+        padding: 12px !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* ========================================
+       TU ESENCIA - SOL, LUNA, ASCENDENTE
+       ======================================== */
+    .interpretation-card {
+        background: transparent !important;
+        background-color: transparent !important;
+        border: 1px solid #cccccc !important;
+        border-radius: 6px !important;
+        padding: 16px !important;
+        margin-bottom: 16px !important;
+        page-break-inside: avoid !important;
+    }
+
+    .interpretation-card__header {
+        padding-bottom: 8px !important;
+        margin-bottom: 8px !important;
+        border-bottom: 1px solid #eeeeee !important;
+    }
+
+    .interpretation-card__text {
+        padding: 8px !important;
+    }
+
+    /* ========================================
+       PLANETAS EN LAS CASAS
+       ======================================== */
+    .interpretations--planets,
+    .planets-interpretations-grid {
+        background: transparent !important;
+    }
+
+    .planets-interpretations-grid .interpretation-card {
+        padding: 12px !important;
+    }
+
+    .planets-interpretations-grid .interpretation-card__text {
+        padding: 8px !important;
+    }
+
+    /* ========================================
+       ASPECTOS PLANETARIOS
+       ======================================== */
+    .interpretations--aspects,
+    .aspects-interpretations-grid {
+        background: transparent !important;
+    }
+
+    .aspects-interpretations-grid .interpretation-card {
+        padding: 12px !important;
+    }
+
+    .aspects-interpretations-grid .interpretation-card__text {
+        padding: 8px !important;
+    }
+
+    /* ========================================
+       CICLOS PERSONALES / BIORRITMOS
+       ======================================== */
+    .interpretations--biorhythms,
+    #biorhythms-container,
+    .biorhythms {
+        background: transparent !important;
+        border: 1px solid #bbbbbb !important;
+        border-radius: 6px !important;
+        padding: 16px !important;
+    }
+
+    .biorhythms__cycles {
+        background: transparent !important;
+    }
+
+    .biorhythm-cycle {
+        background: transparent !important;
+        background-color: transparent !important;
+        border: none !important;
+        padding: 12px 0 !important;
+        border-bottom: 1px solid #eeeeee !important;
+    }
+
+    .biorhythm-cycle:last-child {
+        border-bottom: none !important;
+    }
+
+    .biorhythm-cycle__header {
+        border: none !important;
+    }
+
+    .biorhythm-cycle__name,
+    .biorhythm-cycle__day,
+    .biorhythm-cycle__value {
+        border: none !important;
+    }
+
+    /* Mantener colores en indicadores de ciclos */
+    .biorhythm-cycle__trend,
+    .biorhythm-cycle__quality {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .biorhythm-cycle__bar,
+    .biorhythm-cycle__track,
+    .biorhythm-cycle__fill,
+    .biorhythm-cycle__marker {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Etiquetas ascenso/descenso sin bordes */
+    .biorhythm-cycle__trend,
+    .biorhythm-cycle__quality,
+    .biorhythm-cycle__marker {
+        border: none !important;
+    }
+
+    /* Análisis crítico sin borde extra */
+    .biorhythms__critical {
+        border: none !important;
+        padding: 8px 0 !important;
+    }
+
+    /* ========================================
+       CAJAS DE FILOSOFÍA / CITAS RA
+       ======================================== */
+    .biorhythms__philosophy,
+    .biorhythms__philosophy-quote {
+        background: transparent !important;
+        border: none !important;
+        padding: 12px !important;
+    }
+
+    .biorhythm-cycle__quote {
+        background: transparent !important;
+        border: none !important;
+        border-left: 2px solid #888888 !important;
+        padding-left: 12px !important;
+        color: #333333 !important;
+        font-style: italic !important;
+    }
+
+    /* Cita Ra más oscura para legibilidad */
+    .biorhythms__philosophy-quote,
+    blockquote {
+        color: #222222 !important;
+    }
+
+    /* ========================================
+       LINKS Y ELEMENTOS GENERALES
+       ======================================== */
+    a {
+        color: #000000 !important;
+        text-decoration: underline !important;
+    }
+
+    /* ========================================
+       SALTOS DE PÁGINA
+       ======================================== */
+    .results-section {
+        page-break-before: auto !important;
+    }
+
+    h2 {
+        page-break-after: avoid !important;
+    }
+
+    .planet-card,
+    .aspect-card,
+    .cycle-card,
+    .interpretation-card {
+        page-break-inside: avoid !important;
+    }
+
+    /* Ajuste de márgenes para impresión en carta */
+    @page {
+        size: letter;
+        margin: 1.5cm;
+    }
+}
