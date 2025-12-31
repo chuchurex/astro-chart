@@ -553,88 +553,167 @@ function renderChart(chartData) {
 }
 
 function renderSimpleChart(chartData) {
-    // Carta SVG simplificada con posiciones reales
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('viewBox', '0 0 400 400');
+    svg.setAttribute('viewBox', '0 0 500 500');
     svg.style.width = '100%';
     svg.style.height = '100%';
 
-    const cx = 200, cy = 200;
-    const outerR = 180, midR = 140, innerR = 100, centerR = 60;
+    const cx = 250, cy = 250;
+    const outerR = 230, signR = 200, houseR = 160, innerR = 120, centerR = 50;
 
-    // Círculo exterior
+    // Colores por elemento
+    const elementColors = {
+        fire: 'rgba(239, 68, 68, 0.15)',
+        earth: 'rgba(34, 197, 94, 0.15)',
+        air: 'rgba(59, 130, 246, 0.15)',
+        water: 'rgba(147, 51, 234, 0.15)'
+    };
+    const signElements = ['fire', 'earth', 'air', 'water', 'fire', 'earth', 'air', 'water', 'fire', 'earth', 'air', 'water'];
+
+    // Círculos base
     drawCircle(svg, cx, cy, outerR, '#d4af37', 2);
-    drawCircle(svg, cx, cy, midR, 'rgba(212, 175, 55, 0.4)', 1);
+    drawCircle(svg, cx, cy, signR, 'rgba(212, 175, 55, 0.5)', 1);
+    drawCircle(svg, cx, cy, houseR, 'rgba(212, 175, 55, 0.4)', 1);
     drawCircle(svg, cx, cy, innerR, 'rgba(212, 175, 55, 0.3)', 1);
     drawCircle(svg, cx, cy, centerR, 'rgba(212, 175, 55, 0.2)', 1);
 
-    // Signos del zodiaco
     const zodiacSymbols = ['♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'];
-
-    // Obtener offset del Ascendente (Casa 1)
     const ascOffset = chartData.cusps ? chartData.cusps[0] : 0;
 
-    // Divisiones de signos y símbolos
+    // Segmentos de signos con color de fondo (sentido antihorario)
     for (let i = 0; i < 12; i++) {
-        const signStart = (i * 30 - ascOffset - 90);
-        const angle = signStart * Math.PI / 180;
+        const startAngle = (ascOffset - i * 30 + 180) * Math.PI / 180;
+        const endAngle = (ascOffset - (i + 1) * 30 + 180) * Math.PI / 180;
 
-        // Línea divisoria
-        const x1 = cx + midR * Math.cos(angle);
-        const y1 = cy + midR * Math.sin(angle);
-        const x2 = cx + outerR * Math.cos(angle);
-        const y2 = cy + outerR * Math.sin(angle);
-        drawLine(svg, x1, y1, x2, y2, 'rgba(212, 175, 55, 0.5)', 1);
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const x1 = cx + signR * Math.cos(startAngle);
+        const y1 = cy + signR * Math.sin(startAngle);
+        const x2 = cx + outerR * Math.cos(startAngle);
+        const y2 = cy + outerR * Math.sin(startAngle);
+        const x3 = cx + outerR * Math.cos(endAngle);
+        const y3 = cy + outerR * Math.sin(endAngle);
+        const x4 = cx + signR * Math.cos(endAngle);
+        const y4 = cy + signR * Math.sin(endAngle);
+
+        path.setAttribute('d', `M ${x1} ${y1} L ${x2} ${y2} A ${outerR} ${outerR} 0 0 0 ${x3} ${y3} L ${x4} ${y4} A ${signR} ${signR} 0 0 1 ${x1} ${y1}`);
+        path.setAttribute('fill', elementColors[signElements[i]]);
+        path.setAttribute('stroke', 'rgba(212, 175, 55, 0.3)');
+        svg.appendChild(path);
 
         // Símbolo del signo
-        const symbolAngle = (signStart + 15) * Math.PI / 180;
-        const sx = cx + (midR + 20) * Math.cos(symbolAngle);
-        const sy = cy + (midR + 20) * Math.sin(symbolAngle);
-        drawText(svg, sx, sy, zodiacSymbols[i], '#8888a0', 14);
+        const symbolAngle = (ascOffset - i * 30 - 15 + 180) * Math.PI / 180;
+        const sx = cx + (signR + 15) * Math.cos(symbolAngle);
+        const sy = cy + (signR + 15) * Math.sin(symbolAngle);
+        drawText(svg, sx, sy, zodiacSymbols[i], '#a0a0b0', 13);
     }
 
-    // Dibujar casas si tenemos cúspides
+    // Casas con números (sentido antihorario)
     if (chartData.cusps && chartData.cusps.length === 12) {
         chartData.cusps.forEach((cusp, i) => {
-            const angle = (cusp - ascOffset - 90) * Math.PI / 180;
+            const angle = (ascOffset - cusp + 180) * Math.PI / 180;
+            const isCardinal = (i === 0 || i === 3 || i === 6 || i === 9);
+
             const x1 = cx + centerR * Math.cos(angle);
             const y1 = cy + centerR * Math.sin(angle);
-            const x2 = cx + midR * Math.cos(angle);
-            const y2 = cy + midR * Math.sin(angle);
+            const x2 = cx + (isCardinal ? signR : houseR) * Math.cos(angle);
+            const y2 = cy + (isCardinal ? signR : houseR) * Math.sin(angle);
+            drawLine(svg, x1, y1, x2, y2, isCardinal ? '#d4af37' : 'rgba(212, 175, 55, 0.4)', isCardinal ? 2 : 1);
 
-            const strokeWidth = (i === 0 || i === 3 || i === 6 || i === 9) ? 2 : 1;
-            const color = (i === 0 || i === 3 || i === 6 || i === 9) ? '#d4af37' : 'rgba(212, 175, 55, 0.4)';
-            drawLine(svg, x1, y1, x2, y2, color, strokeWidth);
+            // Número de casa
+            const nextCusp = chartData.cusps[(i + 1) % 12];
+            const midAngle = (cusp + (nextCusp > cusp ? nextCusp : nextCusp + 360)) / 2;
+            const numAngle = (ascOffset - midAngle + 180) * Math.PI / 180;
+            const numR = (houseR + innerR) / 2;
+            drawText(svg, cx + numR * Math.cos(numAngle), cy + numR * Math.sin(numAngle), String(i + 1), 'rgba(212, 175, 55, 0.6)', 11);
+        });
+
+        // Etiquetas AC, DC, MC, IC
+        [{ i: 0, l: 'AC' }, { i: 6, l: 'DC' }, { i: 9, l: 'MC' }, { i: 3, l: 'IC' }].forEach(axis => {
+            const angle = (ascOffset - chartData.cusps[axis.i] + 180) * Math.PI / 180;
+            drawText(svg, cx + (outerR + 15) * Math.cos(angle), cy + (outerR + 15) * Math.sin(angle), axis.l, '#d4af37', 11);
         });
     }
 
-    // Símbolos de planetas en sus posiciones reales
+    // Planetas
     const planetSymbols = {
         'Sol': '☉', 'Luna': '☽', 'Mercurio': '☿', 'Venus': '♀', 'Marte': '♂',
         'Júpiter': '♃', 'Saturno': '♄', 'Urano': '♅', 'Neptuno': '♆', 'Plutón': '♇'
     };
-
     const planetColors = {
         'Sol': '#FFD700', 'Luna': '#C0C0C0', 'Mercurio': '#87CEEB', 'Venus': '#98FB98',
         'Marte': '#FF6347', 'Júpiter': '#DEB887', 'Saturno': '#DAA520',
         'Urano': '#00CED1', 'Neptuno': '#6495ED', 'Plutón': '#9370DB'
     };
 
-    chartData.planets.forEach((planet, i) => {
-        const absPos = planet.abs_pos !== undefined ? planet.abs_pos : (i * 36);
-        const angle = (absPos - ascOffset - 90) * Math.PI / 180;
-        const radius = innerR - 15;
-        const x = cx + radius * Math.cos(angle);
-        const y = cy + radius * Math.sin(angle);
-
-        const symbol = planetSymbols[planet.name] || '★';
-        const color = planetColors[planet.name] || '#d4af37';
-        drawText(svg, x, y, symbol, color, 18);
+    // Posiciones ajustadas para evitar superposición
+    const positions = [];
+    chartData.planets.forEach((planet) => {
+        if (!planetSymbols[planet.name]) return;
+        let pos = planet.abs_pos !== undefined ? planet.abs_pos : 0;
+        for (let p of positions) {
+            const diff = Math.abs(pos - p.pos);
+            if (diff < 10 || diff > 350) pos += 10;
+        }
+        positions.push({ ...planet, pos });
     });
 
-    // Texto central
-    drawText(svg, cx, cy - 10, 'ASC', '#d4af37', 12);
-    drawText(svg, cx, cy + 10, chartData.ascendant, '#e8e8f0', 14);
+    positions.forEach((planet) => {
+        const angle = (ascOffset - planet.pos + 180) * Math.PI / 180;
+        const r = innerR - 25;
+        const x = cx + r * Math.cos(angle);
+        const y = cy + r * Math.sin(angle);
+
+        drawText(svg, x, y, planetSymbols[planet.name], planetColors[planet.name] || '#d4af37', 16);
+
+        // Grado
+        const deg = Math.floor(planet.abs_pos % 30);
+        drawText(svg, cx + (r - 14) * Math.cos(angle), cy + (r - 14) * Math.sin(angle), `${deg}°`, 'rgba(255,255,255,0.5)', 8);
+
+        // Retrógrado
+        if (planet.retrograde) {
+            drawText(svg, cx + (r + 12) * Math.cos(angle), cy + (r + 12) * Math.sin(angle), 'R', '#FF6347', 8);
+        }
+    });
+
+    // Líneas de aspectos (sentido antihorario)
+    if (chartData.aspects && chartData.aspects.length > 0) {
+        const aspectColors = { conjunction: '#FFD700', opposition: '#EF4444', trine: '#3B82F6', square: '#EF4444', sextile: '#22C55E' };
+        const aspectDash = { square: '4,4', sextile: '2,2' };
+        const planetPosMap = {};
+        chartData.planets.forEach(p => { if (p.abs_pos !== undefined) planetPosMap[p.name] = p.abs_pos; });
+
+        chartData.aspects.forEach(aspect => {
+            const pos1 = planetPosMap[aspect.planet1];
+            const pos2 = planetPosMap[aspect.planet2];
+            if (pos1 === undefined || pos2 === undefined) return;
+
+            const r = innerR - 30;
+            const a1 = (ascOffset - pos1 + 180) * Math.PI / 180;
+            const a2 = (ascOffset - pos2 + 180) * Math.PI / 180;
+
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', cx + r * Math.cos(a1));
+            line.setAttribute('y1', cy + r * Math.sin(a1));
+            line.setAttribute('x2', cx + r * Math.cos(a2));
+            line.setAttribute('y2', cy + r * Math.sin(a2));
+            line.setAttribute('stroke', aspectColors[aspect.aspect] || 'rgba(255,255,255,0.3)');
+            line.setAttribute('stroke-width', '1');
+            if (aspectDash[aspect.aspect]) line.setAttribute('stroke-dasharray', aspectDash[aspect.aspect]);
+            line.setAttribute('opacity', '0.5');
+            svg.appendChild(line);
+        });
+    }
+
+    // Centro
+    const centerBg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    centerBg.setAttribute('cx', cx);
+    centerBg.setAttribute('cy', cy);
+    centerBg.setAttribute('r', centerR);
+    centerBg.setAttribute('fill', 'rgba(10, 10, 18, 0.9)');
+    svg.appendChild(centerBg);
+
+    drawText(svg, cx, cy - 8, 'ASC', '#d4af37', 10);
+    drawText(svg, cx, cy + 10, chartData.ascendant, '#e8e8f0', 12);
 
     DOM.chart.appendChild(svg);
 }
