@@ -25,6 +25,9 @@ echo "🌐 Iniciando servidor local en http://localhost:3000"
 python3 -m http.server 3000 &
 SERVER_PID=$!
 
+# Abrir navegador después de un breve delay
+sleep 1 && open "http://localhost:3000" &
+
 echo ""
 echo "✅ Entorno de desarrollo listo!"
 echo "   - Servidor: http://localhost:3000"

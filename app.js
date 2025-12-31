@@ -190,6 +190,32 @@ function parseFlexibleTime(input) {
     return null;
 }
 
+/**
+ * Máscara automática para fecha DD/MM/YYYY
+ * El usuario solo escribe dígitos, las / se agregan solas
+ */
+function maskDate(value) {
+    let v = value.replace(/\D/g, '').slice(0, 8);
+    if (v.length >= 5) {
+        return `${v.slice(0, 2)}/${v.slice(2, 4)}/${v.slice(4)}`;
+    } else if (v.length >= 3) {
+        return `${v.slice(0, 2)}/${v.slice(2)}`;
+    }
+    return v;
+}
+
+/**
+ * Máscara automática para hora HH:MM
+ * El usuario solo escribe dígitos, el : se agrega solo
+ */
+function maskTime(value) {
+    let v = value.replace(/\D/g, '').slice(0, 4);
+    if (v.length >= 3) {
+        return `${v.slice(0, 2)}:${v.slice(2)}`;
+    }
+    return v;
+}
+
 // === GEOCODIFICACIÓN ===
 
 async function geocodeCity(city) {
@@ -1008,8 +1034,19 @@ async function handleCityChange(event) {
 // Formato: ?Nombre&YYYYMMDD&HH:MM&latitud&longitud
 function generateShareURL() {
     const name = encodeURIComponent(DOM.nameInput?.value || '');
-    const date = DOM.birthDate?.value?.replace(/-/g, '') || '';
-    const time = DOM.birthTime?.value || '12:00';
+
+    // Parsear fecha del input de texto y formatear como YYYYMMDD
+    const parsedDate = parseFlexibleDate(DOM.birthDate?.value);
+    const date = parsedDate
+        ? `${parsedDate.year}${String(parsedDate.month).padStart(2, '0')}${String(parsedDate.day).padStart(2, '0')}`
+        : '';
+
+    // Parsear hora del input de texto y formatear como HH:MM
+    const parsedTime = parseFlexibleTime(DOM.birthTime?.value);
+    const time = parsedTime
+        ? `${String(parsedTime.hour).padStart(2, '0')}:${String(parsedTime.minute).padStart(2, '0')}`
+        : '12:00';
+
     const lat = DOM.latitudeInput?.value || '-33.4489';
     const lon = DOM.longitudeInput?.value || '-70.6693';
 
@@ -1131,6 +1168,27 @@ async function init() {
     // Event listeners
     if (DOM.form) DOM.form.addEventListener('submit', handleFormSubmit);
     if (DOM.cityInput) DOM.cityInput.addEventListener('blur', handleCityChange);
+
+    // Máscaras automáticas para fecha y hora
+    if (DOM.birthDate) {
+        DOM.birthDate.addEventListener('input', (e) => {
+            const cursorPos = e.target.selectionStart;
+            const oldLen = e.target.value.length;
+            e.target.value = maskDate(e.target.value);
+            const newLen = e.target.value.length;
+            // Ajustar cursor si se agregaron caracteres
+            e.target.setSelectionRange(cursorPos + (newLen - oldLen), cursorPos + (newLen - oldLen));
+        });
+    }
+    if (DOM.birthTime) {
+        DOM.birthTime.addEventListener('input', (e) => {
+            const cursorPos = e.target.selectionStart;
+            const oldLen = e.target.value.length;
+            e.target.value = maskTime(e.target.value);
+            const newLen = e.target.value.length;
+            e.target.setSelectionRange(cursorPos + (newLen - oldLen), cursorPos + (newLen - oldLen));
+        });
+    }
 
     // Botón compartir
     const shareBtn = document.getElementById('share-btn');
