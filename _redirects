@@ -1,0 +1,7 @@
+# Cloudflare Pages Redirects
+
+# Redirect www to apex domain
+https://www.chuchurex.cl/* https://chuchurex.cl/:splat 301
+
+# SPA fallback (si en el futuro usas rutas client-side)
+# /*    /index.html   200

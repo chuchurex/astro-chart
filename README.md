@@ -11,15 +11,15 @@ Sistema para calcular cartas natales con interpretaciones astrológicas y ciclos
 │                                                              │
 │  Frontend (chuchurex.cl)          Backend (api.chuchurex.cl) │
 │  ┌──────────────────────┐        ┌──────────────────────┐   │
-│  │   BananaHosting      │        │   Vultr VPS          │   │
-│  │   50.31.188.162      │  API   │   64.176.12.233      │   │
+│  │   Cloudflare Pages   │        │   Vultr VPS          │   │
+│  │   (Auto-deploy)      │  API   │   64.176.12.233      │   │
 │  │                      │ ────── │                      │   │
 │  │   index.html         │        │   Docker + nginx     │   │
 │  │   styles.css         │        │   FastAPI + Kerykeion│   │
 │  │   app.js             │        │   Let's Encrypt SSL  │   │
 │  └──────────────────────┘        └──────────────────────┘   │
 │                                                              │
-│  DNS: Cloudflare                                             │
+│  CDN + DNS: Cloudflare                                       │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -50,11 +50,11 @@ astro.cl/
 
 ## Credenciales de Producción
 
-### Frontend - BananaHosting (FTP)
-- Servidor: `50.31.188.162`
-- Usuario: `hfnfzzyg`
-- Directorio: `/chuchurex.cl`
+### Frontend - Cloudflare Pages
 - URL: https://chuchurex.cl
+- URL Preview: https://chuchurex.pages.dev
+- Deploy: Automático en cada push a `main`
+- Dashboard: [Cloudflare Pages](https://dash.cloudflare.com/)
 
 ### Backend - Vultr VPS (SSH)
 - IP: `64.176.12.233`
@@ -63,29 +63,30 @@ astro.cl/
 - URL: https://api.chuchurex.cl
 
 ### DNS - Cloudflare
-- chuchurex.cl → BananaHosting
+- chuchurex.cl → Cloudflare Pages
 - api.chuchurex.cl → Vultr VPS (64.176.12.233)
 
 ## Deploy
 
-### Opción 1: Script unificado
+### Frontend (Automático)
+
+El frontend se despliega **automáticamente** con Cloudflare Pages en cada push a `main`:
+
 ```bash
-./deploy.sh          # Despliega frontend y backend
-./deploy.sh frontend # Solo frontend
-./deploy.sh backend  # Solo backend
+git add .
+git commit -m "feat: nueva funcionalidad"
+git push origin main
+# ✅ Deploy automático en ~30 segundos
 ```
 
-### Opción 2: Manual
+Preview de branches: Cada branch genera una URL de preview automática.
 
-**Frontend (FTP):**
-```bash
-curl -T index.html ftp://50.31.188.162/chuchurex.cl/ --user hfnfzzyg:PASSWORD
-curl -T styles.css ftp://50.31.188.162/chuchurex.cl/ --user hfnfzzyg:PASSWORD
-curl -T app.js ftp://50.31.188.162/chuchurex.cl/ --user hfnfzzyg:PASSWORD
-```
+### Backend (Manual)
 
-**Backend (SSH):**
 ```bash
+./deploy.sh backend  # Usa el script
+
+# O manualmente:
 ssh root@64.176.12.233
 cd /root/astro-chart
 git pull
@@ -93,6 +94,10 @@ docker build -t astro-api .
 docker stop astro-api && docker rm astro-api
 docker run -d --name astro-api -p 8001:8001 astro-api
 ```
+
+### Legacy: Deploy FTP (deprecado)
+
+El script `./deploy.sh frontend` aún funciona para FTP si es necesario.
 
 ## Desarrollo Local
 
