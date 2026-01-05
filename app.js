@@ -1208,7 +1208,12 @@ async function init() {
     if (DOM.latitudeInput) DOM.latitudeInput.value = '-33.4489';
     if (DOM.longitudeInput) DOM.longitudeInput.value = '-70.6693';
 
-    // Pre-llenar desde URL si hay parámetros
+    console.log('🌟 Astro Chart inicializado');
+
+    // Inicializar i18n primero
+    await i18n.init();
+
+    // Pre-llenar desde URL si hay parámetros (después de i18n)
     const filledFromURL = fillFormFromURL();
 
     // Si se llenó desde URL y tiene todos los datos, calcular automáticamente
@@ -1216,14 +1221,6 @@ async function init() {
         console.log('🚀 Calculando carta automáticamente desde URL...');
         setTimeout(() => DOM.form?.dispatchEvent(new Event('submit')), 500);
     }
-
-    console.log('🌟 Astro Chart inicializado');
-
-    // Inicializar i18n
-    await i18n.init();
-
-    // Pre-llenar desde URL si hay parámetros
-    fillFormFromURL();
 }
 
 // === SISTEMA DE INTERNACIONALIZACIÓN (i18n) ===
