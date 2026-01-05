@@ -1,15 +1,15 @@
-# Carta Astral - Sistema de Cartas Natales
+# Astrology Chart - Natal Chart System
 
-Sistema para calcular cartas natales con interpretaciones astrológicas y ciclos de biorritmos basados en las enseñanzas de Ra.
+Natal chart calculation system with astrological interpretations and biorhythm cycles based on Ra's teachings.
 
-## Arquitectura
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      PRODUCCIÓN                              │
+│                      PRODUCTION                              │
 ├─────────────────────────────────────────────────────────────┤
 │                                                              │
-│  Frontend (chuchurex.cl)          Backend (api.chuchurex.cl) │
+│  Frontend (astro.chuchurex.cl)    Backend (api.astro.chuchurex.cl) │
 │  ┌──────────────────────┐        ┌──────────────────────┐   │
 │  │   Cloudflare Pages   │        │   Vultr VPS          │   │
 │  │   (Auto-deploy)      │  API   │   64.176.12.233      │   │
@@ -23,70 +23,70 @@ Sistema para calcular cartas natales con interpretaciones astrológicas y ciclos
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## Estructura del Proyecto
+## Project Structure
 
 ```
 astro.cl/
 ├── Frontend
-│   ├── index.html              # Página principal
-│   ├── styles.css              # Estilos compilados
-│   ├── styles.scss             # Fuente SASS
-│   └── app.js                  # Lógica JavaScript
+│   ├── index.html              # Main page
+│   ├── styles.css              # Compiled styles
+│   ├── styles.scss             # SASS source
+│   └── app.js                  # JavaScript logic
 │
 ├── Backend
-│   ├── app.py                  # API FastAPI
-│   ├── interpretations.json    # Base de interpretaciones
-│   ├── requirements.txt        # Dependencias Python
-│   ├── Dockerfile              # Imagen Docker
-│   └── start.sh                # Script de inicio
+│   ├── app.py                  # FastAPI API
+│   ├── interpretations.json    # Interpretation database
+│   ├── requirements.txt        # Python dependencies
+│   ├── Dockerfile              # Docker image
+│   └── start.sh                # Start script
 │
 ├── Deploy
-│   ├── deploy.sh               # Script de publicación unificado
-│   └── .env                    # Credenciales (no en git)
+│   ├── deploy.sh               # Unified publish script
+│   └── .env                    # Credentials (not in git)
 │
 └── Docs
-    └── ra_astrology_complete_spec.md  # Especificación ciclos Ra
+    └── ra_astrology_complete_spec.md  # Ra cycles specification
 ```
 
-## Credenciales de Producción
+## Production Credentials
 
 ### Frontend - Cloudflare Pages
-- URL: https://chuchurex.cl
-- URL Preview: https://chuchurex.pages.dev
-- Deploy: Automático en cada push a `main`
+- URL: https://astro.chuchurex.cl
+- Preview URL: https://astro-chuchurex.pages.dev
+- Deploy: Automatic on every push to `main`
 - Dashboard: [Cloudflare Pages](https://dash.cloudflare.com/)
 
 ### Backend - Vultr VPS (SSH)
 - IP: `64.176.12.233`
-- Usuario: `root`
-- Ubicación: Santiago, Chile
-- URL: https://api.chuchurex.cl
+- User: `root`
+- Location: Santiago, Chile
+- URL: https://api.astro.chuchurex.cl
 
 ### DNS - Cloudflare
-- chuchurex.cl → Cloudflare Pages
-- api.chuchurex.cl → Vultr VPS (64.176.12.233)
+- astro.chuchurex.cl → Cloudflare Pages
+- api.astro.chuchurex.cl → Vultr VPS (64.176.12.233)
 
 ## Deploy
 
-### Frontend (Automático)
+### Frontend (Automatic)
 
-El frontend se despliega **automáticamente** con Cloudflare Pages en cada push a `main`:
+Frontend deploys **automatically** with Cloudflare Pages on every push to `main`:
 
 ```bash
 git add .
-git commit -m "feat: nueva funcionalidad"
+git commit -m "feat: new feature"
 git push origin main
-# ✅ Deploy automático en ~30 segundos
+# ✅ Automatic deploy in ~30 seconds
 ```
 
-Preview de branches: Cada branch genera una URL de preview automática.
+Branch previews: Each branch generates an automatic preview URL.
 
 ### Backend (Manual)
 
 ```bash
-./deploy.sh backend  # Usa el script
+./deploy.sh backend  # Use the script
 
-# O manualmente:
+# Or manually:
 ssh root@64.176.12.233
 cd /root/astro-chart
 git pull
@@ -95,11 +95,11 @@ docker stop astro-api && docker rm astro-api
 docker run -d --name astro-api -p 8001:8001 astro-api
 ```
 
-### Legacy: Deploy FTP (deprecado)
+### Legacy: FTP Deploy (deprecated)
 
-El script `./deploy.sh frontend` aún funciona para FTP si es necesario.
+The `./deploy.sh frontend` script still works for FTP if needed.
 
-## Desarrollo Local
+## Local Development
 
 ### Backend
 ```bash
@@ -111,30 +111,30 @@ uvicorn app:app --reload --port 8001
 
 ### Frontend
 ```bash
-# Servir con Python
+# Serve with Python
 python -m http.server 3000
 
-# Compilar SASS (si modificas styles.scss)
+# Compile SASS (if modifying styles.scss)
 sass styles.scss styles.css --watch
 ```
 
-### URLs de prueba
-- Frontend local: http://localhost:3000
-- Backend local: http://localhost:8001
-- Test rápido: http://localhost:3000?Carlos&19800822&00:00&-33.4489&-70.6693
+### Test URLs
+- Local frontend: http://localhost:3000
+- Local backend: http://localhost:8001
+- Quick test: http://localhost:3000?Carlos&19800822&00:00&-33.4489&-70.6693
 
 ## API Endpoints
 
-| Método | Endpoint | Descripción |
+| Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/` | Info de la API |
-| GET | `/health` | Estado del servidor |
-| GET | `/signs` | Lista de signos |
-| GET | `/planets` | Lista de planetas |
-| POST | `/chart` | Calcular carta natal |
-| GET | `/chart/example` | Carta de ejemplo |
+| GET | `/` | API info |
+| GET | `/health` | Server status |
+| GET | `/signs` | Sign list |
+| GET | `/planets` | Planet list |
+| POST | `/chart` | Calculate natal chart |
+| GET | `/chart/example` | Example chart |
 
-### Ejemplo POST /chart
+### POST /chart Example
 ```json
 {
     "name": "Carlos",
@@ -149,17 +149,17 @@ sass styles.scss styles.css --watch
 }
 ```
 
-## Funcionalidades
+## Features
 
-- Carta natal con posiciones planetarias precisas (Swiss Ephemeris)
-- Gráfico SVG de la carta natal con símbolos Unicode
-- Interpretaciones personalizadas por planeta, signo y casa
-- Ciclos de biorritmos (Físico, Emocional, Intelectual, Adepto/Espiritual)
-- Enseñanzas de Ra correlacionadas con la carta
-- URL con parámetros para pre-llenar formulario
+- Natal chart with precise planetary positions (Swiss Ephemeris)
+- SVG natal chart graphic with Unicode symbols
+- Personalized interpretations by planet, sign and house
+- Biorhythm cycles (Physical, Emotional, Intellectual, Adept/Spiritual)
+- Ra teachings correlated with chart
+- URL with parameters to pre-fill form
 
-## Stack Tecnológico
+## Tech Stack
 
-- **Frontend**: HTML5, CSS3 (SASS), JavaScript vanilla
+- **Frontend**: HTML5, CSS3 (SASS), Vanilla JavaScript
 - **Backend**: Python 3.11, FastAPI, Kerykeion (Swiss Ephemeris)
-- **Infraestructura**: Docker, nginx, Let's Encrypt, Cloudflare
+- **Infrastructure**: Docker, nginx, Let's Encrypt, Cloudflare

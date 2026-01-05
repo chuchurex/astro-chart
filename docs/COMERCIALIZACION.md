@@ -1,107 +1,107 @@
-# Análisis de Comercialización - astro.cl
+# Commercialization Analysis - astro.cl
 
-*Guardado: 30 Diciembre 2025*
+*Saved: December 30, 2025*
 
-## Estado Actual del Proyecto
+## Current Project Status
 
-**astro.cl** es un MVP funcional con:
-- ~5,900 líneas de código
-- Backend Python (FastAPI + Kerykeion/Swiss Ephemeris)
-- Frontend vanilla JS con diseño responsive
-- Soporte i18n (EN/ES/PT)
-- Cálculos precisos de carta natal + biorritmos Ra
-- Desplegado en producción
-
----
-
-## Opciones de Comercialización
-
-### Opción 1: SaaS para Astrólogos (B2B)
-**Modelo:** Suscripción mensual para astrólogos profesionales
-
-**Qué falta desarrollar:**
-- Sistema de usuarios/autenticación
-- Dashboard personalizado (logo, colores, dominio propio)
-- Exportación PDF con marca del astrólogo
-- Base de datos para guardar cartas de clientes
-- Panel de administración
-
-**Precio sugerido:** $15-50 USD/mes
-**Mercado:** Astrólogos independientes, escuelas de astrología
-**Ventaja:** Recurrente, escalable
+**astro.cl** is a functional MVP with:
+- ~5,900 lines of code
+- Python backend (FastAPI + Kerykeion/Swiss Ephemeris)
+- Vanilla JS frontend with responsive design
+- i18n support (EN/ES/PT)
+- Accurate natal chart + Ra biorhythm calculations
+- Deployed in production
 
 ---
 
-### Opción 2: Plugin WordPress
-**Modelo:** Venta única + soporte premium
+## Commercialization Options
 
-**Qué falta desarrollar:**
-- Wrapper PHP para WordPress
+### Option 1: SaaS for Astrologers (B2B)
+**Model:** Monthly subscription for professional astrologers
+
+**What needs to be developed:**
+- User/authentication system
+- Personalized dashboard (logo, colors, own domain)
+- PDF export with astrologer's brand
+- Database to save client charts
+- Admin panel
+
+**Suggested price:** $15-50 USD/month
+**Market:** Independent astrologers, astrology schools
+**Advantage:** Recurring, scalable
+
+---
+
+### Option 2: WordPress Plugin
+**Model:** One-time sale + premium support
+
+**What needs to be developed:**
+- PHP wrapper for WordPress
 - Shortcodes [carta_natal]
-- Widget de sidebar
-- Panel de configuración WP
-- API embebida o llamada al backend existente
+- Sidebar widget
+- WP configuration panel
+- Embedded API or call to existing backend
 
-**Precio sugerido:** $49-99 USD (licencia única)
-**Mercado:** Sitios de astrología, blogs esotéricos
-**Ventaja:** Mercado masivo de WordPress
-
----
-
-### Opción 3: White-label / Licencia
-**Modelo:** Vender el código completo a empresas
-
-**Qué falta desarrollar:**
-- Documentación técnica completa
-- Guía de instalación
-- Personalización de marca
-- Soporte técnico (opcional)
-
-**Precio sugerido:** $500-2,000 USD por licencia
-**Mercado:** Apps de bienestar, plataformas esotéricas
-**Ventaja:** Ingreso alto por venta
+**Suggested price:** $49-99 USD (single license)
+**Market:** Astrology sites, esoteric blogs
+**Advantage:** Massive WordPress market
 
 ---
 
-### Opción 4: API as a Service
-**Modelo:** Cobrar por llamada a la API
+### Option 3: White-label / License
+**Model:** Sell complete code to companies
 
-**Qué falta desarrollar:**
-- Sistema de API keys
-- Rate limiting y quotas
-- Dashboard de uso
-- Documentación OpenAPI
-- Billing/facturación
+**What needs to be developed:**
+- Complete technical documentation
+- Installation guide
+- Brand customization
+- Technical support (optional)
 
-**Precio sugerido:** $0.01-0.05 USD por cálculo
-**Mercado:** Desarrolladores, apps móviles
-**Ventaja:** Muy escalable
-
----
-
-### Opción 5: Freemium con Premium
-**Modelo:** App gratuita + features de pago
-
-**Features premium posibles:**
-- Tránsitos y progresiones
-- Sinastría (compatibilidad)
-- Reportes PDF descargables
-- Cartas ilimitadas guardadas
-- Sin publicidad
-
-**Precio sugerido:** $5-10 USD/mes o $50/año
-**Mercado:** Usuarios finales interesados en astrología
-**Ventaja:** Base de usuarios grande
+**Suggested price:** $500-2,000 USD per license
+**Market:** Wellness apps, esoteric platforms
+**Advantage:** High income per sale
 
 ---
 
-## Recomendación de Implementación
+### Option 4: API as a Service
+**Model:** Charge per API call
 
-### Corto plazo (1-2 semanas):
-→ **API as a Service** - Solo necesitas autenticación y documentación
+**What needs to be developed:**
+- API key system
+- Rate limiting and quotas
+- Usage dashboard
+- OpenAPI documentation
+- Billing/invoicing
 
-### Mediano plazo (1-2 meses):
-→ **Plugin WordPress** - Mercado masivo, una vez desarrollado es pasivo
+**Suggested price:** $0.01-0.05 USD per calculation
+**Market:** Developers, mobile apps
+**Advantage:** Very scalable
 
-### Largo plazo (3-6 meses):
-→ **SaaS para Astrólogos** - Mayor valor, recurrente
+---
+
+### Option 5: Freemium with Premium
+**Model:** Free app + paid features
+
+**Possible premium features:**
+- Transits and progressions
+- Synastry (compatibility)
+- Downloadable PDF reports
+- Unlimited saved charts
+- No ads
+
+**Suggested price:** $5-10 USD/month or $50/year
+**Market:** End users interested in astrology
+**Advantage:** Large user base
+
+---
+
+## Implementation Recommendation
+
+### Short term (1-2 weeks):
+→ **API as a Service** - Only need authentication and documentation
+
+### Medium term (1-2 months):
+→ **WordPress Plugin** - Massive market, once developed it's passive
+
+### Long term (3-6 months):
+→ **SaaS for Astrologers** - Higher value, recurring

@@ -3,6 +3,7 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-XSS-Protection: 1; mode=block
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com; font-src 'self'; connect-src 'self' https://api.astro.chuchurex.cl https://nominatim.openstreetmap.org https://www.google-analytics.com; frame-ancestors 'none'
 
 /styles.css
   Cache-Control: public, max-age=31536000, immutable
@@ -15,3 +16,6 @@
 
 /styles/*
   Cache-Control: public, max-age=31536000, immutable
+
+/interpretations.json
+  Cache-Control: public, max-age=86400

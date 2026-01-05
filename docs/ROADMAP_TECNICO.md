@@ -1,179 +1,179 @@
-# Roadmap Técnico: De MVP a Producción Robusta
+# Technical Roadmap: From MVP to Robust Production
 
-*Creado: 30 Diciembre 2025*
+*Created: December 30, 2025*
 
-## Estado Actual (MVP)
+## Current State (MVP)
 
-### Lo que funciona bien:
-- ✅ Cálculos astronómicos precisos (Kerykeion/Swiss Ephemeris)
-- ✅ API REST funcional (FastAPI)
-- ✅ Frontend responsive con buen diseño
-- ✅ Sistema i18n (EN/ES/PT)
-- ✅ Biorritmos con enseñanzas de Ra
-- ✅ Deploy automatizado (frontend FTP + backend Docker)
-- ✅ SSL/HTTPS en ambos dominios
+### What works well:
+- ✅ Precise astronomical calculations (Kerykeion/Swiss Ephemeris)
+- ✅ Functional REST API (FastAPI)
+- ✅ Responsive frontend with good design
+- ✅ i18n system (EN/ES/PT)
+- ✅ Biorhythms with Ra teachings
+- ✅ Automated deployment (frontend FTP + backend Docker)
+- ✅ SSL/HTTPS on both domains
 
-### Deuda técnica identificada:
-- ❌ Sin tests automatizados
-- ❌ Credenciales en texto plano (deploy.sh, .env)
-- ❌ CORS permite cualquier origen (*)
-- ❌ Sin logging estructurado
-- ❌ Sin monitoreo/alertas
-- ❌ Sin caché (recalcula todo cada request)
-- ❌ JavaScript en un solo archivo (1,100+ líneas)
-- ❌ Biblioteca astrochart importada pero no usada
+### Identified technical debt:
+- ❌ No automated tests
+- ❌ Credentials in plain text (deploy.sh, .env)
+- ❌ CORS allows any origin (*)
+- ❌ No structured logging
+- ❌ No monitoring/alerts
+- ❌ No caching (recalculates everything each request)
+- ❌ JavaScript in single file (1,100+ lines)
+- ❌ astrochart library imported but not used
 
 ---
 
-## FASE 1: Seguridad y Estabilidad (Prioridad Alta)
+## PHASE 1: Security and Stability (High Priority)
 
-### 1.1 Gestión de Secretos
+### 1.1 Secrets Management
 ```
-Tareas:
-- [ ] Mover credenciales FTP a variables de entorno del sistema
-- [ ] Mover password VPS a SSH keys (eliminar sshpass)
-- [ ] Crear archivo .env.example sin valores reales
-- [ ] Agregar .env a .gitignore (verificar que no esté commiteado)
-- [ ] Usar secrets de GitHub Actions para CI/CD futuro
+Tasks:
+- [ ] Move FTP credentials to system environment variables
+- [ ] Move VPS password to SSH keys (remove sshpass)
+- [ ] Create .env.example file without real values
+- [ ] Add .env to .gitignore (verify it's not committed)
+- [ ] Use GitHub Actions secrets for future CI/CD
 ```
 
-### 1.2 Seguridad de API
+### 1.2 API Security
 ```
-Tareas:
-- [ ] Configurar CORS con whitelist de orígenes permitidos
+Tasks:
+- [ ] Configure CORS with whitelist of allowed origins
   - https://chuchurex.cl
   - https://www.chuchurex.cl
-  - http://localhost:3000 (desarrollo)
-- [ ] Agregar rate limiting (slowapi o similar)
-  - 100 requests/minuto por IP
-  - 10 requests/minuto para /chart
-- [ ] Validar y sanitizar inputs más estrictamente
-- [ ] Agregar headers de seguridad (X-Content-Type-Options, etc.)
+  - http://localhost:3000 (development)
+- [ ] Add rate limiting (slowapi or similar)
+  - 100 requests/minute per IP
+  - 10 requests/minute for /chart
+- [ ] Validate and sanitize inputs more strictly
+- [ ] Add security headers (X-Content-Type-Options, etc.)
 ```
 
-### 1.3 Logging y Monitoreo
+### 1.3 Logging and Monitoring
 ```
-Tareas:
-- [ ] Implementar logging estructurado (loguru o structlog)
-  - Nivel INFO para requests exitosos
-  - Nivel ERROR para excepciones
-  - Incluir request_id para trazabilidad
-- [ ] Agregar endpoint /metrics para Prometheus (opcional)
-- [ ] Configurar alertas básicas (uptime check externo)
-- [ ] Guardar logs en archivo rotativo
+Tasks:
+- [ ] Implement structured logging (loguru or structlog)
+  - INFO level for successful requests
+  - ERROR level for exceptions
+  - Include request_id for traceability
+- [ ] Add /metrics endpoint for Prometheus (optional)
+- [ ] Configure basic alerts (external uptime check)
+- [ ] Save logs to rotating file
 ```
 
 ---
 
-## FASE 2: Testing (Prioridad Alta)
+## PHASE 2: Testing (High Priority)
 
-### 2.1 Tests Unitarios Backend
+### 2.1 Backend Unit Tests
 ```python
 # tests/test_calculations.py
-Tareas:
-- [ ] Test cálculo de signo solar (12 casos)
-- [ ] Test cálculo de signo lunar
-- [ ] Test cálculo de ascendente
-- [ ] Test biorritmos (días específicos conocidos)
-- [ ] Test ciclo espiritual Ra (8 calidades)
-- [ ] Test distribución elementos/modalidades
+Tasks:
+- [ ] Test solar sign calculation (12 cases)
+- [ ] Test lunar sign calculation
+- [ ] Test ascendant calculation
+- [ ] Test biorhythms (known specific days)
+- [ ] Test Ra spiritual cycle (8 qualities)
+- [ ] Test elements/modalities distribution
 
-Herramientas: pytest, pytest-cov
-Meta: 80% cobertura en cálculos
+Tools: pytest, pytest-cov
+Goal: 80% coverage on calculations
 ```
 
-### 2.2 Tests de Integración API
+### 2.2 API Integration Tests
 ```python
 # tests/test_api.py
-Tareas:
+Tasks:
 - [ ] Test GET /health
 - [ ] Test GET /signs
 - [ ] Test GET /planets
-- [ ] Test POST /chart con datos válidos
-- [ ] Test POST /chart con datos inválidos
-- [ ] Test manejo de errores
+- [ ] Test POST /chart with valid data
+- [ ] Test POST /chart with invalid data
+- [ ] Test error handling
 
-Herramientas: pytest, httpx (TestClient)
+Tools: pytest, httpx (TestClient)
 ```
 
-### 2.3 Tests Frontend
+### 2.3 Frontend Tests
 ```javascript
 // tests/app.test.js
-Tareas:
-- [ ] Test geocodificación (mock Nominatim)
-- [ ] Test generación de hash URL
-- [ ] Test decodificación de hash URL
-- [ ] Test renderizado de biorritmos
-- [ ] Test sistema i18n
+Tasks:
+- [ ] Test geocoding (mock Nominatim)
+- [ ] Test URL hash generation
+- [ ] Test URL hash decoding
+- [ ] Test biorhythm rendering
+- [ ] Test i18n system
 
-Herramientas: Jest o Vitest
+Tools: Jest or Vitest
 ```
 
 ---
 
-## FASE 3: Performance y Caché (Prioridad Media)
+## PHASE 3: Performance and Caching (Medium Priority)
 
-### 3.1 Caché de Cálculos
+### 3.1 Calculation Caching
 ```
-Tareas:
-- [ ] Implementar caché en memoria para cartas recientes
-  - Key: hash de (fecha, hora, lat, lon)
-  - TTL: 1 hora
-  - Máximo: 1000 entradas
-- [ ] Cachear biorritmos por fecha de nacimiento
-  - Los biorritmos solo cambian 1 vez al día
-- [ ] Considerar Redis para caché distribuido (futuro)
-```
-
-### 3.2 Optimización Frontend
-```
-Tareas:
-- [ ] Remover astrochart.min.js si no se usa
-- [ ] Minificar app.js y styles.css para producción
-- [ ] Agregar lazy loading para secciones ocultas
-- [ ] Optimizar animación de estrellas (reduce repaint)
-- [ ] Comprimir assets con gzip en servidor
+Tasks:
+- [ ] Implement in-memory cache for recent charts
+  - Key: hash of (date, time, lat, lon)
+  - TTL: 1 hour
+  - Maximum: 1000 entries
+- [ ] Cache biorhythms by birth date
+  - Biorhythms only change once per day
+- [ ] Consider Redis for distributed cache (future)
 ```
 
-### 3.3 Optimización de Red
+### 3.2 Frontend Optimization
 ```
-Tareas:
-- [ ] Agregar headers de caché para assets estáticos
-  - CSS/JS: max-age=31536000 (1 año) con versionado
+Tasks:
+- [ ] Remove astrochart.min.js if not used
+- [ ] Minify app.js and styles.css for production
+- [ ] Add lazy loading for hidden sections
+- [ ] Optimize star animation (reduce repaint)
+- [ ] Compress assets with gzip on server
+```
+
+### 3.3 Network Optimization
+```
+Tasks:
+- [ ] Add cache headers for static assets
+  - CSS/JS: max-age=31536000 (1 year) with versioning
   - HTML: no-cache
-- [ ] Configurar CDN para assets (Cloudflare ya está)
-- [ ] Preload de fuentes críticas
+- [ ] Configure CDN for assets (Cloudflare already in place)
+- [ ] Preload critical fonts
 ```
 
 ---
 
-## FASE 4: Refactoring de Código (Prioridad Media)
+## PHASE 4: Code Refactoring (Medium Priority)
 
-### 4.1 Modularización JavaScript
+### 4.1 JavaScript Modularization
 ```
-Estructura propuesta:
+Proposed structure:
 src/
 ├── js/
-│   ├── main.js           # Punto de entrada
-│   ├── config.js         # Configuración
-│   ├── api.js            # Llamadas al backend
+│   ├── main.js           # Entry point
+│   ├── config.js         # Configuration
+│   ├── api.js            # Backend calls
 │   ├── geocoding.js      # Nominatim
-│   ├── chart.js          # Renderizado SVG
-│   ├── biorhythms.js     # Renderizado biorritmos
-│   ├── i18n.js           # Internacionalización
-│   ├── share.js          # Hash y compartir
-│   └── dom.js            # Elementos DOM
+│   ├── chart.js          # SVG rendering
+│   ├── biorhythms.js     # Biorhythm rendering
+│   ├── i18n.js           # Internationalization
+│   ├── share.js          # Hash and sharing
+│   └── dom.js            # DOM elements
 
-Tareas:
-- [ ] Separar en módulos ES6
-- [ ] Usar import/export
-- [ ] Configurar bundler (esbuild, rollup o vite)
-- [ ] Generar app.bundle.js para producción
+Tasks:
+- [ ] Separate into ES6 modules
+- [ ] Use import/export
+- [ ] Configure bundler (esbuild, rollup, or vite)
+- [ ] Generate app.bundle.js for production
 ```
 
-### 4.2 Mejoras Backend
+### 4.2 Backend Improvements
 ```python
-Estructura propuesta:
+Proposed structure:
 app/
 ├── __init__.py
 ├── main.py               # FastAPI app
@@ -185,162 +185,162 @@ app/
 │   └── health.py         # /health
 ├── services/
 │   ├── astrology.py      # Kerykeion wrapper
-│   ├── biorhythms.py     # Cálculos Ra
+│   ├── biorhythms.py     # Ra calculations
 │   └── interpretations.py
 └── utils/
     ├── cache.py
     └── logging.py
 
-Tareas:
-- [ ] Separar en módulos
-- [ ] Extraer lógica de cálculos a services/
-- [ ] Usar pydantic-settings para configuración
-- [ ] Agregar type hints completos
+Tasks:
+- [ ] Separate into modules
+- [ ] Extract calculation logic to services/
+- [ ] Use pydantic-settings for configuration
+- [ ] Add complete type hints
 ```
 
-### 4.3 Limpieza General
+### 4.3 General Cleanup
 ```
-Tareas:
-- [ ] Eliminar código comentado
-- [ ] Eliminar console.log de debug en producción
-- [ ] Unificar estilos de código (prettier/black)
-- [ ] Documentar funciones principales con docstrings
+Tasks:
+- [ ] Remove commented code
+- [ ] Remove debug console.log from production
+- [ ] Unify code style (prettier/black)
+- [ ] Document main functions with docstrings
 ```
 
 ---
 
-## FASE 5: Mejoras de UX/UI (Prioridad Media)
+## PHASE 5: UX/UI Improvements (Medium Priority)
 
-### 5.1 Carta SVG Mejorada
+### 5.1 Improved SVG Chart
 ```
-Tareas:
-- [ ] Agregar líneas de aspectos (trígono, oposición, etc.)
-- [ ] Evitar superposición de planetas (clustering)
-- [ ] Mostrar grados junto a planetas
-- [ ] Agregar tooltips interactivos (hover)
-- [ ] Opción de zoom/pan en móvil
+Tasks:
+- [ ] Add aspect lines (trine, opposition, etc.)
+- [ ] Prevent planet overlap (clustering)
+- [ ] Show degrees next to planets
+- [ ] Add interactive tooltips (hover)
+- [ ] Zoom/pan option on mobile
 ```
 
-### 5.2 Accesibilidad
+### 5.2 Accessibility
 ```
-Tareas:
-- [ ] Agregar aria-labels a elementos interactivos
-- [ ] Mejorar navegación por teclado
-- [ ] Agregar skip-to-content link
-- [ ] Verificar contraste de colores (WCAG AA)
-- [ ] Agregar alt text a elementos visuales
+Tasks:
+- [ ] Add aria-labels to interactive elements
+- [ ] Improve keyboard navigation
+- [ ] Add skip-to-content link
+- [ ] Verify color contrast (WCAG AA)
+- [ ] Add alt text to visual elements
 ```
 
 ### 5.3 PWA (Progressive Web App)
 ```
-Tareas:
-- [ ] Crear manifest.json
-- [ ] Agregar service worker básico
-- [ ] Iconos para instalación
-- [ ] Permitir uso offline (caché de última carta)
+Tasks:
+- [ ] Create manifest.json
+- [ ] Add basic service worker
+- [ ] Icons for installation
+- [ ] Allow offline usage (cache last chart)
 ```
 
 ---
 
-## FASE 6: DevOps y CI/CD (Prioridad Baja)
+## PHASE 6: DevOps and CI/CD (Low Priority)
 
 ### 6.1 GitHub Actions
 ```yaml
 # .github/workflows/ci.yml
-Tareas:
-- [ ] Lint en cada PR (flake8, eslint)
-- [ ] Tests automatizados en cada PR
-- [ ] Build de Docker en merge a main
-- [ ] Deploy automático a staging (opcional)
+Tasks:
+- [ ] Lint on each PR (flake8, eslint)
+- [ ] Automated tests on each PR
+- [ ] Docker build on merge to main
+- [ ] Automatic deploy to staging (optional)
 ```
 
-### 6.2 Dockerfile Optimizado
+### 6.2 Optimized Dockerfile
 ```dockerfile
-Tareas:
-- [ ] Multi-stage build para reducir tamaño
-- [ ] Health check en Dockerfile
+Tasks:
+- [ ] Multi-stage build to reduce size
+- [ ] Health check in Dockerfile
 - [ ] Non-root user
-- [ ] Cachear dependencias de pip
+- [ ] Cache pip dependencies
 ```
 
-### 6.3 Monitoreo en Producción
+### 6.3 Production Monitoring
 ```
-Tareas:
-- [ ] Configurar UptimeRobot o similar
-- [ ] Dashboard de métricas básicas
-- [ ] Alertas por email/Telegram en errores
+Tasks:
+- [ ] Configure UptimeRobot or similar
+- [ ] Basic metrics dashboard
+- [ ] Alerts via email/Telegram on errors
 ```
 
 ---
 
-## Orden de Implementación Sugerido
+## Suggested Implementation Order
 
-### Sprint 1 (Semana 1-2): Seguridad
-1. Mover secretos a variables de entorno
-2. Configurar SSH keys para VPS
-3. Implementar CORS con whitelist
-4. Agregar rate limiting básico
+### Sprint 1 (Week 1-2): Security
+1. Move secrets to environment variables
+2. Configure SSH keys for VPS
+3. Implement CORS with whitelist
+4. Add basic rate limiting
 
-### Sprint 2 (Semana 3-4): Testing
+### Sprint 2 (Week 3-4): Testing
 1. Setup pytest
-2. Tests unitarios de cálculos
-3. Tests de API
-4. Configurar coverage report
+2. Unit tests for calculations
+3. API tests
+4. Configure coverage report
 
-### Sprint 3 (Semana 5-6): Performance
-1. Implementar caché en memoria
-2. Remover código no usado
-3. Minificar assets
-4. Optimizar headers de caché
+### Sprint 3 (Week 5-6): Performance
+1. Implement in-memory cache
+2. Remove unused code
+3. Minify assets
+4. Optimize cache headers
 
-### Sprint 4 (Semana 7-8): Refactoring
-1. Modularizar JavaScript
-2. Separar backend en módulos
-3. Agregar logging estructurado
-4. Documentación de código
+### Sprint 4 (Week 7-8): Refactoring
+1. Modularize JavaScript
+2. Separate backend into modules
+3. Add structured logging
+4. Code documentation
 
-### Sprint 5 (Semana 9-10): UX
-1. Mejorar carta SVG
-2. Agregar aspectos visuales
-3. Mejoras de accesibilidad
-4. PWA básico
+### Sprint 5 (Week 9-10): UX
+1. Improve SVG chart
+2. Add visual aspects
+3. Accessibility improvements
+4. Basic PWA
 
 ---
 
-## Métricas de Éxito
+## Success Metrics
 
-| Métrica | Actual | Meta |
-|---------|--------|------|
+| Metric | Current | Target |
+|--------|---------|--------|
 | Test coverage | 0% | 80% |
-| Tiempo de respuesta /chart | ~500ms | <300ms |
+| /chart response time | ~500ms | <300ms |
 | Lighthouse Performance | ~70 | >90 |
 | Lighthouse Accessibility | ~80 | >95 |
-| Uptime mensual | ? | 99.5% |
-| Errores 5xx/día | ? | <5 |
+| Monthly uptime | ? | 99.5% |
+| 5xx errors/day | ? | <5 |
 
 ---
 
-## Notas Técnicas
+## Technical Notes
 
-### Dependencias a Considerar
+### Dependencies to Consider
 ```
 Backend:
 - slowapi (rate limiting)
 - loguru (logging)
 - pytest + pytest-cov (testing)
-- pydantic-settings (configuración)
+- pydantic-settings (configuration)
 
 Frontend:
-- esbuild o vite (bundling)
-- jest o vitest (testing)
+- esbuild or vite (bundling)
+- jest or vitest (testing)
 ```
 
-### Compatibilidad
+### Compatibility
 - Python: 3.12+
-- Node: 18+ (para herramientas de build)
+- Node: 18+ (for build tools)
 - Browsers: Chrome 90+, Firefox 90+, Safari 14+
 
-### Documentación Relacionada
+### Related Documentation
 - [FastAPI Best Practices](https://fastapi.tiangolo.com/tutorial/)
 - [Kerykeion Docs](https://github.com/g-battaglia/kerykeion)
 - [Swiss Ephemeris](https://www.astro.com/swisseph/)

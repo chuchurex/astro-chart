@@ -1,147 +1,147 @@
-# Análisis de Carta de Prueba
+# Test Chart Analysis
 
-**URL de prueba**: https://chuchurex.cl/#eyJuYW1lIjoiVGVzdCIsInllYXIiOjE5ODUsIm1vbnRoIjozLCJkYXkiOjE1LCJob3VyIjoxNCwibWludXRlIjozMCwibGF0IjotMzMuNDUsImxuZyI6LTcwLjY3fQ==
+**Test URL**: https://chuchurex.cl/#eyJuYW1lIjoiVGVzdCIsInllYXIiOjE5ODUsIm1vbnRoIjozLCJkYXkiOjE1LCJob3VyIjoxNCwibWludXRlIjozMCwibGF0IjotMzMuNDUsImxuZyI6LTcwLjY3fQ==
 
-**Datos de nacimiento**: 15 de Marzo de 1985, 14:30, Santiago de Chile
-
----
-
-## 1. Ejes Principales (Las 4 líneas más gruesas)
-
-| Eje | Posición en carta | Signo | Grado |
-|-----|-------------------|-------|-------|
-| **AC** (Ascendente) | Izquierda (9:00) | ♋ Cáncer | 93° |
-| **DC** (Descendente) | Derecha (3:00) | ♑ Capricornio | 273° |
-| **MC** (Medio Cielo) | Arriba (12:00) | ♈ Aries | 21° |
-| **IC** (Fondo Cielo) | Abajo (6:00) | ♎ Libra | 201° |
+**Birth Data**: March 15, 1985, 14:30, Santiago, Chile
 
 ---
 
-## 2. Planetas en la Carta
+## 1. Main Axes (The 4 Thickest Lines)
 
-| Símbolo | Planeta | Color | Signo | Grado° | Casa | Retrógrado |
-|---------|---------|-------|-------|--------|------|------------|
-| ☉ | Sol | Amarillo | ♓ Piscis | 25° | 9 | No |
-| ☽ | Luna | Plateado | ♑ Capricornio | 20° | 7 | No |
-| ☿ | Mercurio | Celeste | ♈ Aries | 13° | 9 | No |
-| ♀ | Venus | Verde claro | ♈ Aries | 22° | 10 | **Sí (R)** |
-| ♂ | Marte | Rojo tomate | ♉ Tauro | 0° | 10 | No |
-| ♃ | Júpiter | Beige | ♒ Acuario | 7° | 7 | No |
-| ♄ | Saturno | Dorado oscuro | ♏ Escorpio | 28° | 5 | **Sí (R)** |
-| ♅ | Urano | Turquesa | ♐ Sagitario | 17° | 6 | No |
-| ♆ | Neptuno | Azul acero | ♑ Capricornio | 3° | 7 | No |
-| ♇ | Plutón | Violeta | ♏ Escorpio | 4° | 4 | **Sí (R)** |
-
-### Cómo ubicarlos:
-- El **grado°** junto al símbolo indica la posición dentro del signo (0-29°)
-- Una **R roja** junto al planeta indica que está retrógrado
-- Los planetas se ubican en el anillo interior, cerca del centro
+| Axis | Position in chart | Sign | Degree |
+|------|-------------------|------|--------|
+| **AC** (Ascendant) | Left (9:00) | ♋ Cancer | 93° |
+| **DC** (Descendant) | Right (3:00) | ♑ Capricorn | 273° |
+| **MC** (Midheaven) | Top (12:00) | ♈ Aries | 21° |
+| **IC** (Imum Coeli) | Bottom (6:00) | ♎ Libra | 201° |
 
 ---
 
-## 3. Casas (Números 1-12)
+## 2. Planets in the Chart
 
-Las casas se numeran en sentido **antihorario** desde el Ascendente:
+| Symbol | Planet | Color | Sign | Degree° | House | Retrograde |
+|--------|--------|-------|------|---------|-------|-----------|
+| ☉ | Sun | Yellow | ♓ Pisces | 25° | 9 | No |
+| ☽ | Moon | Silver | ♑ Capricorn | 20° | 7 | No |
+| ☿ | Mercury | Sky Blue | ♈ Aries | 13° | 9 | No |
+| ♀ | Venus | Light Green | ♈ Aries | 22° | 10 | **Yes (R)** |
+| ♂ | Mars | Tomato Red | ♉ Taurus | 0° | 10 | No |
+| ♃ | Jupiter | Beige | ♒ Aquarius | 7° | 7 | No |
+| ♄ | Saturn | Dark Gold | ♏ Scorpio | 28° | 5 | **Yes (R)** |
+| ♅ | Uranus | Turquoise | ♐ Sagittarius | 17° | 6 | No |
+| ♆ | Neptune | Steel Blue | ♑ Capricorn | 3° | 7 | No |
+| ♇ | Pluto | Violet | ♏ Scorpio | 4° | 4 | **Yes (R)** |
 
-| Casa | Signo en cúspide | Grado | Planetas en esta casa |
-|------|------------------|-------|----------------------|
-| 1 | ♋ Cáncer | 93° | - |
+### How to locate them:
+- The **degree°** next to the symbol indicates the position within the sign (0-29°)
+- A red **R** next to the planet indicates that it is retrograde
+- Planets are located in the inner ring, near the center
+
+---
+
+## 3. Houses (Numbers 1-12)
+
+Houses are numbered in **counterclockwise** direction from the Ascendant:
+
+| House | Sign on cusp | Degree | Planets in this house |
+|-------|--------------|--------|----------------------|
+| 1 | ♋ Cancer | 93° | - |
 | 2 | ♌ Leo | 129° | - |
 | 3 | ♍ Virgo | 168° | - |
-| 4 | ♎ Libra | 201° | ♇ Plutón |
-| 5 | ♏ Escorpio | 228° | ♄ Saturno |
-| 6 | ♐ Sagitario | 251° | ♅ Urano |
-| 7 | ♑ Capricornio | 273° | ☽ Luna, ♃ Júpiter, ♆ Neptuno |
-| 8 | ♒ Acuario | 309° | - |
-| 9 | ♓ Piscis | 348° | ☉ Sol, ☿ Mercurio |
-| 10 | ♈ Aries | 21° | ♀ Venus, ♂ Marte |
-| 11 | ♉ Tauro | 48° | - |
-| 12 | ♊ Géminis | 71° | - |
+| 4 | ♎ Libra | 201° | ♇ Pluto |
+| 5 | ♏ Scorpio | 228° | ♄ Saturn |
+| 6 | ♐ Sagittarius | 251° | ♅ Uranus |
+| 7 | ♑ Capricorn | 273° | ☽ Moon, ♃ Jupiter, ♆ Neptune |
+| 8 | ♒ Aquarius | 309° | - |
+| 9 | ♓ Pisces | 348° | ☉ Sun, ☿ Mercury |
+| 10 | ♈ Aries | 21° | ♀ Venus, ♂ Mars |
+| 11 | ♉ Taurus | 48° | - |
+| 12 | ♊ Gemini | 71° | - |
 
 ---
 
-## 4. Aspectos (Líneas entre planetas)
+## 4. Aspects (Lines between Planets)
 
-### Líneas Azules Sólidas (Trígonos - 120° - Armonía)
-| Planeta 1 | Planeta 2 | Significado |
-|-----------|-----------|-------------|
-| ☉ Sol | ♄ Saturno | Vitalidad equilibrada con disciplina |
-| ☿ Mercurio | ♅ Urano | Mente original e intuitiva |
-| ♀ Venus | ♅ Urano | Amor por lo diferente y único |
-| ♂ Marte | ♆ Neptuno | Acción inspirada espiritualmente |
+### Solid Blue Lines (Trines - 120° - Harmony)
+| Planet 1 | Planet 2 | Meaning |
+|----------|----------|---------|
+| ☉ Sun | ♄ Saturn | Balanced vitality with discipline |
+| ☿ Mercury | ♅ Uranus | Original and intuitive mind |
+| ♀ Venus | ♅ Uranus | Love for the different and unique |
+| ♂ Mars | ♆ Neptune | Spiritually inspired action |
 
-### Líneas Rojas Sólidas (Oposiciones - 180° - Tensión)
-| Planeta 1 | Planeta 2 | Significado |
-|-----------|-----------|-------------|
-| ♂ Marte | ♇ Plutón | Luchas de poder intensas |
+### Solid Red Lines (Oppositions - 180° - Tension)
+| Planet 1 | Planet 2 | Meaning |
+|----------|----------|---------|
+| ♂ Mars | ♇ Pluto | Intense power struggles |
 
-### Líneas Rojas Punteadas (Cuadraturas - 90° - Desafío)
-| Planeta 1 | Planeta 2 | Significado |
-|-----------|-----------|-------------|
-| ☽ Luna | ♀ Venus | Conflicto emociones vs deseos |
-| ♃ Júpiter | ♇ Plutón | Ambición intensa, aprender ética del poder |
+### Dotted Red Lines (Squares - 90° - Challenge)
+| Planet 1 | Planet 2 | Meaning |
+|----------|----------|---------|
+| ☽ Moon | ♀ Venus | Conflict between emotions and desires |
+| ♃ Jupiter | ♇ Pluto | Intense ambition, learning the ethics of power |
 
-### Líneas Verdes Punteadas (Sextiles - 60° - Oportunidad)
-| Planeta 1 | Planeta 2 | Significado |
-|-----------|-----------|-------------|
-| ☉ Sol | ☽ Luna | Armonía identidad-emociones |
-| ☿ Mercurio | ♃ Júpiter | Expansión intelectual |
-| ♆ Neptuno | ♇ Plutón | Espiritualidad transformadora |
+### Dotted Green Lines (Sextiles - 60° - Opportunity)
+| Planet 1 | Planet 2 | Meaning |
+|----------|----------|---------|
+| ☉ Sun | ☽ Moon | Harmony between identity and emotions |
+| ☿ Mercury | ♃ Jupiter | Intellectual expansion |
+| ♆ Neptune | ♇ Pluto | Transformative spirituality |
 
-### Líneas Doradas (Conjunciones - 0° - Fusión)
-| Planeta 1 | Planeta 2 | Significado |
-|-----------|-----------|-------------|
-| ☿ Mercurio | ♀ Venus | Comunicación elegante y diplomática |
-| ♀ Venus | ♂ Marte | Naturaleza apasionada y magnética |
-
----
-
-## 5. Colores de Fondo (Elementos)
-
-Los segmentos del anillo exterior tienen colores según el elemento:
-
-| Color | Elemento | Signos | Características |
-|-------|----------|--------|-----------------|
-| Rojo tenue | Fuego | ♈ ♌ ♐ | Energía, acción, pasión |
-| Verde tenue | Tierra | ♉ ♍ ♑ | Practicidad, estabilidad |
-| Azul tenue | Aire | ♊ ♎ ♒ | Intelecto, comunicación |
-| Morado tenue | Agua | ♋ ♏ ♓ | Emociones, intuición |
+### Golden Lines (Conjunctions - 0° - Fusion)
+| Planet 1 | Planet 2 | Meaning |
+|----------|----------|---------|
+| ☿ Mercury | ♀ Venus | Elegant and diplomatic communication |
+| ♀ Venus | ♂ Mars | Passionate and magnetic nature |
 
 ---
 
-## 6. Resumen de la Carta
+## 5. Background Colors (Elements)
 
-### Trilogía Principal
-- **Sol en Piscis**: Esencia compasiva, imaginativa, espiritual
-- **Luna en Capricornio**: Emociones estructuradas, necesidad de logro
-- **Ascendente en Cáncer**: Apariencia sensible, protectora, acogedora
+The segments of the outer ring have colors according to the element:
 
-### Elemento Dominante
-**Agua (37%)** - Naturaleza emocional, intuitiva, profundamente sensible
-
-### Modalidad Dominante
-**Cardinal (54%)** - Iniciador natural, pone las cosas en movimiento
-
-### Planetas Retrógrados
-- **Venus R** en Casa 10: Revisión de valores en la carrera
-- **Saturno R** en Casa 5: Maduración de la expresión creativa
-- **Plutón R** en Casa 4: Transformación interna de raíces familiares
+| Color | Element | Signs | Characteristics |
+|-------|---------|-------|-----------------|
+| Subtle Red | Fire | ♈ ♌ ♐ | Energy, action, passion |
+| Subtle Green | Earth | ♉ ♍ ♑ | Practicality, stability |
+| Subtle Blue | Air | ♊ ♎ ♒ | Intellect, communication |
+| Subtle Purple | Water | ♋ ♏ ♓ | Emotions, intuition |
 
 ---
 
-## 7. Checklist Visual
+## 6. Chart Summary
 
-Usa esta lista para verificar que todo se muestra correctamente:
+### Main Trilogy
+- **Sun in Pisces**: Compassionate, imaginative, spiritual essence
+- **Moon in Capricorn**: Structured emotions, need for achievement
+- **Ascendant in Cancer**: Sensitive, protective, welcoming appearance
 
-- [ ] AC está a la izquierda (9:00)
-- [ ] Las casas avanzan en sentido antihorario (1→2→3...)
-- [ ] Los números de casa (1-12) son visibles
-- [ ] MC está arriba, IC está abajo
-- [ ] Los símbolos del zodíaco (♈♉♊...) están en el anillo exterior
-- [ ] Los colores de elemento son visibles (rojo, verde, azul, morado)
-- [ ] Los planetas tienen sus símbolos y colores correctos
-- [ ] Los grados (°) aparecen junto a los planetas
-- [ ] Venus, Saturno y Plutón muestran "R" (retrógrado)
-- [ ] Las líneas de aspectos conectan los planetas
-- [ ] Las líneas tienen los colores correctos (azul, rojo, verde, dorado)
-- [ ] Las cuadraturas y sextiles son líneas punteadas
+### Dominant Element
+**Water (37%)** - Emotional, intuitive, deeply sensitive nature
+
+### Dominant Modality
+**Cardinal (54%)** - Natural initiator, sets things in motion
+
+### Retrograde Planets
+- **Venus R** in House 10: Revision of values in career
+- **Saturn R** in House 5: Maturation of creative expression
+- **Pluto R** in House 4: Internal transformation of family roots
+
+---
+
+## 7. Visual Checklist
+
+Use this list to verify that everything is displayed correctly:
+
+- [ ] AC is on the left (9:00)
+- [ ] Houses advance in counterclockwise direction (1→2→3...)
+- [ ] House numbers (1-12) are visible
+- [ ] MC is at the top, IC is at the bottom
+- [ ] Zodiac symbols (♈♉♊...) are in the outer ring
+- [ ] Element colors are visible (red, green, blue, purple)
+- [ ] Planets have their correct symbols and colors
+- [ ] Degrees (°) appear next to planets
+- [ ] Venus, Saturn, and Pluto show "R" (retrograde)
+- [ ] Aspect lines connect the planets
+- [ ] Lines have the correct colors (blue, red, green, gold)
+- [ ] Squares and sextiles are dotted lines

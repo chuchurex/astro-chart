@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación Completa - Chuchurex Astral</title>
+    <style>
+        @page {
+            margin: 2cm;
+            size: A4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            line-height: 1.6;
+            color: #000;
+            background: #fff;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #1a1a1a;
+            border-bottom: 3px solid #333;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            page-break-after: avoid;
+        }
+
+        h2 {
+            color: #2a2a2a;
+            border-bottom: 2px solid #666;
+            padding-bottom: 8px;
+            margin-top: 30px;
+            page-break-after: avoid;
+        }
+
+        h3 {
+            color: #3a3a3a;
+            margin-top: 20px;
+            page-break-after: avoid;
+        }
+
+        h4 {
+            color: #4a4a4a;
+            margin-top: 15px;
+            page-break-after: avoid;
+        }
+
+        pre, code {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: "Courier New", monospace;
+            font-size: 11px;
+        }
+
+        pre {
+            padding: 15px;
+            overflow-x: auto;
+            page-break-inside: avoid;
+        }
+
+        code {
+            padding: 2px 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 30px;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        blockquote {
+            border-left: 4px solid #666;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #f9f9f9;
+            font-style: italic;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .header h1 {
+            margin: 0;
+            border: none;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            color: #666;
+        }
+
+        .toc {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 30px 0;
+            page-break-inside: avoid;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border: none;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .badge-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .section-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+
+            .no-print {
+                display: none;
+            }
+
+            a {
+                color: #000;
+                text-decoration: none;
+            }
+
+            a[href^="http"]:after {
+                content: " (" attr(href) ")";
+                font-size: 10px;
+                color: #666;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Documentación Completa del Proyecto</h1>
+        <h2>Chuchurex Astral</h2>
+        <p>Aplicación Web de Cartas Natales Astrológicas</p>
+        <p><strong>Generado el:</strong> 31 de diciembre de 2025</p>
+        <p><strong>URLs:</strong> <a href="https://chuchurex.cl">chuchurex.cl</a> | <a href="https://api.chuchurex.cl">api.chuchurex.cl</a></p>
+    </div>
+
+    <button class="no-print" onclick="window.print()" style="position: fixed; top: 20px; right: 20px; padding: 10px 20px; background: #333; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">
+        Imprimir / Guardar como PDF
+    </button>
+
+    <div class="toc">
+        <h2>Tabla de Contenidos</h2>
+        <ul>
+            <li><a href="#resumen">1. Resumen Ejecutivo</a></li>
+            <li><a href="#arquitectura">2. Arquitectura del Sistema</a></li>
+            <li><a href="#stack">3. Stack Tecnológico</a>
+                <ul>
+                    <li><a href="#frontend">3.1 Frontend</a></li>
+                    <li><a href="#backend">3.2 Backend</a></li>
+                </ul>
+            </li>
+            <li><a href="#estructura">4. Estructura de Archivos</a></li>
+            <li><a href="#funcionalidades">5. Funcionalidades Implementadas</a></li>
+            <li><a href="#frontend-detalle">6. Frontend - Detalle Técnico</a></li>
+            <li><a href="#backend-detalle">7. Backend - Detalle Técnico</a></li>
+            <li><a href="#i18n">8. Sistema de Internacionalización</a></li>
+            <li><a href="#interpretaciones">9. Sistema de Interpretaciones</a></li>
+            <li><a href="#biorritmos">10. Biorritmos y Enseñanzas de Ra</a></li>
+            <li><a href="#deploy">11. Infraestructura y Deployment</a></li>
+            <li><a href="#api">12. API Endpoints</a></li>
+            <li><a href="#desarrollo">13. Desarrollo Local</a></li>
+            <li><a href="#pendiente">14. Tareas Pendientes</a></li>
+            <li><a href="#estadisticas">15. Estadísticas del Proyecto</a></li>
+        </ul>
+    </div>
+
+    <div id="resumen" class="section-break">
+        <h1>1. Resumen Ejecutivo</h1>
+
+        <p><strong>Chuchurex Astral</strong> es una aplicación web completa para el cálculo e interpretación de cartas natales astrológicas con ciclos de biorritmos basados en las enseñanzas de Ra (Material de la Ley del Uno).</p>
+
+        <h3>Características Principales</h3>
+        <ul>
+            <li><span class="badge badge-success">✓</span> Cálculos astronómicos de precisión con Swiss Ephemeris</li>
+            <li><span class="badge badge-success">✓</span> 10 planetas y 12 casas astrológicas</li>
+            <li><span class="badge badge-success">✓</span> 290+ interpretaciones personalizadas en español</li>
+            <li><span class="badge badge-success">✓</span> 4 ciclos de biorritmos (incluido Ciclo Espiritual de 18 días)</li>
+            <li><span class="badge badge-success">✓</span> Soporte multilenguaje (inglés, español, portugués)</li>
+            <li><span class="badge badge-success">✓</span> Accesibilidad WCAG AAA (contraste 7:1)</li>
+            <li><span class="badge badge-success">✓</span> Gráfico SVG interactivo de la carta natal</li>
+            <li><span class="badge badge-success">✓</span> Exportación a PDF</li>
+        </ul>
+
+        <h3>URLs de Producción</h3>
+        <ul>
+            <li><strong>Frontend:</strong> <a href="https://chuchurex.cl">https://chuchurex.cl</a></li>
+            <li><strong>API Backend:</strong> <a href="https://api.chuchurex.cl">https://api.chuchurex.cl</a></li>
+            <li><strong>Repositorio:</strong> <a href="https://github.com/chuchurex/astro-chart">https://github.com/chuchurex/astro-chart</a></li>
+        </ul>
+
+        <blockquote>
+            <p>"Tu carta natal es un mapa, no un destino. El mapa no camina el camino por ti."</p>
+            <footer>— Enseñanzas de Ra</footer>
+        </blockquote>
+    </div>
+
+    <div id="arquitectura">
+        <h1>2. Arquitectura del Sistema</h1>
+
+        <pre>
+Frontend (chuchurex.cl)              Backend (api.chuchurex.cl)
+┌──────────────────────┐             ┌──────────────────────┐
+│   BananaHosting      │   HTTPS     │   Vultr VPS Chile    │
+│   50.31.188.162      │ ─────────── │   64.176.12.233      │
+│                      │             │                      │
+│   HTML + CSS + JS    │             │   Docker + nginx     │
+│   (static files)     │             │   FastAPI + Kerykeion│
+└──────────────────────┘             └──────────────────────┘
+         │                                     │
+         └───────── Cloudflare DNS ────────────┘
+        </pre>
+
+        <h3>Componentes Principales</h3>
+        <table>
+            <tr>
+                <th>Componente</th>
+                <th>Tecnología</th>
+                <th>Ubicación</th>
+                <th>Función</th>
+            </tr>
+            <tr>
+                <td>Frontend</td>
+                <td>HTML5 + CSS3 + JavaScript</td>
+                <td>BananaHosting (50.31.188.162)</td>
+                <td>Interfaz de usuario, entrada de datos, visualización</td>
+            </tr>
+            <tr>
+                <td>Backend API</td>
+                <td>FastAPI + Python 3.14</td>
+                <td>Vultr VPS (64.176.12.233)</td>
+                <td>Cálculos astronómicos, interpretaciones</td>
+            </tr>
+            <tr>
+                <td>Motor Astronómico</td>
+                <td>Kerykeion + Swiss Ephemeris</td>
+                <td>Backend</td>
+                <td>Cálculos precisos de posiciones planetarias</td>
+            </tr>
+            <tr>
+                <td>DNS</td>
+                <td>Cloudflare</td>
+                <td>Global</td>
+                <td>Enrutamiento, SSL/TLS</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="stack">
+        <h1>3. Stack Tecnológico</h1>
+
+        <h2 id="frontend">3.1 Frontend</h2>
+
+        <h3>HTML5</h3>
+        <ul>
+            <li>Semántica accesible (skip links, ARIA roles)</li>
+            <li>Open Graph meta tags para compartir en redes sociales</li>
+            <li>Google Analytics (GA ID: G-T0KJ3RVZ08)</li>
+            <li>Favicon SVG personalizado (símbolo solar ☉)</li>
+        </ul>
+
+        <h3>CSS3 / SASS</h3>
+        <ul>
+            <li>Arquitectura modular con 12 archivos SCSS parciales</li>
+            <li>Tema oscuro celestial (fondo #0a0a12)</li>
+            <li>Paleta dorada/azul (#d4af37 / #7a9cbf)</li>
+            <li>Tipografía: Cinzel (display) + Cormorant Garamond (body)</li>
+            <li>Sistema de diseño con variables (tokens)</li>
+            <li>Responsive mobile-first</li>
+            <li>Animaciones CSS (campo estelar animado)</li>
+            <li>Print stylesheet para exportación PDF</li>
+        </ul>
+
+        <h3>JavaScript Vanilla</h3>
+        <ul>
+            <li>1,368 líneas de código modular</li>
+            <li>Sin frameworks ni dependencias (excepto AstroDraw para gráficos)</li>
+            <li>40+ funciones organizadas por responsabilidad</li>
+            <li>Sistema i18n propio basado en atributos HTML</li>
+            <li>Parseo flexible de fechas (múltiples formatos)</li>
+            <li>Máscaras automáticas en inputs</li>
+            <li>Geocodificación con OpenStreetMap</li>
+        </ul>
+
+        <h3>Dependencias Externas</h3>
+        <ul>
+            <li><strong>AstroDraw:</strong> Visualización de gráficos astrológicos (v3.0.2)</li>
+            <li><strong>Google Fonts:</strong> Cinzel + Cormorant Garamond</li>
+            <li><strong>Nominatim API:</strong> Geocodificación de ciudades</li>
+        </ul>
+
+        <h2 id="backend">3.2 Backend</h2>
+
+        <h3>Python 3.14</h3>
+        <ul>
+            <li>FastAPI framework (v0.104.0+)</li>
+            <li>Uvicorn ASGI server (v0.24.0+)</li>
+            <li>Pydantic para validación de datos (v2.0.0+)</li>
+            <li>Kerykeion para cálculos astronómicos (v4.0.0+)</li>
+        </ul>
+
+        <h3>Características del Backend</h3>
+        <ul>
+            <li>903 líneas de código Python</li>
+            <li>Rate limiting: 60 requests/minuto por IP</li>
+            <li>Caché LRU (10,000 entradas) para cálculos repetidos</li>
+            <li>Compresión GZip (reduce ~70% el tamaño de respuestas)</li>
+            <li>CORS configurado para dominios específicos</li>
+            <li>Middleware stack modular</li>
+        </ul>
+
+        <h3>Swiss Ephemeris</h3>
+        <ul>
+            <li>Motor de cálculo astronómico de alta precisión</li>
+            <li>Usado por astrólogos profesionales</li>
+            <li>Precisión de arco-segundo</li>
+            <li>Integrado vía biblioteca Kerykeion</li>
+        </ul>
+    </div>
+
+    <div id="estructura" class="section-break">
+        <h1>4. Estructura de Archivos</h1>
+
+        <pre>
+astro.cl/
+├── index.html              # Página principal (13.5 KB)
+├── app.js                  # Lógica frontend (52 KB, 1,368 líneas)
+├── app.py                  # API FastAPI (36 KB, 903 líneas)
+├── styles.css              # CSS compilado (64 KB, 1,365 líneas)
+├── styles.scss             # Fuente SASS (24 KB)
+├── interpretations.json    # 290+ interpretaciones (48 KB)
+│
+├── about/
+│   └── index.html          # Página "Acerca de"
+│
+├── i18n/
+│   ├── en.json             # Traducciones inglés (3.7 KB)
+│   ├── es.json             # Traducciones español (3.6 KB)
+│   └── pt.json             # Traducciones portugués (3.5 KB)
+│
+├── scss/                   # Módulos SASS
+│   ├── main.scss           # Punto de entrada
+│   ├── _variables.scss     # Tokens de diseño
+│   ├── _base.scss          # Estilos base
+│   ├── _header.scss        # Cabecera
+│   ├── _form.scss          # Formularios
+│   ├── _buttons.scss       # Botones
+│   ├── _results.scss       # Sección de resultados
+│   ├── _responsive.scss    # Media queries
+│   ├── _loader.scss        # Animación de carga
+│   ├── _stars.scss         # Campo estelar animado
+│   ├── _footer.scss        # Pie de página
+│   └── _about.scss         # Página "Acerca de"
+│
+├── styles/
+│   └── print.css           # Estilos para impresión/PDF
+│
+├── docs/                   # Documentación adicional
+│   ├── ROADMAP_TECNICO.md
+│   ├── COMERCIALIZACION.md
+│   ├── CARTA_NATAL_GUIA.md
+│   └── CARTA_TEST_ANALISIS.md
+│
+├── deploy.sh               # Script de deploy unificado (4.6 KB)
+├── dev.sh                  # Script de desarrollo
+├── requirements.txt        # Dependencias Python
+├── Dockerfile              # Configuración Docker
+├── .env                    # Credenciales (NO en git)
+├── .gitignore              # Archivos excluidos de git
+│
+├── CLAUDE.md               # Contexto del proyecto
+├── README.md               # Documentación principal
+├── PLAN_ACCESIBILIDAD_AAA.md  # Roadmap de accesibilidad
+├── PROGRESO.md             # Estado del proyecto
+├── TAREA_i18n.md           # Notas de i18n
+└── ra_astrology_complete_spec.md  # Especificación Ra
+        </pre>
+    </div>
+
+    <div id="funcionalidades">
+        <h1>5. Funcionalidades Implementadas</h1>
+
+        <h2>Carta Natal</h2>
+        <table>
+            <tr>
+                <th>Funcionalidad</th>
+                <th>Estado</th>
+                <th>Detalles</th>
+            </tr>
+            <tr>
+                <td>10 Planetas</td>
+                <td><span class="badge badge-success">Implementado</span></td>
+                <td>Sol, Luna, Mercurio, Venus, Marte, Júpiter, Saturno, Urano, Neptuno, Plutón</td>
+            </tr>
+            <tr>
+                <td>12 Casas</td>
+                <td><span class="badge badge-success">Implementado</span></td>
+                <td>Cúspides calculadas con precisión</td>
+            </tr>
+            <tr>
+                <td>Ascendente</td>
+                <td><span class="badge badge-success">Implementado</span></td>
+                <td>Cálculo exacto basado en hora y ubicación</td>
+            </tr>
+            <tr>
+                <td>Aspectos</td>
+                <td><span class="badge badge-success">Implementado</span></td>
+                <td>Conjunción ☌, Oposición ☍, Cuadratura □, Trígono △, Sextil ⚹</td>
+            </tr>
+            <tr>
+                <td>Gráfico SVG</td>
+                <td><span class="badge badge-success">Implementado</span></td>
+                <td>Visualización interactiva de la carta</td>
+            </tr>
+            <tr>
+                <td>Elementos</td>
+                <td><span class="badge badge-success">Implementado</span></td>
+                <td>Distribución Fuego/Tierra/Aire/Agua con ponderación</td>
+            </tr>
+            <tr>
+                <td>Modalidades</td>
+                <td><span class="badge badge-success">Implementado</span></td>
+                <td>Cardinal/Fijo/Mutable con análisis</td>
+            </tr>
+        </table>
+
+        <h2>Interpretaciones</h2>
+        <table>
+            <tr>
+                <th>Categoría</th>
+                <th>Cantidad</th>
+                <th>Idioma</th>
+            </tr>
+            <tr>
+                <td>Sol en signos</td>
+                <td>12</td>
+                <td>Español</td>
+            </tr>
+            <tr>
+                <td>Luna en signos</td>
+                <td>12</td>
+                <td>Español</td>
+            </tr>
+            <tr>
+                <td>Ascendentes</td>
+                <td>12</td>
+                <td>Español</td>
+            </tr>
+            <tr>
+                <td>Planetas en casas</td>
+                <td>120</td>
+                <td>Español</td>
+            </tr>
+            <tr>
+                <td>Aspectos</td>
+                <td>130+</td>
+                <td>Español</td>
+            </tr>
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>290+</strong></td>
+                <td><strong>Español</strong></td>
+            </tr>
+        </table>
+
+        <h2>Biorritmos (Enseñanzas de Ra)</h2>
+        <table>
+            <tr>
+                <th>Ciclo</th>
+                <th>Duración</th>
+                <th>Descripción</th>
+            </tr>
+            <tr>
+                <td>Físico</td>
+                <td>23 días</td>
+                <td>Energía vital, salud, resistencia</td>
+            </tr>
+            <tr>
+                <td>Emocional</td>
+                <td>28 días</td>
+                <td>Estado anímico, sensibilidad, creatividad</td>
+            </tr>
+            <tr>
+                <td>Intelectual</td>
+                <td>33 días</td>
+                <td>Claridad mental, lógica, memoria</td>
+            </tr>
+            <tr>
+                <td>Espiritual/Adepto</td>
+                <td>18 días</td>
+                <td>Conexión espiritual, meditación, trabajos energéticos<br>
+                <strong>Días óptimos:</strong> 4, 5 y 6<br>
+                <strong>Días críticos:</strong> 1, 9-10, 18</td>
+            </tr>
+        </table>
+
+        <h2>UX y Accesibilidad</h2>
+        <ul>
+            <li><span class="badge badge-success">✓</span> Geocodificación automática de ciudades</li>
+            <li><span class="badge badge-success">✓</span> Parseo flexible de fechas (DD/MM/YYYY, "15 marzo 1985", etc.)</li>
+            <li><span class="badge badge-success">✓</span> Máscaras automáticas en inputs de fecha/hora</li>
+            <li><span class="badge badge-success">✓</span> URL compartible con parámetros</li>
+            <li><span class="badge badge-success">✓</span> Skip links para navegación por teclado</li>
+            <li><span class="badge badge-success">✓</span> ARIA roles y atributos</li>
+            <li><span class="badge badge-success">✓</span> Contraste de color 7:1 (WCAG AAA)</li>
+            <li><span class="badge badge-success">✓</span> Estilos de impresión optimizados</li>
+            <li><span class="badge badge-success">✓</span> Responsive mobile-first</li>
+        </ul>
+    </div>
+
+    <div id="frontend-detalle" class="section-break">
+        <h1>6. Frontend - Detalle Técnico</h1>
+
+        <h2>app.js - Módulos Principales</h2>
+
+        <h3>1. Configuración y Constantes</h3>
+        <pre>
+const CONFIG = {
+    API_URL: window.location.hostname === 'localhost'
+        ? 'http://localhost:8001'
+        : 'https://api.chuchurex.cl',
+    NOMINATIM_URL: 'https://nominatim.openstreetmap.org/search'
+};
+
+const PLANET_SYMBOLS = {
+    'Sol': '☉', 'Luna': '☽', 'Mercurio': '☿', 'Venus': '♀',
+    'Marte': '♂', 'Júpiter': '♃', 'Saturno': '♄',
+    'Urano': '♅', 'Neptuno': '♆', 'Plutón': '♇'
+};
+        </pre>
+
+        <h3>2. Parseo de Fechas (Flexible)</h3>
+        <p>Acepta múltiples formatos:</p>
+        <ul>
+            <li>DD/MM/YYYY (estándar)</li>
+            <li>DD-MM-YYYY</li>
+            <li>"15 marzo 1985" (lenguaje natural)</li>
+            <li>"15 de marzo de 1985"</li>
+            <li>Nombres de meses en español, inglés y portugués</li>
+        </ul>
+
+        <h3>3. Geocodificación Automática</h3>
+        <pre>
+async function geocodeCity(cityName) {
+    const response = await fetch(
+        `${CONFIG.NOMINATIM_URL}?city=${encodeURIComponent(cityName)}&format=json`
+    );
+    const data = await response.json();
+    if (data.length > 0) {
+        return {
+            latitude: parseFloat(data[0].lat),
+            longitude: parseFloat(data[0].lon)
+        };
+    }
+    // Fallback: Santiago, Chile
+    return { latitude: -33.4489, longitude: -70.6693 };
+}
+        </pre>
+
+        <h3>4. Sistema de Máscaras (Input Masking)</h3>
+        <p>Formatea automáticamente mientras el usuario escribe:</p>
+        <ul>
+            <li>Fecha: DD/MM/YYYY (agrega "/" automáticamente)</li>
+            <li>Hora: HH:MM (agrega ":" automáticamente)</li>
+            <li>Preserva posición del cursor</li>
+        </ul>
+
+        <h3>5. Renderizado de Resultados</h3>
+        <p>Funciones de renderizado principales:</p>
+        <table>
+            <tr>
+                <th>Función</th>
+                <th>Propósito</th>
+            </tr>
+            <tr>
+                <td>renderResults()</td>
+                <td>Orquestador principal de visualización</td>
+            </tr>
+            <tr>
+                <td>renderPlanets()</td>
+                <td>Tabla de posiciones planetarias</td>
+            </tr>
+            <tr>
+                <td>renderChart()</td>
+                <td>Gráfico SVG de la carta natal</td>
+            </tr>
+            <tr>
+                <td>renderAspects()</td>
+                <td>Aspectos planetarios con símbolos</td>
+            </tr>
+            <tr>
+                <td>renderPlanetsInHouses()</td>
+                <td>Interpretaciones de planetas en casas</td>
+            </tr>
+            <tr>
+                <td>renderElementModality()</td>
+                <td>Distribución de elementos/modalidades</td>
+            </tr>
+            <tr>
+                <td>renderBiorhythms()</td>
+                <td>Ciclos de biorritmos con barras de progreso</td>
+            </tr>
+            <tr>
+                <td>renderSummary()</td>
+                <td>Resumen ejecutivo personalizado</td>
+            </tr>
+        </table>
+
+        <h3>6. Sistema i18n</h3>
+        <pre>
+const i18n = {
+    currentLanguage: 'en',
+    translations: {},
+
+    detectLanguage() {
+        const urlLang = new URLSearchParams(window.location.search).get('lang');
+        const storedLang = localStorage.getItem('language');
+        const browserLang = navigator.language.split('-')[0];
+        return urlLang || storedLang || browserLang || 'en';
+    },
+
+    t(key) {
+        // Busca traducción por clave anidada: "header.title"
+        return this.translations[this.currentLanguage]?.[key] || key;
+    }
+};
+        </pre>
+    </div>
+
+    <div id="backend-detalle">
+        <h1>7. Backend - Detalle Técnico</h1>
+
+        <h2>app.py - Arquitectura</h2>
+
+        <h3>1. Middleware Stack</h3>
+        <pre>
+app = FastAPI(title="Chuchurex Astral API")
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://chuchurex.cl", "https://www.chuchurex.cl", "http://localhost:3000"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
+
+# Compresión GZip (reduce ~70% tamaño)
+app.add_middleware(GZIPMiddleware, minimum_size=1000)
+
+# Rate limiting (60 req/min por IP)
+@app.middleware("http")
+async def rate_limit_middleware(request: Request, call_next):
+    # ... implementación ...
+        </pre>
+
+        <h3>2. Modelos Pydantic</h3>
+        <pre>
+class BirthData(BaseModel):
+    name: str
+    year: int
+    month: int
+    day: int
+    hour: int
+    minute: int
+    latitude: float
+    longitude: float
+    timezone: str = "America/Santiago"
+
+class PlanetPosition(BaseModel):
+    name: str
+    sign: str
+    degree: float
+    abs_pos: float  # Posición absoluta 0-360°
+    house: int
+    retrograde: bool
+
+class ChartResponse(BaseModel):
+    name: str
+    sun_sign: str
+    moon_sign: str
+    ascendant: str
+    planets: List[PlanetPosition]
+    houses: List[dict]
+    aspects: List[dict]
+    interpretations: dict
+    biorhythms: dict
+    element_modality: dict
+        </pre>
+
+        <h3>3. Caché LRU</h3>
+        <pre>
+from functools import lru_cache
+
+@lru_cache(maxsize=10000)
+def _cached_kerykeion_calculation(
+    year: int, month: int, day: int,
+    hour: int, minute: int,
+    lat: float, lon: float, tz: str
+):
+    # Cálculo con Kerykeion (costoso)
+    # Resultado cacheado para consultas repetidas
+    return generate_kerykeion_chart(...)
+        </pre>
+
+        <h3>4. Cálculo de Elementos y Modalidades</h3>
+        <pre>
+SIGN_ELEMENTS = {
+    'Aries': 'Fuego', 'Leo': 'Fuego', 'Sagitario': 'Fuego',
+    'Tauro': 'Tierra', 'Virgo': 'Tierra', 'Capricornio': 'Tierra',
+    'Géminis': 'Aire', 'Libra': 'Aire', 'Acuario': 'Aire',
+    'Cáncer': 'Agua', 'Escorpio': 'Agua', 'Piscis': 'Agua'
+}
+
+PLANET_WEIGHTS = {
+    'Sol': 3, 'Luna': 3,
+    'Mercurio': 2, 'Venus': 2, 'Marte': 2,
+    'Júpiter': 1, 'Saturno': 1,
+    'Urano': 0.5, 'Neptuno': 0.5, 'Plutón': 0.5
+}
+        </pre>
+
+        <h3>5. Biorritmos - Ciclo Espiritual</h3>
+        <pre>
+# Ciclo del Adepto (18 días - Enseñanzas de Ra)
+spiritual_day = (days_alive % 18) + 1
+
+# Días especiales
+if spiritual_day in [4, 5, 6]:
+    phase = "ÓPTIMO"
+    color = "#d4af37"  # Dorado
+    description = "Días óptimos para trabajos espirituales..."
+elif spiritual_day in [1, 9, 10, 18]:
+    phase = "CRÍTICO"
+    color = "#e74c3c"  # Rojo
+    description = "Transición de ciclo, precaución..."
+elif spiritual_day in [13, 14]:
+    phase = "NADIR"
+    color = "#95a5a6"  # Gris
+    description = "Punto más bajo del ciclo..."
+        </pre>
+    </div>
+
+    <div id="i18n" class="section-break">
+        <h1>8. Sistema de Internacionalización</h1>
+
+        <h2>Idiomas Soportados</h2>
+        <table>
+            <tr>
+                <th>Idioma</th>
+                <th>Código</th>
+                <th>Archivo</th>
+                <th>Tamaño</th>
+            </tr>
+            <tr>
+                <td>Inglés</td>
+                <td>en</td>
+                <td>i18n/en.json</td>
+                <td>3.7 KB</td>
+            </tr>
+            <tr>
+                <td>Español</td>
+                <td>es</td>
+                <td>i18n/es.json</td>
+                <td>3.6 KB</td>
+            </tr>
+            <tr>
+                <td>Portugués</td>
+                <td>pt</td>
+                <td>i18n/pt.json</td>
+                <td>3.5 KB</td>
+            </tr>
+        </table>
+
+        <h2>Estructura de Traducciones</h2>
+        <pre>
+{
+  "header": {
+    "title": "Chuchurex Astral",
+    "subtitle": "Descubre tu carta natal y biorritmos"
+  },
+  "form": {
+    "name": "Nombre",
+    "date": "Fecha de nacimiento",
+    "time": "Hora de nacimiento",
+    "city": "Ciudad de nacimiento",
+    "calculate": "Calcular Carta"
+  },
+  "results": {
+    "sun": "Sol",
+    "moon": "Luna",
+    "ascendant": "Ascendente",
+    "positions": "Posiciones Planetarias",
+    "aspects": "Aspectos",
+    "houses": "Planetas en Casas",
+    "biorhythms": "Biorritmos"
+  },
+  "biorhythms": {
+    "physical": "Físico (23 días)",
+    "emotional": "Emocional (28 días)",
+    "intellectual": "Intelectual (33 días)",
+    "spiritual": "Espiritual/Adepto (18 días)"
+  }
+}
+        </pre>
+
+        <h2>Detección de Idioma</h2>
+        <p>Prioridad de detección:</p>
+        <ol>
+            <li><strong>Parámetro URL:</strong> <code>?lang=es</code></li>
+            <li><strong>localStorage:</strong> Preferencia guardada del usuario</li>
+            <li><strong>Navegador:</strong> <code>navigator.language</code></li>
+            <li><strong>Por defecto:</strong> Inglés</li>
+        </ol>
+
+        <h2>Implementación en HTML</h2>
+        <pre>
+&lt;!-- Texto simple --&gt;
+&lt;h1 data-i18n="header.title"&gt;Chuchurex Astral&lt;/h1&gt;
+
+&lt;!-- Placeholder --&gt;
+&lt;input data-i18n-placeholder="form.name" /&gt;
+
+&lt;!-- Contenido HTML --&gt;
+&lt;div data-i18n-html="about.bio1"&gt;&lt;/div&gt;
+        </pre>
+    </div>
+
+    <div id="interpretaciones">
+        <h1>9. Sistema de Interpretaciones</h1>
+
+        <h2>Archivo interpretations.json</h2>
+        <p>290+ interpretaciones astrológicas en español organizadas en 6 categorías:</p>
+
+        <h3>Estructura del Archivo</h3>
+        <pre>
+{
+  "meta": {
+    "version": "1.0",
+    "language": "es",
+    "description": "Interpretaciones astrológicas personalizadas"
+  },
+  "sun_in_signs": { ... },
+  "moon_in_signs": { ... },
+  "ascendants": { ... },
+  "planets_in_houses": { ... },
+  "aspects": { ... },
+  "elements": { ... },
+  "modalities": { ... }
+}
+        </pre>
+
+        <h3>Ejemplo: Sol en Aries</h3>
+        <pre>
+"Aries": {
+  "title": "Sol en Aries",
+  "content": "Posees un espíritu pionero y una energía dinámica que te
+             impulsa a iniciar proyectos con entusiasmo. Tu naturaleza
+             es directa y competitiva, siempre buscando nuevos desafíos
+             y oportunidades para demostrar tu valentía."
+}
+        </pre>
+
+        <h3>Ejemplo: Venus en Casa 7</h3>
+        <pre>
+"Venus_7": {
+  "title": "Venus en Casa 7",
+  "content": "Las relaciones de pareja son una fuente importante de
+             felicidad para ti. Buscas armonía y belleza en tus
+             vínculos íntimos, y tienes talento natural para la
+             diplomacia y la colaboración."
+}
+        </pre>
+
+        <h3>Ejemplo: Sol Trígono Luna</h3>
+        <pre>
+"Sol_Trigono_Luna": {
+  "title": "Sol en Trígono con Luna",
+  "content": "Existe una hermosa armonía entre tu voluntad consciente
+             y tus necesidades emocionales. Tu personalidad externa
+             refleja genuinamente tu mundo interior, lo que te otorga
+             autenticidad y equilibrio emocional."
+}
+        </pre>
+
+        <h2>Generación de Resumen Ejecutivo</h2>
+        <p>El sistema combina automáticamente:</p>
+        <ul>
+            <li>Interpretación del Sol (identidad esencial)</li>
+            <li>Interpretación de la Luna (mundo emocional)</li>
+            <li>Interpretación del Ascendente (máscara social)</li>
+            <li>Elemento dominante (temperamento)</li>
+            <li>Modalidad dominante (impulso de acción)</li>
+        </ul>
+
+        <p>Resultado: párrafo personalizado de 3-5 oraciones que sintetiza la esencia de la carta natal.</p>
+    </div>
+
+    <div id="biorritmos" class="section-break">
+        <h1>10. Biorritmos y Enseñanzas de Ra</h1>
+
+        <h2>Ciclos Estándar (Basados en Seno)</h2>
+
+        <h3>1. Ciclo Físico (23 días)</h3>
+        <ul>
+            <li>Energía vital y resistencia física</li>
+            <li>Capacidad de recuperación</li>
+            <li>Rendimiento deportivo</li>
+        </ul>
+
+        <h3>2. Ciclo Emocional (28 días)</h3>
+        <ul>
+            <li>Estado anímico y sensibilidad</li>
+            <li>Creatividad y expresión artística</li>
+            <li>Relaciones interpersonales</li>
+        </ul>
+
+        <h3>3. Ciclo Intelectual (33 días)</h3>
+        <ul>
+            <li>Claridad mental y concentración</li>
+            <li>Capacidad de análisis y lógica</li>
+            <li>Memoria y aprendizaje</li>
+        </ul>
+
+        <h2>Ciclo Espiritual/del Adepto (18 días)</h2>
+        <p>Basado en las enseñanzas de Ra del Material de la Ley del Uno (L/L Research).</p>
+
+        <h3>Fases del Ciclo de 18 Días</h3>
+        <table>
+            <tr>
+                <th>Días</th>
+                <th>Fase</th>
+                <th>Color</th>
+                <th>Descripción</th>
+            </tr>
+            <tr>
+                <td>4, 5, 6</td>
+                <td>ÓPTIMO</td>
+                <td style="background: #d4af37; color: #000;">Dorado</td>
+                <td>Días ideales para trabajos espirituales, meditación profunda, rituales</td>
+            </tr>
+            <tr>
+                <td>1, 9, 10, 18</td>
+                <td>CRÍTICO</td>
+                <td style="background: #e74c3c; color: #fff;">Rojo</td>
+                <td>Transiciones de ciclo, se recomienda precaución en trabajos energéticos</td>
+            </tr>
+            <tr>
+                <td>13, 14</td>
+                <td>NADIR</td>
+                <td style="background: #95a5a6; color: #fff;">Gris</td>
+                <td>Punto más bajo del ciclo, momento para descanso y observación</td>
+            </tr>
+            <tr>
+                <td>2, 3</td>
+                <td>ASCENSO</td>
+                <td style="background: #3498db; color: #fff;">Azul</td>
+                <td>Energía espiritual en crecimiento</td>
+            </tr>
+            <tr>
+                <td>7, 8</td>
+                <td>DESCENSO</td>
+                <td style="background: #9b59b6; color: #fff;">Púrpura</td>
+                <td>Integración de experiencias espirituales</td>
+            </tr>
+            <tr>
+                <td>11, 12</td>
+                <td>DESCENSO</td>
+                <td style="background: #9b59b6; color: #fff;">Púrpura</td>
+                <td>Continuación del descenso energético</td>
+            </tr>
+            <tr>
+                <td>15, 16, 17</td>
+                <td>RECUPERACIÓN</td>
+                <td style="background: #27ae60; color: #fff;">Verde</td>
+                <td>Renovación y preparación para nuevo ciclo</td>
+            </tr>
+        </table>
+
+        <h3>Citas de Ra Incluidas</h3>
+        <p>El sistema incluye 4 citas traducidas del Material Ra:</p>
+
+        <blockquote>
+            <p><strong>Cita 1:</strong> "El ciclo del adepto es de dieciocho días. Dentro de este ciclo, los días cuarto, quinto y sexto son aquellos en los que los trabajos son más apropiadamente emprendidos."</p>
+        </blockquote>
+
+        <blockquote>
+            <p><strong>Cita 2:</strong> "El ciclo natural de dieciocho días descansa sobre la premisa básica de la naturaleza acuática del vehículo físico."</p>
+        </blockquote>
+
+        <blockquote>
+            <p><strong>Cita 3:</strong> "Este es un ritmo que puede ser observado en muchos de vuestros procesos biológicos y psíquicos."</p>
+        </blockquote>
+
+        <blockquote>
+            <p><strong>Cita 4:</strong> "Sugerimos que el trabajo se lleve a cabo precisamente en el cuarto, el quinto y el sexto día del ciclo del adepto."</p>
+        </blockquote>
+
+        <h3>Análisis de Días Críticos</h3>
+        <p>El sistema analiza automáticamente si múltiples ciclos están en puntos críticos simultáneamente:</p>
+        <ul>
+            <li><strong>NIVEL BAJO:</strong> 0-1 ciclos en punto crítico</li>
+            <li><strong>NIVEL MODERADO:</strong> 2 ciclos en punto crítico</li>
+            <li><strong>NIVEL ALTO:</strong> 3-4 ciclos en punto crítico (requiere especial atención)</li>
+        </ul>
+
+        <h2>Visualización en Frontend</h2>
+        <p>Los biorritmos se muestran con:</p>
+        <ul>
+            <li>Barras de progreso coloreadas (verde/rojo según positivo/negativo)</li>
+            <li>Porcentaje numérico (-100% a +100%)</li>
+            <li>Indicadores de tendencia (📈 ascenso / 📉 descenso)</li>
+            <li>Descripción de la fase actual</li>
+            <li>Cita de Ra correspondiente (para ciclo espiritual)</li>
+        </ul>
+    </div>
+
+    <div id="deploy">
+        <h1>11. Infraestructura y Deployment</h1>
+
+        <h2>Servidor Frontend - BananaHosting</h2>
+        <table>
+            <tr>
+                <th>Parámetro</th>
+                <th>Valor</th>
+            </tr>
+            <tr>
+                <td>Servidor</td>
+                <td>50.31.188.162</td>
+            </tr>
+            <tr>
+                <td>Usuario FTP</td>
+                <td>hfnfzzyg</td>
+            </tr>
+            <tr>
+                <td>Directorio</td>
+                <td>/chuchurex.cl</td>
+            </tr>
+            <tr>
+                <td>Protocolo</td>
+                <td>FTP (vía lftp)</td>
+            </tr>
+            <tr>
+                <td>Dominio</td>
+                <td>chuchurex.cl</td>
+            </tr>
+        </table>
+
+        <h2>Servidor Backend - Vultr VPS</h2>
+        <table>
+            <tr>
+                <th>Parámetro</th>
+                <th>Valor</th>
+            </tr>
+            <tr>
+                <td>IP</td>
+                <td>64.176.12.233</td>
+            </tr>
+            <tr>
+                <td>Usuario SSH</td>
+                <td>root</td>
+            </tr>
+            <tr>
+                <td>Ubicación</td>
+                <td>Santiago, Chile</td>
+            </tr>
+            <tr>
+                <td>Puerto Docker</td>
+                <td>8001 (interno)</td>
+            </tr>
+            <tr>
+                <td>Web Server</td>
+                <td>nginx (proxy inverso)</td>
+            </tr>
+            <tr>
+                <td>SSL</td>
+                <td>Let's Encrypt</td>
+            </tr>
+            <tr>
+                <td>Dominio</td>
+                <td>api.chuchurex.cl</td>
+            </tr>
+        </table>
+
+        <h2>DNS - Cloudflare</h2>
+        <ul>
+            <li>chuchurex.cl → 50.31.188.162</li>
+            <li>api.chuchurex.cl → 64.176.12.233</li>
+            <li>SSL/TLS: Full (strict)</li>
+            <li>Proxy habilitado</li>
+        </ul>
+
+        <h2>Script de Deploy (deploy.sh)</h2>
+
+        <h3>Uso</h3>
+        <pre>
+# Deploy completo (frontend + backend)
+./deploy.sh
+
+# Solo frontend
+./deploy.sh frontend
+
+# Solo backend
+./deploy.sh backend
+
+# Verificar estado
+./deploy.sh status
+        </pre>
+
+        <h3>Flujo de Deploy Frontend</h3>
+        <ol>
+            <li>Actualiza timestamps para cache busting</li>
+            <li>Conecta vía FTP a BananaHosting</li>
+            <li>Sube archivos:
+                <ul>
+                    <li>index.html</li>
+                    <li>app.js</li>
+                    <li>styles.css</li>
+                    <li>i18n/*.json</li>
+                    <li>styles/print.css</li>
+                    <li>about/index.html</li>
+                </ul>
+            </li>
+            <li>Verifica subida exitosa</li>
+        </ol>
+
+        <h3>Flujo de Deploy Backend</h3>
+        <ol>
+            <li>Conecta vía SSH a Vultr VPS</li>
+            <li>Navega a directorio /root/astro-chart</li>
+            <li>Ejecuta <code>git pull</code></li>
+            <li>Reconstruye imagen Docker</li>
+            <li>Detiene contenedor anterior</li>
+            <li>Inicia nuevo contenedor en puerto 8001</li>
+            <li>Verifica que el servicio responda</li>
+        </ol>
+
+        <h2>Dockerfile</h2>
+        <pre>
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY app.py .
+COPY interpretations.json .
+
+EXPOSE 8001
+
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8001"]
+        </pre>
+    </div>
+
+    <div id="api" class="section-break">
+        <h1>12. API Endpoints</h1>
+
+        <h2>Endpoints Disponibles</h2>
+        <table>
+            <tr>
+                <th>Método</th>
+                <th>Endpoint</th>
+                <th>Descripción</th>
+                <th>Autenticación</th>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/</td>
+                <td>Información de bienvenida de la API</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/health</td>
+                <td>Estado del servidor + estadísticas de caché</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/signs</td>
+                <td>Lista de 12 signos zodiacales</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/planets</td>
+                <td>Lista de 10 planetas</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td>/chart</td>
+                <td>Calcular carta natal (endpoint principal)</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/chart/example</td>
+                <td>Carta de ejemplo (Carlos, 1980-08-22)</td>
+                <td>No</td>
+            </tr>
+        </table>
+
+        <h2>POST /chart - Ejemplo de Request</h2>
+        <pre>
+POST https://api.chuchurex.cl/chart
+Content-Type: application/json
+
+{
+  "name": "Carlos",
+  "year": 1980,
+  "month": 8,
+  "day": 22,
+  "hour": 0,
+  "minute": 0,
+  "latitude": -33.4489,
+  "longitude": -70.6693,
+  "timezone": "America/Santiago"
+}
+        </pre>
+
+        <h2>Response (Estructura)</h2>
+        <pre>
+{
+  "name": "Carlos",
+  "sun_sign": "Leo",
+  "moon_sign": "Sagitario",
+  "ascendant": "Géminis",
+
+  "planets": [
+    {
+      "name": "Sol",
+      "sign": "Leo",
+      "degree": 28.5,
+      "abs_pos": 148.5,
+      "house": 3,
+      "retrograde": false
+    },
+    // ... 9 planetas más
+  ],
+
+  "houses": [
+    {
+      "number": 1,
+      "sign": "Géminis",
+      "degree": 12.3
+    },
+    // ... 11 casas más
+  ],
+
+  "aspects": [
+    {
+      "planet1": "Sol",
+      "planet2": "Luna",
+      "aspect": "Trígono",
+      "orb": 2.1
+    },
+    // ... aspectos detectados
+  ],
+
+  "interpretations": {
+    "sun": { "title": "...", "content": "..." },
+    "moon": { "title": "...", "content": "..." },
+    "ascendant": { "title": "...", "content": "..." },
+    "summary": "...",
+    "element_modality": { ... },
+    "planets_in_houses": [ ... ],
+    "aspects": [ ... ]
+  },
+
+  "biorhythms": {
+    "physical": {
+      "value": 45.2,
+      "phase": "ascenso",
+      "days_in_cycle": 12
+    },
+    "emotional": { ... },
+    "intellectual": { ... },
+    "spiritual": {
+      "value": 0,
+      "day": 4,
+      "phase": "ÓPTIMO",
+      "description": "...",
+      "color": "#d4af37",
+      "ra_quote": "..."
+    }
+  },
+
+  "element_modality": {
+    "elements": {
+      "Fuego": 35.5,
+      "Tierra": 22.3,
+      "Aire": 28.1,
+      "Agua": 14.1
+    },
+    "modalities": {
+      "Cardinal": 40.2,
+      "Fijo": 38.7,
+      "Mutable": 21.1
+    },
+    "dominant_element": "Fuego",
+    "dominant_modality": "Cardinal"
+  }
+}
+        </pre>
+
+        <h2>Rate Limiting</h2>
+        <ul>
+            <li>Límite: 60 requests por minuto por IP</li>
+            <li>Headers de respuesta:
+                <ul>
+                    <li><code>X-RateLimit-Limit: 60</code></li>
+                    <li><code>X-RateLimit-Remaining: 59</code></li>
+                </ul>
+            </li>
+            <li>Respuesta al exceder límite: HTTP 429 (Too Many Requests)</li>
+        </ul>
+
+        <h2>CORS</h2>
+        <p>Orígenes permitidos:</p>
+        <ul>
+            <li>https://chuchurex.cl</li>
+            <li>https://www.chuchurex.cl</li>
+            <li>http://localhost:3000 (desarrollo)</li>
+        </ul>
+    </div>
+
+    <div id="desarrollo">
+        <h1>13. Desarrollo Local</h1>
+
+        <h2>Requisitos</h2>
+        <ul>
+            <li>Python 3.14 (o 3.12+)</li>
+            <li>SASS (para compilar estilos)</li>
+            <li>Git</li>
+            <li>Navegador moderno (Chrome, Firefox, Safari, Edge)</li>
+        </ul>
+
+        <h2>Setup Inicial</h2>
+        <pre>
+# 1. Clonar repositorio
+git clone https://github.com/chuchurex/astro-chart.git
+cd astro-chart
+
+# 2. Crear y activar entorno virtual
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux
+# o en Windows: venv\Scripts\activate
+
+# 3. Instalar dependencias Python
+pip install -r requirements.txt
+
+# 4. Crear archivo .env (para deploy)
+echo "FTP_PASSWORD=tu_password_aqui" > .env
+        </pre>
+
+        <h2>Ejecutar Backend</h2>
+        <pre>
+# En terminal 1
+source venv/bin/activate
+uvicorn app:app --reload --port 8001
+
+# El servidor estará en http://localhost:8001
+# Swagger docs en http://localhost:8001/docs
+        </pre>
+
+        <h2>Ejecutar Frontend</h2>
+        <pre>
+# En terminal 2
+python -m http.server 3000
+
+# El frontend estará en http://localhost:3000
+        </pre>
+
+        <h2>Compilar SASS</h2>
+        <pre>
+# Compilación única
+sass styles.scss styles.css
+
+# Watch mode (recompila automáticamente)
+sass styles.scss styles.css --watch
+        </pre>
+
+        <h2>Estructura de Desarrollo</h2>
+        <pre>
+Terminal 1: Backend API (puerto 8001)
+Terminal 2: Frontend Server (puerto 3000)
+Terminal 3: SASS Watcher (opcional)
+Terminal 4: Git, comandos generales
+        </pre>
+
+        <h2>Testing</h2>
+        <pre>
+# Test de carta de ejemplo
+curl http://localhost:8001/chart/example
+
+# Test de health check
+curl http://localhost:8001/health
+
+# Test manual con navegador
+# Abrir http://localhost:3000
+# Completar formulario y calcular carta
+        </pre>
+
+        <h2>Hot Reload</h2>
+        <ul>
+            <li><strong>Backend:</strong> Uvicorn con <code>--reload</code> detecta cambios en app.py</li>
+            <li><strong>Frontend:</strong> Refrescar navegador manualmente (F5)</li>
+            <li><strong>CSS:</strong> SASS watch recompila automáticamente, luego refrescar navegador</li>
+        </ul>
+    </div>
+
+    <div id="pendiente" class="section-break">
+        <h1>14. Tareas Pendientes</h1>
+
+        <h2>Prioridad Alta</h2>
+        <table>
+            <tr>
+                <th>Tarea</th>
+                <th>Estado</th>
+                <th>Notas</th>
+            </tr>
+            <tr>
+                <td>Verificar biorritmos en producción</td>
+                <td><span class="badge badge-warning">Pendiente</span></td>
+                <td>Confirmar que los cálculos coincidan entre local y producción</td>
+            </tr>
+        </table>
+
+        <h2>Prioridad Media</h2>
+        <table>
+            <tr>
+                <th>Tarea</th>
+                <th>Estado</th>
+                <th>Notas</th>
+            </tr>
+            <tr>
+                <td>Exportar carta a PDF nativo</td>
+                <td><span class="badge badge-warning">Pendiente</span></td>
+                <td>Actualmente usa window.print(), considerar jsPDF o backend PDF</td>
+            </tr>
+            <tr>
+                <td>Mejorar responsive en tablets</td>
+                <td><span class="badge badge-warning">Pendiente</span></td>
+                <td>Optimizar layouts entre móvil y desktop</td>
+            </tr>
+            <tr>
+                <td>Migrar password SSH a claves</td>
+                <td><span class="badge badge-warning">Pendiente</span></td>
+                <td>Actualmente hardcoded en deploy.sh</td>
+            </tr>
+        </table>
+
+        <h2>Prioridad Baja / Futuro</h2>
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Estimación</th>
+                <th>Descripción</th>
+            </tr>
+            <tr>
+                <td>Tránsitos Planetarios</td>
+                <td><span class="badge badge-info">Grande</span></td>
+                <td>Comparar posiciones actuales vs carta natal</td>
+            </tr>
+            <tr>
+                <td>Sinastría</td>
+                <td><span class="badge badge-info">Grande</span></td>
+                <td>Comparación de dos cartas natales (compatibilidad)</td>
+            </tr>
+            <tr>
+                <td>Calendario del Ciclo del Adepto</td>
+                <td><span class="badge badge-info">Media</span></td>
+                <td>Vista de calendario mensual con días óptimos marcados</td>
+            </tr>
+            <tr>
+                <td>PWA (Progressive Web App)</td>
+                <td><span class="badge badge-info">Media</span></td>
+                <td>Instalable, funciona offline, notificaciones</td>
+            </tr>
+            <tr>
+                <td>Modo claro/oscuro toggle</td>
+                <td><span class="badge badge-info">Pequeña</span></td>
+                <td>Actualmente solo tema oscuro</td>
+            </tr>
+            <tr>
+                <td>Guardar cartas (cuenta de usuario)</td>
+                <td><span class="badge badge-info">Grande</span></td>
+                <td>Requiere backend de autenticación y base de datos</td>
+            </tr>
+            <tr>
+                <td>Backend i18n</td>
+                <td><span class="badge badge-info">Media</span></td>
+                <td>Interpretaciones en inglés y portugués</td>
+            </tr>
+        </table>
+
+        <h2>Accesibilidad (WCAG AAA)</h2>
+        <table>
+            <tr>
+                <th>Fase</th>
+                <th>Estado</th>
+                <th>Elementos</th>
+            </tr>
+            <tr>
+                <td>Fase 1: Fundamentos</td>
+                <td><span class="badge badge-success">Completado</span></td>
+                <td>Skip links, ARIA roles, estructura semántica</td>
+            </tr>
+            <tr>
+                <td>Fase 2: Contraste</td>
+                <td><span class="badge badge-success">Completado</span></td>
+                <td>Contraste 7:1 en todos los elementos</td>
+            </tr>
+            <tr>
+                <td>Fase 3: Interacción</td>
+                <td><span class="badge badge-warning">Pendiente</span></td>
+                <td>Navegación por teclado mejorada, lectores de pantalla</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="estadisticas">
+        <h1>15. Estadísticas del Proyecto</h1>
+
+        <h2>Métricas de Código</h2>
+        <table>
+            <tr>
+                <th>Archivo</th>
+                <th>Líneas</th>
+                <th>Tamaño</th>
+                <th>Lenguaje</th>
+            </tr>
+            <tr>
+                <td>app.js</td>
+                <td>1,368</td>
+                <td>52 KB</td>
+                <td>JavaScript</td>
+            </tr>
+            <tr>
+                <td>app.py</td>
+                <td>903</td>
+                <td>36 KB</td>
+                <td>Python</td>
+            </tr>
+            <tr>
+                <td>styles.css (compilado)</td>
+                <td>1,365</td>
+                <td>64 KB</td>
+                <td>CSS</td>
+            </tr>
+            <tr>
+                <td>styles.scss (fuente)</td>
+                <td>~800</td>
+                <td>24 KB</td>
+                <td>SCSS</td>
+            </tr>
+            <tr>
+                <td>interpretations.json</td>
+                <td>393</td>
+                <td>48 KB</td>
+                <td>JSON</td>
+            </tr>
+            <tr>
+                <td>index.html</td>
+                <td>~400</td>
+                <td>13.5 KB</td>
+                <td>HTML</td>
+            </tr>
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>~5,229</strong></td>
+                <td><strong>~238 KB</strong></td>
+                <td>-</td>
+            </tr>
+        </table>
+
+        <h2>Contenido</h2>
+        <table>
+            <tr>
+                <th>Categoría</th>
+                <th>Cantidad</th>
+            </tr>
+            <tr>
+                <td>Planetas calculados</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>Casas astrológicas</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>Signos zodiacales</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>Tipos de aspectos</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>Ciclos de biorritmos</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Interpretaciones totales</td>
+                <td>290+</td>
+            </tr>
+            <tr>
+                <td>Idiomas soportados</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>Claves de traducción</td>
+                <td>50+</td>
+            </tr>
+            <tr>
+                <td>Citas de Ra</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>API endpoints</td>
+                <td>10+</td>
+            </tr>
+        </table>
+
+        <h2>Componentes SCSS</h2>
+        <table>
+            <tr>
+                <th>Componente</th>
+                <th>Archivo</th>
+            </tr>
+            <tr><td>Variables</td><td>_variables.scss</td></tr>
+            <tr><td>Base</td><td>_base.scss</td></tr>
+            <tr><td>Header</td><td>_header.scss</td></tr>
+            <tr><td>Formularios</td><td>_form.scss</td></tr>
+            <tr><td>Botones</td><td>_buttons.scss</td></tr>
+            <tr><td>Resultados</td><td>_results.scss</td></tr>
+            <tr><td>Responsive</td><td>_responsive.scss</td></tr>
+            <tr><td>Loader</td><td>_loader.scss</td></tr>
+            <tr><td>Estrellas</td><td>_stars.scss</td></tr>
+            <tr><td>Footer</td><td>_footer.scss</td></tr>
+            <tr><td>About</td><td>_about.scss</td></tr>
+            <tr><td><strong>Total</strong></td><td><strong>12 módulos</strong></td></tr>
+        </table>
+
+        <h2>Funciones JavaScript (Principales)</h2>
+        <table>
+            <tr>
+                <th>Categoría</th>
+                <th>Cantidad</th>
+                <th>Ejemplos</th>
+            </tr>
+            <tr>
+                <td>Parseo</td>
+                <td>6</td>
+                <td>parseFlexibleDate, maskDate, maskTime</td>
+            </tr>
+            <tr>
+                <td>Cálculo</td>
+                <td>5</td>
+                <td>calculateChart, calculateSunSign, calculateMoonSign</td>
+            </tr>
+            <tr>
+                <td>Renderizado</td>
+                <td>10</td>
+                <td>renderResults, renderPlanets, renderChart, renderBiorhythms</td>
+            </tr>
+            <tr>
+                <td>Geocodificación</td>
+                <td>2</td>
+                <td>geocodeCity, handleCityChange</td>
+            </tr>
+            <tr>
+                <td>i18n</td>
+                <td>5</td>
+                <td>i18n.init, i18n.setLanguage, i18n.t</td>
+            </tr>
+            <tr>
+                <td>URL/Sharing</td>
+                <td>3</td>
+                <td>parseURLParams, generateShareURL, handleShare</td>
+            </tr>
+            <tr>
+                <td>SVG/Gráficos</td>
+                <td>5</td>
+                <td>renderSimpleChart, drawCircle, drawLine, drawText</td>
+            </tr>
+            <tr>
+                <td>Utilidades</td>
+                <td>4+</td>
+                <td>Event handlers, validación, formateo</td>
+            </tr>
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>40+</strong></td>
+                <td>-</td>
+            </tr>
+        </table>
+
+        <h2>Performance</h2>
+        <table>
+            <tr>
+                <th>Métrica</th>
+                <th>Valor</th>
+            </tr>
+            <tr>
+                <td>Tamaño total frontend (sin comprimir)</td>
+                <td>~130 KB</td>
+            </tr>
+            <tr>
+                <td>Caché LRU (backend)</td>
+                <td>10,000 entradas</td>
+            </tr>
+            <tr>
+                <td>Reducción GZip</td>
+                <td>~70%</td>
+            </tr>
+            <tr>
+                <td>Rate limit</td>
+                <td>60 req/min por IP</td>
+            </tr>
+            <tr>
+                <td>Tiempo de respuesta API</td>
+                <td>&lt; 500ms (con caché)</td>
+            </tr>
+        </table>
+
+        <h2>Historial de Commits Recientes</h2>
+        <ul>
+            <li>feat(ux): add auto-format masks for date and time inputs</li>
+            <li>feat(ux): implement flexible text input for date/time per NN/G guidelines</li>
+            <li>feat(a11y): improve date/time input icon contrast</li>
+            <li>feat(a11y): implement WCAG AAA Phase 2 - Contrast ratios 7:1</li>
+            <li>feat(a11y): implement WCAG AAA Phase 1 - Foundations</li>
+        </ul>
+    </div>
+
+    <div style="margin-top: 60px; padding: 30px; background: #f5f5f5; border-top: 3px solid #333; text-align: center;">
+        <h2>Fin de la Documentación</h2>
+        <p><strong>Proyecto Chuchurex Astral</strong></p>
+        <p>Generado el 31 de diciembre de 2025</p>
+        <p style="margin-top: 20px; font-style: italic; color: #666;">
+            "Tu carta natal es un mapa, no un destino.<br>
+            El mapa no camina el camino por ti."<br>
+            — Enseñanzas de Ra
+        </p>
+    </div>
+
+</body>
+</html>

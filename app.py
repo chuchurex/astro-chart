@@ -50,10 +50,14 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://chuchurex.cl",
-        "https://www.chuchurex.cl",
+        "https://astro.chuchurex.cl",
+        "https://www.astro.chuchurex.cl",
+        "https://chuchurex.cl",  # temporary backward compatibility
+        "https://www.chuchurex.cl",  # temporary backward compatibility
         "http://localhost:8000",  # desarrollo local
-        "http://127.0.0.1:8000"
+        "http://localhost:3000",  # desarrollo local frontend
+        "http://127.0.0.1:8000",
+        "http://127.0.0.1:3000"
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST"],

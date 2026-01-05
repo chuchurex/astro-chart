@@ -1,20 +1,20 @@
-# Chuchurex Astral - Contexto del Proyecto
+# Chuchurex Astral - Project Context
 
-## Resumen
+## Summary
 
-Aplicacion web de **cartas natales astrológicas** con interpretaciones personalizadas y ciclos de biorritmos basados en las enseñanzas de Ra (Law of One).
+Web application for **astrological natal charts** with personalized interpretations and biorhythm cycles based on Ra's teachings (Law of One).
 
-**URLs de Produccion:**
-- Frontend: https://chuchurex.cl
-- API Backend: https://api.chuchurex.cl
-- Repositorio: https://github.com/chuchurex/astro-chart
+**Production URLs:**
+- Frontend: https://astro.chuchurex.cl
+- API Backend: https://api.astro.chuchurex.cl
+- Repository: https://github.com/chuchurex/astro-chart
 
 ---
 
-## Arquitectura
+## Architecture
 
 ```
-Frontend (chuchurex.cl)              Backend (api.chuchurex.cl)
+Frontend (astro.chuchurex.cl)        Backend (api.astro.chuchurex.cl)
 ┌──────────────────────┐             ┌──────────────────────┐
 │   Cloudflare Pages   │   HTTPS     │   Vultr VPS Chile    │
 │   (Auto-deploy)      │ ─────────── │   64.176.12.233      │
@@ -26,145 +26,145 @@ Frontend (chuchurex.cl)              Backend (api.chuchurex.cl)
          └───────── Cloudflare CDN + DNS ──────┘
 ```
 
-**Deploy Frontend:** Automatico en cada `git push origin main`
+**Frontend Deploy:** Automatic on every `git push origin main`
 
 ---
 
-## Estructura de Archivos
+## File Structure
 
 ```
 astro.cl/
-├── index.html              # Pagina principal (calculadora)
-├── app.js                  # Logica frontend (~1400 lineas)
-├── app.py                  # API FastAPI (~900 lineas)
-├── styles.css              # CSS compilado
-├── styles.scss             # Fuente SASS
-├── interpretations.json    # 290+ interpretaciones en espanol
+├── index.html              # Main page (calculator)
+├── app.js                  # Frontend logic (~1400 lines)
+├── app.py                  # FastAPI API (~900 lines)
+├── styles.css              # Compiled CSS
+├── styles.scss             # SASS source
+├── interpretations.json    # 290+ interpretations in Spanish
 │
-├── about/index.html        # Pagina "Acerca de"
-├── i18n/                   # Traducciones
-│   ├── en.json             # Ingles (base)
-│   ├── es.json             # Espanol
-│   └── pt.json             # Portugues
+├── about/index.html        # "About" page
+├── i18n/                   # Translations
+│   ├── en.json             # English (base)
+│   ├── es.json             # Spanish
+│   └── pt.json             # Portuguese
 │
-├── styles/                 # Estilos adicionales
-│   └── print.css           # Estilos para impresion/PDF
+├── styles/                 # Additional styles
+│   └── print.css           # Print/PDF styles
 │
-├── deploy.sh               # Script de deploy unificado
-├── requirements.txt        # Dependencias Python
-├── Dockerfile              # Para deploy backend
-└── .env                    # Credenciales (NO en git)
+├── deploy.sh               # Unified deploy script
+├── requirements.txt        # Python dependencies
+├── Dockerfile              # For backend deploy
+└── .env                    # Credentials (NOT in git)
 ```
 
 ---
 
-## Stack Tecnologico
+## Tech Stack
 
 ### Frontend
-- **HTML5** con semantica accesible (WCAG AAA en progreso)
-- **CSS3** via SASS, tema oscuro celestial
-- **JavaScript vanilla** (sin frameworks)
-- **Fuentes**: Cinzel + Cormorant Garamond
-- **i18n**: Sistema propio con JSON, 3 idiomas (EN/ES/PT)
+- **HTML5** with accessible semantics (WCAG AAA in progress)
+- **CSS3** via SASS, celestial dark theme
+- **Vanilla JavaScript** (no frameworks)
+- **Fonts**: Cinzel + Cormorant Garamond
+- **i18n**: Custom JSON system, 3 languages (EN/ES/PT)
 
 ### Backend
 - **Python 3.14** (via venv)
-- **FastAPI** con Pydantic
-- **Kerykeion** (Swiss Ephemeris para calculos astronomicos)
-- **Docker** para produccion
-- Rate limiting: 60 req/min por IP
-- Cache LRU para calculos astronomicos
+- **FastAPI** with Pydantic
+- **Kerykeion** (Swiss Ephemeris for astronomical calculations)
+- **Docker** for production
+- Rate limiting: 60 req/min per IP
+- LRU cache for astronomical calculations
 
 ---
 
-## Funcionalidades Implementadas
+## Implemented Features
 
-### Carta Natal
-- [x] 10 planetas: Sol, Luna, Mercurio, Venus, Marte, Jupiter, Saturno, Urano, Neptuno, Pluton
-- [x] 12 casas astrologicas con cuspides
-- [x] Ascendente calculado con precision
-- [x] Aspectos planetarios (conjuncion, oposicion, cuadratura, trigono, sextil)
-- [x] Grafico SVG interactivo de la carta
-- [x] Distribucion de elementos (Fuego, Tierra, Aire, Agua)
-- [x] Distribucion de modalidades (Cardinal, Fijo, Mutable)
+### Natal Chart
+- [x] 10 planets: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto
+- [x] 12 astrological houses with cusps
+- [x] Ascendant calculated with precision
+- [x] Planetary aspects (conjunction, opposition, square, trine, sextile)
+- [x] Interactive SVG chart graphic
+- [x] Element distribution (Fire, Earth, Air, Water)
+- [x] Modality distribution (Cardinal, Fixed, Mutable)
 
-### Interpretaciones
-- [x] Sol, Luna y Ascendente por signo
-- [x] Planetas en casas (120 combinaciones)
-- [x] Aspectos planetarios (130+ combinaciones)
-- [x] Resumen ejecutivo personalizado
+### Interpretations
+- [x] Sun, Moon and Ascendant by sign
+- [x] Planets in houses (120 combinations)
+- [x] Planetary aspects (130+ combinations)
+- [x] Personalized executive summary
 
-### Biorritmos (Ensenanzas de Ra)
-- [x] Fisico: 23 dias
-- [x] Emocional: 28 dias
-- [x] Intelectual: 33 dias
-- [x] Espiritual/Adepto: 18 dias (con analisis especial)
-- [x] Citas de Ra correlacionadas con el dia del ciclo
+### Biorhythms (Ra's Teachings)
+- [x] Physical: 23 days
+- [x] Emotional: 28 days
+- [x] Intellectual: 33 days
+- [x] Spiritual/Adept: 18 days (with special analysis)
+- [x] Ra quotes correlated with cycle day
 
-### UX/Accesibilidad
-- [x] Geocodificacion automatica de ciudades (OpenStreetMap)
-- [x] Parseo flexible de fechas (DD/MM/YYYY, "15 marzo 1985", etc.)
-- [x] Mascaras automaticas en inputs de fecha/hora
-- [x] URL compartible con parametros
+### UX/Accessibility
+- [x] Automatic city geocoding (OpenStreetMap)
+- [x] Flexible date parsing (DD/MM/YYYY, "March 15, 1985", etc.)
+- [x] Automatic masks on date/time inputs
+- [x] Shareable URL with parameters
 - [x] Skip links, ARIA roles, contrast ratio 7:1
-- [x] Estilos de impresion (print.css)
+- [x] Print styles (print.css)
 
 ---
 
-## Credenciales de Produccion
+## Production Credentials
 
 ### Frontend - Cloudflare Pages
-- URL: https://chuchurex.cl
-- Preview: https://chuchurex.pages.dev
-- Deploy: Automatico en cada push a `main`
+- URL: https://astro.chuchurex.cl
+- Preview: https://astro-chuchurex.pages.dev
+- Deploy: Automatic on every push to `main`
 - Dashboard: https://dash.cloudflare.com/
 
 ### Backend - Vultr VPS (SSH)
 - IP: `64.176.12.233`
-- Usuario: `root`
-- Password: en `.env` y `deploy.sh` (hardcoded por ahora)
-- Puerto Docker: 8001
+- User: `root`
+- Password: in `.env` and `deploy.sh` (hardcoded for now)
+- Docker Port: 8001
 
 ---
 
-## Comandos de Deploy
+## Deploy Commands
 
-### Frontend (Automatico)
+### Frontend (Automatic)
 ```bash
 git add .
-git commit -m "feat: cambio"
+git commit -m "feat: change"
 git push origin main
-# Deploy automatico en ~30 segundos
+# Automatic deploy in ~30 seconds
 ```
 
 ### Backend (Manual)
 ```bash
 ./deploy.sh backend
 
-# Verificar estado
+# Check status
 ./deploy.sh status
 ```
 
-### Legacy FTP (deprecado)
+### Legacy FTP (deprecated)
 ```bash
-./deploy.sh frontend  # Aun funciona si es necesario
+./deploy.sh frontend  # Still works if necessary
 ```
 
 ---
 
-## Desarrollo Local
+## Local Development
 
 ```bash
-# Activar entorno virtual
+# Activate virtual environment
 source venv/bin/activate
 
-# Backend (puerto 8001)
+# Backend (port 8001)
 uvicorn app:app --reload --port 8001
 
-# Frontend (puerto 3000)
+# Frontend (port 3000)
 python -m http.server 3000
 
-# Compilar SASS
+# Compile SASS
 sass styles.scss styles.css --watch
 ```
 
@@ -172,16 +172,16 @@ sass styles.scss styles.css --watch
 
 ## API Endpoints
 
-| Metodo | Endpoint        | Descripcion                    |
+| Method | Endpoint        | Description                    |
 |--------|-----------------|--------------------------------|
-| GET    | `/`             | Pagina principal (static file) |
-| GET    | `/health`       | Estado del servidor + cache    |
-| GET    | `/signs`        | Lista de signos zodiacales     |
-| GET    | `/planets`      | Lista de planetas              |
-| POST   | `/chart`        | Calcular carta natal           |
-| GET    | `/chart/example`| Carta de ejemplo               |
+| GET    | `/`             | Main page (static file)        |
+| GET    | `/health`       | Server status + cache          |
+| GET    | `/signs`        | List of zodiac signs           |
+| GET    | `/planets`      | List of planets                |
+| POST   | `/chart`        | Calculate natal chart          |
+| GET    | `/chart/example`| Example chart                  |
 
-### Ejemplo POST /chart
+### POST /chart Example
 ```json
 {
   "name": "Carlos",
@@ -198,40 +198,40 @@ sass styles.scss styles.css --watch
 
 ---
 
-## Tareas Pendientes (Backlog)
+## Pending Tasks (Backlog)
 
-### Prioridad Alta
-- [ ] Verificar que biorritmos funcionen correctamente en produccion
+### High Priority
+- [ ] Verify biorhythms work correctly in production
 
-### Prioridad Media
-- [ ] Exportar carta a PDF nativo (actualmente usa window.print())
-- [ ] Mejorar responsive en tablets
+### Medium Priority
+- [ ] Export chart to native PDF (currently uses window.print())
+- [ ] Improve responsive on tablets
 
-### Prioridad Baja / Futuro
-- [ ] Transitos planetarios (posiciones actuales vs carta natal)
-- [ ] Comparacion de cartas (sinastria)
-- [ ] Calendario mensual del Ciclo del Adepto
+### Low Priority / Future
+- [ ] Planetary transits (current positions vs natal chart)
+- [ ] Chart comparison (synastry)
+- [ ] Monthly calendar of Adept Cycle
 - [ ] PWA (Progressive Web App)
-- [ ] Modo claro/oscuro toggle
+- [ ] Light/dark mode toggle
 
 ---
 
-## Notas Importantes
+## Important Notes
 
-1. **El archivo `.env` contiene las credenciales FTP** - nunca commitear
-2. **El password del VPS esta hardcoded en `deploy.sh`** - considerar usar ssh keys
-3. **Las interpretaciones estan en espanol** - el backend no tiene i18n todavia
-4. **El frontend detecta el idioma automaticamente** (URL param > localStorage > navigator.language > 'en')
-
----
-
-## Filosofia del Proyecto
-
-> "Tu carta natal es un mapa, no un destino. El mapa no camina el camino por ti."
-> - Ensenanzas de Ra
-
-Este proyecto combina la precision astronomica de Swiss Ephemeris con las ensenanzas espirituales del Material Ra. Cada ciclo y aspecto es una invitacion a elegir, no una prediccion fija.
+1. **The `.env` file contains FTP credentials** - never commit
+2. **VPS password is hardcoded in `deploy.sh`** - consider using ssh keys
+3. **Interpretations are in Spanish** - backend doesn't have i18n yet
+4. **Frontend detects language automatically** (URL param > localStorage > navigator.language > 'en')
 
 ---
 
-*Documentacion generada el 31 de diciembre de 2025*
+## Project Philosophy
+
+> "Your natal chart is a map, not a destination. The map doesn't walk the path for you."
+> - Ra's Teachings
+
+This project combines the astronomical precision of Swiss Ephemeris with the spiritual teachings of the Ra Material. Each cycle and aspect is an invitation to choose, not a fixed prediction.
+
+---
+
+*Documentation generated December 31, 2025*
