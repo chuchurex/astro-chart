@@ -124,6 +124,9 @@ astro.cl/
 - User: `root`
 - Password: in `.env` and `deploy.sh` (hardcoded for now)
 - Docker Port: 8001
+- SSL: Let's Encrypt certificate (auto-renews)
+- Cloudflare SSL Mode: Full (HTTPS end-to-end)
+- Cloudflare Proxy: Disabled (DNS only, gray cloud)
 
 ---
 
@@ -198,14 +201,27 @@ sass styles.scss styles.css --watch
 
 ---
 
+## Recent Changes (2026-01-05)
+
+### ✅ Completed
+- [x] Configured SSL/HTTPS for api.astro.chuchurex.cl with Let's Encrypt
+- [x] Fixed Mixed Content errors (HTTP API calls from HTTPS frontend)
+- [x] Updated footer to link to chuchurex.cl
+- [x] Fixed URL parameter parsing timing issues
+- [x] Added extensive debugging logs for troubleshooting
+- [x] Configured Cloudflare SSL mode: Full (end-to-end HTTPS)
+
 ## Pending Tasks (Backlog)
 
 ### High Priority
+- [ ] Re-enable Cloudflare Proxy for api.astro subdomain (currently DNS-only for testing)
+- [ ] Configure GitHub Actions secrets (CF_API_TOKEN, CF_ACCOUNT_ID) for auto-deploy
 - [ ] Verify biorhythms work correctly in production
 
 ### Medium Priority
 - [ ] Export chart to native PDF (currently uses window.print())
 - [ ] Improve responsive on tablets
+- [ ] Migrate VPS authentication to SSH keys (remove hardcoded password)
 
 ### Low Priority / Future
 - [ ] Planetary transits (current positions vs natal chart)
@@ -234,4 +250,4 @@ This project combines the astronomical precision of Swiss Ephemeris with the spi
 
 ---
 
-*Documentation generated December 31, 2025*
+*Last updated: January 5, 2026*
