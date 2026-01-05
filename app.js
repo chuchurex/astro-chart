@@ -356,6 +356,13 @@ function calculateChartLocally(data) {
 // === RENDERIZADO ===
 
 function renderResults(chartData) {
+    console.log('🎨 Renderizando resultados:', {
+        name: chartData.name,
+        sun: chartData.sun_sign,
+        moon: chartData.moon_sign,
+        asc: chartData.ascendant
+    });
+
     DOM.resultName.textContent = `Carta Astral de ${chartData.name}`;
     DOM.sunSign.textContent = chartData.sun_sign;
     DOM.moonSign.textContent = chartData.moon_sign;
@@ -1106,6 +1113,8 @@ function formatDateForInput(dateStr) {
 
 function fillFormFromURL() {
     const urlData = parseURLParams();
+    console.log('🔗 Datos parseados de URL:', urlData);
+
     if (!urlData) return false;
 
     if (urlData.name && DOM.nameInput) {
@@ -1115,14 +1124,18 @@ function fillFormFromURL() {
     if (urlData.date && DOM.birthDate) {
         // Convertir YYYYMMDD a DD/MM/YYYY para el input
         const formattedDate = formatDateForInput(urlData.date);
+        console.log('📅 Fecha formateada:', formattedDate);
         if (formattedDate) {
             const [y, m, d] = formattedDate.split('-');
-            DOM.birthDate.value = `${d}/${m}/${y}`;
+            const displayDate = `${d}/${m}/${y}`;
+            DOM.birthDate.value = displayDate;
+            console.log('📅 Fecha asignada al input:', displayDate);
         }
     }
 
     if (urlData.time && DOM.birthTime) {
         DOM.birthTime.value = urlData.time;
+        console.log('⏰ Hora asignada:', urlData.time);
     }
 
     if (urlData.lat && DOM.latitudeInput) {
