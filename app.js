@@ -6,10 +6,10 @@
 
 // === CONFIGURACIÓN ===
 const CONFIG = {
-    // En producción usa Vultr (Chile) con HTTPS, en desarrollo usa localhost
+    // En producción usa Vultr (Chile), en desarrollo usa localhost
     API_URL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://localhost:8001'
-        : 'https://api.chuchurex.cl', // TODO: change to api.astro.chuchurex.cl after backend migration
+        : 'http://api.astro.chuchurex.cl',
     DEFAULT_TIMEZONE: 'America/Santiago'
 };
 
