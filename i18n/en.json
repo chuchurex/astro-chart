@@ -47,8 +47,7 @@
   "footer": {
     "calculations": "Astronomical calculations: Swiss Ephemeris",
     "cycles": "Adept Cycles: Ra Material (L/L Research)",
-    "developed": "Developed by",
-    "and": "and"
+    "developed": "Developed by"
   },
   "a11y": {
     "skip_to_form": "Skip to form",
