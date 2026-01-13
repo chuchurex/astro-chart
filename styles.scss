@@ -32,7 +32,9 @@ $transition-medium: 0.4s ease;
 $transition-slow: 0.8s ease;
 
 // === RESET & BASE ===
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -66,9 +68,11 @@ body {
 
 @function create-stars($n) {
   $value: '#{random(2000)}px #{random(2000)}px #FFF';
+
   @for $i from 2 through $n {
     $value: '#{$value}, #{random(2000)}px #{random(2000)}px #FFF';
   }
+
   @return unquote($value);
 }
 
@@ -78,7 +82,7 @@ body {
   background: transparent;
   box-shadow: create-stars(700);
   animation: animStar 50s linear infinite;
-  
+
   &::after {
     content: "";
     position: absolute;
@@ -96,7 +100,7 @@ body {
   background: transparent;
   box-shadow: create-stars(200);
   animation: animStar 100s linear infinite;
-  
+
   &::after {
     content: "";
     position: absolute;
@@ -114,7 +118,7 @@ body {
   background: transparent;
   box-shadow: create-stars(100);
   animation: animStar 150s linear infinite;
-  
+
   &::after {
     content: "";
     position: absolute;
@@ -127,8 +131,13 @@ body {
 }
 
 @keyframes animStar {
-  from { transform: translateY(0px); }
-  to { transform: translateY(-2000px); }
+  from {
+    transform: translateY(0px);
+  }
+
+  to {
+    transform: translateY(-2000px);
+  }
 }
 
 // === LAYOUT ===
@@ -154,19 +163,19 @@ body {
   align-items: center;
   background: linear-gradient(to bottom, rgba(10, 10, 18, 0.95), transparent);
   backdrop-filter: blur(10px);
-  
+
   &__logo {
     display: flex;
     align-items: center;
     gap: 12px;
   }
-  
+
   &__symbol {
     font-size: 28px;
     color: $color-gold;
     text-shadow: 0 0 20px rgba($color-gold, 0.5);
   }
-  
+
   &__title {
     font-family: $font-display;
     font-size: 24px;
@@ -175,12 +184,12 @@ body {
     text-transform: uppercase;
     color: $color-text;
   }
-  
+
   &__nav {
     display: flex;
     gap: 32px;
   }
-  
+
   &__link {
     font-family: $font-display;
     font-size: 14px;
@@ -189,7 +198,7 @@ body {
     color: $color-text-muted;
     text-decoration: none;
     transition: color $transition-fast;
-    
+
     &:hover {
       color: $color-gold;
     }
@@ -205,7 +214,7 @@ body {
   text-align: center;
   padding: 120px 24px 60px;
   position: relative;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -217,12 +226,12 @@ body {
     background: radial-gradient(circle, rgba($color-celestial, 0.15) 0%, transparent 70%);
     pointer-events: none;
   }
-  
+
   &__content {
     position: relative;
     z-index: 1;
   }
-  
+
   &__title {
     font-family: $font-display;
     font-size: clamp(36px, 6vw, 64px);
@@ -235,7 +244,7 @@ body {
     background-clip: text;
     text-shadow: none;
   }
-  
+
   &__subtitle {
     font-size: 20px;
     font-style: italic;
@@ -256,7 +265,7 @@ body {
   border-radius: $radius-lg;
   padding: 48px;
   backdrop-filter: blur(10px);
-  
+
   // Decoración Art Deco
   &::before {
     content: '✧';
@@ -269,7 +278,7 @@ body {
     background: $color-bg-deep;
     padding: 0 16px;
   }
-  
+
   position: relative;
 }
 
@@ -284,11 +293,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  
+
   &--full {
     grid-column: 1 / -1;
   }
-  
+
   &--coords {
     // Mostrar coordenadas más pequeñas
   }
@@ -311,11 +320,11 @@ body {
   border-radius: $radius-md;
   color: $color-text;
   transition: all $transition-fast;
-  
+
   &::placeholder {
     color: $color-text-muted;
   }
-  
+
   &:focus {
     outline: none;
     border-color: $color-gold;
@@ -341,11 +350,11 @@ body {
   transition: all $transition-medium;
   position: relative;
   overflow: hidden;
-  
+
   &--primary {
     background: linear-gradient(135deg, $color-gold, darken($color-gold, 10%));
     color: $color-bg-deep;
-    
+
     &::before {
       content: '';
       position: absolute;
@@ -353,24 +362,24 @@ body {
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
       transition: left 0.5s;
     }
-    
+
     &:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 40px rgba($color-gold, 0.4);
-      
+
       &::before {
         left: 100%;
       }
     }
-    
+
     &:active {
       transform: translateY(0);
     }
   }
-  
+
   &__icon {
     font-size: 18px;
     animation: pulse 2s infinite;
@@ -378,8 +387,15 @@ body {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
 }
 
 // === LOADER ===
@@ -394,15 +410,15 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  
+
   &.hidden {
     display: none;
   }
-  
+
   &__spinner {
     text-align: center;
   }
-  
+
   &__ring {
     width: 80px;
     height: 80px;
@@ -412,7 +428,7 @@ body {
     animation: spin 1s linear infinite;
     margin: 0 auto 24px;
   }
-  
+
   &__text {
     font-family: $font-display;
     font-size: 16px;
@@ -422,22 +438,24 @@ body {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 // === RESULTADOS ===
 .results {
   padding: 80px 0;
-  
+
   &.hidden {
     display: none;
   }
-  
+
   &__header {
     text-align: center;
     margin-bottom: 60px;
   }
-  
+
   &__name {
     font-family: $font-display;
     font-size: 36px;
@@ -453,7 +471,7 @@ body {
   justify-content: center;
   gap: 60px;
   flex-wrap: wrap;
-  
+
   &__item {
     display: flex;
     flex-direction: column;
@@ -465,20 +483,20 @@ body {
     border-radius: $radius-lg;
     min-width: 160px;
     transition: all $transition-medium;
-    
+
     &:hover {
       border-color: $color-gold;
       transform: translateY(-4px);
       box-shadow: 0 10px 40px rgba($color-gold, 0.15);
     }
   }
-  
+
   &__symbol {
     font-size: 32px;
     color: $color-gold;
     text-shadow: 0 0 20px rgba($color-gold, 0.5);
   }
-  
+
   &__label {
     font-family: $font-display;
     font-size: 11px;
@@ -486,7 +504,7 @@ body {
     text-transform: uppercase;
     color: $color-text-muted;
   }
-  
+
   &__sign {
     font-family: $font-display;
     font-size: 20px;
@@ -511,7 +529,7 @@ body {
   border: 1px solid rgba($color-gold, 0.2);
   border-radius: $radius-round;
   padding: 20px;
-  
+
   svg {
     width: 100%;
     height: 100%;
@@ -526,13 +544,13 @@ body {
   text-align: center;
   margin-bottom: 40px;
   color: $color-gold;
-  
+
   &::before,
   &::after {
     content: '─── ';
     color: rgba($color-gold, 0.3);
   }
-  
+
   &::after {
     content: ' ───';
   }
@@ -557,23 +575,23 @@ body {
   border: 1px solid rgba($color-gold, 0.15);
   border-radius: $radius-md;
   transition: all $transition-fast;
-  
+
   &:hover {
     border-color: rgba($color-gold, 0.4);
     background: rgba($color-gold, 0.05);
   }
-  
+
   &__symbol {
     font-size: 24px;
     width: 40px;
     text-align: center;
     color: $color-gold;
   }
-  
+
   &__info {
     flex: 1;
   }
-  
+
   &__name {
     font-family: $font-display;
     font-size: 12px;
@@ -581,12 +599,12 @@ body {
     text-transform: uppercase;
     color: $color-text-muted;
   }
-  
+
   &__position {
     font-size: 18px;
     color: $color-text;
   }
-  
+
   &__house {
     font-size: 14px;
     color: $color-text-muted;
@@ -605,7 +623,7 @@ body {
   padding: 32px 40px;
   margin-bottom: 24px;
   position: relative;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -616,27 +634,27 @@ body {
     background: linear-gradient(to bottom, $color-gold, transparent);
     border-radius: $radius-lg 0 0 $radius-lg;
   }
-  
+
   &__header {
     display: flex;
     align-items: center;
     gap: 16px;
     margin-bottom: 16px;
   }
-  
+
   &__symbol {
     font-size: 28px;
     color: $color-gold;
     text-shadow: 0 0 15px rgba($color-gold, 0.4);
   }
-  
+
   &__title {
     font-family: $font-display;
     font-size: 18px;
     letter-spacing: 2px;
     color: $color-text;
   }
-  
+
   &__text {
     font-size: 18px;
     line-height: 1.8;
@@ -833,13 +851,33 @@ body {
     height: 24px;
     border-radius: 50%;
 
-    &--fire { background: linear-gradient(135deg, #e74c3c, #f39c12); }
-    &--earth { background: linear-gradient(135deg, #27ae60, #2ecc71); }
-    &--air { background: linear-gradient(135deg, #3498db, #9b59b6); }
-    &--water { background: linear-gradient(135deg, #9b59b6, #3498db); }
-    &--cardinal { background: linear-gradient(135deg, #e67e22, #d35400); }
-    &--fixed { background: linear-gradient(135deg, #2980b9, #3498db); }
-    &--mutable { background: linear-gradient(135deg, #1abc9c, #16a085); }
+    &--fire {
+      background: linear-gradient(135deg, #e74c3c, #f39c12);
+    }
+
+    &--earth {
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+    }
+
+    &--air {
+      background: linear-gradient(135deg, #3498db, #9b59b6);
+    }
+
+    &--water {
+      background: linear-gradient(135deg, #9b59b6, #3498db);
+    }
+
+    &--cardinal {
+      background: linear-gradient(135deg, #e67e22, #d35400);
+    }
+
+    &--fixed {
+      background: linear-gradient(135deg, #2980b9, #3498db);
+    }
+
+    &--mutable {
+      background: linear-gradient(135deg, #1abc9c, #16a085);
+    }
   }
 
   &__label {
@@ -889,13 +927,33 @@ body {
     border-radius: 4px;
     transition: width 0.6s ease;
 
-    &--fire { background: linear-gradient(90deg, #e74c3c, #f39c12); }
-    &--earth { background: linear-gradient(90deg, #27ae60, #2ecc71); }
-    &--air { background: linear-gradient(90deg, #3498db, #9b59b6); }
-    &--water { background: linear-gradient(90deg, #9b59b6, #3498db); }
-    &--cardinal { background: linear-gradient(90deg, #e67e22, #d35400); }
-    &--fixed { background: linear-gradient(90deg, #2980b9, #3498db); }
-    &--mutable { background: linear-gradient(90deg, #1abc9c, #16a085); }
+    &--fire {
+      background: linear-gradient(90deg, #e74c3c, #f39c12);
+    }
+
+    &--earth {
+      background: linear-gradient(90deg, #27ae60, #2ecc71);
+    }
+
+    &--air {
+      background: linear-gradient(90deg, #3498db, #9b59b6);
+    }
+
+    &--water {
+      background: linear-gradient(90deg, #9b59b6, #3498db);
+    }
+
+    &--cardinal {
+      background: linear-gradient(90deg, #e67e22, #d35400);
+    }
+
+    &--fixed {
+      background: linear-gradient(90deg, #2980b9, #3498db);
+    }
+
+    &--mutable {
+      background: linear-gradient(90deg, #1abc9c, #16a085);
+    }
   }
 
   &__value {
@@ -1059,10 +1117,21 @@ body {
     min-width: 40px;
     text-align: right;
 
-    &.high { color: #10B981; }
-    &.low { color: #EF4444; }
-    &.neutral { color: $color-text-muted; }
-    &.critical { color: #F59E0B; }
+    &.high {
+      color: #10B981;
+    }
+
+    &.low {
+      color: #EF4444;
+    }
+
+    &.neutral {
+      color: $color-text-muted;
+    }
+
+    &.critical {
+      color: #F59E0B;
+    }
   }
 
   &__description {
@@ -1089,13 +1158,13 @@ body {
   padding: 60px 0;
   text-align: center;
   border-top: 1px solid rgba($color-gold, 0.1);
-  
+
   &__text {
     font-size: 14px;
     color: $color-text-muted;
     margin-bottom: 8px;
   }
-  
+
   &__credits {
     font-family: $font-display;
     font-size: 12px;
@@ -1113,29 +1182,29 @@ body {
 @media (max-width: 768px) {
   .header {
     padding: 16px 20px;
-    
+
     &__nav {
       display: none;
     }
   }
-  
+
   .form-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .birth-form {
     padding: 32px 24px;
   }
-  
+
   .big-three {
     gap: 20px;
-    
+
     &__item {
       padding: 20px 24px;
       min-width: 140px;
     }
   }
-  
+
   .interpretation-card {
     padding: 24px;
   }

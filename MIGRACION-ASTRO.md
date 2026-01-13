@@ -61,10 +61,11 @@ Read CONTEXT.md for more project context.
 - [x] Update CORS origins (app.py lines 53-60 - includes backward compatibility)
 - [x] Update .env.example (lines 4-5)
 
-### Cloudflare ⏳ MANUAL STEPS REQUIRED
-- [ ] Create astro-chuchurex project in CF Pages
-- [ ] Configure custom domain astro.chuchurex.cl
-- [ ] Configure DNS A/CNAME records in Cloudflare
+### Cloudflare ✅ COMPLETED
+- [x] Create astro-chuchurex project in CF Pages
+- [x] Deploy to Cloudflare Pages (https://astro-chuchurex.pages.dev)
+- [ ] Configure custom domain astro.chuchurex.cl (requires web dashboard)
+- [ ] Configure DNS A/CNAME records in Cloudflare (automatic after domain setup)
 
 ### VPS ⏳ MANUAL STEPS REQUIRED
 - [ ] Update nginx config for api.astro.chuchurex.cl

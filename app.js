@@ -224,16 +224,16 @@ async function geocodeCity(city) {
             `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`,
             { headers: { 'Accept-Language': 'es' } }
         );
-        
+
         const data = await response.json();
-        
+
         if (data.length > 0) {
             return {
                 lat: parseFloat(data[0].lat),
                 lon: parseFloat(data[0].lon)
             };
         }
-        
+
         throw new Error('Ciudad no encontrada');
     } catch (error) {
         console.error('Error en geocodificación:', error);
@@ -250,7 +250,7 @@ async function calculateChart(birthData) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(birthData)
         });
-        
+
         if (!response.ok) throw new Error('Error en el servidor');
         return await response.json();
     } catch (error) {
@@ -268,7 +268,7 @@ function calculateSunSign(month, day) {
         [7, 23, 'Cáncer'], [8, 23, 'Leo'], [9, 23, 'Virgo'],
         [10, 23, 'Libra'], [11, 22, 'Escorpio'], [12, 22, 'Sagitario']
     ];
-    
+
     for (let i = 0; i < dates.length; i++) {
         const [m, d, sign] = dates[i];
         if (month === m && day < d) {
@@ -286,15 +286,15 @@ function calculateMoonSign(year, month, day) {
         'Leo', 'Virgo', 'Libra', 'Escorpio',
         'Sagitario', 'Capricornio', 'Acuario', 'Piscis'
     ];
-    
+
     const baseDate = new Date(2000, 0, 1);
     const birthDate = new Date(year, month - 1, day);
     const daysDiff = Math.floor((birthDate - baseDate) / (1000 * 60 * 60 * 24));
-    
+
     const moonCycle = 27.3;
     const position = (daysDiff % moonCycle) / moonCycle * 12;
     const signIndex = Math.floor(Math.abs(position)) % 12;
-    
+
     return signs[signIndex];
 }
 
@@ -304,11 +304,11 @@ function calculateAscendant(hour, month) {
         'Leo', 'Virgo', 'Libra', 'Escorpio',
         'Sagitario', 'Capricornio', 'Acuario', 'Piscis'
     ];
-    
+
     const sunSignIndex = (month - 1) % 12;
     const hourOffset = Math.floor((hour - 6) / 2);
     const ascIndex = (sunSignIndex + hourOffset + 12) % 12;
-    
+
     return signs[ascIndex];
 }
 
@@ -316,15 +316,15 @@ function calculateChartLocally(data) {
     const sunSign = calculateSunSign(data.month, data.day);
     const moonSign = calculateMoonSign(data.year, data.month, data.day);
     const ascendant = calculateAscendant(data.hour, data.month);
-    
+
     const signs = [
         'Aries', 'Tauro', 'Géminis', 'Cáncer',
         'Leo', 'Virgo', 'Libra', 'Escorpio',
         'Sagitario', 'Capricornio', 'Acuario', 'Piscis'
     ];
-    
+
     const sunIndex = signs.indexOf(sunSign);
-    
+
     const planets = [
         { name: 'Sol', sign: sunSign, degree: 15, house: 1 },
         { name: 'Luna', sign: moonSign, degree: 20, house: 4 },
@@ -337,7 +337,7 @@ function calculateChartLocally(data) {
         { name: 'Neptuno', sign: signs[(sunIndex + 9) % 12], degree: 22, house: 10 },
         { name: 'Plutón', sign: signs[(sunIndex + 10) % 12], degree: 28, house: 11 }
     ];
-    
+
     return {
         name: data.name,
         sun_sign: sunSign,
@@ -538,8 +538,8 @@ function renderBiorhythms(biorhythms) {
                 <div class="biorhythm-cycle__header">
                     <span class="biorhythm-cycle__name">${cycle.name}</span>
                     ${isSpiritual
-                        ? `<span class="biorhythm-cycle__quality" style="color: ${cycle.color}">${cycle.symbol} ${cycle.quality}</span>`
-                        : `<span class="biorhythm-cycle__trend" style="color: ${trend.color}">${trend.symbol} ${trend.label}</span>`}
+                ? `<span class="biorhythm-cycle__quality" style="color: ${cycle.color}">${cycle.symbol} ${cycle.quality}</span>`
+                : `<span class="biorhythm-cycle__trend" style="color: ${trend.color}">${trend.symbol} ${trend.label}</span>`}
                     <span class="biorhythm-cycle__day">Día ${cycle.current_day}/${cycle.duration}</span>
                 </div>
                 <div class="biorhythm-cycle__bar">
@@ -604,7 +604,7 @@ function getTranslatedRaQuote(day) {
 }
 
 function getLevelIcon(level) {
-    switch(level) {
+    switch (level) {
         case 'BAJO': return '✓';
         case 'MODERADO': return '⚠';
         case 'ALTO': return '⚡';
@@ -666,16 +666,16 @@ function renderElementModality(elementModality) {
 
 function renderPlanets(planets) {
     DOM.planetsGrid.innerHTML = '';
-    
+
     planets.forEach(planet => {
         const card = document.createElement('div');
         card.className = 'planet-card';
-        
+
         const symbol = PLANET_SYMBOLS[planet.name] || '★';
-        const degree = typeof planet.degree === 'number' ? 
-            `${Math.floor(planet.degree)}°${Math.floor((planet.degree % 1) * 60)}'` : 
+        const degree = typeof planet.degree === 'number' ?
+            `${Math.floor(planet.degree)}°${Math.floor((planet.degree % 1) * 60)}'` :
             planet.degree;
-        
+
         card.innerHTML = `
             <span class="planet-card__symbol">${symbol}</span>
             <div class="planet-card__info">
@@ -684,7 +684,7 @@ function renderPlanets(planets) {
                 <span class="planet-card__house">Casa ${planet.house}</span>
             </div>
         `;
-        
+
         DOM.planetsGrid.appendChild(card);
     });
 }
@@ -1027,7 +1027,7 @@ async function handleFormSubmit(event) {
 
 async function handleCityChange(event) {
     const city = event.target.value;
-    
+
     if (city.length > 3) {
         const coords = await geocodeCity(city);
         DOM.latitudeInput.value = coords.lat.toFixed(4);
@@ -1106,7 +1106,7 @@ function parseURLParams() {
 function formatDateForInput(dateStr) {
     // Convierte YYYYMMDD a YYYY-MM-DD
     if (dateStr && dateStr.length === 8) {
-        return `${dateStr.slice(0,4)}-${dateStr.slice(4,6)}-${dateStr.slice(6,8)}`;
+        return `${dateStr.slice(0, 4)}-${dateStr.slice(4, 6)}-${dateStr.slice(6, 8)}`;
     }
     return dateStr;
 }
@@ -1153,6 +1153,8 @@ function fillFormFromURL() {
     console.log('📋 Formulario pre-llenado desde URL:', urlData);
     return true;
 }
+
+
 
 // === INICIALIZACIÓN ===
 

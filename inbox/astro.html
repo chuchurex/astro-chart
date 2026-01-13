@@ -1,0 +1,244 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- Google Analytics -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-T0KJ3RVZ08"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-T0KJ3RVZ08');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chuchurex Astral | Chuchurex Astral</title>
+  <meta name="description" content="Calcula tu carta natal gratis con posiciones planetarias precisas, aspectos, casas y ciclos personales basados en las enseñanzas de Ra. Sin registro, sin costo.">
+  <meta name="keywords" content="carta natal, carta astral, horóscopo, astrología, signos zodiacales, ascendente, casas astrológicas, aspectos planetarios, ciclos personales, Ra, Law of One">
+  <meta name="author" content="chuchurex">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://astro.chuchurex.cl/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://astro.chuchurex.cl/">
+  <meta property="og:title" content="Chuchurex Astral | Carta Natal Gratis">
+  <meta property="og:description" content="Calcula tu carta natal gratis con posiciones planetarias precisas, aspectos y ciclos personales. Sin registro, sin costo.">
+  <meta property="og:image" content="https://astro.chuchurex.cl/share.jpeg">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="pt_BR">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://astro.chuchurex.cl/">
+  <meta name="twitter:title" content="Chuchurex Astral | Carta Natal Gratis">
+  <meta name="twitter:description" content="Calcula tu carta natal gratis con posiciones planetarias precisas, aspectos y ciclos personales.">
+  <meta name="twitter:image" content="https://astro.chuchurex.cl/share.jpeg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;☉&lt;/text&gt;&lt;/svg&gt;">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/@astrodraw/astrochart@3.0.2/dist/astrochart.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css?v=1767174372">
+  <link rel="stylesheet" href="styles/print.css" media="print">
+</head>
+
+<body>
+  <!-- Skip Links para accesibilidad -->
+  <a href="#birth-form" class="skip-link" data-i18n="a11y.skip_to_form">Skip to form</a>
+  <a href="#results" class="skip-link" data-i18n="a11y.skip_to_results">Skip to results</a>
+
+  <div class="stars-container">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+  </div>
+
+  <header class="header header--expanded" id="calculate" role="banner">
+    <div class="header__top">
+      <div class="header__logo">
+        <span class="header__symbol">☉</span>
+        <h1 class="header__title" data-i18n="header.title">Chuchurex Astral</h1>
+      </div>
+      <nav class="header__nav hidden" id="results-nav" role="navigation" aria-label="Navegación de resultados">
+        <a href="#results" class="header__link" data-i18n="nav.chart">Chart</a>
+        <a href="#interpretations" class="header__link" data-i18n="nav.planets">Planets</a>
+        <a href="#biorhythms-section" class="header__link" data-i18n="nav.cycles">Personal Cycles</a>
+      </nav>
+      <div class="lang-selector">
+        <button class="lang-btn lang-btn--active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="pt">PT</button>
+      </div>
+    </div>
+
+    <div class="header__form-container">
+      <p class="header__subtitle" id="form-title" data-i18n="header.subtitle">Enter your birth data</p>
+      <form id="birth-form" class="birth-form birth-form--compact" role="form" aria-labelledby="form-title">
+        <div class="form-grid form-grid--inline">
+          <div class="form-group">
+            <label for="name" class="form-label" data-i18n="form.name">Name</label>
+            <input type="text" id="name" name="name" class="form-input" data-i18n-placeholder="form.name_placeholder" placeholder="Your name" required="">
+          </div>
+
+          <div class="form-group">
+            <label for="birth-date" class="form-label" data-i18n="form.date">Date of birth</label>
+            <input type="text" id="birth-date" name="birthDate" class="form-input" data-i18n-placeholder="form.date_placeholder" placeholder="15/03/1985" autocomplete="bday" inputmode="numeric" required="" max="2026-01-07">
+          </div>
+
+          <div class="form-group">
+            <label for="birth-time" class="form-label" data-i18n="form.time">Time of birth</label>
+            <input type="text" id="birth-time" name="birthTime" class="form-input" data-i18n-placeholder="form.time_placeholder" placeholder="14:30" inputmode="numeric" required="">
+          </div>
+
+          <div class="form-group">
+            <label for="city" class="form-label" data-i18n="form.city">City</label>
+            <div class="city-autocomplete-wrapper"><input type="text" id="city" name="city" class="form-input" data-i18n-placeholder="form.city_placeholder" placeholder="e.g. New York, USA" autocomplete="off" required="">
+              <ul class="city-suggestions" role="listbox" hidden=""></ul>
+            </div>
+          </div>
+
+          <input type="hidden" id="latitude" name="latitude" value="-33.4489">
+          <input type="hidden" id="longitude" name="longitude" value="-70.6693">
+
+          <div class="form-group form-group--btn">
+            <button type="submit" class="btn btn--primary" id="calculate-btn">
+              <span class="btn__text" data-i18n="form.calculate">Calculate</span>
+              <span class="btn__icon">✧</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </header>
+
+  <div id="loader" class="loader hidden" role="status" aria-live="polite" aria-label="Cargando">
+    <div class="loader__spinner">
+      <div class="loader__ring"></div>
+      <span class="loader__text" data-i18n="loader.text">Consulting the stars...</span>
+    </div>
+  </div>
+
+  <main id="results" class="results hidden" role="main" aria-label="Resultados de la carta natal">
+    <div class="container">
+      <div class="results__header">
+        <div class="results__actions">
+          <button id="share-btn" class="btn btn--share" title="Share">
+            <span class="btn__icon">🔗</span>
+            <span class="btn__text" data-i18n="results.share">Share</span>
+          </button>
+          <button id="pdf-btn" class="btn btn--pdf" title="Download PDF">
+            <span class="btn__icon">📄</span>
+            <span class="btn__text" data-i18n="results.pdf">PDF</span>
+          </button>
+        </div>
+        <h2 class="results__name" id="result-name" data-i18n="results.title">Your Natal Chart</h2>
+        <div class="big-three">
+          <div class="big-three__item">
+            <span class="big-three__symbol">☉</span>
+            <span class="big-three__label" data-i18n="results.sun">Sun</span>
+            <span class="big-three__sign" id="sun-sign">--</span>
+          </div>
+          <div class="big-three__item">
+            <span class="big-three__symbol">☽</span>
+            <span class="big-three__label" data-i18n="results.moon">Moon</span>
+            <span class="big-three__sign" id="moon-sign">--</span>
+          </div>
+          <div class="big-three__item">
+            <span class="big-three__symbol">↑</span>
+            <span class="big-three__label" data-i18n="results.ascendant">Ascendant</span>
+            <span class="big-three__sign" id="ascendant">--</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-section">
+        <h3 class="section-title" data-i18n="results.summary">Chart Summary</h3>
+        <div id="summary-container"></div>
+      </div>
+
+      <div class="chart-container">
+        <div id="chart" class="chart"></div>
+      </div>
+
+      <div class="planets-table" id="interpretations">
+        <h3 class="section-title" data-i18n="results.positions">Planetary Positions</h3>
+        <div class="planets-grid" id="planets-grid"></div>
+      </div>
+
+      <div class="interpretations interpretations--balance">
+        <h3 class="section-title" data-i18n="results.balance">Energy Balance</h3>
+        <p class="section-subtitle" data-i18n="results.balance_sub">The distribution of elements and modalities in your chart</p>
+        <div id="element-modality-container"></div>
+      </div>
+
+      <div class="interpretations">
+        <h3 class="section-title" data-i18n="results.essence">Your Essence: Sun, Moon and Ascendant</h3>
+
+        <article class="interpretation-card" id="sun-interpretation">
+          <header class="interpretation-card__header">
+            <span class="interpretation-card__symbol">☉</span>
+            <h4 class="interpretation-card__title" data-i18n="results.your_sun">Your Sun</h4>
+          </header>
+          <p class="interpretation-card__text"></p>
+        </article>
+
+        <article class="interpretation-card" id="moon-interpretation">
+          <header class="interpretation-card__header">
+            <span class="interpretation-card__symbol">☽</span>
+            <h4 class="interpretation-card__title" data-i18n="results.your_moon">Your Moon</h4>
+          </header>
+          <p class="interpretation-card__text"></p>
+        </article>
+
+        <article class="interpretation-card" id="asc-interpretation">
+          <header class="interpretation-card__header">
+            <span class="interpretation-card__symbol">↑</span>
+            <h4 class="interpretation-card__title" data-i18n="results.your_asc">Your Ascendant</h4>
+          </header>
+          <p class="interpretation-card__text"></p>
+        </article>
+      </div>
+
+      <div class="interpretations interpretations--planets hidden" id="planets-houses-section">
+        <h3 class="section-title" data-i18n="results.houses">Planets in Houses</h3>
+        <div id="planets-interpretations" class="planets-interpretations-grid"></div>
+      </div>
+
+      <div class="interpretations interpretations--aspects hidden" id="aspects-section">
+        <h3 class="section-title" data-i18n="results.aspects">Planetary Aspects</h3>
+        <p class="section-subtitle" data-i18n="results.aspects_sub">The relationships between your planets reveal inner dynamics</p>
+        <div id="aspects-interpretations" class="aspects-interpretations-grid"></div>
+      </div>
+
+      <div class="interpretations interpretations--biorhythms" id="biorhythms-section">
+        <h3 class="section-title" data-i18n="results.cycles">Personal Cycles</h3>
+        <p class="section-subtitle" data-i18n="results.cycles_sub">The rhythms of being according to Ra's teachings</p>
+        <div id="biorhythms-container"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <p class="footer__text">
+        <span data-i18n="footer.calculations">Astronomical calculations: Swiss Ephemeris</span> ·
+        <span data-i18n="footer.cycles">Adept Cycles: Ra Material (L/L Research)</span>
+      </p>
+      <p class="footer__credits">
+        <span data-i18n="footer.developed">Developed by</span> <a href="https://chuchurex.cl" target="_blank" rel="noopener" class="footer__link">chuchurex</a> · 2025
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js?v=1767174372"></script>
+
+
+</body>
+
+</html>

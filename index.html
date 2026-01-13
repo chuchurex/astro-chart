@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-T0KJ3RVZ08"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-T0KJ3RVZ08');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-T0KJ3RVZ08');
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chuchurex Astral | Carta Natal Gratis</title>
@@ -47,6 +48,7 @@
     <link rel="stylesheet" href="styles.css?v=1767174372">
     <link rel="stylesheet" href="styles/print.css" media="print">
 </head>
+
 <body>
     <!-- Skip Links para accesibilidad -->
     <a href="#birth-form" class="skip-link" data-i18n="a11y.skip_to_form">Saltar al formulario</a>
@@ -82,28 +84,22 @@
                 <div class="form-grid form-grid--inline">
                     <div class="form-group">
                         <label for="name" class="form-label" data-i18n="form.name">Name</label>
-                        <input type="text" id="name" name="name" class="form-input"
-                               data-i18n-placeholder="form.name_placeholder" placeholder="Your name" required>
+                        <input type="text" id="name" name="name" class="form-input" data-i18n-placeholder="form.name_placeholder" placeholder="Your name" required>
                     </div>
 
                     <div class="form-group">
                         <label for="birth-date" class="form-label" data-i18n="form.date">Date</label>
-                        <input type="text" id="birth-date" name="birthDate" class="form-input"
-                               data-i18n-placeholder="form.date_placeholder" placeholder="15/03/1985"
-                               autocomplete="bday" inputmode="numeric" required>
+                        <input type="text" id="birth-date" name="birthDate" class="form-input" data-i18n-placeholder="form.date_placeholder" placeholder="15/03/1985" autocomplete="bday" inputmode="numeric" required>
                     </div>
 
                     <div class="form-group">
                         <label for="birth-time" class="form-label" data-i18n="form.time">Time</label>
-                        <input type="text" id="birth-time" name="birthTime" class="form-input"
-                               data-i18n-placeholder="form.time_placeholder" placeholder="14:30"
-                               inputmode="numeric" required>
+                        <input type="text" id="birth-time" name="birthTime" class="form-input" data-i18n-placeholder="form.time_placeholder" placeholder="14:30" inputmode="numeric" required>
                     </div>
 
                     <div class="form-group">
                         <label for="city" class="form-label" data-i18n="form.city">City</label>
-                        <input type="text" id="city" name="city" class="form-input"
-                               data-i18n-placeholder="form.city_placeholder" placeholder="e.g. New York, USA" required>
+                        <input type="text" id="city" name="city" class="form-input" data-i18n-placeholder="form.city_placeholder" placeholder="e.g. New York, USA" required>
                     </div>
 
                     <input type="hidden" id="latitude" name="latitude" value="-33.4489">
@@ -241,4 +237,5 @@
 
     <script src="app.js?v=1767174372"></script>
 </body>
+
 </html>
