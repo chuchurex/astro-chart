@@ -1,20 +1,23 @@
-# Chuchurex Astral - Project Context
+# Mapa Natal - Project Context
 
 ## Summary
 
 Web application for **astrological natal charts** with personalized interpretations and biorhythm cycles based on Ra's teachings (Law of One).
 
 **Production URLs:**
-- Frontend: https://astro.chuchurex.cl
-- API Backend: https://api.astro.chuchurex.cl
+- Frontend: https://mapanatal.org
+- API Backend: https://api.mapanatal.org
 - Repository: https://github.com/chuchurex/astro-chart
+
+**Legacy URLs (redirect to new domain):**
+- https://astro.chuchurex.cl → https://mapanatal.org
 
 ---
 
 ## Architecture
 
 ```
-Frontend (astro.chuchurex.cl)        Backend (api.astro.chuchurex.cl)
+Frontend (mapanatal.org)             Backend (api.mapanatal.org)
 ┌──────────────────────┐             ┌──────────────────────┐
 │   Cloudflare Pages   │   HTTPS     │   Vultr VPS Chile    │
 │   (Auto-deploy)      │ ─────────── │   64.176.12.233      │
@@ -157,18 +160,50 @@ git push origin main
 
 ## Local Development
 
+### Método Recomendado: Live Reload (browser-sync)
+
 ```bash
-# Activate virtual environment
+# Iniciar servidor con auto-refresh del navegador
+./dev-local.sh
+```
+
+Este script:
+- Usa **browser-sync** para refrescar automáticamente el navegador cuando cambias HTML, CSS o JS
+- Compila SASS automáticamente si está instalado
+- Abre el navegador en http://localhost:3000
+
+**Requisitos:**
+- Node.js (ya instalado)
+- browser-sync (se instala automáticamente si no existe)
+
+### Método Alternativo: Servidor Python (sin live-reload)
+
+```bash
+# Solo si necesitas un servidor simple sin auto-refresh
+python3 -m http.server 3000
+```
+
+### Backend Local (opcional)
+
+```bash
+# Activar entorno virtual
 source venv/bin/activate
 
-# Backend (port 8001)
+# Iniciar API en puerto 8001
 uvicorn app:app --reload --port 8001
+```
 
-# Frontend (port 3000)
-python -m http.server 3000
+**Nota:** Por defecto el frontend usa la API de producción (`https://api.astro.chuchurex.cl`).
+Para usar el backend local, edita `app.js` línea ~50 y cambia `API_BASE_URL` a `http://localhost:8001`.
 
-# Compile SASS
-sass styles.scss styles.css --watch
+### Compilar SASS manualmente
+
+```bash
+# Una vez
+sass scss/main.scss styles.css --style compressed
+
+# Watch mode
+sass --watch scss/main.scss:styles.css --style compressed
 ```
 
 ---

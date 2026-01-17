@@ -9,7 +9,7 @@ const CONFIG = {
     // En producción usa Vultr (Chile), en desarrollo usa localhost
     API_URL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://localhost:8001'
-        : 'https://api.astro.chuchurex.cl',
+        : 'https://api.mapanatal.org',
     DEFAULT_TIMEZONE: 'America/Santiago'
 };
 
