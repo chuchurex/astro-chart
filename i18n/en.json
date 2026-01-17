@@ -1,7 +1,8 @@
 {
   "header": {
     "title": "Birth Chart",
-    "intro": "At the moment of your birth, the configuration of the sky—planets, Sun, Moon—was imprinted upon you. Rudolf Steiner described it in 1911: the newborn's brain is a photograph of the celestial vault. We are born under lunar, planetary, and cosmic influences that mark us. In 2020, scientists from Bologna and Verona discovered that the neural network and the cosmic web share the same structure. Your birth chart is not superstition: it is the map of how the universe imprinted itself upon you."
+    "intro": "At the moment of your birth, the configuration of the sky—planets, Sun, Moon—was imprinted upon you. Rudolf Steiner described it in 1911: the newborn's brain is a photograph of the celestial vault. We are born under lunar, planetary, and cosmic influences that mark us. In 2020, scientists from Bologna and Verona discovered that the neural network and the cosmic web share the same structure. Your birth chart is not superstition: it is the map of how the universe imprinted itself upon you.",
+    "intro2": "But birth did not only leave a fixed imprint. It also initiated four cycles that pulse within you since then: physical (23 days), emotional (28 days), intellectual (33 days), and a fourth cycle revealed by Ra—the spiritual or adept cycle (18 days)—which governs your connection to the transcendent. This site calculates your birth chart and your current cycles, so you can know both your cosmic photograph and the inner tides flowing within you today."
   },
   "nav": {
     "chart": "Chart",
@@ -41,12 +42,14 @@
     "aspects_sub": "The relationships between your planets reveal inner dynamics",
     "cycles": "Personal Cycles",
     "cycles_sub": "The rhythms of being according to Ra's teachings",
+    "cycles_explanation": "The first three cycles were proposed in the West between the late 19th century and the 1920s by Wilhelm Fliess, Hermann Swoboda, and Alfred Teltscher. Although popular in the 70s, scientific studies have not been able to conclusively validate them. The fourth cycle—the 18-day spiritual cycle—comes exclusively from the Ra Material. Rather than predictions, these cycles are a tool for self-observation: a framework to notice patterns in your energy, mood, mental clarity, and spiritual openness. You can use them to choose favorable days for physical effort, important conversations, complex decisions, or meditative practice. Ra himself puts them in perspective: \"they are interesting but not critical.\" They determine nothing. They simply illuminate.",
     "share": "Share",
     "copied": "Copied!"
   },
   "footer": {
     "calculations": "Astronomical calculations: Swiss Ephemeris",
-    "cycles": "Adept Cycles: Ra Material (L/L Research)",
+    "cycles": "Adept Cycles: Ra Material",
+    "llresearch": "L/L Research",
     "developed": "Developed by"
   },
   "a11y": {

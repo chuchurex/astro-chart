@@ -1020,8 +1020,19 @@ a:focus-visible {
 .interpretations--biorhythms .section-subtitle {
   color: #b0b0c8;
   font-style: italic;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   font-size: 16px;
+}
+.cycles-explanation {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #c0c0d0;
+  margin-bottom: 32px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid rgba(255, 215, 0, 0.3);
+  border-radius: 4px;
 }
 
 .biorhythms__cycles {

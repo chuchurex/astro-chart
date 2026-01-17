@@ -1,7 +1,8 @@
 {
   "header": {
     "title": "Mapa Natal",
-    "intro": "No momento do seu nascimento, a configuração do céu—planetas, Sol, Lua—ficou impressa em você. Rudolf Steiner descreveu em 1911: o cérebro do recém-nascido é uma fotografia da abóbada celeste. Nascemos sob influências lunares, planetárias e cósmicas que nos marcam. Em 2020, cientistas de Bolonha e Verona descobriram que a rede neuronal e a rede cósmica compartilham a mesma estrutura. Seu mapa natal não é superstição: é o mapa de como o universo se imprimiu em você."
+    "intro": "No momento do seu nascimento, a configuração do céu—planetas, Sol, Lua—ficou impressa em você. Rudolf Steiner descreveu em 1911: o cérebro do recém-nascido é uma fotografia da abóbada celeste. Nascemos sob influências lunares, planetárias e cósmicas que nos marcam. Em 2020, cientistas de Bolonha e Verona descobriram que a rede neuronal e a rede cósmica compartilham a mesma estrutura. Seu mapa natal não é superstição: é o mapa de como o universo se imprimiu em você.",
+    "intro2": "Mas o nascimento não deixou apenas uma marca fixa. Também iniciou quatro ciclos que pulsam em você desde então: físico (23 dias), emocional (28 dias), intelectual (33 dias) e um quarto ciclo revelado por Ra—o espiritual ou do adepto (18 dias)—que governa sua conexão com o transcendente. Este site calcula seu mapa natal e seus ciclos atuais, para que você conheça tanto sua fotografia cósmica quanto as marés internas que fluem em você hoje."
   },
   "nav": {
     "chart": "Mapa",
@@ -41,12 +42,14 @@
     "aspects_sub": "As relações entre seus planetas revelam dinâmicas internas",
     "cycles": "Ciclos Pessoais",
     "cycles_sub": "Os ritmos do ser segundo os ensinamentos de Ra",
+    "cycles_explanation": "Os três primeiros ciclos foram propostos no Ocidente entre o final do século XIX e os anos 1920 por Wilhelm Fliess, Hermann Swoboda e Alfred Teltscher. Embora populares nos anos 70, os estudos científicos não conseguiram validá-los de forma conclusiva. O quarto ciclo—o espiritual de 18 dias—vem exclusivamente do Material Ra. Mais do que previsões, esses ciclos são uma ferramenta de auto-observação: uma estrutura para notar padrões em sua energia, humor, clareza mental e abertura espiritual. Você pode usá-los para escolher dias favoráveis para esforço físico, conversas importantes, decisões complexas ou prática meditativa. Ra mesmo os relativiza: \"são interessantes mas não críticos\". Eles não determinam nada. Simplesmente iluminam.",
     "share": "Compartilhar",
     "copied": "Copiado!"
   },
   "footer": {
     "calculations": "Cálculos astronômicos: Swiss Ephemeris",
-    "cycles": "Ciclos do Adepto: Material Ra (L/L Research)",
+    "cycles": "Ciclos do Adepto: Material Ra",
+    "llresearch": "L/L Research",
     "developed": "Desenvolvido por"
   },
   "a11y": {
