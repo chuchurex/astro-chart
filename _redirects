@@ -1,7 +1,4 @@
 # Cloudflare Pages Redirects
+# Redirect astro.chuchurex.cl to mapanatal.org (permanent 301)
 
-# Redirect www to apex domain
-https://www.chuchurex.cl/* https://chuchurex.cl/:splat 301
-
-# SPA fallback (si en el futuro usas rutas client-side)
-# /*    /index.html   200
+/* https://mapanatal.org/:splat 301
