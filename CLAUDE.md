@@ -122,6 +122,19 @@ astro.cl/
 - Deploy: Automatic on every push to `main`
 - Dashboard: https://dash.cloudflare.com/
 
+**Cloudflare Cache Purge Credentials:**
+To get CF_ZONE_ID and CF_API_TOKEN for cache purging:
+1. Go to https://dash.cloudflare.com/
+2. Select domain: mapanatal.org
+3. Zone ID is in the right sidebar (Overview tab)
+4. For API Token: Profile → API Tokens → Create Token
+   - Use template "Edit zone DNS" or create custom with "Cache Purge" permission
+5. Add to .env:
+   ```
+   export CF_ZONE_ID="your_zone_id_here"
+   export CF_API_TOKEN="your_api_token_here"
+   ```
+
 ### Backend - Vultr VPS (SSH)
 - IP: `64.176.12.233`
 - User: `root`
@@ -142,6 +155,23 @@ git commit -m "feat: change"
 git push origin main
 # Automatic deploy in ~30 seconds
 ```
+
+**IMPORTANT - Cache Purge:**
+After deploying frontend changes (especially JS/CSS), you MUST purge Cloudflare cache:
+
+```bash
+# Method 1: Using purge-cache.sh script (recommended if credentials configured)
+./purge-cache.sh
+
+# Method 2: Cloudflare Dashboard (always works)
+# 1. Go to https://dash.cloudflare.com/
+# 2. Select domain: mapanatal.org
+# 3. Go to "Caching" → "Configuration"
+# 4. Click "Purge Everything"
+```
+
+**Why this matters:** Without cache purge, users will see old cached versions of app.js/styles.css
+for hours until cache expires. This is especially critical for bug fixes in JavaScript logic.
 
 ### Backend (Manual)
 ```bash
