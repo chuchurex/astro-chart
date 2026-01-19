@@ -262,22 +262,34 @@ async function calculateChart(birthData) {
 // === CÁLCULOS LOCALES ===
 
 function calculateSunSign(month, day) {
+    // Cada entrada: [mes, día_límite, signo_que_empieza_ese_día]
+    // El día_límite es el ÚLTIMO día del signo anterior
+    // Ejemplo: [2, 18, 'Acuario'] = Acuario TERMINA el 18 de Feb, Piscis empieza el 19
     const dates = [
-        [1, 20, 'Capricornio'], [2, 19, 'Acuario'], [3, 21, 'Piscis'],
-        [4, 20, 'Aries'], [5, 21, 'Tauro'], [6, 21, 'Géminis'],
-        [7, 23, 'Cáncer'], [8, 23, 'Leo'], [9, 23, 'Virgo'],
-        [10, 23, 'Libra'], [11, 22, 'Escorpio'], [12, 22, 'Sagitario']
+        [1, 19, 'Capricornio'], // Capricornio: hasta 19 Ene
+        [2, 18, 'Acuario'],     // Acuario: 20 Ene - 18 Feb
+        [3, 20, 'Piscis'],      // Piscis: 19 Feb - 20 Mar
+        [4, 19, 'Aries'],       // Aries: 21 Mar - 19 Abr
+        [5, 20, 'Tauro'],       // Tauro: 20 Abr - 20 May
+        [6, 20, 'Géminis'],     // Géminis: 21 May - 20 Jun
+        [7, 22, 'Cáncer'],      // Cáncer: 21 Jun - 22 Jul
+        [8, 22, 'Leo'],         // Leo: 23 Jul - 22 Ago
+        [9, 22, 'Virgo'],       // Virgo: 23 Ago - 22 Sep
+        [10, 22, 'Libra'],      // Libra: 23 Sep - 22 Oct
+        [11, 21, 'Escorpio'],   // Escorpio: 23 Oct - 21 Nov
+        [12, 21, 'Sagitario']   // Sagitario: 22 Nov - 21 Dic
     ];
 
     for (let i = 0; i < dates.length; i++) {
         const [m, d, sign] = dates[i];
-        if (month === m && day < d) {
-            return i > 0 ? dates[i - 1][2] : 'Sagitario';
-        } else if (month === m) {
+        if (month === m && day <= d) {
             return sign;
+        } else if (month === m) {
+            // Estamos en el mes pero después del día límite → siguiente signo
+            return i < dates.length - 1 ? dates[i + 1][2] : 'Capricornio';
         }
     }
-    return 'Sagitario';
+    return 'Capricornio';
 }
 
 function calculateMoonSign(year, month, day) {
