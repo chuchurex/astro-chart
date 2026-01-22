@@ -348,17 +348,20 @@ function calculateChartLocally(data) {
     const sunIndex = signs.indexOf(sunSign);
 
     const planets = [
-        { name: 'Sol', sign: sunSign, degree: 15, house: 1 },
-        { name: 'Luna', sign: moonSign, degree: 20, house: 4 },
-        { name: 'Mercurio', sign: sunSign, degree: 10, house: 1 },
-        { name: 'Venus', sign: signs[(sunIndex + 1) % 12], degree: 25, house: 2 },
-        { name: 'Marte', sign: signs[(sunIndex + 2) % 12], degree: 8, house: 3 },
-        { name: 'Júpiter', sign: signs[(sunIndex + 4) % 12], degree: 12, house: 5 },
-        { name: 'Saturno', sign: signs[(sunIndex + 6) % 12], degree: 18, house: 7 },
-        { name: 'Urano', sign: signs[(sunIndex + 8) % 12], degree: 5, house: 9 },
-        { name: 'Neptuno', sign: signs[(sunIndex + 9) % 12], degree: 22, house: 10 },
-        { name: 'Plutón', sign: signs[(sunIndex + 10) % 12], degree: 28, house: 11 }
+        { name: 'Sol', sign: sunSign, degree: 15, house: 1, abs_pos: sunIndex * 30 + 15 },
+        { name: 'Luna', sign: moonSign, degree: 20, house: 4, abs_pos: signs.indexOf(moonSign) * 30 + 20 },
+        { name: 'Mercurio', sign: sunSign, degree: 10, house: 1, abs_pos: sunIndex * 30 + 10 },
+        { name: 'Venus', sign: signs[(sunIndex + 1) % 12], degree: 25, house: 2, abs_pos: ((sunIndex + 1) % 12) * 30 + 25 },
+        { name: 'Marte', sign: signs[(sunIndex + 2) % 12], degree: 8, house: 3, abs_pos: ((sunIndex + 2) % 12) * 30 + 8 },
+        { name: 'Júpiter', sign: signs[(sunIndex + 4) % 12], degree: 12, house: 5, abs_pos: ((sunIndex + 4) % 12) * 30 + 12 },
+        { name: 'Saturno', sign: signs[(sunIndex + 6) % 12], degree: 18, house: 7, abs_pos: ((sunIndex + 6) % 12) * 30 + 18 },
+        { name: 'Urano', sign: signs[(sunIndex + 8) % 12], degree: 5, house: 9, abs_pos: ((sunIndex + 8) % 12) * 30 + 5 },
+        { name: 'Neptuno', sign: signs[(sunIndex + 9) % 12], degree: 22, house: 10, abs_pos: ((sunIndex + 9) % 12) * 30 + 22 },
+        { name: 'Plutón', sign: signs[(sunIndex + 10) % 12], degree: 28, house: 11, abs_pos: ((sunIndex + 10) % 12) * 30 + 28 }
     ];
+
+    // Calcular biorhythms localmente
+    const biorhythms = calculateBiorhythmsLocally(data.year, data.month, data.day);
 
     return {
         name: data.name,
@@ -371,7 +374,142 @@ function calculateChartLocally(data) {
             moon: `La Luna en ${moonSign} refleja tu mundo emocional interno, tus necesidades y cómo te nutres emocionalmente.`,
             ascendant: `El Ascendente en ${ascendant} define cómo te presentas al mundo y la primera impresión que das a los demás.`
         },
+        biorhythms: biorhythms,
         calculation_method: 'local'
+    };
+}
+
+function calculateBiorhythmsLocally(year, month, day) {
+    const birthDate = new Date(year, month - 1, day);
+    const today = new Date();
+    const daysAlive = Math.floor((today - birthDate) / (1000 * 60 * 60 * 24));
+
+    function getCycle(days, duration, name) {
+        const dayInCycle = days % duration;
+        const angle = (2 * Math.PI * days) / duration;
+        const value = Math.sin(angle);
+        const percentage = Math.round(value * 100);
+        const isCritical = dayInCycle === 0 || dayInCycle === Math.floor(duration / 2);
+
+        return {
+            name: name,
+            duration: duration,
+            current_day: dayInCycle + 1,
+            value: Math.round(value * 100) / 100,
+            percentage: percentage,
+            phase: value >= 0 && dayInCycle < duration / 4 ? 'ascenso' : value >= 0 ? 'descenso' : 'bajo',
+            is_critical: isCritical
+        };
+    }
+
+    function getSpiritualCycle(days) {
+        const dayInCycle = days % 18;
+        const dayDisplay = dayInCycle + 1;
+        const offset = 18 / 4 - 5;
+        const angle = (2 * Math.PI * (days + offset)) / 18;
+        const value = Math.sin(angle);
+
+        let quality, symbol, description, workRecommended, color;
+
+        if ([4, 5, 6].includes(dayDisplay)) {
+            quality = 'ÓPTIMO'; symbol = '⭐'; color = '#FFD700';
+            description = 'Días de máximo poder. Ideales para meditación profunda, rituales, trabajo energético.';
+            workRecommended = true;
+        } else if ([9, 10].includes(dayDisplay)) {
+            quality = 'CRÍTICO'; symbol = '🔄'; color = '#FF6B6B';
+            description = 'Transición de mitad de ciclo. Mayor vulnerabilidad. Autoobservación recomendada.';
+            workRecommended = false;
+        } else if ([18, 1].includes(dayDisplay)) {
+            quality = 'CRÍTICO'; symbol = '🔄'; color = '#FF6B6B';
+            description = 'Renovación del ciclo. Fragilidad en la transición. Evitar trabajos importantes.';
+            workRecommended = false;
+        } else if ([13, 14].includes(dayDisplay)) {
+            quality = 'NADIR'; symbol = '⬇️'; color = '#6B7280';
+            description = 'Valle del ciclo. Menor poder pero paradójicamente más estable. Ideal para descanso e integración.';
+            workRecommended = false;
+        } else if ([2, 3].includes(dayDisplay)) {
+            quality = 'ASCENSO'; symbol = '📈'; color = '#10B981';
+            description = 'Energía creciente. Buen momento para preparar trabajos espirituales.';
+            workRecommended = true;
+        } else if ([7, 8].includes(dayDisplay)) {
+            quality = 'DESCENSO'; symbol = '📉'; color = '#60A5FA';
+            description = 'Cerrando ventana óptima. Completar trabajos iniciados.';
+            workRecommended = true;
+        } else if ([11, 12].includes(dayDisplay)) {
+            quality = 'BAJO'; symbol = '📉'; color = '#9CA3AF';
+            description = 'Energía disminuida. Favorece actividades ligeras.';
+            workRecommended = false;
+        } else {
+            quality = 'RECUPERACIÓN'; symbol = '📈'; color = '#8B5CF6';
+            description = 'Ascenso desde el valle. Preparando el próximo ciclo.';
+            workRecommended = dayDisplay >= 16;
+        }
+
+        let raQuote = '';
+        if ([4, 5, 6].includes(dayDisplay)) {
+            raQuote = '"precisely the fourth, the fifth, and the sixth—when workings are most appropriately undertaken"';
+        } else if ([9, 10].includes(dayDisplay)) {
+            raQuote = '"passing from the ninth to the tenth... the adept will experience some difficulty"';
+        } else if ([18, 1].includes(dayDisplay)) {
+            raQuote = '"passing from the eighteenth to the first days"';
+        } else if ([13, 14].includes(dayDisplay)) {
+            raQuote = '"at its least powerful but will not be open to difficulties"';
+        }
+
+        return {
+            name: 'Espiritual / Adepto',
+            duration: 18,
+            current_day: dayDisplay,
+            value: Math.round(value * 100) / 100,
+            percentage: Math.round(value * 100),
+            quality: quality,
+            symbol: symbol,
+            description: description,
+            work_recommended: workRecommended,
+            color: color,
+            is_optimal: [4, 5, 6].includes(dayDisplay),
+            is_critical: [9, 10, 18, 1].includes(dayDisplay),
+            is_nadir: [13, 14].includes(dayDisplay),
+            ra_quote: raQuote
+        };
+    }
+
+    const cycles = {
+        physical: getCycle(daysAlive, 23, 'Físico'),
+        emotional: getCycle(daysAlive, 28, 'Emocional'),
+        intellectual: getCycle(daysAlive, 33, 'Intelectual'),
+        spiritual: getSpiritualCycle(daysAlive)
+    };
+
+    const criticalCycles = Object.entries(cycles)
+        .filter(([_, cycle]) => cycle.is_critical)
+        .map(([name, _]) => name);
+
+    let criticalLevel, criticalMessage;
+    if (criticalCycles.length === 0) {
+        criticalLevel = 'BAJO';
+        criticalMessage = 'Sin puntos críticos activos. Día estable para todo tipo de actividades.';
+    } else if (criticalCycles.length === 1) {
+        criticalLevel = 'MODERADO';
+        criticalMessage = `Transición en ciclo ${criticalCycles[0]}. Mayor consciencia recomendada.`;
+    } else {
+        criticalLevel = 'ALTO';
+        criticalMessage = `Ra advierte sobre transiciones simultáneas. Coinciden ${criticalCycles.length} puntos críticos. Día para autoobservación.`;
+    }
+
+    return {
+        days_alive: daysAlive,
+        cycles: cycles,
+        critical_analysis: {
+            level: criticalLevel,
+            cycles_in_critical: criticalCycles,
+            message: criticalMessage
+        },
+        ra_philosophy: {
+            map_not_destiny: 'Tu carta natal es un mapa, no un destino. El mapa no camina el camino por ti.',
+            water_nature: 'Tu naturaleza es como el agua — fácilmente impresionada y movida por las mareas cósmicas.',
+            free_will: 'Cada elección sigue siendo tuya. El libre albedrío es la ley primaria.'
+        }
     };
 }
 
