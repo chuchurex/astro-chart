@@ -552,7 +552,7 @@ function generateAspectInterpretationsLocally(aspects) {
 function generateSummaryLocally(sunSign, moonSign, ascendant, elementModality) {
     const ELEMENT_NAMES_LOCAL = { fire: 'Fuego', earth: 'Tierra', air: 'Aire', water: 'Agua' };
     const domEl = ELEMENT_NAMES_LOCAL[elementModality.elements.dominant];
-    return `Tu carta natal revela un Sol en ${sunSign} que define tu esencia, una Luna en ${moonSign} que guía tu mundo emocional, y un Ascendente en ${ascendant} que moldea cómo te perciben los demás. Con predominio del elemento ${domEl}, tu energía tiende hacia ${domEl === 'Fuego' ? 'la acción y la pasión' : domEl === 'Tierra' ? 'lo práctico y concreto' : domEl === 'Aire' ? 'las ideas y la comunicación' : 'la intuición y la profundidad emocional'}. Esta es una aproximación local — para cálculos astronómicos precisos con efemérides suizas, el servidor estará disponible pronto.`;
+    return `Tu carta natal revela un Sol en ${sunSign} que define tu esencia, una Luna en ${moonSign} que guía tu mundo emocional, y un Ascendente en ${ascendant} que moldea cómo te perciben los demás. Con predominio del elemento ${domEl}, tu energía tiende hacia ${domEl === 'Fuego' ? 'la acción y la pasión' : domEl === 'Tierra' ? 'lo práctico y concreto' : domEl === 'Aire' ? 'las ideas y la comunicación' : 'la intuición y la profundidad emocional'}.`;
 }
 
 function calculateBiorhythmsLocally(year, month, day) {
