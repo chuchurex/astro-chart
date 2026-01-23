@@ -1,0 +1,24 @@
+{
+    "name": "Mapa Natal - Carta Astral Gratis",
+    "short_name": "Mapa Natal",
+    "description": "Calcula tu carta natal con posiciones planetarias precisas, aspectos, casas y ciclos personales basados en las enseñanzas de Ra.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a12",
+    "theme_color": "#d4af37",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "lang": "es",
+    "categories": ["lifestyle", "education"]
+}

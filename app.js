@@ -13,6 +13,70 @@ const CONFIG = {
     DEFAULT_TIMEZONE: 'America/Santiago'
 };
 
+// === CHART CACHE (IndexedDB) ===
+const ChartCache = {
+    DB_NAME: 'MapaNatalCache',
+    DB_VERSION: 1,
+    STORE_NAME: 'charts',
+    db: null,
+
+    async open() {
+        if (this.db) return this.db;
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open(this.DB_NAME, this.DB_VERSION);
+            request.onupgradeneeded = (event) => {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains(this.STORE_NAME)) {
+                    db.createObjectStore(this.STORE_NAME, { keyPath: 'key' });
+                }
+            };
+            request.onsuccess = (event) => {
+                this.db = event.target.result;
+                resolve(this.db);
+            };
+            request.onerror = () => reject(request.error);
+        });
+    },
+
+    generateKey(birthData) {
+        const relevant = {
+            year: birthData.year,
+            month: birthData.month,
+            day: birthData.day,
+            hour: birthData.hour,
+            minute: birthData.minute,
+            latitude: parseFloat(birthData.latitude).toFixed(4),
+            longitude: parseFloat(birthData.longitude).toFixed(4)
+        };
+        return JSON.stringify(relevant);
+    },
+
+    async get(birthData) {
+        try {
+            const db = await this.open();
+            const key = this.generateKey(birthData);
+            return new Promise((resolve) => {
+                const tx = db.transaction(this.STORE_NAME, 'readonly');
+                const store = tx.objectStore(this.STORE_NAME);
+                const request = store.get(key);
+                request.onsuccess = () => resolve(request.result ? request.result.data : null);
+                request.onerror = () => resolve(null);
+            });
+        } catch (e) {
+            return null;
+        }
+    },
+
+    async set(birthData, chartData) {
+        try {
+            const db = await this.open();
+            const key = this.generateKey(birthData);
+            const tx = db.transaction(this.STORE_NAME, 'readwrite');
+            tx.objectStore(this.STORE_NAME).put({ key, data: chartData, timestamp: Date.now() });
+        } catch (e) { /* silent */ }
+    }
+};
+
 // === SÍMBOLOS PLANETARIOS ===
 const PLANET_SYMBOLS = {
     'Sol': '☉',
@@ -244,17 +308,40 @@ async function geocodeCity(city) {
 // === API ===
 
 async function calculateChart(birthData) {
+    // Nivel 1: Buscar en cache (resultado preciso guardado)
+    const cached = await ChartCache.get(birthData);
+    if (cached) {
+        cached.name = birthData.name;
+        cached.biorhythms = calculateBiorhythmsLocally(birthData.year, birthData.month, birthData.day);
+        cached.calculation_method = 'cached-api';
+        return cached;
+    }
+
+    // Nivel 2: Llamar API con timeout
     try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000);
+
         const response = await fetch(`${CONFIG.API_URL}/chart`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(birthData)
+            body: JSON.stringify(birthData),
+            signal: controller.signal
         });
+        clearTimeout(timeout);
 
         if (!response.ok) throw new Error('Error en el servidor');
-        return await response.json();
+        const chartData = await response.json();
+        chartData.calculation_method = 'api';
+
+        // Guardar en cache (fire-and-forget)
+        ChartCache.set(birthData, chartData);
+
+        return chartData;
     } catch (error) {
-        console.error('Error al calcular carta:', error);
+        console.warn('API no disponible, usando cálculo local:', error.message);
+
+        // Nivel 3: Cálculo local aproximado
         return calculateChartLocally(birthData);
     }
 }
@@ -1611,11 +1698,29 @@ const i18n = {
     },
 
     async loadTranslations(lang) {
+        const cacheKey = `i18n_${lang}`;
+
+        // Intentar cache localStorage primero
+        const cached = localStorage.getItem(cacheKey);
+        if (cached) {
+            try {
+                const data = JSON.parse(cached);
+                // Refrescar en background (stale-while-revalidate)
+                fetch(`/i18n/${lang}.json`).then(r => r.ok && r.json().then(d => {
+                    try { localStorage.setItem(cacheKey, JSON.stringify(d)); } catch(e) {}
+                })).catch(() => {});
+                return data;
+            } catch (e) {
+                localStorage.removeItem(cacheKey);
+            }
+        }
+
+        // Si no hay cache, fetch desde red
         try {
             const response = await fetch(`/i18n/${lang}.json`);
             if (!response.ok) throw new Error('Failed to load translations');
             const data = await response.json();
-            console.log(`🌐 Traducciones cargadas: ${lang}`, data);
+            try { localStorage.setItem(cacheKey, JSON.stringify(data)); } catch(e) {}
             return data;
         } catch (error) {
             console.error(`Error loading ${lang} translations:`, error);
@@ -1712,5 +1817,12 @@ const i18n = {
         });
     }
 };
+
+// Registrar Service Worker para soporte offline
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+        .then((reg) => console.log('SW registrado:', reg.scope))
+        .catch((err) => console.warn('SW error:', err));
+}
 
 document.addEventListener('DOMContentLoaded', init);

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="64" fill="#0a0a12"/>
+  <circle cx="256" cy="256" r="80" fill="none" stroke="#d4af37" stroke-width="8"/>
+  <circle cx="256" cy="256" r="8" fill="#d4af37"/>
+  <g stroke="#d4af37" stroke-width="6" stroke-linecap="round">
+    <line x1="256" y1="140" x2="256" y2="170"/>
+    <line x1="256" y1="342" x2="256" y2="372"/>
+    <line x1="140" y1="256" x2="170" y2="256"/>
+    <line x1="342" y1="256" x2="372" y2="256"/>
+    <line x1="174" y1="174" x2="195" y2="195"/>
+    <line x1="317" y1="317" x2="338" y2="338"/>
+    <line x1="338" y1="174" x2="317" y2="195"/>
+    <line x1="195" y1="317" x2="174" y2="338"/>
+  </g>
+  <text x="256" y="450" text-anchor="middle" font-family="serif" font-size="48" fill="#d4af37" opacity="0.6">MN</text>
+</svg>
