@@ -346,7 +346,9 @@ function calculateChartLocally(data) {
     ];
 
     const sunIndex = signs.indexOf(sunSign);
+    const ascIndex = signs.indexOf(ascendant);
 
+    // Calcular posiciones planetarias aproximadas
     const planets = [
         { name: 'Sol', sign: sunSign, degree: 15, house: 1, abs_pos: sunIndex * 30 + 15 },
         { name: 'Luna', sign: moonSign, degree: 20, house: 4, abs_pos: signs.indexOf(moonSign) * 30 + 20 },
@@ -360,6 +362,42 @@ function calculateChartLocally(data) {
         { name: 'Plutón', sign: signs[(sunIndex + 10) % 12], degree: 28, house: 11, abs_pos: ((sunIndex + 10) % 12) * 30 + 28 }
     ];
 
+    // Calcular cusps (casas) basadas en sistema de casas iguales desde el ascendente
+    const ascDegree = ascIndex * 30 + 15;
+    const cusps = [];
+    for (let i = 0; i < 12; i++) {
+        cusps.push((ascDegree + i * 30) % 360);
+    }
+
+    // Asignar casas a planetas basándose en cusps
+    planets.forEach(planet => {
+        let pos = planet.abs_pos;
+        for (let i = 0; i < 12; i++) {
+            const cuspStart = cusps[i];
+            const cuspEnd = cusps[(i + 1) % 12];
+            if (cuspEnd > cuspStart) {
+                if (pos >= cuspStart && pos < cuspEnd) { planet.house = i + 1; break; }
+            } else {
+                if (pos >= cuspStart || pos < cuspEnd) { planet.house = i + 1; break; }
+            }
+        }
+    });
+
+    // Calcular aspectos entre planetas
+    const aspects = calculateAspectsLocally(planets);
+
+    // Calcular distribución de elementos y modalidades
+    const elementModality = calculateElementModalityLocally(planets, signs);
+
+    // Generar interpretaciones de planetas en casas
+    const planetsInHouses = generatePlanetsInHousesLocally(planets);
+
+    // Generar interpretaciones de aspectos
+    const aspectInterpretations = generateAspectInterpretationsLocally(aspects);
+
+    // Generar resumen
+    const summary = generateSummaryLocally(sunSign, moonSign, ascendant, elementModality);
+
     // Calcular biorhythms localmente
     const biorhythms = calculateBiorhythmsLocally(data.year, data.month, data.day);
 
@@ -369,14 +407,152 @@ function calculateChartLocally(data) {
         moon_sign: moonSign,
         ascendant: ascendant,
         planets: planets,
+        cusps: cusps,
+        aspects: aspects,
         interpretations: {
             sun: `El Sol en ${sunSign} representa tu esencia vital y propósito de vida. Esta posición define cómo te expresas y qué te da energía.`,
             moon: `La Luna en ${moonSign} refleja tu mundo emocional interno, tus necesidades y cómo te nutres emocionalmente.`,
-            ascendant: `El Ascendente en ${ascendant} define cómo te presentas al mundo y la primera impresión que das a los demás.`
+            ascendant: `El Ascendente en ${ascendant} define cómo te presentas al mundo y la primera impresión que das a los demás.`,
+            summary: summary,
+            element_modality: elementModality,
+            planets_in_houses: planetsInHouses,
+            aspects: aspectInterpretations
         },
         biorhythms: biorhythms,
         calculation_method: 'local'
     };
+}
+
+function calculateAspectsLocally(planets) {
+    const aspectDefs = [
+        { name: 'conjunction', angle: 0, orb: 8 },
+        { name: 'sextile', angle: 60, orb: 6 },
+        { name: 'square', angle: 90, orb: 7 },
+        { name: 'trine', angle: 120, orb: 8 },
+        { name: 'opposition', angle: 180, orb: 8 }
+    ];
+    const aspects = [];
+
+    for (let i = 0; i < planets.length; i++) {
+        for (let j = i + 1; j < planets.length; j++) {
+            let diff = Math.abs(planets[i].abs_pos - planets[j].abs_pos);
+            if (diff > 180) diff = 360 - diff;
+
+            for (const asp of aspectDefs) {
+                if (Math.abs(diff - asp.angle) <= asp.orb) {
+                    aspects.push({
+                        planet1: planets[i].name,
+                        planet2: planets[j].name,
+                        aspect: asp.name,
+                        orb: Math.abs(diff - asp.angle).toFixed(1)
+                    });
+                    break;
+                }
+            }
+        }
+    }
+    return aspects;
+}
+
+function calculateElementModalityLocally(planets, signs) {
+    const signElements = ['fire', 'earth', 'air', 'water', 'fire', 'earth', 'air', 'water', 'fire', 'earth', 'air', 'water'];
+    const signModalities = ['cardinal', 'fixed', 'mutable', 'cardinal', 'fixed', 'mutable', 'cardinal', 'fixed', 'mutable', 'cardinal', 'fixed', 'mutable'];
+
+    const elements = { fire: 0, earth: 0, air: 0, water: 0 };
+    const modalities = { cardinal: 0, fixed: 0, mutable: 0 };
+
+    planets.forEach(planet => {
+        const idx = signs.indexOf(planet.sign);
+        if (idx >= 0) {
+            elements[signElements[idx]]++;
+            modalities[signModalities[idx]]++;
+        }
+    });
+
+    const total = planets.length;
+    const elPct = {};
+    Object.keys(elements).forEach(k => { elPct[k] = Math.round(elements[k] / total * 100); });
+    const modPct = {};
+    Object.keys(modalities).forEach(k => { modPct[k] = Math.round(modalities[k] / total * 100); });
+
+    const dominantEl = Object.keys(elements).reduce((a, b) => elements[a] >= elements[b] ? a : b);
+    const dominantMod = Object.keys(modalities).reduce((a, b) => modalities[a] >= modalities[b] ? a : b);
+
+    const elInterpretations = {
+        fire: 'Predomina el Fuego en tu carta: eres una persona de acción, pasión e iniciativa. Tu energía vital es intensa y buscas expresarte con entusiasmo.',
+        earth: 'Predomina la Tierra en tu carta: eres práctico, concreto y valoras la estabilidad. Tu conexión con el mundo material te da solidez y perseverancia.',
+        air: 'Predomina el Aire en tu carta: el pensamiento, la comunicación y las ideas son tu motor. Buscas comprender, conectar y compartir conocimiento.',
+        water: 'Predomina el Agua en tu carta: la sensibilidad, la intuición y la profundidad emocional guían tu vida. Percibes lo que otros no ven.'
+    };
+    const modInterpretations = {
+        cardinal: 'La modalidad Cardinal domina: eres iniciador, líder natural que pone las cosas en movimiento.',
+        fixed: 'La modalidad Fija domina: eres perseverante, leal y mantienes con firmeza tus propósitos.',
+        mutable: 'La modalidad Mutable domina: eres adaptable, flexible y sabes fluir con los cambios.'
+    };
+
+    return {
+        elements: {
+            dominant: dominantEl,
+            percentages: elPct,
+            interpretation: elInterpretations[dominantEl]
+        },
+        modalities: {
+            dominant: dominantMod,
+            percentages: modPct,
+            interpretation: modInterpretations[dominantMod]
+        }
+    };
+}
+
+function generatePlanetsInHousesLocally(planets) {
+    const houseInterpretations = {
+        1: 'en la Casa 1 indica que esta energía se expresa directamente en tu personalidad y apariencia. Es una fuerza que los demás perciben de inmediato en ti.',
+        2: 'en la Casa 2 conecta esta energía con tus recursos, valores personales y sentido de autoestima. Influye en cómo generas y manejas lo material.',
+        3: 'en la Casa 3 canaliza esta energía hacia la comunicación, el aprendizaje y las relaciones con hermanos y vecinos. Tu mente busca expresar esta fuerza.',
+        4: 'en la Casa 4 ancla esta energía en tu hogar, familia y raíces emocionales. Es una influencia profunda en tu mundo interior y privado.',
+        5: 'en la Casa 5 dirige esta energía hacia la creatividad, el romance y la autoexpresión. Aquí brillas y juegas con la vida.',
+        6: 'en la Casa 6 orienta esta energía hacia el trabajo diario, la salud y el servicio. Te impulsa a perfeccionar y ser útil.',
+        7: 'en la Casa 7 proyecta esta energía en las relaciones y asociaciones. Buscas reflejar y complementar esta fuerza a través del otro.',
+        8: 'en la Casa 8 profundiza esta energía hacia la transformación, lo oculto y los recursos compartidos. Hay intensidad y regeneración.',
+        9: 'en la Casa 9 expande esta energía hacia la filosofía, los viajes lejanos y la búsqueda de significado. Tu espíritu es explorador.',
+        10: 'en la Casa 10 eleva esta energía hacia tu vocación, reputación y logros públicos. Es visible en tu carrera y rol social.',
+        11: 'en la Casa 11 conecta esta energía con tus ideales, amistades y proyectos colectivos. Buscas innovar y contribuir al grupo.',
+        12: 'en la Casa 12 interioriza esta energía en el inconsciente, la espiritualidad y el servicio anónimo. Es una fuerza sutil pero profunda.'
+    };
+
+    const result = {};
+    planets.forEach(planet => {
+        const house = planet.house || 1;
+        result[planet.name] = {
+            house: house,
+            interpretation: `${planet.name} ${houseInterpretations[house] || 'influye en esta área de tu vida.'}`
+        };
+    });
+    return result;
+}
+
+function generateAspectInterpretationsLocally(aspects) {
+    const aspectMeanings = {
+        conjunction: 'fusiona sus energías creando una fuerza concentrada e intensa. Estas dos fuerzas actúan como una sola en tu vida.',
+        sextile: 'crea una oportunidad armónica entre estas energías. Hay un flujo natural que puedes aprovechar con algo de esfuerzo consciente.',
+        square: 'genera una tensión dinámica que te impulsa a crecer. Aunque desafiante, esta fricción produce los mayores desarrollos personales.',
+        trine: 'fluye en perfecta armonía, indicando un talento natural. Estas energías se apoyan mutuamente sin esfuerzo.',
+        opposition: 'crea una polaridad que busca equilibrio. Oscilás entre estas dos fuerzas aprendiendo a integrar ambos polos.'
+    };
+
+    return aspects.map(asp => ({
+        planet1: asp.planet1,
+        planet2: asp.planet2,
+        aspect: asp.aspect,
+        orb: asp.orb,
+        interpretation: `${asp.planet1} y ${asp.planet2} en ${asp.aspect} ${aspectMeanings[asp.aspect] || 'interactúan de manera significativa en tu carta.'}`
+    }));
+}
+
+function generateSummaryLocally(sunSign, moonSign, ascendant, elementModality) {
+    const ELEMENT_NAMES_LOCAL = { fire: 'Fuego', earth: 'Tierra', air: 'Aire', water: 'Agua' };
+    const domEl = ELEMENT_NAMES_LOCAL[elementModality.elements.dominant];
+    return `Tu carta natal revela un Sol en ${sunSign} que define tu esencia, una Luna en ${moonSign} que guía tu mundo emocional, y un Ascendente en ${ascendant} que moldea cómo te perciben los demás. Con predominio del elemento ${domEl}, tu energía tiende hacia ${domEl === 'Fuego' ? 'la acción y la pasión' : domEl === 'Tierra' ? 'lo práctico y concreto' : domEl === 'Aire' ? 'las ideas y la comunicación' : 'la intuición y la profundidad emocional'}. Esta es una aproximación local — para cálculos astronómicos precisos con efemérides suizas, el servidor estará disponible pronto.`;
 }
 
 function calculateBiorhythmsLocally(year, month, day) {
