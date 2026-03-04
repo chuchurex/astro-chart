@@ -1,5 +1,5 @@
 // Service Worker - Mapa Natal PWA
-const CACHE_VERSION = 'mapanatal-v1';
+const CACHE_VERSION = 'mapanatal-v2';
 const STATIC_ASSETS = [
     '/',
     '/index.html',

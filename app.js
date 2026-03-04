@@ -16,7 +16,7 @@ const CONFIG = {
 // === CHART CACHE (IndexedDB) ===
 const ChartCache = {
     DB_NAME: 'MapaNatalCache',
-    DB_VERSION: 1,
+    DB_VERSION: 2,
     STORE_NAME: 'charts',
     db: null,
 
@@ -308,9 +308,9 @@ async function geocodeCity(city) {
 // === API ===
 
 async function calculateChart(birthData) {
-    // Nivel 1: Buscar en cache (resultado preciso guardado)
+    // Nivel 1: Buscar en cache (solo resultados precisos de la API)
     const cached = await ChartCache.get(birthData);
-    if (cached) {
+    if (cached && cached.calculation_method !== 'local') {
         cached.name = birthData.name;
         cached.biorhythms = calculateBiorhythmsLocally(birthData.year, birthData.month, birthData.day);
         cached.calculation_method = 'cached-api';
@@ -334,14 +334,14 @@ async function calculateChart(birthData) {
         const chartData = await response.json();
         chartData.calculation_method = 'api';
 
-        // Guardar en cache (fire-and-forget)
+        // Guardar en cache (fire-and-forget, solo resultados de API)
         ChartCache.set(birthData, chartData);
 
         return chartData;
     } catch (error) {
         console.warn('API no disponible, usando cálculo local:', error.message);
 
-        // Nivel 3: Cálculo local aproximado
+        // Nivel 3: Cálculo local aproximado (NO se guarda en cache)
         return calculateChartLocally(birthData);
     }
 }
