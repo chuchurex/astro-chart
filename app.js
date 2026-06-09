@@ -282,28 +282,215 @@ function maskTime(value) {
 
 // === GEOCODIFICACIÓN ===
 
-async function geocodeCity(city) {
+// Dedupe por etiqueta: los proveedores suelen devolver ciudad y provincia homónimas
+function dedupeByLabel(results) {
+    const seen = new Set();
+    return results.filter(r => seen.has(r.label) ? false : seen.add(r.label));
+}
+
+/**
+ * Proveedor principal: Open-Meteo Geocoding (base GeoNames).
+ * Sin API key, CORS abierto, nombres localizados (es/pt/en), búsqueda por
+ * prefijo apta para autocomplete y timezone IANA en cada resultado.
+ */
+async function searchOpenMeteo(query, limit, lang, signal) {
+    const response = await fetch(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=${limit}&language=${lang}`,
+        { signal }
+    );
+    if (!response.ok) throw new Error('Open-Meteo request failed');
+
+    const data = await response.json();
+    return dedupeByLabel((data.results || []).map(item => ({
+        lat: item.latitude,
+        lon: item.longitude,
+        label: [item.name, item.admin1, item.country]
+            .filter((part, i, arr) => part && arr.indexOf(part) === i)
+            .join(', '),
+        timezone: item.timezone || null
+    })));
+}
+
+/**
+ * Proveedor de respaldo: Nominatim (OSM). Cubre lugares que no están en
+ * GeoNames, pero su política de uso no permite autocomplete intensivo.
+ */
+async function searchNominatim(query, limit, lang, signal) {
+    const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=${limit}&addressdetails=1`,
+        { headers: { 'Accept-Language': lang }, signal }
+    );
+    if (!response.ok) throw new Error('Nominatim request failed');
+
+    const data = await response.json();
+    return dedupeByLabel(data.map(item => {
+        const addr = item.address || {};
+        const cityName = addr.city || addr.town || addr.village || addr.municipality || addr.county || item.name;
+        const label = [cityName, addr.state, addr.country]
+            .filter((part, i, arr) => part && arr.indexOf(part) === i)
+            .join(', ');
+        return {
+            lat: parseFloat(item.lat),
+            lon: parseFloat(item.lon),
+            label: label || item.display_name,
+            timezone: null
+        };
+    }));
+}
+
+/**
+ * Busca ciudades: Open-Meteo primero, Nominatim como respaldo.
+ * Sin fallback silencioso de coordenadas: si no hay resultados retorna [],
+ * si fallan ambos proveedores lanza error.
+ */
+async function searchCities(query, limit = 5, signal = undefined) {
+    const lang = (typeof i18n !== 'undefined' && i18n.currentLang) || 'es';
+
+    let results = [];
     try {
-        const response = await fetch(
-            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`,
-            { headers: { 'Accept-Language': 'es' } }
-        );
+        results = await searchOpenMeteo(query, limit, lang, signal);
+        // Si el usuario escribió "Ciudad, País" y no hubo match, probar solo la ciudad
+        if (results.length === 0 && query.includes(',')) {
+            results = await searchOpenMeteo(query.split(',')[0].trim(), limit, lang, signal);
+        }
+    } catch (e) {
+        if (e.name === 'AbortError') throw e;
+        // Open-Meteo caído: seguir al respaldo
+    }
 
-        const data = await response.json();
+    if (results.length === 0) {
+        results = await searchNominatim(query, limit, lang, signal);
+    }
 
-        if (data.length > 0) {
-            return {
-                lat: parseFloat(data[0].lat),
-                lon: parseFloat(data[0].lon)
-            };
+    return results;
+}
+
+// === AUTOCOMPLETE DE CIUDAD ===
+
+const CityAutocomplete = {
+    input: null,
+    listbox: null,
+    results: [],
+    activeIndex: -1,
+    debounceTimer: null,
+    abortController: null,
+    selectedPlace: null,
+
+    init(input, listbox) {
+        this.input = input;
+        this.listbox = listbox;
+
+        input.addEventListener('input', () => {
+            // Editar el texto invalida la selección previa
+            this.selectedPlace = null;
+            DOM.latitudeInput.value = '';
+            DOM.longitudeInput.value = '';
+
+            clearTimeout(this.debounceTimer);
+            const query = input.value.trim();
+            if (query.length < 3) {
+                this.close();
+                return;
+            }
+            this.debounceTimer = setTimeout(() => this.search(query), 350);
+        });
+
+        input.addEventListener('keydown', (e) => this.onKeydown(e));
+        input.addEventListener('blur', () => setTimeout(() => this.close(), 200));
+    },
+
+    async search(query) {
+        if (this.abortController) this.abortController.abort();
+        this.abortController = new AbortController();
+        const signal = this.abortController.signal;
+
+        try {
+            this.results = await searchCities(query, 5, signal);
+        } catch (e) {
+            if (e.name === 'AbortError') return; // una búsqueda más nueva tomó el control
+            this.results = [];
+        }
+        this.render();
+    },
+
+    render() {
+        this.listbox.innerHTML = '';
+        this.activeIndex = -1;
+
+        if (this.results.length === 0) {
+            const li = document.createElement('li');
+            li.className = 'city-autocomplete__empty';
+            li.textContent = i18n.translations?.form?.city_no_results || 'No cities found';
+            this.listbox.appendChild(li);
+        } else {
+            this.results.forEach((result, i) => {
+                const li = document.createElement('li');
+                li.className = 'city-autocomplete__option';
+                li.id = `city-option-${i}`;
+                li.setAttribute('role', 'option');
+                li.setAttribute('aria-selected', 'false');
+                li.textContent = result.label;
+                // mousedown para ganar al blur del input
+                li.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    this.select(i);
+                });
+                this.listbox.appendChild(li);
+            });
         }
 
-        throw new Error('Ciudad no encontrada');
-    } catch (error) {
-        console.error('Error en geocodificación:', error);
-        return { lat: -33.4489, lon: -70.6693 };
+        this.listbox.classList.remove('hidden');
+        this.input.setAttribute('aria-expanded', 'true');
+    },
+
+    onKeydown(e) {
+        const isOpen = !this.listbox.classList.contains('hidden');
+        if (!isOpen || this.results.length === 0) return;
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            this.setActive((this.activeIndex + 1) % this.results.length);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            this.setActive((this.activeIndex - 1 + this.results.length) % this.results.length);
+        } else if (e.key === 'Enter') {
+            if (this.activeIndex >= 0) {
+                e.preventDefault();
+                this.select(this.activeIndex);
+            }
+        } else if (e.key === 'Escape') {
+            this.close();
+        }
+    },
+
+    setActive(index) {
+        this.activeIndex = index;
+        Array.from(this.listbox.querySelectorAll('[role="option"]')).forEach((el, i) => {
+            el.classList.toggle('city-autocomplete__option--active', i === index);
+            el.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        });
+        this.input.setAttribute('aria-activedescendant', `city-option-${index}`);
+    },
+
+    select(index) {
+        const result = this.results[index];
+        if (!result) return;
+
+        this.selectedPlace = result;
+        this.input.value = result.label;
+        DOM.latitudeInput.value = result.lat.toFixed(4);
+        DOM.longitudeInput.value = result.lon.toFixed(4);
+        this.close();
+    },
+
+    close() {
+        this.listbox.classList.add('hidden');
+        this.listbox.innerHTML = '';
+        this.activeIndex = -1;
+        this.input.setAttribute('aria-expanded', 'false');
+        this.input.removeAttribute('aria-activedescendant');
     }
-}
+};
 
 // === API ===
 
@@ -474,7 +661,7 @@ function calculateChartLocally(data) {
     const aspects = calculateAspectsLocally(planets);
 
     // Calcular distribución de elementos y modalidades
-    const elementModality = calculateElementModalityLocally(planets, signs);
+    const elementModality = calculateElementModalityLocally(planets, signs, ascendant);
 
     // Generar interpretaciones de planetas en casas
     const planetsInHouses = generatePlanetsInHousesLocally(planets);
@@ -541,9 +728,15 @@ function calculateAspectsLocally(planets) {
     return aspects;
 }
 
-function calculateElementModalityLocally(planets, signs) {
+function calculateElementModalityLocally(planets, signs, ascendant) {
     const signElements = ['fire', 'earth', 'air', 'water', 'fire', 'earth', 'air', 'water', 'fire', 'earth', 'air', 'water'];
     const signModalities = ['cardinal', 'fixed', 'mutable', 'cardinal', 'fixed', 'mutable', 'cardinal', 'fixed', 'mutable', 'cardinal', 'fixed', 'mutable'];
+
+    // Mismos pesos que la API: luminarias y personales pesan más
+    const planetWeights = {
+        'Sol': 3, 'Luna': 3, 'Mercurio': 2, 'Venus': 2, 'Marte': 2,
+        'Júpiter': 1, 'Saturno': 1, 'Urano': 0.5, 'Neptuno': 0.5, 'Plutón': 0.5
+    };
 
     const elements = { fire: 0, earth: 0, air: 0, water: 0 };
     const modalities = { cardinal: 0, fixed: 0, mutable: 0 };
@@ -551,16 +744,25 @@ function calculateElementModalityLocally(planets, signs) {
     planets.forEach(planet => {
         const idx = signs.indexOf(planet.sign);
         if (idx >= 0) {
-            elements[signElements[idx]]++;
-            modalities[signModalities[idx]]++;
+            const weight = planetWeights[planet.name] || 1;
+            elements[signElements[idx]] += weight;
+            modalities[signModalities[idx]] += weight;
         }
     });
 
-    const total = planets.length;
+    // Ascendente con peso 2, igual que en el backend
+    const ascIdx = signs.indexOf(ascendant);
+    if (ascIdx >= 0) {
+        elements[signElements[ascIdx]] += 2;
+        modalities[signModalities[ascIdx]] += 2;
+    }
+
+    const totalEl = Object.values(elements).reduce((a, b) => a + b, 0);
+    const totalMod = Object.values(modalities).reduce((a, b) => a + b, 0);
     const elPct = {};
-    Object.keys(elements).forEach(k => { elPct[k] = Math.round(elements[k] / total * 100); });
+    Object.keys(elements).forEach(k => { elPct[k] = Math.round(elements[k] / totalEl * 100); });
     const modPct = {};
-    Object.keys(modalities).forEach(k => { modPct[k] = Math.round(modalities[k] / total * 100); });
+    Object.keys(modalities).forEach(k => { modPct[k] = Math.round(modalities[k] / totalMod * 100); });
 
     const dominantEl = Object.keys(elements).reduce((a, b) => elements[a] >= elements[b] ? a : b);
     const dominantMod = Object.keys(modalities).reduce((a, b) => modalities[a] >= modalities[b] ? a : b);
@@ -668,7 +870,8 @@ function calculateBiorhythmsLocally(year, month, day) {
     function getSpiritualCycle(days) {
         const dayInCycle = days % 18;
         const dayDisplay = dayInCycle + 1;
-        const offset = 18 / 4 - 5;
+        // Pico del seno en día mostrado 5: days % 18 == 4 implica offset 0.5
+        const offset = 0.5;
         const angle = (2 * Math.PI * (days + offset)) / 18;
         const value = Math.sin(angle);
 
@@ -785,6 +988,19 @@ function renderResults(chartData) {
         moon: chartData.moon_sign,
         asc: chartData.ascendant
     });
+
+    // Aviso visible cuando la carta es una aproximación local (sin servidor)
+    const existingWarning = document.getElementById('local-warning');
+    if (existingWarning) existingWarning.remove();
+    if (chartData.calculation_method === 'local') {
+        const warning = document.createElement('div');
+        warning.id = 'local-warning';
+        warning.className = 'results-warning';
+        warning.setAttribute('role', 'alert');
+        warning.textContent = i18n.translations?.errors?.local_approximation ||
+            'No pudimos conectar con el servidor de cálculo. Esta carta es una aproximación: las posiciones planetarias, casas y aspectos no son precisos. Intenta de nuevo más tarde para obtener tu carta exacta.';
+        DOM.results.prepend(warning);
+    }
 
     DOM.resultName.textContent = `Carta Astral de ${chartData.name}`;
     DOM.sunSign.textContent = chartData.sun_sign;
@@ -1405,14 +1621,35 @@ async function handleFormSubmit(event) {
 
         console.log('📍 Coordenadas iniciales:', { latitude, longitude });
 
-        if (!latitude || !longitude) {
+        // Timezone del lugar seleccionado en el autocomplete (si la hay);
+        // el backend igual deriva la suya desde lat/lon, esto es el fallback.
+        let cityTimezone = CityAutocomplete.selectedPlace?.timezone || null;
+
+        if (isNaN(latitude) || isNaN(longitude)) {
             console.log('🔍 Geocodificando ciudad:', city);
-            const coords = await geocodeCity(city);
-            latitude = coords.lat;
-            longitude = coords.lon;
-            DOM.latitudeInput.value = latitude;
-            DOM.longitudeInput.value = longitude;
-            console.log('📍 Coordenadas geocodificadas:', { latitude, longitude });
+            let results = [];
+            try {
+                results = await searchCities(city, 1);
+            } catch (e) {
+                hideLoader();
+                alert(i18n.translations?.errors?.api_error || 'No se pudo conectar al servicio de geolocalización. Intenta de nuevo.');
+                return;
+            }
+
+            if (results.length === 0) {
+                hideLoader();
+                alert(i18n.translations?.errors?.city_not_found || 'Ciudad no encontrada. Revisa el nombre e intenta de nuevo.');
+                return;
+            }
+
+            latitude = results[0].lat;
+            longitude = results[0].lon;
+            cityTimezone = results[0].timezone || cityTimezone;
+            DOM.latitudeInput.value = latitude.toFixed(4);
+            DOM.longitudeInput.value = longitude.toFixed(4);
+            // Mostrar al usuario qué lugar se resolvió
+            if (DOM.cityInput) DOM.cityInput.value = results[0].label;
+            console.log('📍 Coordenadas geocodificadas:', { latitude, longitude, lugar: results[0].label });
         }
 
         const birthData = {
@@ -1424,7 +1661,8 @@ async function handleFormSubmit(event) {
             minute,
             latitude,
             longitude,
-            timezone: CONFIG.DEFAULT_TIMEZONE
+            // El backend deriva la timezone desde lat/lon; esto es solo fallback
+            timezone: cityTimezone || CONFIG.DEFAULT_TIMEZONE
         };
 
         console.log('🚀 Enviando al servidor:', birthData);
@@ -1445,16 +1683,6 @@ async function handleFormSubmit(event) {
         alert('Hubo un error al calcular la carta. Por favor, intenta de nuevo.');
     } finally {
         hideLoader();
-    }
-}
-
-async function handleCityChange(event) {
-    const city = event.target.value;
-
-    if (city.length > 3) {
-        const coords = await geocodeCity(city);
-        DOM.latitudeInput.value = coords.lat.toFixed(4);
-        DOM.longitudeInput.value = coords.lon.toFixed(4);
     }
 }
 
@@ -1605,7 +1833,12 @@ async function init() {
 
     // Event listeners
     if (DOM.form) DOM.form.addEventListener('submit', handleFormSubmit);
-    if (DOM.cityInput) DOM.cityInput.addEventListener('blur', handleCityChange);
+
+    // Autocomplete de ciudad
+    const cityListbox = document.getElementById('city-listbox');
+    if (DOM.cityInput && cityListbox) {
+        CityAutocomplete.init(DOM.cityInput, cityListbox);
+    }
 
     // Máscaras automáticas para fecha y hora
     if (DOM.birthDate) {
@@ -1641,10 +1874,6 @@ async function init() {
         const today = new Date().toISOString().split('T')[0];
         DOM.birthDate.setAttribute('max', today);
     }
-
-    // Valores por defecto
-    if (DOM.latitudeInput) DOM.latitudeInput.value = '-33.4489';
-    if (DOM.longitudeInput) DOM.longitudeInput.value = '-70.6693';
 
     console.log('🌟 Astro Chart inicializado');
 

@@ -37,6 +37,33 @@ except ImportError:
     KERYKEION_AVAILABLE = False
     print("⚠️  Kerykeion no disponible. Usando cálculos simplificados.")
 
+# TimezoneFinder para derivar la zona horaria desde lat/lon.
+# La timezone que envía el cliente es solo un fallback: confiar en ella
+# produce cartas desplazadas para nacimientos fuera de Chile.
+try:
+    from timezonefinder import TimezoneFinder
+    _timezone_finder = TimezoneFinder()
+    TIMEZONEFINDER_AVAILABLE = True
+except ImportError:
+    _timezone_finder = None
+    TIMEZONEFINDER_AVAILABLE = False
+    print("⚠️  timezonefinder no disponible. Se usará la timezone enviada por el cliente.")
+
+
+@lru_cache(maxsize=10000)
+def resolve_timezone(lat: float, lng: float, fallback: str) -> str:
+    """Deriva la zona horaria IANA desde las coordenadas de nacimiento."""
+    if not TIMEZONEFINDER_AVAILABLE:
+        return fallback
+    try:
+        tz = _timezone_finder.timezone_at(lat=lat, lng=lng)
+        if tz is None:
+            # Coordenadas en el océano: buscar la zona terrestre más cercana
+            tz = _timezone_finder.timezone_at_land(lat=lat, lng=lng)
+        return tz or fallback
+    except Exception:
+        return fallback
+
 app = FastAPI(
     title="Astro API",
     description="API para cálculos astrológicos y cartas natales",
@@ -50,12 +77,14 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://mapanatal.org",
+        "https://www.mapanatal.org",
         "https://astro.chuchurex.cl",
         "https://www.astro.chuchurex.cl",
-        "https://chuchurex.cl",  # temporary backward compatibility
-        "https://www.chuchurex.cl",  # temporary backward compatibility
-        "http://localhost:8000",  # desarrollo local
-        "http://localhost:3000",  # desarrollo local frontend
+        "https://chuchurex.cl",
+        "https://www.chuchurex.cl",
+        "http://localhost:8000",
+        "http://localhost:3000",
         "http://127.0.0.1:8000",
         "http://127.0.0.1:3000"
     ],
@@ -119,19 +148,21 @@ PLANETS = ["Sol", "Luna", "Mercurio", "Venus", "Marte",
 
 def calculate_sun_sign_simple(month: int, day: int) -> str:
     """Calcula el signo solar de forma simplificada"""
-    dates = [
-        (1, 20, "Capricornio"), (2, 19, "Acuario"), (3, 21, "Piscis"),
-        (4, 20, "Aries"), (5, 21, "Tauro"), (6, 21, "Géminis"),
-        (7, 23, "Cáncer"), (8, 23, "Leo"), (9, 23, "Virgo"),
-        (10, 23, "Libra"), (11, 22, "Escorpio"), (12, 22, "Sagitario")
+    # (mes, día, signo que EMPIEZA ese día)
+    transitions = [
+        (1, 20, "Acuario"), (2, 19, "Piscis"), (3, 21, "Aries"),
+        (4, 20, "Tauro"), (5, 21, "Géminis"), (6, 21, "Cáncer"),
+        (7, 23, "Leo"), (8, 23, "Virgo"), (9, 23, "Libra"),
+        (10, 23, "Escorpio"), (11, 22, "Sagitario"), (12, 22, "Capricornio")
     ]
-    
-    for i, (m, d, sign) in enumerate(dates):
-        if month == m and day < d:
-            return dates[i-1][2] if i > 0 else "Sagitario"
-        elif month == m:
-            return sign
-    return "Sagitario"
+
+    sign = "Capricornio"  # Enero antes del 20
+    for m, d, s in transitions:
+        if m < month or (m == month and day >= d):
+            sign = s
+        elif m > month:
+            break
+    return sign
 
 def calculate_moon_sign_simple(year: int, month: int, day: int) -> str:
     """
@@ -402,10 +433,10 @@ def calculate_biorhythms(birth_date: str, target_date: str = None) -> dict:
         day_in_cycle = days % 18
         day = day_in_cycle + 1  # 1-based para mostrar
 
-        # Desplazar para que el pico (100%) esté en día 5
-        # sin(x) tiene pico en π/2, queremos eso en día 5
-        # angle = 2π * (days + offset) / 18, donde offset hace que día 5 = pico
-        offset = 18 / 4 - 5  # = -0.5
+        # Desplazar para que el pico (100%) esté en día 5 (mostrado 1-based)
+        # sin alcanza su pico cuando (days + offset) = 18/4 = 4.5
+        # Día mostrado 5 corresponde a days % 18 == 4, por lo tanto offset = 0.5
+        offset = 0.5
         angle = (2 * math.pi * (days + offset)) / 18
         value = math.sin(angle)
 
@@ -821,12 +852,21 @@ def calculate_chart(data: BirthData, request: Request):
     if not check_rate_limit(client_ip):
         raise HTTPException(status_code=429, detail="Límite de requests excedido. Intenta en un minuto.")
     try:
+        # Derivar la timezone real desde las coordenadas de nacimiento.
+        # El campo timezone del cliente queda solo como fallback.
+        data.timezone = resolve_timezone(
+            round(data.latitude, 4), round(data.longitude, 4), data.timezone
+        )
+
         # Usar Kerykeion si está disponible, sino cálculos simplificados
         if KERYKEION_AVAILABLE:
             chart = generate_kerykeion_chart(data)
         else:
             chart = generate_simple_chart(data)
-        
+
+        # Timezone efectivamente usada en el cálculo (transparencia para el cliente)
+        chart['timezone_used'] = data.timezone
+
         # Agregar interpretaciones
         chart['interpretations'] = get_interpretations_for_chart(chart)
 

@@ -47,7 +47,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@astrodraw/astrochart@3.0.2/dist/astrochart.min.js"></script>
 
-    <link rel="stylesheet" href="styles.css?v=1769129809">
+    <link rel="stylesheet" href="styles.css?v=1781040766">
     <link rel="stylesheet" href="styles/print.css" media="print">
 </head>
 
@@ -100,13 +100,19 @@
                         <input type="text" id="birth-time" name="birthTime" class="form-input" data-i18n-placeholder="form.time_placeholder" placeholder="14:30" inputmode="numeric" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group form-group--city">
                         <label for="city" class="form-label" data-i18n="form.city">City</label>
-                        <input type="text" id="city" name="city" class="form-input" data-i18n-placeholder="form.city_placeholder" placeholder="e.g. New York, USA" required>
+                        <div class="city-autocomplete">
+                            <input type="text" id="city" name="city" class="form-input"
+                                data-i18n-placeholder="form.city_placeholder" placeholder="e.g. New York, USA"
+                                role="combobox" aria-autocomplete="list" aria-expanded="false"
+                                aria-controls="city-listbox" autocomplete="off" required>
+                            <ul id="city-listbox" class="city-autocomplete__list hidden" role="listbox"></ul>
+                        </div>
                     </div>
 
-                    <input type="hidden" id="latitude" name="latitude" value="-33.4489">
-                    <input type="hidden" id="longitude" name="longitude" value="-70.6693">
+                    <input type="hidden" id="latitude" name="latitude" value="">
+                    <input type="hidden" id="longitude" name="longitude" value="">
 
                     <div class="form-group form-group--btn">
                         <button type="submit" class="btn btn--primary" id="calculate-btn">
@@ -239,7 +245,7 @@
         </div>
     </footer>
 
-    <script src="app.js?v=1769129809"></script>
+    <script src="app.js?v=1781040766"></script>
 </body>
 
 </html>

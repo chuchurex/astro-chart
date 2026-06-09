@@ -1385,3 +1385,15 @@ a:focus-visible {
 }
 
 /*# sourceMappingURL=styles.css.map */
+
+/* === Autocomplete de ciudad === */
+.city-autocomplete { position: relative; }
+.city-autocomplete .form-input { width: 100%; }
+.city-autocomplete__list { position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 100; margin: 0; padding: 4px; list-style: none; background: rgba(20, 20, 35, 0.97); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 8px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6); max-height: 240px; overflow-y: auto; }
+.city-autocomplete__list.hidden { display: none; }
+.city-autocomplete__option { padding: 10px 12px; font-family: "Cormorant Garamond", serif; font-size: 15px; color: #e8e8f0; border-radius: 6px; cursor: pointer; transition: background 0.2s ease; }
+.city-autocomplete__option:hover, .city-autocomplete__option--active { background: rgba(212, 175, 55, 0.15); color: #d4af37; }
+.city-autocomplete__empty { padding: 10px 12px; font-family: "Cormorant Garamond", serif; font-size: 15px; color: #b0b0c8; font-style: italic; }
+
+/* === Aviso de carta aproximada (fallback local) === */
+.results-warning { background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.5); border-radius: 8px; padding: 16px 20px; margin-bottom: 24px; font-size: 16px; line-height: 1.5; color: #fbbf24; }

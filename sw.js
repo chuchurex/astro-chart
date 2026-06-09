@@ -1,5 +1,5 @@
 // Service Worker - Mapa Natal PWA
-const CACHE_VERSION = 'mapanatal-v2';
+const CACHE_VERSION = 'mapanatal-v3';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
@@ -43,8 +43,10 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     const url = new URL(event.request.url);
 
-    // Don't intercept API calls - app.js handles those with IndexedDB
-    if (url.hostname === 'api.mapanatal.org') return;
+    // Solo interceptar requests al propio origen. Cross-origin (Nominatim,
+    // API, fonts, CDN) va directo a la red: cachearlos con ignoreSearch
+    // servía resultados de una ciudad para búsquedas de otra.
+    if (url.origin !== self.location.origin) return;
 
     // Don't intercept non-GET requests
     if (event.request.method !== 'GET') return;
@@ -63,9 +65,11 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // Static assets: cache-first, network fallback
+    // Static assets: cache-first con match EXACTO (respeta ?v= para que
+    // una nueva versión de app.js/styles.css no sea pisada por la vieja).
+    // ignoreSearch solo como último recurso cuando no hay red (offline).
     event.respondWith(
-        caches.match(event.request, { ignoreSearch: true }).then((cached) => {
+        caches.match(event.request).then((cached) => {
             if (cached) return cached;
             return fetch(event.request).then((response) => {
                 if (response.ok) {
@@ -73,7 +77,7 @@ self.addEventListener('fetch', (event) => {
                     caches.open(CACHE_VERSION).then((cache) => cache.put(event.request, clone));
                 }
                 return response;
-            });
+            }).catch(() => caches.match(event.request, { ignoreSearch: true }));
         })
     );
 });

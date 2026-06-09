@@ -19,6 +19,7 @@
     "time_placeholder": "14:30",
     "city": "Ciudad",
     "city_placeholder": "Ej: Santiago, Chile",
+    "city_no_results": "No se encontraron ciudades",
     "calculate": "Calcular"
   },
   "loader": {
@@ -66,8 +67,9 @@
     "back": "← Volver a Chuchurex Astral"
   },
   "errors": {
-    "city_not_found": "Ciudad no encontrada. Usando coordenadas por defecto.",
+    "city_not_found": "Ciudad no encontrada. Revisa el nombre e intenta de nuevo.",
     "api_error": "Error al calcular la carta. Por favor intenta de nuevo.",
+    "local_approximation": "No pudimos conectar con el servidor de cálculo. Esta carta es una aproximación: las posiciones planetarias, casas y aspectos no son precisos. Intenta de nuevo más tarde para obtener tu carta exacta.",
     "invalid_date": "Fecha inválida. Usa formato: DD/MM/AAAA (ej: 15/03/1985)",
     "invalid_time": "Hora inválida. Usa formato: HH:MM (ej: 14:30)"
   },

@@ -9,6 +9,9 @@ uvicorn[standard]>=0.24.0
 # Cálculos astrológicos (Swiss Ephemeris)
 kerykeion>=4.0.0
 
+# Zona horaria derivada de coordenadas de nacimiento
+timezonefinder>=6.5.0
+
 # Utilidades
 pydantic>=2.0.0
 python-multipart>=0.0.6
