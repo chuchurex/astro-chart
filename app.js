@@ -890,7 +890,7 @@ function calculateBiorhythmsLocally(year, month, day) {
             description = 'Renovación del ciclo. Fragilidad en la transición. Evitar trabajos importantes.';
             workRecommended = false;
         } else if ([13, 14].includes(dayDisplay)) {
-            quality = 'NADIR'; symbol = '⬇️'; color = '#6B7280';
+            quality = 'NADIR'; symbol = '⬇️'; color = '#9CA3AF';
             description = 'Valle del ciclo. Menor poder pero paradójicamente más estable. Ideal para descanso e integración.';
             workRecommended = false;
         } else if ([2, 3].includes(dayDisplay)) {
@@ -906,7 +906,7 @@ function calculateBiorhythmsLocally(year, month, day) {
             description = 'Energía disminuida. Favorece actividades ligeras.';
             workRecommended = false;
         } else {
-            quality = 'RECUPERACIÓN'; symbol = '📈'; color = '#8B5CF6';
+            quality = 'RECUPERACIÓN'; symbol = '📈'; color = '#A78BFA';
             description = 'Ascenso desde el valle. Preparando el próximo ciclo.';
             workRecommended = dayDisplay >= 16;
         }
@@ -1071,7 +1071,7 @@ function renderAspects(aspects) {
         card.className = 'interpretation-card interpretation-card--aspect';
         card.innerHTML = `
             <header class="interpretation-card__header">
-                <span class="interpretation-card__symbols">
+                <span class="interpretation-card__symbols" aria-hidden="true">
                     <span class="interpretation-card__symbol">${symbol1}</span>
                     <span class="interpretation-card__aspect-symbol">${aspectSymbol}</span>
                     <span class="interpretation-card__symbol">${symbol2}</span>
@@ -1098,7 +1098,7 @@ function renderPlanetsInHouses(planetsInHouses) {
         card.className = 'interpretation-card interpretation-card--compact';
         card.innerHTML = `
             <header class="interpretation-card__header">
-                <span class="interpretation-card__symbol">${symbol}</span>
+                <span class="interpretation-card__symbol" aria-hidden="true">${symbol}</span>
                 <h4 class="interpretation-card__title">${planetName} en Casa ${data.house}</h4>
             </header>
             <p class="interpretation-card__text">${data.interpretation}</p>
@@ -1177,8 +1177,8 @@ function renderBiorhythms(biorhythms) {
                 <div class="biorhythm-cycle__header">
                     <span class="biorhythm-cycle__name">${cycle.name}</span>
                     ${isSpiritual
-                ? `<span class="biorhythm-cycle__quality" style="color: ${cycle.color}">${cycle.symbol} ${cycle.quality}</span>`
-                : `<span class="biorhythm-cycle__trend" style="color: ${trend.color}">${trend.symbol} ${trend.label}</span>`}
+                ? `<span class="biorhythm-cycle__quality" style="color: ${cycle.color}"><span aria-hidden="true">${cycle.symbol}</span> ${cycle.quality}</span>`
+                : `<span class="biorhythm-cycle__trend" style="color: ${trend.color}"><span aria-hidden="true">${trend.symbol}</span> ${trend.label}</span>`}
                     <span class="biorhythm-cycle__day">Día ${cycle.current_day}/${cycle.duration}</span>
                 </div>
                 <div class="biorhythm-cycle__bar">
@@ -1207,7 +1207,7 @@ function renderBiorhythms(biorhythms) {
             </div>
 
             <div class="biorhythms__critical biorhythms__critical--${criticalClass}">
-                <span class="biorhythms__critical-level">${getLevelIcon(critical_analysis.level)} ${critical_analysis.level}</span>
+                <span class="biorhythms__critical-level"><span aria-hidden="true">${getLevelIcon(critical_analysis.level)}</span> ${critical_analysis.level}</span>
                 <p class="biorhythms__critical-message">${critical_analysis.message}</p>
             </div>
 
@@ -1316,7 +1316,7 @@ function renderPlanets(planets) {
             planet.degree;
 
         card.innerHTML = `
-            <span class="planet-card__symbol">${symbol}</span>
+            <span class="planet-card__symbol" aria-hidden="true">${symbol}</span>
             <div class="planet-card__info">
                 <span class="planet-card__name">${planet.name}</span>
                 <span class="planet-card__position">${planet.sign} ${degree}</span>
@@ -1337,6 +1337,10 @@ function renderChart(chartData) {
 function renderSimpleChart(chartData) {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('viewBox', '0 0 1058 1058');  // Escalado a 1058px para coincidir con contenedor
+    svg.setAttribute('role', 'img');
+    const chartLabel = i18n.t('a11y.chart_label');
+    svg.setAttribute('aria-label', chartLabel !== 'a11y.chart_label' ? chartLabel
+        : 'Rueda de la carta natal: representación gráfica de posiciones planetarias, casas y aspectos.');
     svg.style.width = '100%';
     svg.style.height = '100%';
 
@@ -2016,6 +2020,15 @@ const i18n = {
             }
         });
 
+        // Traducir aria-labels con data-i18n-aria
+        document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+            const key = el.getAttribute('data-i18n-aria');
+            const translation = this.t(key);
+            if (translation !== key) {
+                el.setAttribute('aria-label', translation);
+            }
+        });
+
         // Actualizar título de la página
         const titleKey = document.body.contains(document.querySelector('.about'))
             ? 'about.name'
@@ -2038,11 +2051,9 @@ const i18n = {
     updateLangSelector() {
         document.querySelectorAll('.lang-btn').forEach(btn => {
             const lang = btn.getAttribute('data-lang');
-            if (lang === this.currentLang) {
-                btn.classList.add('lang-btn--active');
-            } else {
-                btn.classList.remove('lang-btn--active');
-            }
+            const active = lang === this.currentLang;
+            btn.classList.toggle('lang-btn--active', active);
+            btn.setAttribute('aria-pressed', active ? 'true' : 'false');
         });
     }
 };

@@ -31,7 +31,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/styles.css?v=1">
+    <link rel="stylesheet" href="/styles.css?v=1781054251">
 </head>
 <body>
     <div class="stars-container">
@@ -43,17 +43,17 @@
     <header class="header">
         <div class="header__logo">
             <a href="/" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
-                <span class="header__symbol">☉</span>
+                <span class="header__symbol" aria-hidden="true">☉</span>
                 <h1 class="header__title" data-i18n="header.title">Chuchurex Astral</h1>
             </a>
         </div>
         <nav class="header__nav">
             <a href="/" class="header__link" data-i18n="nav.calculate">Calculate</a>
         </nav>
-        <div class="lang-selector">
-            <button class="lang-btn" data-lang="en">EN</button>
-            <button class="lang-btn" data-lang="es">ES</button>
-            <button class="lang-btn" data-lang="pt">PT</button>
+        <div class="lang-selector" role="group" aria-label="Selección de idioma" data-i18n-aria="a11y.lang_selector">
+            <button type="button" class="lang-btn" data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+            <button type="button" class="lang-btn" data-lang="es" lang="es" aria-label="Español" aria-pressed="false">ES</button>
+            <button type="button" class="lang-btn" data-lang="pt" lang="pt" aria-label="Português" aria-pressed="false">PT</button>
         </div>
     </header>
 
@@ -80,6 +80,6 @@
         </div>
     </footer>
 
-    <script src="/app.js?v=1"></script>
+    <script src="/app.js?v=1781054251"></script>
 </body>
 </html>

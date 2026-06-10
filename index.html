@@ -46,7 +46,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
 
-    <link rel="stylesheet" href="styles.css?v=1781040766">
+    <link rel="stylesheet" href="styles.css?v=1781054251">
     <link rel="stylesheet" href="styles/print.css" media="print">
 </head>
 
@@ -64,25 +64,25 @@
     <header class="header header--expanded" id="calculate" role="banner">
         <div class="header__top">
             <div class="header__logo">
-                <span class="header__symbol">☉</span>
+                <span class="header__symbol" aria-hidden="true">☉</span>
                 <h1 class="header__title" data-i18n="header.title">Mapa Natal</h1>
             </div>
-            <nav class="header__nav hidden" id="results-nav" role="navigation" aria-label="Navegación de resultados">
+            <nav class="header__nav hidden" id="results-nav" role="navigation" aria-label="Navegación de resultados" data-i18n-aria="a11y.results_nav">
                 <a href="#results" class="header__link" data-i18n="nav.chart">Chart</a>
                 <a href="#interpretations" class="header__link" data-i18n="nav.planets">Planets</a>
                 <a href="#biorhythms-section" class="header__link" data-i18n="nav.cycles">Personal Cycles</a>
             </nav>
-            <div class="lang-selector">
-                <button class="lang-btn" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="es">ES</button>
-                <button class="lang-btn" data-lang="pt">PT</button>
+            <div class="lang-selector" role="group" aria-label="Selección de idioma" data-i18n-aria="a11y.lang_selector">
+                <button type="button" class="lang-btn" data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+                <button type="button" class="lang-btn" data-lang="es" lang="es" aria-label="Español" aria-pressed="false">ES</button>
+                <button type="button" class="lang-btn" data-lang="pt" lang="pt" aria-label="Português" aria-pressed="false">PT</button>
             </div>
         </div>
 
         <div class="header__form-container">
             <p class="header__intro" data-i18n="header.intro">En el momento de tu nacimiento, la configuración del cielo —planetas, Sol, Luna— quedó impresa en ti. Rudolf Steiner lo describió en 1911: el cerebro del recién nacido es una fotografía de la bóveda celeste. Nacemos bajo influencias lunares, planetarias y cósmicas que nos marcan. En 2020, científicos de Bolonia y Verona descubrieron que la red neuronal y la red cósmica comparten la misma estructura. Tu carta natal no es superstición: es el mapa de cómo el universo se imprimió en ti.</p>
             <p class="header__intro" data-i18n="header.intro2">Pero el nacimiento no solo dejó una marca fija. También inició cuatro ciclos que pulsan en ti desde entonces: físico (23 días), emocional (28 días), intelectual (33 días) y un cuarto ciclo revelado por Ra —el espiritual o del adepto (18 días)— que gobierna tu conexión con lo trascendente. Este sitio calcula tu carta natal y tus ciclos actuales, para que conozcas tanto tu fotografía cósmica como las mareas internas que fluyen en ti hoy.</p>
-            <form id="birth-form" class="birth-form birth-form--compact" role="form" aria-label="Formulario de carta natal">
+            <form id="birth-form" class="birth-form birth-form--compact" role="form" aria-label="Formulario de carta natal" data-i18n-aria="a11y.form_label">
                 <div class="form-grid form-grid--inline">
                     <div class="form-group">
                         <label for="name" class="form-label" data-i18n="form.name">Name</label>
@@ -116,7 +116,7 @@
                     <div class="form-group form-group--btn">
                         <button type="submit" class="btn btn--primary" id="calculate-btn">
                             <span class="btn__text" data-i18n="form.calculate">Calculate</span>
-                            <span class="btn__icon">✧</span>
+                            <span class="btn__icon" aria-hidden="true">✧</span>
                         </button>
                     </div>
                 </div>
@@ -124,40 +124,40 @@
         </div>
     </header>
 
-    <div id="loader" class="loader hidden" role="status" aria-live="polite" aria-label="Cargando">
+    <div id="loader" class="loader hidden" role="status" aria-live="polite" aria-label="Cargando" data-i18n-aria="a11y.loading">
         <div class="loader__spinner">
             <div class="loader__ring"></div>
             <span class="loader__text" data-i18n="loader.text">Consulting the stars...</span>
         </div>
     </div>
 
-    <main id="results" class="results hidden" role="main" aria-label="Resultados de la carta natal">
+    <main id="results" class="results hidden" role="main" aria-label="Resultados de la carta natal" data-i18n-aria="a11y.main_label">
         <div class="container">
             <div class="results__header">
                 <div class="results__actions">
-                    <button id="share-btn" class="btn btn--share" title="Share">
-                        <span class="btn__icon">🔗</span>
+                    <button type="button" id="share-btn" class="btn btn--share">
+                        <span class="btn__icon" aria-hidden="true">🔗</span>
                         <span class="btn__text" data-i18n="results.share">Share</span>
                     </button>
-                    <button id="pdf-btn" class="btn btn--pdf" title="Download PDF">
-                        <span class="btn__icon">📄</span>
+                    <button type="button" id="pdf-btn" class="btn btn--pdf">
+                        <span class="btn__icon" aria-hidden="true">📄</span>
                         <span class="btn__text" data-i18n="results.pdf">PDF</span>
                     </button>
                 </div>
                 <h2 class="results__name" id="result-name" data-i18n="results.title">Your Natal Chart</h2>
                 <div class="big-three">
                     <div class="big-three__item">
-                        <span class="big-three__symbol">☉</span>
+                        <span class="big-three__symbol" aria-hidden="true">☉</span>
                         <span class="big-three__label" data-i18n="results.sun">Sun</span>
                         <span class="big-three__sign" id="sun-sign">--</span>
                     </div>
                     <div class="big-three__item">
-                        <span class="big-three__symbol">☽</span>
+                        <span class="big-three__symbol" aria-hidden="true">☽</span>
                         <span class="big-three__label" data-i18n="results.moon">Moon</span>
                         <span class="big-three__sign" id="moon-sign">--</span>
                     </div>
                     <div class="big-three__item">
-                        <span class="big-three__symbol">↑</span>
+                        <span class="big-three__symbol" aria-hidden="true">↑</span>
                         <span class="big-three__label" data-i18n="results.ascendant">Ascendant</span>
                         <span class="big-three__sign" id="ascendant">--</span>
                     </div>
@@ -189,7 +189,7 @@
 
                 <article class="interpretation-card" id="sun-interpretation">
                     <header class="interpretation-card__header">
-                        <span class="interpretation-card__symbol">☉</span>
+                        <span class="interpretation-card__symbol" aria-hidden="true">☉</span>
                         <h4 class="interpretation-card__title" data-i18n="results.your_sun">Your Sun</h4>
                     </header>
                     <p class="interpretation-card__text"></p>
@@ -197,7 +197,7 @@
 
                 <article class="interpretation-card" id="moon-interpretation">
                     <header class="interpretation-card__header">
-                        <span class="interpretation-card__symbol">☽</span>
+                        <span class="interpretation-card__symbol" aria-hidden="true">☽</span>
                         <h4 class="interpretation-card__title" data-i18n="results.your_moon">Your Moon</h4>
                     </header>
                     <p class="interpretation-card__text"></p>
@@ -205,7 +205,7 @@
 
                 <article class="interpretation-card" id="asc-interpretation">
                     <header class="interpretation-card__header">
-                        <span class="interpretation-card__symbol">↑</span>
+                        <span class="interpretation-card__symbol" aria-hidden="true">↑</span>
                         <h4 class="interpretation-card__title" data-i18n="results.your_asc">Your Ascendant</h4>
                     </header>
                     <p class="interpretation-card__text"></p>
@@ -244,7 +244,7 @@
         </div>
     </footer>
 
-    <script src="app.js?v=1781040766"></script>
+    <script src="app.js?v=1781054251"></script>
 </body>
 
 </html>
