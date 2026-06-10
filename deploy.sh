@@ -17,7 +17,7 @@ source .env
 # Credenciales del servidor VPS
 VPS_IP="64.176.12.233"
 VPS_USER="root"
-VPS_PASS='***REMOVED***'
+VPS_PASS="${VPS_PASS:?Falta VPS_PASS en .env}"
 
 # Directorio del proyecto
 PROJECT_DIR=$(dirname "$(realpath "$0")")
