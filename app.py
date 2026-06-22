@@ -202,18 +202,25 @@ def generate_simple_chart(data: BirthData) -> dict:
     moon_sign = calculate_moon_sign_simple(data.year, data.month, data.day)
     ascendant = calculate_ascendant_simple(data.hour, data.month)
     
-    # Planetas simplificados (posiciones aproximadas)
+    # Planetas simplificados (posiciones aproximadas).
+    # abs_pos (0-360) es obligatorio en PlanetPosition: sin él Pydantic
+    # lanza ValidationError y este fallback devuelve 500.
+    def _planet(name, sign, degree, house):
+        abs_pos = SIGNS.index(sign) * 30 + degree
+        return PlanetPosition(name=name, sign=sign, degree=degree, abs_pos=abs_pos, house=house)
+
+    sun_idx = SIGNS.index(sun_sign)
     planets = [
-        PlanetPosition(name="Sol", sign=sun_sign, degree=15.0, house=1),
-        PlanetPosition(name="Luna", sign=moon_sign, degree=20.0, house=4),
-        PlanetPosition(name="Mercurio", sign=sun_sign, degree=10.0, house=1),
-        PlanetPosition(name="Venus", sign=SIGNS[(SIGNS.index(sun_sign) + 1) % 12], degree=25.0, house=2),
-        PlanetPosition(name="Marte", sign=SIGNS[(SIGNS.index(sun_sign) + 2) % 12], degree=8.0, house=3),
-        PlanetPosition(name="Júpiter", sign=SIGNS[(SIGNS.index(sun_sign) + 4) % 12], degree=12.0, house=5),
-        PlanetPosition(name="Saturno", sign=SIGNS[(SIGNS.index(sun_sign) + 6) % 12], degree=18.0, house=7),
-        PlanetPosition(name="Urano", sign=SIGNS[(SIGNS.index(sun_sign) + 8) % 12], degree=5.0, house=9),
-        PlanetPosition(name="Neptuno", sign=SIGNS[(SIGNS.index(sun_sign) + 9) % 12], degree=22.0, house=10),
-        PlanetPosition(name="Plutón", sign=SIGNS[(SIGNS.index(sun_sign) + 10) % 12], degree=28.0, house=11),
+        _planet("Sol", sun_sign, 15.0, 1),
+        _planet("Luna", moon_sign, 20.0, 4),
+        _planet("Mercurio", sun_sign, 10.0, 1),
+        _planet("Venus", SIGNS[(sun_idx + 1) % 12], 25.0, 2),
+        _planet("Marte", SIGNS[(sun_idx + 2) % 12], 8.0, 3),
+        _planet("Júpiter", SIGNS[(sun_idx + 4) % 12], 12.0, 5),
+        _planet("Saturno", SIGNS[(sun_idx + 6) % 12], 18.0, 7),
+        _planet("Urano", SIGNS[(sun_idx + 8) % 12], 5.0, 9),
+        _planet("Neptuno", SIGNS[(sun_idx + 9) % 12], 22.0, 10),
+        _planet("Plutón", SIGNS[(sun_idx + 10) % 12], 28.0, 11),
     ]
     
     return {
@@ -828,11 +835,21 @@ def check_rate_limit(ip: str) -> bool:
     """Verifica si la IP excedió el límite de requests"""
     now = time.time()
     # Limpiar requests antiguos
-    request_counts[ip] = [t for t in request_counts[ip] if now - t < RATE_WINDOW]
+    recent = [t for t in request_counts[ip] if now - t < RATE_WINDOW]
     # Verificar límite
-    if len(request_counts[ip]) >= RATE_LIMIT:
+    if len(recent) >= RATE_LIMIT:
+        request_counts[ip] = recent
         return False
-    request_counts[ip].append(now)
+    recent.append(now)
+    request_counts[ip] = recent
+
+    # Evitar fuga de memoria: purgar IPs cuya ventana expiró por completo.
+    # Sin esto, request_counts acumula una entrada por cada IP histórica.
+    if len(request_counts) > 1000:
+        for stale_ip in [k for k, v in request_counts.items()
+                         if not v or now - v[-1] >= RATE_WINDOW]:
+            del request_counts[stale_ip]
+
     return True
 
 @app.post("/chart")

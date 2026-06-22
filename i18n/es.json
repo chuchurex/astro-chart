@@ -27,6 +27,7 @@
   },
   "results": {
     "title": "Tu Carta Astral",
+    "chart_for": "Carta Astral de {name}",
     "sun": "Sol",
     "moon": "Luna",
     "ascendant": "Ascendente",

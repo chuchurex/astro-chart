@@ -27,6 +27,7 @@
   },
   "results": {
     "title": "Your Natal Chart",
+    "chart_for": "Natal Chart of {name}",
     "sun": "Sun",
     "moon": "Moon",
     "ascendant": "Ascendant",

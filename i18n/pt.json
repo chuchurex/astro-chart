@@ -27,6 +27,7 @@
   },
   "results": {
     "title": "Seu Mapa Astral",
+    "chart_for": "Mapa Astral de {name}",
     "sun": "Sol",
     "moon": "Lua",
     "ascendant": "Ascendente",

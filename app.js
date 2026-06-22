@@ -588,8 +588,10 @@ function calculateMoonSign(year, month, day) {
     const daysDiff = Math.floor((birthDate - baseDate) / (1000 * 60 * 60 * 24));
 
     const moonCycle = 27.3;
-    const position = (daysDiff % moonCycle) / moonCycle * 12;
-    const signIndex = Math.floor(Math.abs(position)) % 12;
+    // Módulo positivo: para nacimientos previos al 2000 daysDiff es negativo
+    // y el % de JS conserva el signo, dando un índice de signo incorrecto.
+    const posInCycle = ((daysDiff % moonCycle) + moonCycle) % moonCycle;
+    const signIndex = Math.floor(posInCycle / moonCycle * 12) % 12;
 
     return signs[signIndex];
 }
@@ -862,7 +864,8 @@ function calculateBiorhythmsLocally(year, month, day) {
             current_day: dayInCycle + 1,
             value: Math.round(value * 100) / 100,
             percentage: percentage,
-            phase: value >= 0 && dayInCycle < duration / 4 ? 'ascenso' : value >= 0 ? 'descenso' : 'bajo',
+            // Math.floor para igualar el // entero del backend (app.py)
+            phase: value >= 0 && dayInCycle < Math.floor(duration / 4) ? 'ascenso' : value >= 0 ? 'descenso' : 'bajo',
             is_critical: isCritical
         };
     }
@@ -1002,7 +1005,10 @@ function renderResults(chartData) {
         DOM.results.prepend(warning);
     }
 
-    DOM.resultName.textContent = `Carta Astral de ${chartData.name}`;
+    const chartForTpl = i18n.t('results.chart_for');
+    DOM.resultName.textContent = chartForTpl !== 'results.chart_for'
+        ? chartForTpl.replace('{name}', chartData.name)
+        : `Carta Astral de ${chartData.name}`;
     DOM.sunSign.textContent = chartData.sun_sign;
     DOM.moonSign.textContent = chartData.moon_sign;
     DOM.ascendant.textContent = chartData.ascendant;
@@ -1746,8 +1752,11 @@ function parseURLParams() {
     const keys = Array.from(params.keys());
 
     if (keys.length >= 2) {
+        // URLSearchParams ya devuelve las claves decodificadas una vez.
+        // No volver a decodificar: un nombre con '%' literal (ej. "50%")
+        // haría que decodeURIComponent lanzara URIError y rompiera init().
         return {
-            name: decodeURIComponent(keys[0] || ''),
+            name: keys[0] || '',
             date: keys[1] || '',
             time: keys[2] || '12:00',
             lat: keys[3] || '-33.4489',
@@ -1773,7 +1782,7 @@ function fillFormFromURL() {
     if (!urlData) return false;
 
     if (urlData.name && DOM.nameInput) {
-        DOM.nameInput.value = decodeURIComponent(urlData.name);
+        DOM.nameInput.value = urlData.name;
     }
 
     if (urlData.date && DOM.birthDate) {
@@ -1801,9 +1810,9 @@ function fillFormFromURL() {
         DOM.longitudeInput.value = urlData.lon;
     }
 
-    if (urlData.city && DOM.cityInput) {
-        DOM.cityInput.value = decodeURIComponent(urlData.city);
-    }
+    // La URL para compartir es posicional (?nombre&fecha&hora&lat&lon) y no
+    // incluye ciudad; el campo queda vacío pero lat/lon ya están en los hidden
+    // inputs, así que el cálculo no necesita geocodificar.
 
     console.log('📋 Formulario pre-llenado desde URL:', urlData);
     return true;
