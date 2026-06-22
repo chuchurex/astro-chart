@@ -6,6 +6,15 @@
 
 set -e
 
+# Cargar credenciales desde .env (gitignored) si no vienen ya en el entorno.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/.env" ]; then
+    set -a
+    # shellcheck disable=SC1091
+    source "$SCRIPT_DIR/.env"
+    set +a
+fi
+
 echo "🔄 Purging Cloudflare cache for mapanatal.org..."
 
 # Colores
