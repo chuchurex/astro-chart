@@ -379,6 +379,22 @@ PLANET_WEIGHTS = {
     'Júpiter': 1, 'Saturno': 1, 'Urano': 0.5, 'Neptuno': 0.5, 'Plutón': 0.5
 }
 
+# Nombres de aspectos en español y significado genérico de respaldo.
+# interpretations.json no cubre todas las combinaciones (sobre todo sextiles
+# y quintiles): sin esto, esos aspectos desaparecían de la respuesta.
+ASPECT_NAMES_ES = {
+    'conjunction': 'conjunción', 'sextile': 'sextil', 'square': 'cuadratura',
+    'trine': 'trígono', 'opposition': 'oposición', 'quintile': 'quintil'
+}
+ASPECT_GENERIC_MEANINGS = {
+    'conjunction': 'fusionan sus energías en una fuerza concentrada e intensa que actúa como una sola en tu vida.',
+    'sextile': 'crean una oportunidad armónica entre sus energías, un flujo natural que aprovechas con algo de esfuerzo consciente.',
+    'square': 'generan una tensión dinámica que te impulsa a crecer; aunque desafiante, esta fricción produce los mayores desarrollos personales.',
+    'trine': 'fluyen en perfecta armonía, indicando un talento natural en el que ambas energías se apoyan sin esfuerzo.',
+    'opposition': 'forman una polaridad que busca equilibrio; aprendes a integrar ambos polos en lugar de oscilar entre ellos.',
+    'quintile': 'establecen una conexión creativa y sutil, asociada al talento singular y a la expresión personal.'
+}
+
 # === BIORRITMOS Y CICLO DEL ADEPTO (Enseñanzas de Ra) ===
 
 def calculate_biorhythms(birth_date: str, target_date: str = None) -> dict:
@@ -770,6 +786,14 @@ def get_interpretations_for_chart(chart: dict) -> dict:
         key_reverse = f"{planet2.lower()}_{aspect_type}_{planet1.lower()}"
 
         interpretation = aspects_data.get(key) or aspects_data.get(key_reverse)
+
+        # Fallback genérico: si no hay texto específico, igual mostramos el
+        # aspecto con un significado por tipo (no lo descartamos en silencio).
+        if not interpretation:
+            meaning = ASPECT_GENERIC_MEANINGS.get(aspect_type)
+            if meaning:
+                aspecto_es = ASPECT_NAMES_ES.get(aspect_type, aspect_type)
+                interpretation = f"{planet1} y {planet2} en {aspecto_es} {meaning}"
 
         if interpretation:
             result['aspects'].append({

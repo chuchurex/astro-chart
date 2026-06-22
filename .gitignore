@@ -14,3 +14,6 @@ __pycache__/
 # Claude
 .claude/
 .gstack/
+
+# Build output de Cloudflare Pages (generado por pages-build.sh)
+public_deploy/

@@ -77,7 +77,7 @@ PORT=3000
 
 # API backend (producción o local)
 # Cambiar a http://localhost:8001 si ejecutas el backend localmente
-API_URL="https://api.astro.chuchurex.cl"
+API_URL="https://api.mapanatal.org"
 
 # Archivos a observar para live-reload
 WATCH_FILES="*.html,*.css,*.js,about/*.html,i18n/*.json"

@@ -3,6 +3,8 @@
 # Development script - watches SASS and serves locally
 # Usage: ./dev.sh
 
+set -e
+
 echo "🚀 Iniciando entorno de desarrollo..."
 
 # Check if sass is installed
@@ -11,9 +13,9 @@ if ! command -v sass &> /dev/null; then
     exit 1
 fi
 
-# Kill any existing processes on common ports
-pkill -f "python3 -m http.server" 2>/dev/null
-pkill -f "sass --watch" 2>/dev/null
+# Kill any existing processes on common ports (|| true: no fallar si no hay match con set -e)
+pkill -f "python3 -m http.server" 2>/dev/null || true
+pkill -f "sass --watch" 2>/dev/null || true
 
 # Start SASS watcher in background
 echo "👀 Iniciando SASS watcher..."
@@ -35,8 +37,14 @@ echo "   - SASS: watching scss/main.scss"
 echo ""
 echo "   Presiona Ctrl+C para detener"
 
-# Handle Ctrl+C
-trap "echo ''; echo '🛑 Deteniendo...'; kill $SASS_PID $SERVER_PID 2>/dev/null; exit 0" INT
+# Handle Ctrl+C (función cleanup: evita expansión temprana de PIDs en el trap)
+cleanup() {
+    echo ''
+    echo '🛑 Deteniendo...'
+    kill "$SASS_PID" "$SERVER_PID" 2>/dev/null || true
+    exit 0
+}
+trap cleanup INT
 
 # Wait
 wait

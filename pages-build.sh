@@ -11,11 +11,9 @@ PUBLICAR=(
   _headers
   _redirects
   index.html
-  hash.html
   app.js
   sw.js
   styles.css
-  interpretations.json
   manifest.webmanifest
   pop.ogg
   share.jpeg

@@ -19,17 +19,21 @@ Web application for **astrological natal charts** with personalized interpretati
 ```
 Frontend (mapanatal.org)             Backend (api.mapanatal.org)
 ┌──────────────────────┐             ┌──────────────────────┐
-│   Cloudflare Pages   │   HTTPS     │   Vultr VPS Chile    │
-│   (Auto-deploy)      │ ─────────── │   64.176.12.233      │
+│   Cloudflare Pages   │   HTTPS     │   Fly.io (gru)       │
+│   (Auto-deploy)      │ ─────────── │   app: mapanatal-api │
 │                      │             │                      │
-│   HTML + CSS + JS    │             │   Docker + nginx     │
+│   HTML + CSS + JS    │             │   Docker container   │
 │   (static files)     │             │   FastAPI + Kerykeion│
 └──────────────────────┘             └──────────────────────┘
          │                                     │
          └───────── Cloudflare CDN + DNS ──────┘
 ```
 
-**Frontend Deploy:** Automatic on every `git push origin main`
+**Frontend Deploy:** Automatic on every `git push origin main` (Cloudflare Pages)
+**Backend Deploy:** `./deploy.sh backend` o `flyctl deploy` (app `mapanatal-api`, ver `fly.toml`)
+
+> Nota: el VPS de Vultr (`64.176.12.233`) y nginx están OBSOLETOS. El backend
+> se migró a Fly.io. `deploy.sh`/`setup-backend.sh` viejos apuntaban al VPS muerto.
 
 ---
 
@@ -71,7 +75,7 @@ astro.cl/
 - **i18n**: Custom JSON system, 3 languages (EN/ES/PT)
 
 ### Backend
-- **Python 3.14** (via venv)
+- **Python 3.12** (via venv; ver `runtime.txt` y `Dockerfile`)
 - **FastAPI** with Pydantic
 - **Kerykeion** (Swiss Ephemeris for astronomical calculations)
 - **Docker** for production
@@ -135,14 +139,16 @@ To get CF_ZONE_ID and CF_API_TOKEN for cache purging:
    export CF_API_TOKEN="your_api_token_here"
    ```
 
-### Backend - Vultr VPS (SSH)
-- IP: `64.176.12.233`
-- User: `root`
-- Password: in `.env` and `deploy.sh` (hardcoded for now)
-- Docker Port: 8001
-- SSL: Let's Encrypt certificate (auto-renews)
-- Cloudflare SSL Mode: Full (HTTPS end-to-end)
-- Cloudflare Proxy: Disabled (DNS only, gray cloud)
+### Backend - Fly.io
+- App: `mapanatal-api`, región `gru` (ver `fly.toml`)
+- Deploy: `./deploy.sh backend` o `flyctl deploy`
+- Puerto interno: 8000 (`start.sh` corre uvicorn en `$PORT`, fly.toml fija `PORT=8000`)
+- Health check: `GET /health`
+- TLS gestionado por Fly (`force_https`)
+- Auth de flyctl: token propio de la sesión (no en `.env`)
+
+> El VPS de Vultr (`64.176.12.233`) está OBSOLETO/apagado. Su password fue
+> removido del repo y deshabilitado en el servidor.
 
 ---
 
@@ -173,17 +179,17 @@ After deploying frontend changes (especially JS/CSS), you MUST purge Cloudflare 
 **Why this matters:** Without cache purge, users will see old cached versions of app.js/styles.css
 for hours until cache expires. This is especially critical for bug fixes in JavaScript logic.
 
-### Backend (Manual)
+### Backend (Manual - Fly.io)
 ```bash
-./deploy.sh backend
+./deploy.sh backend   # = flyctl deploy --now (app mapanatal-api)
 
 # Check status
-./deploy.sh status
+./deploy.sh status    # health checks de mapanatal.org y api.mapanatal.org
 ```
 
-### Legacy FTP (deprecated)
+### Frontend (Manual)
 ```bash
-./deploy.sh frontend  # Still works if necessary
+./deploy.sh frontend  # bumpea ?v=, commitea, pushea (Pages) y purga cache CF
 ```
 
 ---
@@ -286,7 +292,7 @@ sass --watch scss/main.scss:styles.css --style compressed
 ### Medium Priority
 - [ ] Export chart to native PDF (currently uses window.print())
 - [ ] Improve responsive on tablets
-- [ ] Migrate VPS authentication to SSH keys (remove hardcoded password)
+- [ ] Revocar la Global API Key de Cloudflare (CF_API_KEY/CF_EMAIL en .env): es de control total, no debe usarse
 
 ### Low Priority / Future
 - [ ] Planetary transits (current positions vs natal chart)
@@ -299,8 +305,8 @@ sass --watch scss/main.scss:styles.css --style compressed
 
 ## Important Notes
 
-1. **The `.env` file contains FTP credentials** - never commit
-2. **VPS password is hardcoded in `deploy.sh`** - consider using ssh keys
+1. **The `.env` file contains secrets** (CF token/zone) - never commit. Está gitignored.
+2. **`deploy.sh` ya NO tiene secretos hardcodeados** - usa Fly.io (backend) y Pages (frontend); las credenciales del VPS/FTP fueron removidas.
 3. **Interpretations are in Spanish** - backend doesn't have i18n yet
 4. **Frontend detects language automatically** (URL param > localStorage > navigator.language > 'en')
 
